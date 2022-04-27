@@ -1,0 +1,18 @@
+SELECT DISTINCT bhdid ID,
+	ROUND((SELECT SUM(bhppv) FROM bohstp WHERE bhdid=ID AND bhpmo BETWEEN '01' AND '04' AND bhpyr='2015'),2) PV
+FROM bohstp
+WHERE bhpmo BETWEEN '01' AND '04'
+AND bhpyr='2015'
+ORDER BY PV DESC
+
+
+SELECT DISTINCT bhdid ID,
+	ROUND((SELECT SUM(bhppv) FROM bohstp WHERE bhdid=ID AND bhpmo='01' AND bhpyr='2015'),2) wk01,
+	ROUND((SELECT SUM(bhppv) FROM bohstp WHERE bhdid=ID AND bhpmo='02' AND bhpyr='2015'),2) wk02,
+	ROUND((SELECT SUM(bhppv) FROM bohstp WHERE bhdid=ID AND bhpmo='03' AND bhpyr='2015'),2) wk03,
+	ROUND((SELECT SUM(bhppv) FROM bohstp WHERE bhdid=ID AND bhpmo='04' AND bhpyr='2015'),2) wk04,
+	ROUND((SELECT SUM(bhppv) FROM bohstp WHERE bhdid=ID AND bhpmo BETWEEN '01' AND '04' AND bhpyr='2015'),2) TOTAL
+FROM bohstp
+WHERE bhpmo BETWEEN '01' AND '04'
+AND bhpyr='2015'
+ORDER BY ID

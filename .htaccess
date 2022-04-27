@@ -1,0 +1,13 @@
+# secure .htaccess file
+<Files .htaccess>
+	Order allow,deny
+	Deny from all
+</Files>
+
+# enable rewrite engine
+RewriteEngine on
+
+RewriteRule ^products/(.+)/(.+)$ products.php?p=$1&pid=$2 [NC,L]
+
+ErrorDocument 403 /errors/403.php
+ErrorDocument 404 /errors/404.php

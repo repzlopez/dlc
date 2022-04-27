@@ -1,0 +1,36 @@
+API PATH
+https://dlcph.com/api
+
+ADMIN
+/distributors				-endpoint
+	/find/[id|name]/[args]		-find distributor data via id or name (full/partial)
+	/list				-list all distributors from loadManna
+	/list/[id]			-list individual distributor data via id
+	/list/[id]/ormstp/[yr]/[mo]	-list individual distributor orders via id
+	/list/[id]/bomstp		-list individual distributor current points via id
+	/list/[id]/bohstp/[yr]/[mo]	-list individual distributor bonus history via id
+
+
+APP
+/me					-endpoint
+	/				-distributor profile
+	/ormstp/[yr]/[mo]		-distributor orders
+	/bomstp				-distributor current points
+	/bohstp/[yr]/[mo]		-distributor bonus history
+
+/products				-endpoint
+	/list
+	/find/[id/name(full/partial)]/[args]
+	/[id]/[args]
+
+/orders					-endpoint
+	verbs [ add | edit ]
+	types [ transactions | delivers | payments | orders ]
+
+	/[verb]/[type]/id
+
+	/[verb]/transactions/id		-list of transactions
+	/[verb]/orders/id		-list of orders
+	/[verb]/delivers/id		-list of preset delivery addresses
+	/[verb]/payments/id		-list of preset payment options
+

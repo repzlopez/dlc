@@ -1,0 +1,152 @@
+/*
+#00539b blue
+#fdb913 yellow
+*/
+
+body, p, ol li, ul li, dl dd, input, .fl-callout-text { font-family: Montserrat, sans-serif !important;position:relative; }
+input[type=button], input[type=submit] { font-family: oswald, sans-serif !important;line-height: 46px !important;padding:0 22px; }
+ol,ul { list-style-type: none; }
+code { padding:5px; }
+hr { width:100%; }
+
+.site-header { padding:0 !important; }
+.page-title-container,.hero { padding:0 20px 0 !important; }
+.page-title { color:#fdb913 !important;padding:40px 0 20px !important; }
+.expand { color:#00539b !important; }
+
+#distributor a { color:#00539b; }
+#distributor h2 { font-size: 32px; }
+#distributor h2,#distributor h3,
+#distributor h4 { margin:0 !important; }
+#distributor li { padding:10px; }
+#distributor li div { margin-left:20px; }
+#distributor li a,
+#distributor li span { margin-right:20px; }
+#distributor li * { display: inline-block; }
+#distributor .pv label { width:70px;vertical-align: top; }
+#distributor .pv span { width:110px;text-align:right;vertical-align:top; }
+#distributor .pv div { width:240px; }
+.reflink:active { color:#fdb913 !important; }
+
+#reset_pass input[type=text] { width:184px !important; }
+
+#olreg li { padding:5px; }
+#olreg li * { vertical-align:middle; }
+#olreg label { display:inline-block;width:120px; }
+#olreg input[type=text] { width:380px; }
+#olreg input[type=submit] { background:#fdb913; }
+#olreg h3 { margin:0; }
+
+#downloads li a { border:#ddd solid 1px;color:#00539b !important;display:block;margin:5px;padding:10px; }
+#downloads li a:hover { background:#00539b;color:#fdb913 !important; }
+
+#product_search { margin:0 25px;width:60%; }
+#product_list>li { float:left;margin:5px;position: relative; }
+#product_list a { border:#ddd solid 1px;color:#000;display:inline-block;font-size:smaller;height:304px;padding:5px;width:218px; }
+#product_list a p { display:inline-block;font:14px Spartan, sans-serif !important;height:48px;margin:10px 0 0;overflow: hidden;width:100%; }
+#product_list a label { cursor: pointer;display:inline-block;font-size:16px;text-align:right;width:100%; }
+#product_list img { float:left; }
+#product_list img { float:left; }
+#product_list .nostock { top:0; }
+#product_raw_list li * { font-family: Courier !important; }
+#product_raw_list li span:nth-child(2) { overflow:hidden;white-space:nowrap;vertical-align:bottom;width:320px !important; }
+
+#product_main>div:last-child { padding-left:30px; }
+#product_main>div:last-child p { text-align:justify; }
+#product_main span { color:#00539b; }
+#product_main figure { position:relative; }
+#product_main .addtocart { left:0; }
+#product_main .nostock { left:0; }
+#product_main .reflink { background:#fff;bottom:0;right:0;margin:3px;padding:2px 5px;position:absolute; }
+
+#shopping_cart { border:#ccc solid 1px;padding:5px 10px;width:360px; }
+#shopping_cart li { border-bottom:#ccc dotted 1px;margin:0 auto;padding:5px 0;width:320px; }
+#shopping_cart li:last-child { border:none; }
+#shopping_cart span,#shopping_cart strong { font:1.1em calibri !important;vertical-align:top; }
+#shopping_cart h4,#shopping_cart .btn { margin:5px 0; }
+#shopping_cart hr { border-top:#eee dotted 1px; }
+#shopping_cart .s6 { overflow:hidden;white-space:nowrap; }
+#shopping_cart li:not(:first-child):not(:last-child)>span:first-child:hover { background: url(/src/link.gif) no-repeat 0 5px;color:#00539b;cursor:pointer;padding-left:15px; }
+#shop_list li:not(:first-child):not(:last-child)>span:nth-child(2):hover { background: url(/src/link.gif) no-repeat 0 5px;color:#00539b;cursor:pointer;padding-left:15px; }
+
+#shop_list { position:relative; }
+#shop_list ul { margin:0;padding:10px; }
+#plusminus { background: url(/src/bot.png) repeat-x;border:#aaa solid 1px;display:block;height:44px;position:absolute;z-index:99; }
+#plusminus div { padding:10px 0 0 8px;width:64px; }
+#plusminus span { cursor:pointer;display:inline-block;height:14px;width:14px; }
+#shop_list #plusminus div { padding:14px 0 0 8px; }
+#qtyup { background: url(/src/plusminus.png) no-repeat top left; }
+#qtydn { background: url(/src/plusminus.png) no-repeat top right; }
+
+.orders * { vertical-align:top; }
+.orders li { padding:5px 0;border-bottom:#eee solid 1px;width:640px; }
+.orders span,.orders strong,.orders label { display:inline-block; }
+.orders .s6 { overflow:hidden;white-space:nowrap; }
+
+#package *,
+#package_data * { font-family: "spartan", sans-serif !important; }
+#package_data li * { vertical-align: middle; }
+#package_data select { padding: 12px;width:480px; }
+#package_data #datePicker { cursor:pointer; }
+#package_data #notice .s4 { width:220px !important; }
+#package_data #payment .s3 { text-align:right;width:160px !important; }
+#package ul li { border:#ccc solid 1px }
+#package img { display:block;height:160px;width:160px; }
+#package ul { margin:0; }
+#package li { border:#ccc solid 1px;cursor:pointer;display:block;float:left;margin:5px;padding:0;position:relative;overflow:hidden;width:160px; }
+#package p { background:#000;color:#fff;font-size:12px;height:42px;margin:0;padding:5px 10px;text-align:right;width:100%;position: absolute;bottom:0; }
+#package #shop_list ul { border:red solid 1px !important; }
+
+.page-title { font-family: "spartan", sans-serif !important; }
+.page-content input,.button,.wp-block-button__link,.btn,select,textarea,
+#shopping_cart,#plusminus,#product_list img,#product_list a,#product_main img,
+#package li,#downloads li a {
+     -moz-border-radius:10px !important;
+     -webkit-border-radius:10px !important;
+     -khtml-border-radius:10px !important;
+     border-radius:10px !important;
+}
+
+#overlay { opacity:0.5;filter:alpha(opacity=50); }
+
+#secondary { display:none;margin:2.5rem 0 !important; }
+.no_cart.widget_custom_html { display:none !important; }
+
+/*	placeholder		*/
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+ color:#ccc;
+ opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color:#ccc;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+ color:#ccc;
+}
+/*	placeholder		*/
+
+/*	classes		*/
+.btn { display:inline-block;padding:9px 10px;border:#ddd solid 1px; }
+.good { color:green !important; }
+.bad { color:red !important; }
+.smaller { color:#999;font-size: smaller;font-style: italic; }
+.addtocart { background:url(/src/cart3.png) 8px no-repeat !important;height:40px;outline:none;padding:10px 22px !important;position:absolute;bottom:0;z-index:99; }
+.addtocart:hover { background-image:url(/src/cart1.png) !important; }
+.addtocart:active { background-image:url(/src/cart2.png) !important; }
+.nostock { height:75px;width:75px !important;position:absolute; }
+.lt { text-align:left; }
+.rt { text-align:right; }
+.ct { text-align:center; }
+.jt { text-align:justify; }
+
+.s0,.s1,.s2,.s3,.s4,.s5,.s6,.s7,.s8 { display:inline-block;margin:0; }
+.s0 { width:20px !important; }
+.s1 { width:50px !important; }
+.s2 { width:70px !important; }
+.s3 { width:80px !important; }
+.s4 { width:150px !important; }
+.s5 { width:180px !important; }
+.s6 { width:220px !important; }
+.s7 { width:480px !important; }

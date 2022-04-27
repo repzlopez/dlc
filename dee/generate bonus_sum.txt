@@ -1,0 +1,7 @@
+SELECT b.bdsid,CONCAT(dslnam,', ',dsfnam,' ',dsmnam) nam,ROUND(pvb,2) pb,ROUND(gvb,2) gb,ROUND(gvb*(bdctxp/100),2) tax,ROUND(pvb+gvb-(gvb*(bdctxp/100)),2) vb,NULL bnk,'D' typ,dstin
+FROM (SELECT bdsid,bdctxp,
+	SUM(CASE WHEN bdtype='B' AND bdsid=bddids THEN bdbamt ELSE 0 END) pvb,
+	SUM(CASE WHEN bdtype='B' AND bdsid<>bddids THEN bdbamt ELSE 0 END)+SUM(CASE WHEN NOT (bdtype='B' OR bdtype='L') THEN bdbamt ELSE 0 END) gvb
+	FROM bodstp WHERE bdyy=2019 AND bdmm=5 GROUP BY bdsid) b
+LEFT JOIN distributors ON dsdid=b.bdsid
+HAVING vb>0

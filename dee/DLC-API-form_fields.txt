@@ -1,0 +1,44 @@
+Transaction
+	transactions_id
+	delivers_id
+	payments_id
+	dsdid
+	amount
+	fees
+	date
+	paid
+	delivered
+	status
+ 
+
+Orders
+	transactions_id
+	pid
+	wsp
+	pov
+	srp
+	pv
+	qty
+	status
+
+
+Delivers
+	delivers_id
+	dsdid
+	name
+	contact
+	street
+	province
+	city
+	brgy
+	postal
+	note
+	status
+
+
+Payments
+	payments_id
+	dsdid
+	options
+	note
+	status
