@@ -20,13 +20,13 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'dlcwp' );
+define( 'DB_NAME', 'diamondl_wp' );
 
 /** MySQL database username */
-define( 'DB_USER', 'dlcph' );
+define( 'DB_USER', 'diamondl_wp' );
 
 /** MySQL database password */
-define( 'DB_PASSWORD', 'dlc0306@)!)' );
+define( 'DB_PASSWORD', 'SD349!hT-p' );
 
 /** MySQL hostname */
 define( 'DB_HOST', 'localhost' );
@@ -46,14 +46,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         ']r9+>+mBKy/vE33%6A~=X CoH]91k#;Sl2/GLMIp!%8{_,vz4#8i=6uG7t<<HpjX' );
-define( 'SECURE_AUTH_KEY',  '+d/J:Lz)pKX_HcXfG_<r+SN7<%c#KuzWS2B8oI&LyN9)1K@;B%Jkmc6CY+PB?u}#' );
-define( 'LOGGED_IN_KEY',    'jF9Z}s3NE+P)  6LL5oz2Qf~fDAWMxYaiFDe5&Sq|jO#xx{83285Q|`.yma<Ea&M' );
-define( 'NONCE_KEY',        '.@t]Ny$^s0#hwW2(4>l7=|~po!cL0OdJAB%m(axS!d=ZhyLij=/i!c;WhHZjo{-a' );
-define( 'AUTH_SALT',        'JZ]?r LM[M&=,t>n:Zljk|g)55^hgMI}j!U[DPtp5K0SgLejJaqOiWOl7Iw}w*HD' );
-define( 'SECURE_AUTH_SALT', 'IveyK5Zx3ksPi/i$w7|]!SXU!8fHyF%utF>dH!2xV]pcDzJHWKAdkM{/Z7LV.tg*' );
-define( 'LOGGED_IN_SALT',   'tJOOUrbD1#+/%nRD2il}Ui=DB 0`RHzye.P9P{g9ACE3C;=eiC(W|<Ahl+(#qlwF' );
-define( 'NONCE_SALT',       '{>_z-hCvHpj;.Em7xYVPLXDHn<}N4wDyyN~e&TpE|E`Ehaqk7VAl^`sz,qa&4%R2' );
+define( 'AUTH_KEY',         'qxyzccqo7uptwd8ylyfw6qta6cwwdmoyy4mz3t0v4imu8eh8oxvrotwzwjxhzukw' );
+define( 'SECURE_AUTH_KEY',  'zyevsety3j0808hl5udtcawbisbmrhgkjbf45x3tsfhzosybwea1gl3t4kvqbaug' );
+define( 'LOGGED_IN_KEY',    '08qcyx3a3lq6dunidfcqb5jit39n2d44tfwxeaqfrrzenr6em2f7nculvvg5ka54' );
+define( 'NONCE_KEY',        'kxw5to2uzn1gwasf47zzjijtpygzhjabqvki7x1sqmjfe45ck23ymrwdy85pos6f' );
+define( 'AUTH_SALT',        'ewxufwulhpoka0xsnldhvyyu8kx8uunnnwadmgeuxqe45zav6rkemms41oqko4a6' );
+define( 'SECURE_AUTH_SALT', 'gjnzhbbtc5flch36lpm2v25zmtxalgnlwd7fhexn6wwkhgqr7dbmvjgmalw6k0tj' );
+define( 'LOGGED_IN_SALT',   'vpnk403gaf49idqpkdnamq4opzkje1gd2ozqqdg6l8rsuoqd2z1v4vbwxl1ostws' );
+define( 'NONCE_SALT',       '0aid3ensaimyql00cx0sts6etrbldsvdq4lgpdczqeftdodjjuk9wdratcmzeez3' );
 
 /**#@-*/
 
@@ -78,6 +78,13 @@ $table_prefix = 'rd_';
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
 define( 'WP_DEBUG', false );
+
+// Enable Debug logging to the /wp-content/debug.log file
+define( 'WP_DEBUG_LOG', false );
+
+// Disable display of errors and warnings
+define( 'WP_DEBUG_DISPLAY', true );
+@ini_set( 'display_errors', 0 );
 
 /* That's all, stop editing! Happy publishing. */
 

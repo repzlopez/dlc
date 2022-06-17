@@ -1,8 +1,5 @@
-<?php
-if(!isset($_SESSION)) {
-     session_set_cookie_params(0);
-     session_start();
-}
+<?php session_set_cookie_params(0);
+if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
 if(!ISIN_ADMIN||!testScope("global|data|accounting")){
@@ -44,6 +41,7 @@ if(!ISIN_ADMIN||!testScope("global|data|accounting")){
 		getDistList($do,0,MAXLOOP,1);
 		echo $str.$_SESSION['downlines'];
 	}else print $str.listDistributors($do);
+	mysqli_close($con);
 }
 
 function listDistributors($do){

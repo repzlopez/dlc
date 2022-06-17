@@ -1,8 +1,5 @@
-<?php
-if(!isset($_SESSION)) {
-     session_set_cookie_params(0);
-     session_start();
-}
+<?php session_set_cookie_params(0);
+if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
 if(!ISIN_ADMIN||!testScope("global|data")){
@@ -15,6 +12,8 @@ if(!ISIN_ADMIN||!testScope("global|data")){
 	$getArea=isset($_GET['area'])?$_GET['area']:0;	//area
 	header('Content-type: application/vnd.ms-excel');
 	header('Content-disposition: filename=Distributors_w_'.(($getTPV!==null)?$getTPV:$getPV).'PV_'.$getDate.'.csv');
+	$dbsrc='distributor';
+	include('../../infoconfig.php');
 	$csv=listPV($getPV,$getDate,$getDate,$getTPV,$getArea);
 	print $csv;
 }
@@ -42,9 +41,8 @@ function listPV($pv,$date,$monyr,$tpv=null,$area=false){
 	$pvhdr=(($tpv!==null)?$tpv:$pv);
 	$str="Distributors with $pvhdr PV [ $monyr ]\n";
 	$str.='"ID#","LAST NAME","FIRST NAME","PPV","GPV","TPV","LEVEL"'.($area?',"AREA"':'')."\n";
-	$con=SQLi('distributor');
-	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	$rs=mysql_query($qry) or die(mysql_error());
+	while($rw=mysql_fetch_assoc($rs)){
 		$getGPV=$rw['tpv']-$rw['ppv'];
 //		if($getGPV>=$pvhdr){
 			$str.='"'.$rw['dsdid'].'",';

@@ -1,8 +1,5 @@
-<?php
-if(!isset($_SESSION)) {
-     session_set_cookie_params(0);
-     session_start();
-}
+<?php session_set_cookie_params(0);
+if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
 if(!ISIN_ADMIN||!testScope("global|data")){
@@ -16,6 +13,8 @@ if(!ISIN_ADMIN||!testScope("global|data")){
 	$file=($getmo)?'with'.$getPV.'PVupfor':($get1only?'qualifiedfor':'accumulated'.$getPV);
 	header('Content-type: application/vnd.ms-excel');
 	header('Content-disposition: filename=Distributors_'.$file.'_'.$getDate.'.csv');
+	$dbsrc='distributor';
+	include('../../infoconfig.php');
 	$csv=($getmo)?listPVMonth($getPV,$getDate):listPV($getPV,$getDate,$get1only);
 	print $csv;
 }
@@ -36,9 +35,8 @@ function listPV($pv,$date,$single){
 	";
 	$str="Distributors with $pv PV and up [ ".($single?'Single Invoice':'Total PV')." ]\n";
 	$str.='"ID#","FIRST NAME","LAST NAME","INVOICE","PPV"'."\n";
-	$con=SQLi('distributor');
-	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	$rs=mysql_query($qry) or die(mysql_error());
+	while($rw=mysql_fetch_assoc($rs)){
 		$str.='"'.$rw['dsdid'].'",';
 		$str.='"'.$rw['dsfnam'].'",';
 		$str.='"'.$rw['dslnam'].'",';
@@ -67,9 +65,8 @@ function listPVMonth($pv,$date){
 
 	$str="Distributors with $pv PV and up for ".date('F Y',strtotime(substr($date,2,4).'-'.substr($date,0,2).'-18'))."\n";
 	$str.='"ID#","FIRST NAME","LAST NAME","PPV"'."\n";
-	$con=SQLi('distributor');
-	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	$rs=mysql_query($qry) or die(mysql_error());
+	while($rw=mysql_fetch_assoc($rs)){
 		if($rw['tpv']>=$pv){
 			$str.='"'.$rw['dsdid'].'",';
 			$str.='"'.$rw['dsfnam'].'",';

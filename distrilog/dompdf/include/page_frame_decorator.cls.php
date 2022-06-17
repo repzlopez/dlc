@@ -391,7 +391,7 @@ class Page_Frame_Decorator extends Frame_Decorator {
       dompdf_debug("page-break","table-row/row-groups: break allowed");
       return true;
 
-    } else if ( in_array($display, Table_Frame_Decorator::$rw_GROUPS) ) {
+    } else if ( in_array($display, Table_Frame_Decorator::$ROW_GROUPS) ) {
 
       // Disallow breaks at row-groups: only split at row boundaries
       return false;

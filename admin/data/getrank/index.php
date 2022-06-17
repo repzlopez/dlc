@@ -1,8 +1,5 @@
-<?php
-if(!isset($_SESSION)) {
-     session_set_cookie_params(0);
-     session_start();
-}
+<?php session_set_cookie_params(0);
+if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
 if(!ISIN_ADMIN||!testScope("global|data")){
@@ -16,6 +13,7 @@ if(!ISIN_ADMIN||!testScope("global|data")){
 	$aa=substr($do,0,2);
 	$bb=substr($do,2,2);
 	$yr=substr($do,-4);
+
 	header('Content-type: application/vnd.ms-excel');
 	header('Content-disposition: filename=All_'.($st=='*'?'DATA':$set[$st]).'_for_Weeks_'.$aa.'-'.$bb.'.csv');
 	if($st=='*'){
@@ -37,7 +35,7 @@ function listPV($aa,$bb,$yr,$st){
 	$rnd='';$hdr='';$t=1;
 	for($n=(int)$aa;$n<=(int)$bb;$n++){
 		$rnd.="ROUND((SELECT SUM(bh".$st.") FROM bohstp WHERE bhdid=ID AND bhpmo='".sprintf("%02d",$n)."' AND bhpyr='$yr'),2) wk".sprintf("%02d",$n).",";
-		$hdr.='"Week '.sprintf("%02d",$n).' PPV","Week '.sprintf("%02d",$n).' POV",';
+		$hdr.='"Week '.sprintf("%02d",$n).'",';
 	}
 	$qry="
 		SELECT DISTINCT bhdid ID,dsdid,dslnam,dsfnam,dsmnam,dssetd,$rnd
@@ -63,7 +61,7 @@ function listPV($aa,$bb,$yr,$st){
 		$nm=$rw['dslnam'].', '.$rw['dsfnam'].' '.substr($rw['dsmnam'],0,1).'.';
 		for($n=(int)$aa;$n<=(int)$bb;$n++){
 			$dat=$rw['wk'.sprintf("%02d",$n)]*($isPOV?25:1);
-			$s.='"'.($dat).'","'.($dat*25).'",';
+			$s.='"'.($dat).'",';
 			switch($n){
 				case $n<=13:$q1+=$dat;$d1++;break;
 				case $n<=26:$q2+=$dat;$d2++;break;

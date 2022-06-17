@@ -1,8 +1,5 @@
-<?php
-if(!isset($_SESSION)) {
-     session_set_cookie_params(0);
-     session_start();
-}
+<?php session_set_cookie_params(0);
+if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
 if(!ISIN_ADMIN||!testScope("global|data")){
@@ -14,6 +11,8 @@ if(!ISIN_ADMIN||!testScope("global|data")){
 	$date=$date[2].'_'.$date[0].$date[1];
 	header("Content-type: application/vnd.ms-excel");
 	header("Content-disposition: filename=Distributors_signupon_".$date.".csv");
+	$dbsrc='distributor';
+	include('../../infoconfig.php');
 	print listDistributors($filter);
 }
 
@@ -22,9 +21,8 @@ function listDistributors($filter){
 //	$qry="SELECT * FROM distributors WHERE dscoid='DLCPH' AND dseadd LIKE '% $filter%'";
 	$str='"","ID#","Set Date","First Name","Middle Name","Last Name"'.',"Street","Brgy","City","Province"'."\n";
 	$i=1;
-	$con=SQLi('distributor');
-	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	$rs=mysql_query($qry) or die(mysql_error());
+	while($rw=mysql_fetch_assoc($rs)){
 		$str.='"'.$i++.'",';
 		$str.='"'.$rw['dsdid'].'",';
 		$str.='"'.$rw['dssetd'].'",';
@@ -39,7 +37,7 @@ function listDistributors($filter){
 //		$str.='=="|'.$rw['dstime'].'|'.$rw['dseadd'].'|'.$rw['dssetd'].'|"==';
 		$str.="\n";
 	}$str.="\n\n";
-	mysqli_close($con);
+	mysql_close();
 	return $str;
 }
 ?>

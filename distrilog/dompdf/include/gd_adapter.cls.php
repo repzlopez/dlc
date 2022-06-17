@@ -529,7 +529,7 @@ class GD_Adapter implements Canvas {
    * @param int $w width (in pixels)
    * @param int $h height (in pixels)
    */
-  function image($img_url, $x, $y, $w, $h, $rsolution = "normal") {
+  function image($img_url, $x, $y, $w, $h, $resolution = "normal") {
     $img_type = Image_Cache::detect_type($img_url);
     $img_ext  = Image_Cache::type_to_ext($img_type);
 

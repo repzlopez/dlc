@@ -569,7 +569,7 @@ class CPDF_Adapter implements Canvas {
   
   //........................................................................
 
-  function image($img, $x, $y, $w, $h, $rsolution = "normal") {
+  function image($img, $x, $y, $w, $h, $resolution = "normal") {
     list($width, $height, $type) = dompdf_getimagesize($img);
     
     //debugpng

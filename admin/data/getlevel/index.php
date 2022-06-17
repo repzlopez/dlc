@@ -1,8 +1,5 @@
-<?php
-if(!isset($_SESSION)) {
-     session_set_cookie_params(0);
-     session_start();
-}
+<?php session_set_cookie_params(0);
+if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
 if(!ISIN_ADMIN||!testScope("global|data")){
@@ -12,6 +9,8 @@ if(!ISIN_ADMIN||!testScope("global|data")){
 	$getDate=isset($_GET['do'])?$_GET['do']:'';	/* mmyyyy REQUIRED */
 	header('Content-type: application/vnd.ms-excel');
 	header('Content-disposition: filename=Distributors_Levels_in_'.$getDate.'.csv');
+	$dbsrc='distributor';
+	include('../../infoconfig.php');
 	$csv =listLevel(6,$getDate);
 	$csv.="\n\n";
 	$csv.=listLevel(5,$getDate);
@@ -40,11 +39,10 @@ function listLevel($level,$date){
 		AND $useCoID
 	";
 
-	$con=SQLi('distributor');
-	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	$ctr=mysqli_num_rows($rs);
+	$rs=mysql_query($qry) or die(mysql_error());
+	$ctr=mysql_num_rows($rs);
 	if($ctr>0){
-		while($rw=mysqli_fetch_assoc($rs)) {
+		while($rw=mysql_fetch_assoc($rs)) {
 			$dat.='"'.number_format($rw['bhdid'],0).'",';
 			$dat.='"'.$rw['dslnam'].'",';
 			$dat.='"'.$rw['dsfnam'].'",';
@@ -56,7 +54,7 @@ function listLevel($level,$date){
 			$dat.='"'.$rw['dscity'].' '.$rw['dsprov'].'"'."\n";
 		}
 	}
-
+	
 //	$lev=array('0%'=>0,'6%'=>1,'9%'=>2,'12%'=>3,'15%'=>4,'18%'=>5,'21%'=>6);
 	$str =getPercent($level,$year).' Distributors [ '.$ctr.' Distributor'.($ctr>1?'s':'').' ]'."\n";
 	$str.='"ID#","LAST NAME","FIRST NAME","HOME","MOBILE","PPV","TPV","LEVEL","AREA"'."\n";

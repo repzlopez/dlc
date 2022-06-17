@@ -197,7 +197,7 @@ interface Canvas {
    * @param int $w width (in pixels)
    * @param int $h height (in pixels)
    */
-  function image($img_url, $x, $y, $w, $h, $rsolution = "normal");
+  function image($img_url, $x, $y, $w, $h, $resolution = "normal");
 
   /**
    * Writes text at the specified x and y coordinates

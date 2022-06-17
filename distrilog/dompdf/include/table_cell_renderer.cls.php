@@ -118,10 +118,10 @@ class Table_Cell_Renderer extends Block_Renderer {
 
       $x = $left_col["x"] - $bp["left"]["width"] / 2;
 
-      $rw = $cellmap->get_row($i);
+      $row = $cellmap->get_row($i);
 
-      $y = $rw["y"] - $bp["top"]["width"] / 2;
-      $h = $rw["height"] + ($bp["top"]["width"] + $bp["bottom"]["width"])/ 2;
+      $y = $row["y"] - $bp["top"]["width"] / 2;
+      $h = $row["height"] + ($bp["top"]["width"] + $bp["bottom"]["width"])/ 2;
 
       if ( $bp["left"]["style"] !== "none" && $bp["left"]["width"] > 0 ) {
 

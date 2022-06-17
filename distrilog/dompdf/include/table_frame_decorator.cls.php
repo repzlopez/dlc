@@ -23,7 +23,7 @@ class Table_Frame_Decorator extends Frame_Decorator {
                                  "table-caption",
                                  "table-cell");
 
-  static $rw_GROUPS = array('table-row-group',
+  static $ROW_GROUPS = array('table-row-group',
                              'table-header-group',
                              'table-footer-group');
 
@@ -93,11 +93,11 @@ class Table_Frame_Decorator extends Frame_Decorator {
   //........................................................................
 
   /**
-   * split the table at $rw.  $rw and all subsequent rows will be
+   * split the table at $row.  $row and all subsequent rows will be
    * added to the clone.  This method is overidden in order to remove
    * frames from the cellmap properly.
    *
-   * @param Frame $rw
+   * @param Frame $row
    */
   function split($child = null, $force_pagebreak = false) {
 
@@ -126,7 +126,7 @@ class Table_Frame_Decorator extends Frame_Decorator {
 
       parent::split($first_header);
 
-    } else if ( in_array($child->get_style()->display, self::$rw_GROUPS) ) {
+    } else if ( in_array($child->get_style()->display, self::$ROW_GROUPS) ) {
 
       // Individual rows should have already been handled
       parent::split($child);

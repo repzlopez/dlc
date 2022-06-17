@@ -302,13 +302,13 @@ function parse_data_uri($data_uri) {
   }
   
   $match['data'] = rawurldecode($match['data']);
-  $rsult = array(
+  $result = array(
     'charset' => $match['charset'] ? $match['charset'] : 'US-ASCII',
     'mime'    => $match['mime'] ? $match['mime'] : 'text/plain',
     'data'    => $match['base64'] ? base64_decode($match['data']) : $match['data'],
   );
   
-  return $rsult;
+  return $result;
 }
 
 /**

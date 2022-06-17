@@ -64,12 +64,12 @@ class Image_Cache {
   
         // From cache
         if ( isset(self::$_cache[$full_url]) ) {
-          $rsolved_url = self::$_cache[$full_url];
+          $resolved_url = self::$_cache[$full_url];
         }
         
         // From remote
         else {
-          $rsolved_url = tempnam(DOMPDF_TEMP_DIR, "ca_dompdf_img_");
+          $resolved_url = tempnam(DOMPDF_TEMP_DIR, "ca_dompdf_img_");
   
           if ($datauri) {
             if ($parsed_data_uri = parse_data_uri($url)) {
@@ -95,49 +95,49 @@ class Image_Cache {
             //- a remote url does not need to have a file extension at all
             //- local cached file does not have a matching file extension
             //Therefore get image type from the content
-            file_put_contents($rsolved_url, $image);
+            file_put_contents($resolved_url, $image);
           }
         }
       }
       
       // Not remote, local image
       else {
-        $rsolved_url = build_url($proto, $host, $base_path, $url);
+        $resolved_url = build_url($proto, $host, $base_path, $url);
       }
   
   
       // Check if the local file is readable
-      if ( !is_readable($rsolved_url) || !filesize($rsolved_url) ) {
+      if ( !is_readable($resolved_url) || !filesize($resolved_url) ) {
         throw new DOMPDF_Image_Exception("Image not readable or empty");
       }
       
       // Check is the file is an image
       else {
-        list($width, $height, $type) = dompdf_getimagesize($rsolved_url);
+        list($width, $height, $type) = dompdf_getimagesize($resolved_url);
         
         // Known image type
         if ( $width && $height && in_array($type, array(IMAGETYPE_GIF, IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_BMP)) ) {
           //Don't put replacement image into cache - otherwise it will be deleted on cache cleanup.
           //Only execute on successfull caching of remote image.
           if ( DOMPDF_ENABLE_REMOTE && $remote ) {
-            self::$_cache[$full_url] = $rsolved_url;
+            self::$_cache[$full_url] = $resolved_url;
           }
         }
         
         // Unknown image type
         else {
           throw new DOMPDF_Image_Exception("Image type unknown");
-          unlink($rsolved_url);
+          unlink($resolved_url);
         }
       }
     }
     catch(DOMPDF_Image_Exception $e) {
-      $rsolved_url = self::$broken_image;
+      $resolved_url = self::$broken_image;
       $type = IMAGETYPE_PNG;
       $message = $e->getMessage()." \n $url";
     }
 
-    return array($rsolved_url, $type, $message);
+    return array($resolved_url, $type, $message);
   }
 
   /**

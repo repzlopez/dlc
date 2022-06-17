@@ -1,8 +1,5 @@
-<?php
-if(!isset($_SESSION)) {
-     session_set_cookie_params(0);
-     session_start();
-}
+<?php session_set_cookie_params(0);
+if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
 if(!ISIN_ADMIN||!testScope("global|data")){
@@ -34,25 +31,26 @@ function listLevel($n,$yr){$str='';$add='';
 
 	$qry="
 		SELECT DISTINCT bhdid,bhelev,bhcoid,bhpmo,bhpyr,dslnam,dsfnam,dsmnam,dsoph,dshph,dsmph
-		FROM bohstp,distributors
+		FROM bohstp,distributors 
 		WHERE bhcoid='DLCPH'
 		AND dsdid=bhdid
 		AND bhelev$n
 		".$add."
 		ORDER BY bhdid,bhpyr,bhpmo";
 	$oldid='';
-	$con=SQLi('distributor');
-	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
+	$dbsrc='distributor';
+	include('../../infoconfig.php');
+	$rs=mysql_query($qry) or die(mysql_error());
 	ini_set('max_execution_time',300);
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysql_fetch_assoc($rs)){
 		$newid=$rw['bhdid'];
 		if($oldid!=$newid){
 			$oldid=$rw['bhdid'];
 			$monyr=$rw['bhpyr'].'|'.sprintf('%02d',$rw['bhpmo']);
 			$str.='"'.$rw['bhdid'].'",';
 			$str.='"'.$rw['dslnam'].'",';
-			$str.='"'.$rw['dsfnam'].'",';
-			$str.='"'.$rw['dsmnam'].'",';
+			$str.='"'.$rw['dsfnam'].'",';		
+			$str.='"'.$rw['dsmnam'].'",';		
 			$str.='"'.getPercent($rw['bhelev'],$rw['bhpyr']).'",';
 			$str.='"'.$monyr.'"'."\n";
 		}

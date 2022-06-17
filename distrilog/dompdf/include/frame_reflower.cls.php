@@ -406,8 +406,8 @@ abstract class Frame_Reflower {
       $frame->append_child($new_frame);
     }
     
-    if ( $style->counter_reset && ($rset = $style->counter_reset) !== "none" )
-      $frame->reset_counter($rset);
+    if ( $style->counter_reset && ($reset = $style->counter_reset) !== "none" )
+      $frame->reset_counter($reset);
     
     if ( $style->counter_increment && ($increment = $style->counter_increment) !== "none" )
       $frame->increment_counters($increment);

@@ -133,11 +133,11 @@ class Frame_Tree {
       $table->parentNode->insertBefore($caption, $table);
     }
     
-    $rws = $xp->query("//table/tr");
-    foreach($rws as $rw) {
+    $rows = $xp->query("//table/tr");
+    foreach($rows as $row) {
       $tbody = $this->_dom->createElement("tbody");
-      $tbody = $rw->parentNode->insertBefore($tbody, $rw);
-      $tbody->appendChild($rw);
+      $tbody = $row->parentNode->insertBefore($tbody, $row);
+      $tbody->appendChild($row);
     }
   }
 

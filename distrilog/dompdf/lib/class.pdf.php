@@ -392,8 +392,8 @@ class Cpdf {
 
     case  'out':
       $tmp =  $o['info'];
-      $rs = "\n$id 0 obj\n".'['.$tmp['page'].' 0 R /'.$tmp['string']."]\nendobj";
-      return  $rs;
+      $res = "\n$id 0 obj\n".'['.$tmp['page'].' 0 R /'.$tmp['string']."]\nendobj";
+      return  $res;
     }
   }
 
@@ -427,12 +427,12 @@ class Cpdf {
       break;
 
     case  'out':
-      $rs = "\n$id 0 obj\n<< ";
+      $res = "\n$id 0 obj\n<< ";
       foreach($o['info'] as  $k=>$v) {
-        $rs.= "\n/$k $v";
+        $res.= "\n/$k $v";
       }
-      $rs.= "\n>>\n";
-      return  $rs;
+      $res.= "\n>>\n";
+      return  $res;
     }
   }
 
@@ -470,34 +470,34 @@ class Cpdf {
       break;
 
     case  'out':
-      $rs = "\n$id 0 obj\n<< /Type /Catalog";
+      $res = "\n$id 0 obj\n<< /Type /Catalog";
 
       foreach($o['info'] as  $k=>$v) {
         switch ($k) {
         case  'outlines':
-          $rs.= "\n/Outlines $v 0 R";
+          $res.= "\n/Outlines $v 0 R";
           break;
           
         case  'pages':
-          $rs.= "\n/Pages $v 0 R";
+          $res.= "\n/Pages $v 0 R";
           break;
 
         case  'viewerPreferences':
-          $rs.= "\n/ViewerPreferences $v 0 R";
+          $res.= "\n/ViewerPreferences $v 0 R";
           break;
 
         case  'openHere':
-          $rs.= "\n/OpenAction $v 0 R";
+          $res.= "\n/OpenAction $v 0 R";
           break;
 
         case  'javascript':
-          $rs.= "\n/Names <</JavaScript $v 0 R>>";
+          $res.= "\n/Names <</JavaScript $v 0 R>>";
           break;
         }
       }
 
-      $rs.= " >>\nendobj";
-      return  $rs;
+      $res.= " >>\nendobj";
+      return  $res;
     }
   }
 
@@ -578,59 +578,59 @@ class Cpdf {
 
     case  'out':
       if  (count($o['info']['pages'])) {
-        $rs = "\n$id 0 obj\n<< /Type /Pages\n/Kids [";
+        $res = "\n$id 0 obj\n<< /Type /Pages\n/Kids [";
         foreach($o['info']['pages'] as  $v) {
-          $rs.= "$v 0 R\n";
+          $res.= "$v 0 R\n";
         }
 
-        $rs.= "]\n/Count ".count($this->objects[$id]['info']['pages']);
+        $res.= "]\n/Count ".count($this->objects[$id]['info']['pages']);
 
         if  ( (isset($o['info']['fonts']) &&  count($o['info']['fonts'])) ||
               isset($o['info']['procset']) ||
               (isset($o['info']['extGStates']) &&  count($o['info']['extGStates']))) {
-          $rs.= "\n/Resources <<";
+          $res.= "\n/Resources <<";
 
           if  (isset($o['info']['procset'])) {
-            $rs.= "\n/ProcSet ".$o['info']['procset']." 0 R";
+            $res.= "\n/ProcSet ".$o['info']['procset']." 0 R";
           }
 
           if  (isset($o['info']['fonts']) &&  count($o['info']['fonts'])) {
-            $rs.= "\n/Font << ";
+            $res.= "\n/Font << ";
             foreach($o['info']['fonts'] as  $finfo) {
-              $rs.= "\n/F".$finfo['fontNum']." ".$finfo['objNum']." 0 R";
+              $res.= "\n/F".$finfo['fontNum']." ".$finfo['objNum']." 0 R";
             }
-            $rs.= "\n>>";
+            $res.= "\n>>";
           }
 
           if  (isset($o['info']['xObjects']) &&  count($o['info']['xObjects'])) {
-            $rs.= "\n/XObject << ";
+            $res.= "\n/XObject << ";
             foreach($o['info']['xObjects'] as  $finfo) {
-              $rs.= "\n/".$finfo['label']." ".$finfo['objNum']." 0 R";
+              $res.= "\n/".$finfo['label']." ".$finfo['objNum']." 0 R";
             }
-            $rs.= "\n>>";
+            $res.= "\n>>";
           }
 
           if  ( isset($o['info']['extGStates']) &&  count($o['info']['extGStates'])) {
-            $rs.=  "\n/ExtGState << ";
+            $res.=  "\n/ExtGState << ";
             foreach ($o['info']['extGStates'] as  $gstate) {
-              $rs.=  "\n/GS" . $gstate['stateNum'] . " " . $gstate['objNum'] . " 0 R";
+              $res.=  "\n/GS" . $gstate['stateNum'] . " " . $gstate['objNum'] . " 0 R";
             }
-            $rs.=  "\n>>";
+            $res.=  "\n>>";
           }
 
-          $rs.= "\n>>";
+          $res.= "\n>>";
           if  (isset($o['info']['mediaBox'])) {
             $tmp = $o['info']['mediaBox'];
-            $rs.= "\n/MediaBox [".sprintf('%.3F %.3F %.3F %.3F', $tmp[0], $tmp[1], $tmp[2], $tmp[3]) .']';
+            $res.= "\n/MediaBox [".sprintf('%.3F %.3F %.3F %.3F', $tmp[0], $tmp[1], $tmp[2], $tmp[3]) .']';
           }
         }
 
-        $rs.= "\n >>\nendobj";
+        $res.= "\n >>\nendobj";
       } else {
-        $rs = "\n$id 0 obj\n<< /Type /Pages\n/Count 0\n>>\nendobj";
+        $res = "\n$id 0 obj\n<< /Type /Pages\n/Count 0\n>>\nendobj";
       }
 
-      return  $rs;
+      return  $res;
     }
   }
 
@@ -654,17 +654,17 @@ class Cpdf {
 
     case  'out':
       if  (count($o['info']['outlines'])) {
-        $rs = "\n$id 0 obj\n<< /Type /Outlines /Kids [";
+        $res = "\n$id 0 obj\n<< /Type /Outlines /Kids [";
         foreach($o['info']['outlines'] as  $v) {
-          $rs.= "$v 0 R ";
+          $res.= "$v 0 R ";
         }
 
-        $rs.= "] /Count ".count($o['info']['outlines']) ." >>\nendobj";
+        $res.= "] /Count ".count($o['info']['outlines']) ." >>\nendobj";
       } else {
-        $rs = "\n$id 0 obj\n<< /Type /Outlines /Count 0 >>\nendobj";
+        $res = "\n$id 0 obj\n<< /Type /Outlines /Count 0 >>\nendobj";
       }
 
-      return  $rs;
+      return  $res;
     }
   }
 
@@ -744,10 +744,10 @@ end
 end
 EOT;
 
-        $rs =   "<</Length " . mb_strlen($stream, '8bit') . " >>\n";
-        $rs .=  "stream\n" . $stream . "endstream";
+        $res =   "<</Length " . mb_strlen($stream, '8bit') . " >>\n";
+        $res .=  "stream\n" . $stream . "endstream";
 
-        $this->objects[$toUnicodeId]['c'] = $rs;
+        $this->objects[$toUnicodeId]['c'] = $res;
 
         $cidFontId = ++$this->numObj;
         $this->o_fontDescendentCID($cidFontId, 'new', $options);
@@ -791,50 +791,50 @@ EOT;
         // All of this code is adapted from the excellent changes made to
         // transform FPDF to TCPDF (http://tcpdf.sourceforge.net/)
 
-        $rs =  "\n$id 0 obj\n<</Type /Font\n/Subtype /Type0\n";
-        $rs.=  "/BaseFont /".$o['info']['name']."\n";
+        $res =  "\n$id 0 obj\n<</Type /Font\n/Subtype /Type0\n";
+        $res.=  "/BaseFont /".$o['info']['name']."\n";
 
         // The horizontal identity mapping for 2-byte CIDs; may be used
         // with CIDFonts using any Registry, Ordering, and Supplement values.
-        $rs.=  "/Encoding /Identity-H\n";
-        $rs.=  "/DescendantFonts [".$o['info']['cidFont']." 0 R]\n";
-        $rs.=  "/ToUnicode ".$o['info']['toUnicode']." 0 R\n";
-        $rs.=  ">>\n";
-        $rs.=  "endobj";
+        $res.=  "/Encoding /Identity-H\n";
+        $res.=  "/DescendantFonts [".$o['info']['cidFont']." 0 R]\n";
+        $res.=  "/ToUnicode ".$o['info']['toUnicode']." 0 R\n";
+        $res.=  ">>\n";
+        $res.=  "endobj";
       } else {
-        $rs =  "\n$id 0 obj\n<< /Type /Font\n/Subtype /".$o['info']['SubType']."\n";
-        $rs.=  "/Name /F".$o['info']['fontNum']."\n";
-        $rs.=  "/BaseFont /".$o['info']['name']."\n";
+        $res =  "\n$id 0 obj\n<< /Type /Font\n/Subtype /".$o['info']['SubType']."\n";
+        $res.=  "/Name /F".$o['info']['fontNum']."\n";
+        $res.=  "/BaseFont /".$o['info']['name']."\n";
   
         if  (isset($o['info']['encodingDictionary'])) {
           // then place a reference to the dictionary
-          $rs.=  "/Encoding ".$o['info']['encodingDictionary']." 0 R\n";
+          $res.=  "/Encoding ".$o['info']['encodingDictionary']." 0 R\n";
         } else  if  (isset($o['info']['encoding'])) {
           // use the specified encoding
-          $rs.=  "/Encoding /".$o['info']['encoding']."\n";
+          $res.=  "/Encoding /".$o['info']['encoding']."\n";
         }
   
         if  (isset($o['info']['FirstChar'])) {
-          $rs.=  "/FirstChar ".$o['info']['FirstChar']."\n";
+          $res.=  "/FirstChar ".$o['info']['FirstChar']."\n";
         }
   
         if  (isset($o['info']['LastChar'])) {
-          $rs.=  "/LastChar ".$o['info']['LastChar']."\n";
+          $res.=  "/LastChar ".$o['info']['LastChar']."\n";
         }
   
         if  (isset($o['info']['Widths'])) {
-          $rs.=  "/Widths ".$o['info']['Widths']." 0 R\n";
+          $res.=  "/Widths ".$o['info']['Widths']." 0 R\n";
         }
   
         if  (isset($o['info']['FontDescriptor'])) {
-          $rs.=  "/FontDescriptor ".$o['info']['FontDescriptor']." 0 R\n";
+          $res.=  "/FontDescriptor ".$o['info']['FontDescriptor']." 0 R\n";
         }
 
-        $rs.=  ">>\n";
-        $rs.=  "endobj";
+        $res.=  ">>\n";
+        $res.=  "endobj";
       }
 
-      return  $rs;
+      return  $res;
     }
   }
 
@@ -852,7 +852,7 @@ EOT;
       break;
 
     case  'out':
-      $rs = "\n$id 0 obj\n<< /Type /FontDescriptor\n";
+      $res = "\n$id 0 obj\n<< /Type /FontDescriptor\n";
       foreach ($o['info'] as  $label => $value) {
         switch  ($label) {
         case  'Ascent':
@@ -869,29 +869,29 @@ EOT;
         case  'XHeight':
         case  'CharSet':
           if  (mb_strlen($value, '8bit')) {
-            $rs.= "/$label $value\n";
+            $res.= "/$label $value\n";
           }
 
           break;
         case  'FontFile':
         case  'FontFile2':
         case  'FontFile3':
-          $rs.= "/$label $value 0 R\n";
+          $res.= "/$label $value 0 R\n";
           break;
 
         case  'FontBBox':
-          $rs.= "/$label [$value[0] $value[1] $value[2] $value[3]]\n";
+          $res.= "/$label [$value[0] $value[1] $value[2] $value[3]]\n";
           break;
 
         case  'FontName':
-          $rs.= "/$label /$value\n";
+          $res.= "/$label /$value\n";
           break;
         }
       }
 
-      $rs.= ">>\nendobj";
+      $res.= ">>\nendobj";
 
-      return  $rs;
+      return  $res;
     }
   }
 
@@ -910,32 +910,32 @@ EOT;
       break;
 
     case  'out':
-      $rs = "\n$id 0 obj\n<< /Type /Encoding\n";
+      $res = "\n$id 0 obj\n<< /Type /Encoding\n";
       if  (!isset($o['info']['encoding'])) {
         $o['info']['encoding'] = 'WinAnsiEncoding';
       }
 
       if  ($o['info']['encoding'] !== 'none') {
-        $rs.= "/BaseEncoding /".$o['info']['encoding']."\n";
+        $res.= "/BaseEncoding /".$o['info']['encoding']."\n";
       }
 
-      $rs.= "/Differences \n[";
+      $res.= "/Differences \n[";
 
       $onum = -100;
 
       foreach($o['info']['differences'] as  $num=>$label) {
         if  ($num != $onum+1) {
           // we cannot make use of consecutive numbering
-          $rs.=  "\n$num /$label";
+          $res.=  "\n$num /$label";
         } else {
-          $rs.=  " /$label";
+          $res.=  " /$label";
         }
 
         $onum = $num;
       }
 
-      $rs.= "\n]\n>>\nendobj";
-      return  $rs;
+      $res.= "\n]\n>>\nendobj";
+      return  $res;
     }
   }
 
@@ -955,11 +955,11 @@ EOT;
       $cidSystemInfoId = ++$this->numObj;
       $this->o_contents($cidSystemInfoId, 'new', 'raw');
       $this->objects[$id]['info']['cidSystemInfo'] = $cidSystemInfoId;
-      $rs=   "<</Registry (Adobe)\n"; // A string identifying an issuer of character collections
-      $rs.=  "/Ordering (UCS)\n"; // A string that uniquely names a character collection issued by a specific registry
-      $rs.=  "/Supplement 0\n"; // The supplement number of the character collection.
-      $rs.=  ">>";
-      $this->objects[$cidSystemInfoId]['c'] = $rs;
+      $res=   "<</Registry (Adobe)\n"; // A string identifying an issuer of character collections
+      $res.=  "/Ordering (UCS)\n"; // A string that uniquely names a character collection issued by a specific registry
+      $res.=  "/Supplement 0\n"; // The supplement number of the character collection.
+      $res.=  ">>";
+      $this->objects[$cidSystemInfoId]['c'] = $res;
 
       // and a CID to GID map
       $cidToGidMapId = ++$this->numObj;
@@ -990,24 +990,24 @@ EOT;
       break;
 
     case  'out':
-      $rs =  "\n$id 0 obj\n";
-      $rs.=  "<</Type /Font\n";
-      $rs.=  "/Subtype /CIDFontType2\n";
-      $rs.=  "/BaseFont /".$o['info']['name']."\n";
-      $rs.=  "/CIDSystemInfo ".$o['info']['cidSystemInfo']." 0 R\n";
+      $res =  "\n$id 0 obj\n";
+      $res.=  "<</Type /Font\n";
+      $res.=  "/Subtype /CIDFontType2\n";
+      $res.=  "/BaseFont /".$o['info']['name']."\n";
+      $res.=  "/CIDSystemInfo ".$o['info']['cidSystemInfo']." 0 R\n";
 //      if  (isset($o['info']['FirstChar'])) {
-//        $rs.=  "/FirstChar ".$o['info']['FirstChar']."\n";
+//        $res.=  "/FirstChar ".$o['info']['FirstChar']."\n";
 //      }
 
 //      if  (isset($o['info']['LastChar'])) {
-//        $rs.=  "/LastChar ".$o['info']['LastChar']."\n";
+//        $res.=  "/LastChar ".$o['info']['LastChar']."\n";
 //      }
       if  (isset($o['info']['FontDescriptor'])) {
-        $rs.=  "/FontDescriptor ".$o['info']['FontDescriptor']." 0 R\n";
+        $res.=  "/FontDescriptor ".$o['info']['FontDescriptor']." 0 R\n";
       }
 
       if  (isset($o['info']['MissingWidth'])) {
-        $rs.=  "/DW ".$o['info']['MissingWidth']."\n";
+        $res.=  "/DW ".$o['info']['MissingWidth']."\n";
       }
 
       if  (isset($o['info']['fontFileName']) && isset($this->fonts[$o['info']['fontFileName']]['CIDWidths'])) {
@@ -1016,14 +1016,14 @@ EOT;
         foreach ($cid_widths as $cid => $width) {
           $w .= "$cid [$width] ";
         }
-        $rs.=  "/W [$w]\n";
+        $res.=  "/W [$w]\n";
       }
 
-      $rs.=  "/CIDToGIDMap ".$o['info']['cidToGidMap']." 0 R\n";
-      $rs.=  ">>\n";
-      $rs.=  "endobj";
+      $res.=  "/CIDToGIDMap ".$o['info']['cidToGidMap']." 0 R\n";
+      $res.=  ">>\n";
+      $res.=  "endobj";
 
-      return  $rs;
+      return  $res;
     }
   }
   
@@ -1041,7 +1041,7 @@ EOT;
       break;
 
     case  'out':
-      $rs = "\n$id 0 obj\n";
+      $res = "\n$id 0 obj\n";
       $fontFileName = $o['info']['fontFileName'];
       $tmp = $this->fonts[$fontFileName]['CIDtoGID'] = base64_decode($this->fonts[$fontFileName]['CIDtoGID']);
       
@@ -1049,9 +1049,9 @@ EOT;
                     $this->fonts[$fontFileName]['CIDtoGID_Compressed'];
 
       if  (!$compressed && isset($o['raw'])) {
-        $rs.= $tmp;
+        $res.= $tmp;
       } else {
-        $rs.=  "<<";
+        $res.=  "<<";
 
         if  (!$compressed && $this->compressionReady && $this->options['compression']) {
           // then implement ZLIB based compression on this content stream
@@ -1059,14 +1059,14 @@ EOT;
           $tmp =  gzcompress($tmp,  6);
         }
         if ($compressed) {
-          $rs.= "\n/Filter /FlateDecode";
+          $res.= "\n/Filter /FlateDecode";
         }
 
-        $rs.= "\n/Length ".mb_strlen($tmp, '8bit') .">>\nstream\n$tmp\nendstream";
+        $res.= "\n/Length ".mb_strlen($tmp, '8bit') .">>\nstream\n$tmp\nendstream";
       }
 
-      $rs.= "\nendobj";
-      return  $rs;
+      $res.= "\nendobj";
+      return  $res;
     }
   }
   
@@ -1098,12 +1098,12 @@ EOT;
       break;
 
     case  'out':
-      $rs = "\n$id 0 obj\n[";
+      $res = "\n$id 0 obj\n[";
       foreach ($o['info'] as  $label=>$val) {
-        $rs.= "/$label ";
+        $res.= "/$label ";
       }
-      $rs.= "]\nendobj";
-      return  $rs;
+      $res.= "]\nendobj";
+      return  $res;
     }
   }
 
@@ -1138,9 +1138,9 @@ EOT;
         $this->encryptInit($id);
       }
 
-      $rs = "\n$id 0 obj\n<<\n";
+      $res = "\n$id 0 obj\n<<\n";
       foreach ($o['info'] as  $k=>$v) {
-        $rs.= "/$k (";
+        $res.= "/$k (";
         // dates must be outputted as-is, without Unicode transformations
         $raw = ($k === 'CreationDate' || $k === 'ModDate');
         $c = $v;
@@ -1149,12 +1149,12 @@ EOT;
           $c = $this->ARC4($c);
         }
 
-        $rs.= ($raw) ? $c : $this->filterText($c);
-        $rs.= ")\n";
+        $res.= ($raw) ? $c : $this->filterText($c);
+        $res.= ")\n";
       }
 
-      $rs.= ">>\nendobj";
-      return  $rs;
+      $res.= ">>\nendobj";
+      return  $res;
     }
   }
 
@@ -1181,29 +1181,29 @@ EOT;
         $this->encryptInit($id);
       }
 
-      $rs = "\n$id 0 obj\n<< /Type /Action";
+      $res = "\n$id 0 obj\n<< /Type /Action";
       switch ($o['type']) {
       case  'ilink':
         if (!isset($this->destinations[(string)$o['info']['label']])) break;
         
         // there will be an 'label' setting, this is the name of the destination
-        $rs.= "\n/S /GoTo\n/D ".$this->destinations[(string)$o['info']['label']]." 0 R";
+        $res.= "\n/S /GoTo\n/D ".$this->destinations[(string)$o['info']['label']]." 0 R";
         break;
 
       case  'URI':
-        $rs.= "\n/S /URI\n/URI (";
+        $res.= "\n/S /URI\n/URI (";
         if  ($this->encrypted) {
-          $rs.= $this->filterText($this->ARC4($o['info']), true, false);
+          $res.= $this->filterText($this->ARC4($o['info']), true, false);
         } else {
-          $rs.= $this->filterText($o['info'], true, false);
+          $res.= $this->filterText($o['info'], true, false);
         }
 
-        $rs.= ")";
+        $res.= ")";
         break;
       }
 
-      $rs.= "\n>>\nendobj";
-      return  $rs;
+      $res.= "\n>>\nendobj";
+      return  $res;
     }
   }
 
@@ -1243,25 +1243,25 @@ EOT;
       break;
 
     case  'out':
-      $rs = "\n$id 0 obj\n<< /Type /Annot";
+      $res = "\n$id 0 obj\n<< /Type /Annot";
       switch ($o['info']['type']) {
       case  'link':
       case  'ilink':
-        $rs.=  "\n/Subtype /Link";
+        $res.=  "\n/Subtype /Link";
         break;
       }
-      $rs.= "\n/A ".$o['info']['actionId']." 0 R";
-      $rs.= "\n/Border [0 0 0]";
-      $rs.= "\n/H /I";
-      $rs.= "\n/Rect [ ";
+      $res.= "\n/A ".$o['info']['actionId']." 0 R";
+      $res.= "\n/Border [0 0 0]";
+      $res.= "\n/H /I";
+      $res.= "\n/Rect [ ";
 
       foreach($o['info']['rect'] as  $v) {
-        $rs.=  sprintf("%.4F ", $v);
+        $res.=  sprintf("%.4F ", $v);
       }
 
-      $rs.= "]";
-      $rs.= "\n>>\nendobj";
-      return  $rs;
+      $res.= "]";
+      $res.= "\n>>\nendobj";
+      return  $res;
     }
   }
 
@@ -1317,34 +1317,34 @@ EOT;
       break;
 
     case  'out':
-      $rs = "\n$id 0 obj\n<< /Type /Page";
-      $rs.= "\n/Parent ".$o['info']['parent']." 0 R";
+      $res = "\n$id 0 obj\n<< /Type /Page";
+      $res.= "\n/Parent ".$o['info']['parent']." 0 R";
 
       if  (isset($o['info']['annot'])) {
-        $rs.= "\n/Annots [";
+        $res.= "\n/Annots [";
         foreach($o['info']['annot'] as  $aId) {
-          $rs.= " $aId 0 R";
+          $res.= " $aId 0 R";
         }
-        $rs.= " ]";
+        $res.= " ]";
       }
 
       $count =  count($o['info']['contents']);
       if  ($count == 1) {
-        $rs.= "\n/Contents ".$o['info']['contents'][0]." 0 R";
+        $res.= "\n/Contents ".$o['info']['contents'][0]." 0 R";
       } else  if  ($count>1) {
-        $rs.= "\n/Contents [\n";
+        $res.= "\n/Contents [\n";
 
         // reverse the page contents so added objects are below normal content
         //foreach (array_reverse($o['info']['contents']) as  $cId) {
         // Back to normal now that I've got transparency working --Benj
         foreach ($o['info']['contents'] as  $cId) {
-          $rs.= "$cId 0 R\n";
+          $res.= "$cId 0 R\n";
         }
-        $rs.= "]";
+        $res.= "]";
       }
 
-      $rs.= "\n>>\nendobj";
-      return  $rs;
+      $res.= "\n>>\nendobj";
+      return  $res;
     }
   }
 
@@ -1376,15 +1376,15 @@ EOT;
 
     case  'out':
       $tmp = $o['c'];
-      $rs =  "\n$id 0 obj\n";
+      $res =  "\n$id 0 obj\n";
 
       if  (isset($this->objects[$id]['raw'])) {
-        $rs.= $tmp;
+        $res.= $tmp;
       } else {
-        $rs.=  "<<";
+        $res.=  "<<";
         if  ($this->compressionReady && $this->options['compression']) {
           // then implement ZLIB based compression on this content stream
-          $rs.= " /Filter /FlateDecode";
+          $res.= " /Filter /FlateDecode";
           $tmp =  gzcompress($tmp,  6);
         }
 
@@ -1394,14 +1394,14 @@ EOT;
         }
 
         foreach($o['info'] as  $k=>$v) {
-          $rs.=  "\n/$k $v";
+          $res.=  "\n/$k $v";
         }
 
-        $rs.= "\n/Length ".mb_strlen($tmp, '8bit') ." >>\nstream\n$tmp\nendstream";
+        $res.= "\n/Length ".mb_strlen($tmp, '8bit') ." >>\nstream\n$tmp\nendstream";
       }
 
-      $rs.= "\nendobj";
-      return  $rs;
+      $res.= "\nendobj";
+      return  $res;
     }
   }
 
@@ -1418,12 +1418,12 @@ EOT;
       break;
 
     case  'out':
-      $rs = "\n$id 0 obj\n<< ";
+      $res = "\n$id 0 obj\n<< ";
       foreach($o['info'] as  $k=>$v) {
-        $rs.=  "\n/$k $v";
+        $res.=  "\n/$k $v";
       }
-      $rs.= "\n>>\nendobj";
-      return  $rs;
+      $res.= "\n>>\nendobj";
+      return  $res;
     }
   }
   
@@ -1441,12 +1441,12 @@ EOT;
       break;
 
     case  'out':
-      $rs = "\n$id 0 obj\n<< ";
+      $res = "\n$id 0 obj\n<< ";
       foreach($o['info'] as  $k=>$v) {
-        $rs.=  "\n/$k $v";
+        $res.=  "\n/$k $v";
       }
-      $rs.= "\n>>\nendobj";
-      return  $rs;
+      $res.= "\n>>\nendobj";
+      return  $res;
     }
   }
 
@@ -1565,10 +1565,10 @@ EOT;
 
     case  'out':
       $tmp = &$o['data'];
-      $rs =  "\n$id 0 obj\n<<";
+      $res =  "\n$id 0 obj\n<<";
 
       foreach($o['info'] as  $k=>$v) {
-        $rs.= "\n/$k $v";
+        $res.= "\n/$k $v";
       }
 
       if  ($this->encrypted) {
@@ -1576,9 +1576,9 @@ EOT;
         $tmp =  $this->ARC4($tmp);
       }
 
-      $rs.= "\n/Length ".mb_strlen($tmp, '8bit') .">>\nstream\n$tmp\nendstream\nendobj";
+      $res.= "\n/Length ".mb_strlen($tmp, '8bit') .">>\nstream\n$tmp\nendstream\nendobj";
 
-      return  $rs;
+      return  $res;
     }
   }
 
@@ -1607,16 +1607,16 @@ EOT;
       break;
 
     case  "out":
-      $rs = "\n$id 0 obj\n<< /Type /ExtGState\n";
+      $res = "\n$id 0 obj\n<< /Type /ExtGState\n";
 
       foreach ($o["info"] as  $k => $v) {
         if  ( !in_array($k, $valid_params))
           continue;
-        $rs.=  "/$k $v\n";
+        $res.=  "/$k $v\n";
       }
 
-      $rs.= ">>\nendobj";
-      return  $rs;
+      $res.= ">>\nendobj";
+      return  $res;
     }
   }
 
@@ -1679,17 +1679,17 @@ EOT;
       break;
 
     case  'out':
-      $rs =  "\n$id 0 obj\n<<";
-      $rs.= "\n/Filter /Standard";
-      $rs.= "\n/V 1";
-      $rs.= "\n/R 2";
-      $rs.= "\n/O (".$this->filterText($o['info']['O'], true, false) .')';
-      $rs.= "\n/U (".$this->filterText($o['info']['U'], true, false) .')';
+      $res =  "\n$id 0 obj\n<<";
+      $res.= "\n/Filter /Standard";
+      $res.= "\n/V 1";
+      $res.= "\n/R 2";
+      $res.= "\n/O (".$this->filterText($o['info']['O'], true, false) .')';
+      $res.= "\n/U (".$this->filterText($o['info']['U'], true, false) .')';
       // and the p-value needs to be converted to account for the twos-complement approach
       $o['info']['p'] =  (($o['info']['p']^255) +1) *-1;
-      $rs.= "\n/P ".($o['info']['p']);
-      $rs.= "\n>>\nendobj";
-      return  $rs;
+      $res.= "\n/P ".($o['info']['p']);
+      $res.= "\n>>\nendobj";
+      return  $res;
     }
   }
 
@@ -2017,13 +2017,13 @@ EOT;
 
       $file =  file($dir . $metrics_name);
 
-      foreach ($file as  $rwA) {
-        $rw = trim($rwA);
-        $pos = strpos($rw, ' ');
+      foreach ($file as  $rowA) {
+        $row = trim($rowA);
+        $pos = strpos($row, ' ');
 
         if  ($pos) {
           // then there must be some keyword
-          $key =  substr($rw, 0, $pos);
+          $key =  substr($row, 0, $pos);
           switch  ($key) {
           case  'FontName':
           case  'FullName':
@@ -2045,16 +2045,16 @@ EOT;
           case  'StdVW':
           case  'StartCharMetrics':
           case  'FontHeightOffset': // OAR - Added so we can offset the height calculation of a Windows font.  Otherwise it's too big.
-            $data[$key] = trim(substr($rw, $pos));
+            $data[$key] = trim(substr($row, $pos));
             break;
 
           case  'FontBBox':
-            $data[$key] = explode(' ', trim(substr($rw, $pos)));
+            $data[$key] = explode(' ', trim(substr($row, $pos)));
             break;
 
           //C 39 ; WX 222 ; N quoteright ; B 53 463 157 718 ;
           case  'C': // Found in AFM files
-            $bits = explode(';', trim($rw));
+            $bits = explode(';', trim($row));
             $dtmp = array();
 
             foreach($bits as  $bit) {
@@ -2094,7 +2094,7 @@ EOT;
           case  'U': // Found in UFM files
             if (!$data['isUnicode']) break;
             
-            $bits = explode(';', trim($rw));
+            $bits = explode(';', trim($row));
             $dtmp = array();
 
             foreach($bits as  $bit) {
@@ -2140,7 +2140,7 @@ EOT;
           case  'KPX':
             break; // don't include them as they are not used yet
             //KPX Adieresis yacute -40
-            $bits = explode(' ', trim($rw));
+            $bits = explode(' ', trim($row));
             $data['KPX'][$bits[1]][$bits[2]] = $bits[3];
             break;
           }

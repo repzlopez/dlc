@@ -290,11 +290,11 @@ class Table_Frame_Reflower extends Frame_Reflower {
 
     $cellmap = $this->_frame->get_cellmap();
     $cellmap->assign_frame_heights();
-    $rws = $cellmap->get_rows();
+    $rows = $cellmap->get_rows();
 
     // Determine our content height
     $content_height = 0;
-    foreach ( $rws as $r )
+    foreach ( $rows as $r )
       $content_height += $r["height"];
 
     $cb = $this->_frame->get_containing_block();
@@ -453,8 +453,8 @@ class Table_Frame_Reflower extends Frame_Reflower {
     $col =& $cellmap->get_column(0);
     $col["x"] = $content_x;
 
-    $rw =& $cellmap->get_row(0);
-    $rw["y"] = $content_y;
+    $row =& $cellmap->get_row(0);
+    $row["y"] = $content_y;
 
     $cellmap->assign_x_positions();
 

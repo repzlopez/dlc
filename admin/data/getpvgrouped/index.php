@@ -1,8 +1,5 @@
-<?php
-if(!isset($_SESSION)) {
-     session_set_cookie_params(0);
-     session_start();
-}
+<?php session_set_cookie_params(0);
+if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
 if(!ISIN_ADMIN||!testScope("global|data")){
@@ -16,6 +13,8 @@ if(!ISIN_ADMIN||!testScope("global|data")){
 	$getDate=isset($_GET['do'])?$_GET['do']:'';		//mmyyyy REQUIRED
 	header('Content-type: application/vnd.ms-excel');
 	header('Content-disposition: filename=Distributors_w_'.(($getTPV!==null)?$getTPV:$getPV).'PV_'.$getDate.'.csv');
+	$dbsrc='distributor';
+	include('../../infoconfig.php');
 	getDistList(GRACE,0,MAXLOOP,$getDate,$getTPV);
 	$csv ="Distributors with ".(($getTPV!==null)?$getTPV:$getPV)." PV [ $getDate ]\n";
 	$csv.='"ID#","LAST NAME","FIRST NAME","PROV","PPV","GPV","TPV"'."\n";
@@ -28,12 +27,11 @@ if(!ISIN_ADMIN||!testScope("global|data")){
 function getDistList($sponsor,$lvl,$date,$tpv){
 	if($lvl>=MAXLOOP){}
 	else{
-		$con=SQLi('distributor');
 		$qry="SELECT dsdid,dslnam,dsfnam,dsprov FROM distributors WHERE dssid='$sponsor'";
-		$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-		if(mysqli_num_rows($rs)==0){
+		$rs=mysql_query($qry) or die(mysql_error());
+		if(mysql_num_rows($rs)==0){
 		}else{
-			while($rw=mysqli_fetch_assoc($rs)){
+			while($rw=mysql_fetch_assoc($rs)){
 				if(hasPV($rw['dsdid'],$date,$tpv)){
 					$_SESSION['distlist'].='"'.$rw['dsdid'].'","'.$rw['dslnam'].'","'.$rw['dsfnam'].'","'.$rw['dsprov'].'",'.$_SESSION['datalist'];
 				}getDistList($rw['dsdid'],$lvl+1,$date,$tpv);
@@ -52,13 +50,12 @@ function hasPV($id,$date,$tpv){
 		AND bhnpv>=$tpv
 		AND bhppv>=5
 	";$str='';
-	$con=SQLi('distributor');
-	$rs1=mysqli_query($qry) or die(mysqli_error($con));
-	$rw1=mysqli_fetch_array($rs1);
+	$rs1=mysql_query($qry) or die(mysql_error());
+	$rw1=mysql_fetch_array($rs1);
 	$str.='"'.number_format($rw1['ppv'],2).'",';
 	$str.='"'.number_format($rw1['gpv'],2).'",';
 	$str.='"'.number_format($rw1['tpv'],2).'"'."\n";
 	$_SESSION['datalist']=$str;
-	return (mysqli_num_rows($rs1)>0)?true:false;
+	return (mysql_num_rows($rs1)>0)?true:false;
 }
 ?>

@@ -40,8 +40,8 @@ $filename='recap.pdf';
 if(isset($_SESSION['multirecap'])&&$_SESSION['multirecap']){
 	$d=0;$html=null;
 	$recapdistri=$_SESSION['recapdistri'];
-	ini_set('memory_limit', '-1');
-	set_time_limit(600);
+	// ini_set('memory_limit', '-1');
+	// set_time_limit(600);
 	foreach($recapdistri as $val){
 		$_SESSION['u_site']=trim($val);
 		$html.='<div class="recappage">'.getRecap().'</div>';
