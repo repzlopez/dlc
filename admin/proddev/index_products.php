@@ -39,7 +39,7 @@ if($do==0){
 		$rs=mysqli_query($con,"SELECT * FROM $tbl WHERE id='$item'") or die(mysqli_error($con));
 		while($rw=mysqli_fetch_assoc($rs)){
 			$id=$rw['id'];
-			$msg.='<li><label>Product ID:</label><input type="text" name="id" '.READONLY.' value="'.$id.'" /></li>';
+			$msg.='<li><label>Product ID:</label><input type="text" name="id" '.READ_ONLY.' value="'.$id.'" /></li>';
 			$msg.='<li><label>Name:</label><span>'.getPName($id).'</span></li>';
 			$msg.='<li><label>Category:</label><select name="cat"><option value="" '.SELECTED.'>None</option>'.populateCat('tblnavigation','short','navi','*','WHERE parent_id=004',$rw['cat']).'</select></li>';
 			$msg.='<li><label>Sub-Category:</label><select name="subcat"><option value="" '.SELECTED.'>None</option>'.populateCat('tblcategories','cat','cat','*','ORDER BY sort_order',$rw['subcat'],'parent_id','products').'</select></li>';
@@ -48,7 +48,7 @@ $msg.='<li><input type="hidden" name="pfda" class="txt" value="" /><input type="
 			$msg.='<li><label>Contains:</label><textarea name="contains">'.$rw['contains'].'</textarea></li>';
 			$msg.='<li><label>Description:</label><div class="editor"><textarea name="description" id="panel">'.$rw['description'].'</textarea></div></li>';
 			$msg.='<li><label>Order:</label><input type="text" name="sort_order" class="txt" value="'.$rw['sort_order'].'" /></li>';
-			$msg.='<li><label>Image:</label><img src="/images/products/'.$rw['img'].'" /><input type="file" name="file_img" /><input type="text" name="img" value="'.$rw['img'].'" '.READONLY.' /> <span class="removepic">remove</span></li>';
+			$msg.='<li><label>Image:</label><img src="/images/products/'.$rw['img'].'" /><input type="file" name="file_img" /><input type="text" name="img" value="'.$rw['img'].'" '.READ_ONLY.' /> <span class="removepic">remove</span></li>';
 			$msg.='<li><label>Stock Status:</label><input type="hidden" name="stock" value=0 /><input type="checkbox" name="stock" value=1 '.($rw['stock']?C_K:'').' class="rdo" /></li>';
 			$msg.='<li><label>Promo:</label><input type="hidden" name="promo" value=0 /><input type="checkbox" name="promo" value=1 '.($rw['promo']?C_K:'').' class="rdo" /></li>';
 			$msg.='<li><label>Sun Life:</label><input type="hidden" name="slp" value=0 /><input type="checkbox" name="slp" value=1 '.($rw['slp']?C_K:'').' class="rdo" /></li>';

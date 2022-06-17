@@ -53,7 +53,7 @@ function getPayment($met){
 	$x.='<li><span class="s4 lbl">Method:</span><select name="payOp"> ';
 	$x.=$p.'</select></li>';
 	$x.='<li class="ifremit"><span class="s4 lbl">Pay To</span> <p class="s7">'.DLC_FULL.', Inc.<br>'.$defPayOp.'<br>0915 170 7388 / 0947 692 8060</p></li>';
-	$x.='<li><span class="s4 lbl">Amount (Php):</span> <input type="text" rel="'.$payamt.'" value="'.number_format($payplus,2).'" name="payAmt" class="s3" '.(GUEST?READONLY:'').' /> <span class="smaller">( <span class="payamt smaller">'.number_format($payamt,2).'</span> '.$procfee.$delifee.' ** Order'.($ol_proc?' & Processing':'').($delivr?' + Shipping':'').' )</span>';
+	$x.='<li><span class="s4 lbl">Amount (Php):</span> <input type="text" rel="'.$payamt.'" value="'.number_format($payplus,2).'" name="payAmt" class="s3" '.(GUEST?READ_ONLY:'').' /> <span class="smaller">( <span class="payamt smaller">'.number_format($payamt,2).'</span> '.$procfee.$delifee.' ** Order'.($ol_proc?' & Processing':'').($delivr?' + Shipping':'').' )</span>';
 		$x.='<br><span class="s5"></span><span class="smaller">**Shipping fee may change depending on package and location</span>';
 		$x.='<br><span class="s5"></span><span class="smaller">**In case of changes, you will be contacted for confirmation.</span></li>';
 	$x.='<li><span class="s4 lbl">NOTE:</span> <textarea class="s7" name="payNote" placeholder="Enter note here">'.$olreg_msg.'</textarea></li>';

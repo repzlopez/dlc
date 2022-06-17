@@ -20,7 +20,7 @@ if($do==0){
 	$msg.='</ul>';
 }else{
 	if($do==1){
-		$msg.='<li><label>ID:</label><input type="text" name="id" class="txt" value="" '.READONLY.' /></li>';
+		$msg.='<li><label>ID:</label><input type="text" name="id" class="txt" value="" '.READ_ONLY.' /></li>';
 		$msg.='<li><label>Navigation:</label><input type="text" name="navi" class="txt" value="" /></li>';
 		$msg.='<li><label>Shorthand:</label><input type="text" name="short" class="txt" value="" /></li>';
 		$msg.='<li><label>Tag Line:</label><input type="text" name="tagline" class="txt" value="" /></li>';
@@ -33,7 +33,7 @@ if($do==0){
 	}else if($do==2){
 		$rs=mysqli_query($con,"SELECT * FROM $tbl WHERE id='$item'") or die(mysqli_error($con));
 		while($rw=mysqli_fetch_assoc($rs)){
-			$msg.='<li><label>ID:</label><input type="text" name="id" class="txt" value="'.$rw['id'].'" '.READONLY.' /></li>';
+			$msg.='<li><label>ID:</label><input type="text" name="id" class="txt" value="'.$rw['id'].'" '.READ_ONLY.' /></li>';
 			$msg.='<li><label>Navigation:</label><input type="text" name="navi" class="txt" value="'.$rw['navi'].'" /></li>';
 			$msg.='<li><label>Shorthand:</label><input type="text" name="short" class="txt" value="'.$rw['short'].'" /></li>';
 			$msg.='<li><label>Tag Line:</label><input type="text" name="tagline" class="txt" value="'.$rw['tagline'].'" /></li>';

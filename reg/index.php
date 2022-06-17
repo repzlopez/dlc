@@ -73,7 +73,7 @@ $x .= '<ul class="print"><li><a href="javascript:window.print()"></a></li></ul>'
 $x .= '<form enctype="multipart/form-data" method="post" action="'.DLC_ROOT.'/reg/post.php" id="olreg"><ul>';
 $x .= '<li><h2 class="blue ct">'.$title.'</h2>'.( ITS_ME && $found ? '<em class="smaller lite">(Update request pending)</em>':'').'<br><input type="hidden" name="id" value="'.$id.'" /></li>';
 if( ITS_ME ) $x .= '<li'.($dsdid!=''?' class="hide"':'').'><label></label><label><input type="checkbox" /> Signed DAF (Distributor Application Form)</label></li>';
-$x .= '<li'.( ( !ISIN_ADMIN && $dsdid=='' ) || ISIN_WP ? ' class="hide"' :'').'><label>Distributor ID *:</label><input type="text" name="dsdid" class="txt ex" value="'.$dsdid.'" '.READONLY.' maxlength=32 required /></li>';
+$x .= '<li'.( ( !ISIN_ADMIN && $dsdid=='' ) || ISIN_WP ? ' class="hide"' :'').'><label>Distributor ID *:</label><input type="text" name="dsdid" class="txt ex" value="'.$dsdid.'" '.READ_ONLY.' maxlength=32 required /></li>';
 $x .= '<li><label>Last Name: * </label><input type="text" name="dslnam" class="txt" value="'.$dslnam.'" '.$styleis.' maxlength=32 required /></li>';
 $x .= '<li><label>First Name: * </label><input type="text" name="dsfnam" class="txt" value="'.$dsfnam.'" '.$styleis.' maxlength=32 required /></li>';
 $x .= '<li><label>Middle Name:</label><input type="text" name="dsmnam" class="txt ex" value="'.$dsmnam.'" maxlength=32 /></li>';
@@ -91,7 +91,7 @@ $x .= '<li><label>TIN: '.($dstin!=''?'':'<span class="smaller">** 0 if none</spa
 $x .= '<li><label>BPI Acct Name:</label><input type="text" name="dsbankact" class="txt" value="'.$dsbankact.'" /></li>';
 $x .= '<li><label>BPI Acct #:</label><input type="text" name="dsbankno" class="txt" value="'.$dsbankno.'" /></li>';
 $x .= '<li><label>E-mail:</label><input type="text" name="dsemail" class="txt" value="'.$dsemail.'" maxlength=64 /></li>';
-$x .= '<li class="'.(GUEST?' hide':'').'"><label>Sponsor ID: * </label><input type="text" name="dssid" class="txt ex" value="'.(GUEST?GUEST:$dssid).'" '.$styleis.$badspon.' '.(ITS_ME?READONLY:'').' maxlength=32 required /> '.$responsor.'</li>';
+$x .= '<li class="'.(GUEST?' hide':'').'"><label>Sponsor ID: * </label><input type="text" name="dssid" class="txt ex" value="'.(GUEST?GUEST:$dssid).'" '.$styleis.$badspon.' '.(ITS_ME?READ_ONLY:'').' maxlength=32 required /> '.$responsor.'</li>';
 $x .= '<li class="'.(GUEST?' hide':'').'"><label>Sponsor Contact:</label><input type="text" name="dsscont" class="txt" value="'.$dsscont.'" '.$styleis.' maxlength=32 /></li>';
 $x .= '<li class="smaller"><label></label>* Required fields'.(ISIN_DISTRI&&$noslot?'<input type="hidden" name="noslot" value=1 />':'').'</li>';
 

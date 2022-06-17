@@ -83,8 +83,8 @@ if ($do==0) {
 			$x .= '<li><label>E-mail:</label><input type="text" name="dsemail" class="txt" value='.$dsemail.' /></li>';
 			$x .= '<li><label>Sponsor ID:</label><input type="text" name="dssid" class="txt s4" value="'.$dssid.'" /> '.( $dssid!='' ? strtoupper(getName($dssid,'fml')) . $allowed : 'Waiting for ENCODE Request' ).'</li>';
 			$x .= '<li><label>Contact:</label><input type="text" name="dsscont" class="txt" value="'.$dsscont.'" /></li>';
-			$x .= '<li><label>Submitted:</label><input type="text" name="date" class="txt" value="'.$date.'" '.READONLY.' /></li>';
-			$x .= '<li><label>Referrer:</label><input type="text" name="referrer" class="txt s4" value="'.$referrer.'" '.READONLY.' /> <span>'.strtoupper(getName($referrer,'fml')).'</span><input type="hidden" name="noslot" value="'.$noslot.'" /></li>';
+			$x .= '<li><label>Submitted:</label><input type="text" name="date" class="txt" value="'.$date.'" '.READ_ONLY.' /></li>';
+			$x .= '<li><label>Referrer:</label><input type="text" name="referrer" class="txt s4" value="'.$referrer.'" '.READ_ONLY.' /> <span>'.strtoupper(getName($referrer,'fml')).'</span><input type="hidden" name="noslot" value="'.$noslot.'" /></li>';
 			$x .= $noslot ? '<li><label>Package:</label><span>Kindly check purchased package. No slot required.</span><a href="'.DLC_ADMIN.'/orders/?get=1" id="download" target="_blank">CHECK ORDER</a></li>' :'';
 			$x .= '<li><label>Status:</label><label class="s3"><input type="radio" name="status" value="1" '.($status==1?C_K:'').' />'.$arr[1].'</label> &nbsp; <label class="s3"><input type="radio" name="status" value="0" '.($status==0?C_K:'').' />'.$arr[0].'</label> &nbsp; <label class="s3"><input type="radio" name="status" value="2" '.($status==2?C_K:'').' />'.$arr[2].'</label></li>';
 			$x .= '<li><label>Copy of ID:</label><span class="s5">'.($scn!=''?'<a href="'.$scn.'" target="_blank">CLICK TO VIEW SCANNED COPY</a>':'').'</span></li>';

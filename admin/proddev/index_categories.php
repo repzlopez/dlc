@@ -19,7 +19,7 @@ if($do==0){
 	$msg.='</ul>';
 }else{
 	if($do==1){
-		$msg.='<li><label>ID:</label><input type="text" name="id" class="txt" value="" '.READONLY.' /></li>';
+		$msg.='<li><label>ID:</label><input type="text" name="id" class="txt" value="" '.READ_ONLY.' /></li>';
 		$msg.='<li><label>Category:</label><input type="text" name="cat" class="txt" value="" /></li>';
 		$msg.='<li><label>Parent:</label><select name="parent_id"><option value="0" '.SELECTED.'>None</option>'.populateCat('tblnavigation','short','navi','*','WHERE parent_id=004','').'</select></li>';
 		$msg.='<li><label>Order:</label><input type="text" name="sort_order" class="txt" value=0 /></li>';
@@ -30,7 +30,7 @@ if($do==0){
 		while($rw=mysqli_fetch_assoc($rs)){
 			$c_y=$rw['status']?C_K:'';
 			$c_n=!$rw['status']?C_K:'';
-			$msg.='<li><label>ID:</label><input type="text" name="id" class="txt" value="'.$rw['id'].'" '.READONLY.' /></li>';
+			$msg.='<li><label>ID:</label><input type="text" name="id" class="txt" value="'.$rw['id'].'" '.READ_ONLY.' /></li>';
 			$msg.='<li><label>Category:</label><input type="text" name="cat" class="txt" value="'.$rw['cat'].'" /></li>';
 			$msg.='<li><label>Parent:</label><select name="parent_id"><option value="0">None</option>'.populateCat('tblnavigation','short','navi','*','WHERE parent_id=004',$rw['parent_id']).'</select></li>';
 			$msg.='<li><label>Order:</label><input type="text" name="sort_order" class="txt" value="'.$rw['sort_order'].'" /></li>';

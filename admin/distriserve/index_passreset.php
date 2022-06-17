@@ -24,7 +24,7 @@ if( isset($_POST['submit']) && isset($_POST['id']) ) {
 $x  = '<form method="post" action="'.$_SERVER['REQUEST_URI'].'"><ul>';
 $x .= '<li><span class="blue">Password Reset</span>';
 $x .= '<li><label>Distributor ID:</label><input type="text" name="id" class="txt" id="distid" /></li>';
-$x .= '<li><label>Distributor Name:</label><input type="text" name="nn" class="txt" id="distname" '. READONLY .' /></li>';
+$x .= '<li><label>Distributor Name:</label><input type="text" name="nn" class="txt" id="distname" '. READ_ONLY .' /></li>';
 $x .= '<li><span id="resetstat">'.$z.'</span></li>';
 $x .= '<input type="submit" name="submit" class="btn" value="Reset" /></ul></form>';
 

@@ -61,7 +61,7 @@ if( $do==0 ) {
 		$x .= '<li><label>Sponsor ID:</label><input type="hidden" name="dsfor" /></li>';
 		$x .= '<li><label>Downline ID:</label><input type="hidden" name="dslid" /></li>';
 		$x .= '<li><label>Slot Used:</label><input type="hidden" name="used" /></li>';
-		$x .= '<li><label>Slot Reference:</label><input type="text" name="ref" class="txt ex" value="'.WKYR.WEEK.'" '.READONLY.' /></li>';
+		$x .= '<li><label>Slot Reference:</label><input type="text" name="ref" class="txt ex" value="'.WKYR.WEEK.'" '.READ_ONLY.' /></li>';
 
 	} else if( $do==2 ) {
 		$rs = mysqli_query($con,"SELECT * FROM $tbl WHERE slotid='$item'") or die(mysqli_error($con));

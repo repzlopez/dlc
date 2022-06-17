@@ -213,7 +213,7 @@ function listReplenish(){
 				$msg.='<li><span class="s3">'.$cod.'</span>';
 				$msg.='<span class="s5">'.getPName($cod).'</span>';
 				$msg.='<span class="s3 rt qty">'.$qty.'</span>';
-				$msg.='<span class="s3 rt"><input type="text" rel="'.$cod.'" class="txt s1 rt" value="'.$req.'" '.(IS_PCM?'':READONLY).' /></span></li>';
+				$msg.='<span class="s3 rt"><input type="text" rel="'.$cod.'" class="txt s1 rt" value="'.$req.'" '.(IS_PCM?'':READ_ONLY).' /></span></li>';
 			}
 		}return $msg.getBtn($brn);
 	}

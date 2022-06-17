@@ -66,7 +66,7 @@ define( 'SHOPLIST', isset($_SESSION['shoplist']) );
 
 define( 'LOGO_LINK', DLC_ROOT .'/'. LOGIN_TYPE);
 define( 'DIV_CLEAR', '<div class="clear"></div>' );
-define( 'READONLY', 'readonly="readonly"' );
+define( 'READ_ONLY', 'readonly="readonly"' );
 define( 'DISABLED', 'disabled="disabled"' );
 define( 'SELECTED', 'selected="selected"' );
 define( 'C_K', 'checked="checked"' );

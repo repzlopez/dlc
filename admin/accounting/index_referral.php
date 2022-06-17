@@ -36,7 +36,7 @@ if($do==0){$rel_ok=0;$rel=0;$t=0;$old='';$nam1='';
 	$x.='</ul>';
 }else{
 	$datenow=date(TMDSET,time());
-	$readonly=(testScope("global|accounting"))?'':READONLY;
+	$readonly=(testScope("global|accounting"))?'':READ_ONLY;
 	if($do==2){
 		$con=SQLi('orders');
 		$rs=mysqli_query($con,"SELECT * FROM $tbl WHERE id='$item'") or die(mysqli_error($con));
