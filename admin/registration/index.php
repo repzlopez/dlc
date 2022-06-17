@@ -5,8 +5,8 @@ if(!isset($_SESSION)) {
 }
 define('INCLUDE_CHECK',1);
 require('../fetch.php');
-$adminpage = 'encoding';
-testScope("global|encoding", DLC_ADMIN);
+$adminpage = 'registration';
+testScope("global|registration", DLC_ADMIN);
 
 $_SESSION['lastpage'] = $_SERVER['REQUEST_URI'];
 $_SESSION['lastURI']  = $adminpage;
@@ -15,7 +15,7 @@ $title   = '| '.strtoupper($adminpage);
 $content = isset($_GET['p'])?$_GET['p']:'';
 $item    = isset($_GET['i'])?$_GET['i']:'';
 $do      = isset($_GET['do'])?$_GET['do']:0;
-$page    = 'Encoding';
+$page    = 'Registration';
 $y = '';
 
 ob_start();
@@ -26,7 +26,7 @@ if( !ISIN_ADMIN ) {
 
 } else {
 	$y .= '<ul class="home">';
-	$y .= '<li><a href="?p=newdistri&do=0">NEW DISTRIBUTORS</a></li>';
+	$y .= '<li><a href="../distriserve?p=olreg&do=0">ONLINE REGISTRATION</a></li>';
 	$y .= DIV_CLEAR.'</ul>';
 	unset($_SESSION['my']);
 }

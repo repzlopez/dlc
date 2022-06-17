@@ -1,6 +1,8 @@
 <?php if(!defined('INCLUDE_CHECK')) die('Invalid Operation');
 if( !isset($_SESSION) ) session_start();
 
+testScope("global|distri|encoding", DLC_ADMIN);
+
 $x    = '';
 $tbl  = 'tbl'. $content;
 $goup = ($adminpage=='distriserve') ? '../' :'';

@@ -1,5 +1,8 @@
 <?php if(!defined('INCLUDE_CHECK')) die('Invalid Operation');
 if(!isset($_SESSION)) session_start();
+
+testScope("global|distri", DLC_ADMIN);
+
 $tbl  = $content;
 $goup = ($adminpage=='distriserve')?'../':'';
 $con  = SQLi('distributor');
@@ -74,3 +77,4 @@ if ( $do==0 ) {
 }
 
 echo $x;
+?>

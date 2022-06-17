@@ -6,7 +6,6 @@ if(!isset($_SESSION)) {
 define('INCLUDE_CHECK',1);
 require('../fetch.php');
 $adminpage = 'distriserve';
-testScope("global|distri", DLC_ADMIN);
 
 $_SESSION['lastpage'] = $_SERVER['REQUEST_URI'];
 $_SESSION['lastURI']  = $adminpage;

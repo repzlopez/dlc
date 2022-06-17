@@ -20,8 +20,6 @@ hr { width:100%; }
 #distributor h4 { margin:0 !important; }
 #distributor li { padding:10px; }
 #distributor li div { margin-left:20px; }
-#distributor li a,
-#distributor li span { margin-right:20px; }
 #distributor li * { display: inline-block; }
 #distributor .pv label { width:70px;vertical-align: top; }
 #distributor .pv span { width:110px;text-align:right;vertical-align:top; }

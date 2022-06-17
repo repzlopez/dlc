@@ -43,6 +43,7 @@ if( $do==0 ) {
 	$x .= '<li'. $h .'><label>Distri:</label><input type="hidden" name="distri" value=0 /><input type="checkbox" name="distri" value=1 '.($distri?C_K:'').' /></li>';
 	$x .= '<li'. $h .'><label>Data:</label><input type="hidden" name="data" value=0 /><input type="checkbox" name="data" value=1 ' . ($data ? C_K : '') . ' /></li>';
 	$x .= '<li'. $h .'><label>Encoding:</label><input type="hidden" name="encoding" value=0 /><input type="checkbox" name="encoding" value=1 ' . ($encoding ? C_K : '') . ' /></li>';
+	$x .= '<li'. $h .'><label>Registration:</label><input type="hidden" name="registration" value=0 /><input type="checkbox" name="registration" value=1 ' . ($registration ? C_K : '') . ' /></li>';
 	$x .= '<li'. $h .'><label>Lookup:</label><input type="hidden" name="lookup" value=0 /><input type="checkbox" name="lookup" value=1 '.($lookup?C_K:'').' /></li>';
 	$x .= '<li'. $h .'><label>Orders:</label><input type="hidden" name="orders" value=0 /><input type="checkbox" name="orders" value=1 '.($orders?C_K:'').' /></li>';
 	$x .= '<li'. $h .'><label>Logistics:</label><input type="hidden" name="logis" value=0 /><input type="checkbox" name="logis" value=1 '.($logis?C_K:'').' /></li>';

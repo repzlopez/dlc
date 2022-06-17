@@ -1,5 +1,8 @@
 <?php if ( !defined('INCLUDE_CHECK') ) die('Invalid Operation');
 if ( !isset($_SESSION) ) session_start();
+
+testScope("global|distri|registration", DLC_ADMIN);
+
 $x    = '';
 $tbl  = 'tbl'. $content;
 $type = ( isset($_GET['type']) ?$_GET['type'] :0 );
@@ -19,15 +22,17 @@ if ($do==0) {
 	FROM $tbl o
 	LEFT JOIN ".DB."distributor.distributors d
 		ON d.dsdid=o.dssid
-	WHERE o.status=$type";
+	WHERE o.status=$type
+	ORDER BY date DESC";
 
 	$rs = mysqli_query($con,$qry) or die(mysqli_error($con));
 	while ( $rw=mysqli_fetch_assoc($rs) ) {
 		$styleis =! $rw['status']?'bad':'';
+
 		$x .= '<li rel="'.$rw['id'].'">';
 		$x .= '<span class="s4">'.$rw['dsdid'].'</span>';
-		$x .= '<span class="s5"><a href="?p='.$content.'&do=2&i='.$rw['id'].'">'.ucwords(utf8_decode(strtolower(($rw['onam'])))).'</a></span>';
-		$x .= '<span class="s6">'.($rw['dssid']!=''?$rw['dssid'].' ':'-').($rw['dnam']!=''?ucwords(strtolower(utf8_decode($rw['dnam']))):'Waiting for ENCODE Request').'</span>';
+		$x .= '<span class="s5"><a href="?p='.$content.'&do=2&i='.$rw['id'].'">'.ucwords(strtolower(utf8_decode(utf8_encode(($rw['onam']))))).'</a></span>';
+		$x .= '<span class="s6">'.($rw['dssid']!=''?$rw['dssid'].' ':'-').($rw['dnam']!=''?ucwords(strtolower(utf8_decode(utf8_encode($rw['dnam'])))):'Waiting for ENCODE Request').'</span>';
 		$x .= '<span class="s2">'.date('Y.m.d',strtotime($rw['date'])).'</span>';
 		$x .= '<span class="s1 '.$styleis.'">'.$arr[$rw['status']].'</span></li>';
 	}
