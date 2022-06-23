@@ -5,9 +5,11 @@ if(!isset($_SESSION)) {
 }
 define('INCLUDE_CHECK',1);
 require('../admin/setup.php');
-$img='gjd.jpg';
-$msg='<p>SORRY FOR THE INCONVENIENCE</p><p>We\'re applying <span class="product">Golden Jubilee Diamond</span><br />to keep our pages from aging</p>';
+
+$img = 'gjd.jpg';
+$msg = '<p>SORRY FOR THE INCONVENIENCE</p><p>We\'re applying <span class="product">Golden Jubilee Diamond</span><br />to keep our pages from aging</p>';
 ob_start();
+
 ?><html>
 <head>
 	<title>Oops..</title>

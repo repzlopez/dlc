@@ -122,7 +122,7 @@ class Frame_Tree {
   /**
    * Adds missing TBODYs around TR
    */
-  protected function fix_tables(){
+  protected function fix_tables() {
     $xp = new DOMXPath($this->_dom);
     
     // Move table caption before the table
@@ -164,14 +164,14 @@ class Frame_Tree {
     // Fixes 'cannot access undefined property for object with
     // overloaded access', fix by Stefan radulian
     // <stefan.radulian@symbion.at>    
-    //foreach ($node->childNodes as $child) {
+    //foreach($node->childNodes as $child) {
 
     // Store the children in an array so that the tree can be modified
     $children = array();
     for ($i = 0; $i < $node->childNodes->length; $i++)
       $children[] = $node->childNodes->item($i);
 
-    foreach ($children as $child) {
+    foreach($children as $child) {
       $node_name = mb_strtolower($child->nodeName);
       
       // Skip non-displaying nodes

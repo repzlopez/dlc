@@ -17,8 +17,8 @@ require_once( '../admin/setup.php' );
 $con = SQLi('products');
 $rs  = mysqli_query($con,$qry) or die(mysqli_error($con));
 
-while ( $r = mysqli_fetch_assoc($rs) ) {
-     foreach ($r as $k=>$v) $$k = $v;
+while( $r = mysqli_fetch_assoc($rs) ) {
+     foreach($r as $k=>$v) $$k = $v;
 
      $z .= '<li><span class="s5">'.$item_code.'</span><span class="s6">'.$name.'</span><span class="s4 rt">'.number_format($srp,2).'</span></li>';
 }

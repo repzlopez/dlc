@@ -11,7 +11,7 @@
  * @author  Helmut Tischer <htischer@weihenstephan.org>
  * @author  Ryan H. Masten <ryan.masten@gmail.com>
  * @author  Brian Sweeney <eclecticgeek@gmail.com>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @version $Id: class.pdf.php 469 2012-02-05 22:25:30Z fabien.menager $
  * @license Public Domain http://creativecommons.org/licenses/publicdomain/
  * @package Cpdf
@@ -612,7 +612,7 @@ class Cpdf {
 
           if  ( isset($o['info']['extGStates']) &&  count($o['info']['extGStates'])) {
             $res.=  "\n/ExtGState << ";
-            foreach ($o['info']['extGStates'] as  $gstate) {
+            foreach($o['info']['extGStates'] as  $gstate) {
               $res.=  "\n/GS" . $gstate['stateNum'] . " " . $gstate['objNum'] . " 0 R";
             }
             $res.=  "\n>>";
@@ -759,7 +759,7 @@ EOT;
       break;
 
     case  'add':
-      foreach ($options as  $k => $v) {
+      foreach($options as  $k => $v) {
         switch  ($k) {
         case  'BaseFont':
           $o['info']['name'] =  $v;
@@ -853,7 +853,7 @@ EOT;
 
     case  'out':
       $res = "\n$id 0 obj\n<< /Type /FontDescriptor\n";
-      foreach ($o['info'] as  $label => $value) {
+      foreach($o['info'] as  $label => $value) {
         switch  ($label) {
         case  'Ascent':
         case  'CapHeight':
@@ -968,7 +968,7 @@ EOT;
       break;
 
     case  'add':
-      foreach ($options as  $k => $v) {
+      foreach($options as  $k => $v) {
         switch  ($k) {
         case  'BaseFont':
           $o['info']['name'] =  $v;
@@ -1013,7 +1013,7 @@ EOT;
       if  (isset($o['info']['fontFileName']) && isset($this->fonts[$o['info']['fontFileName']]['CIDWidths'])) {
         $cid_widths = &$this->fonts[$o['info']['fontFileName']]['CIDWidths'];
         $w = '';
-        foreach ($cid_widths as $cid => $width) {
+        foreach($cid_widths as $cid => $width) {
           $w .= "$cid [$width] ";
         }
         $res.=  "/W [$w]\n";
@@ -1099,7 +1099,7 @@ EOT;
 
     case  'out':
       $res = "\n$id 0 obj\n[";
-      foreach ($o['info'] as  $label=>$val) {
+      foreach($o['info'] as  $label=>$val) {
         $res.= "/$label ";
       }
       $res.= "]\nendobj";
@@ -1139,7 +1139,7 @@ EOT;
       }
 
       $res = "\n$id 0 obj\n<<\n";
-      foreach ($o['info'] as  $k=>$v) {
+      foreach($o['info'] as  $k=>$v) {
         $res.= "/$k (";
         // dates must be outputted as-is, without Unicode transformations
         $raw = ($k === 'CreationDate' || $k === 'ModDate');
@@ -1335,9 +1335,9 @@ EOT;
         $res.= "\n/Contents [\n";
 
         // reverse the page contents so added objects are below normal content
-        //foreach (array_reverse($o['info']['contents']) as  $cId) {
+        //foreach(array_reverse($o['info']['contents']) as  $cId) {
         // Back to normal now that I've got transparency working --Benj
-        foreach ($o['info']['contents'] as  $cId) {
+        foreach($o['info']['contents'] as  $cId) {
           $res.= "$cId 0 R\n";
         }
         $res.= "]";
@@ -1370,7 +1370,7 @@ EOT;
 
     case  'add':
       // add more options to the decleration
-      foreach ($options as  $k=>$v) {
+      foreach($options as  $k=>$v) {
         $o['info'][$k] = $v;
       }
 
@@ -1609,7 +1609,7 @@ EOT;
     case  "out":
       $res = "\n$id 0 obj\n<< /Type /ExtGState\n";
 
-      foreach ($o["info"] as  $k => $v) {
+      foreach($o["info"] as  $k => $v) {
         if  ( !in_array($k, $valid_params))
           continue;
         $res.=  "/$k $v\n";
@@ -1736,7 +1736,7 @@ EOT;
     }
 
     $k =  '';
-    while (mb_strlen($k, '8bit') <256) {
+    while(mb_strlen($k, '8bit') <256) {
       $k.= $key;
     }
 
@@ -2017,7 +2017,7 @@ EOT;
 
       $file =  file($dir . $metrics_name);
 
-      foreach ($file as  $rowA) {
+      foreach($file as  $rowA) {
         $row = trim($rowA);
         $pos = strpos($row, ' ');
 
@@ -2255,7 +2255,7 @@ EOT;
           $widths =  array();
           $cid_widths = array();
 
-          foreach ($font['C'] as  $num => $d) {
+          foreach($font['C'] as  $num => $d) {
             if  (intval($num) >0 ||  $num ==  '0') {
               if (!$font['isUnicode']) {
                 // With Unicode, widths array isn't used
@@ -2529,14 +2529,14 @@ EOT;
    * @access private
    */
   function setCurrentFont() {
-    //   if (strlen($this->currentBaseFont) == 0){
+    //   if (strlen($this->currentBaseFont) == 0) {
     //     // then assume an initial font
     //     $this->selectFont($this->defaultFont);
     //   }
     //   $cf = substr($this->currentBaseFont,strrpos($this->currentBaseFont,'/')+1);
     //   if (strlen($this->currentTextState)
     //     && isset($this->fontFamilies[$cf])
-    //       && isset($this->fontFamilies[$cf][$this->currentTextState])){
+    //       && isset($this->fontFamilies[$cf][$this->currentTextState])) {
     //     // then we are in some state or another
     //     // and this font has a family, and the current setting exists within it
     //     // select the font, then return it
@@ -3273,7 +3273,7 @@ EOT;
     $out = $bom ? "\xFE\xFF" : '';
     
     $unicode = $this->utf8toCodePointsArray($text);
-    foreach ($unicode as $c) {
+    foreach($unicode as $c) {
       if ($c === 0xFFFD) {
         $out .= "\xFF\xFD"; // replacement character
       } elseif ($c < 0x10000) {
@@ -3516,7 +3516,7 @@ EOT;
   
   function concatMatches($matches) {
     $str = "";
-    foreach($matches as $match){
+    foreach($matches as $match) {
       $str .= $match[0];
     }
     return $str;
@@ -3599,17 +3599,17 @@ EOT;
     $start =  0;
 
     /*
-     for ($i = 0;$i<$len;$i++){
+     for ($i = 0;$i<$len;$i++) {
      $f = 1;
      $directive = 0; //$this->PRVTcheckTextDirective($text,$i,$f);
-     if ($directive){
+     if ($directive) {
      // then we should write what we need to
-     if ($i>$start){
+     if ($i>$start) {
      $part = mb_substr($text,$start,$i-$start);
      $this->objects[$this->currentContents]['c'] .= ' /F'.$this->currentFontNum.' '.sprintf('%.1F',$size).' Tf ';
      $this->objects[$this->currentContents]['c'] .= ' ('.$this->filterText($part, false).') Tj';
      }
-     if ($f){
+     if ($f) {
      // then there was nothing drastic done here, restore the contents
      $this->setCurrentFont();
      } else {
@@ -3620,7 +3620,7 @@ EOT;
      $directive = 0; //$this->PRVTcheckTextDirective1($text,$i,$f,1,$xp,$yp,$size,$angle,$wordSpaceAdjust);
 
      // restart the text object
-     if ($angle == 0){
+     if ($angle == 0) {
      $this->objects[$this->currentContents]['c'] .= "\n".'BT '.sprintf('%.3F',$xp).' '.sprintf('%.3F',$yp).' Td';
      } else {
      $a = deg2rad((float)$angle);
@@ -3629,7 +3629,7 @@ EOT;
      $tmp .= sprintf('%.3F',$xp).' '.sprintf('%.3F',$yp).' Tm';
      $this->objects[$this->currentContents]['c'] .= $tmp;
      }
-     if ($wordSpaceAdjust != 0 || $wordSpaceAdjust != $this->wordSpaceAdjust){
+     if ($wordSpaceAdjust != 0 || $wordSpaceAdjust != $this->wordSpaceAdjust) {
      $this->wordSpaceAdjust = $wordSpaceAdjust;
      $this->objects[$this->currentContents]['c'] .= ' '.sprintf('%.3F',$wordSpaceAdjust).' Tw';
      }
@@ -3712,7 +3712,7 @@ EOT;
       // than just the string itself
       $unicode = $this->utf8toCodePointsArray($text);
 
-      foreach ($unicode as $char) {
+      foreach($unicode as $char) {
         // check if we have to replace character
         if ( isset($current_font['differences'][$char])) {
           $char = $current_font['differences'][$char];
@@ -4148,7 +4148,7 @@ EOT;
     // if $label is an array then assume that it is key => value pairs
     // else assume that they are both scalar, anything else will probably error
     if  (is_array($label)) {
-      foreach ($label as  $l => $v) {
+      foreach($label as  $l => $v) {
         $this->o_info($this->infoObject, $l, $v);
       }
     } else {
@@ -4162,7 +4162,7 @@ EOT;
   function setPreferences($label, $value =  0) {
     // this will only work if the label is one of the valid ones.
     if  (is_array($label)) {
-      foreach ($label as  $l => $v) {
+      foreach($label as  $l => $v) {
         $this->o_catalog($this->catalogId, 'viewerPreferences', array($l => $v));
       }
     } else {
@@ -4944,7 +4944,7 @@ EOT;
         // can only abort if were inside a checkpoint
         $tmp =  $this->checkpoint;
 
-        foreach ($tmp as  $k => $v) {
+        foreach($tmp as  $k => $v) {
           if  ($k !==  'checkpoint') {
             $this->$k =  $v;
           }
@@ -4957,7 +4957,7 @@ EOT;
       if  (is_array($this->checkpoint)) {
         // can only abort if were inside a checkpoint
         $tmp =  $this->checkpoint;
-        foreach ($tmp as  $k => $v) {
+        foreach($tmp as  $k => $v) {
           $this->$k =  $v;
         }
         unset($tmp);

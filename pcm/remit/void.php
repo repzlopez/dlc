@@ -13,8 +13,8 @@ $trans=$_SESSION['pcm_edit'];
 $brn=substr($trans,0,5);
 mysqli_query($con,"UPDATE tblorders SET status=9 WHERE refno='$trans'");
 mysqli_query($con,"INSERT INTO tbllog VALUES (null,'$trans','".date(TMDSET,time())."',9,'".LOGIN_ID."')");
-if(isset($_SESSION['pcm_edit_orders'])){
-	foreach($_SESSION['pcm_edit_orders'] as $v){
+if(isset($_SESSION['pcm_edit_orders'])) {
+	foreach($_SESSION['pcm_edit_orders'] as $v) {
 		updateStocks($brn,$v[0],$v[1],'+');
 	}
 }
@@ -26,7 +26,7 @@ unset($_SESSION['for_edit']);
 unset($_POST);
 reloadTo('/pcm/remit/');
 
-function updateStocks($brn,$cod,$qty,$o){
+function updateStocks($brn,$cod,$qty,$o) {
 	mysqli_query(SQLi('products'),"UPDATE tblstocks SET w$brn=(w$brn+$qty) WHERE id='$cod'");
 }
 ?>

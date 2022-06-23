@@ -55,10 +55,10 @@ if( $content!='' ) {
 		$str .= DIV_CLEAR . '</ul>';
 	}
 
-	if(IS_GLOB){
+	if(IS_GLOB) {
 		$str .= '<ul class="home">';
 
-		foreach($arrLinks as $k=>$v){
+		foreach($arrLinks as $k=>$v) {
 			$str .= '<li><a href="?p='.$k.'&do=0">'.$v.'</a></li>';
 		}
 

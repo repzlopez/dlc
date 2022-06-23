@@ -6,7 +6,7 @@ if(!isset($_SESSION)) {
 define('INCLUDE_CHECK',1);
 require('../../admin/setup.php');
 require('../func.php');
-if(!ISIN_GOS){ reloadTo(DLC_GORT);exit; }
+if(!ISIN_GOS) { reloadTo(DLC_GORT);exit; }
 $_SESSION['gos_last']=DLC_GORT;
 $title='GOS | Orders';
 $content='orders';
@@ -16,7 +16,7 @@ echo loadFilters();
 include('../foot.php');
 ob_end_flush();
 
-function loadFilters(){
+function loadFilters() {
 	$head='<ul class="list clear"><li class="hdr nobg"><span class="s1">Code</span><span class="s6">Product Name</span><span class="s2 rt">WSP</span><span class="s2 rt">PV</span><span class="s1 rt">Qty</span><span class="s2 rt">Amount</span><span class="s2 rt">PV</span></li></ul>';
 	$ad='ending';
 	$arrSort=array(
@@ -39,7 +39,7 @@ function loadFilters(){
 	$data='<div><ul id="filter" class="ct"><li>FILTER BY</li>';
 	$fltr=isset($_SESSION['prodfilter'])?$_SESSION['prodfilter']:str_pad('',getFilters()+1,'1');
 	$rs=mysqli_query($con,"SELECT DISTINCT parent_id FROM tblcategories WHERE status=1") or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		$pid=$rw['parent_id'];
 		$pid=($pid=='')?'Uncategorized':ucwords(strtolower($pid));
 		$c_y=(substr($fltr,$d++,1)==1)?C_K:'';
@@ -59,15 +59,15 @@ function loadFilters(){
 	return $data;
 }
 
-function getFilters(){
+function getFilters() {
 	$con=SQLi('products');
 	$rs=mysqli_query($con,"SELECT DISTINCT parent_id FROM tblcategories WHERE status=1") or die(mysqli_error($con));
 	return mysqli_num_rows($rs);
 }
 
-function generate_options($arr,$select){
+function generate_options($arr,$select) {
 	$return_string=array();
-	foreach($arr as $key=>$val){
+	foreach($arr as $key=>$val) {
 		$return_string[]='<option value="'.$val.'" '.(($val==$select)?SELECTED:'').'>'.$key.'</option>';
 	} return join($return_string);
 }

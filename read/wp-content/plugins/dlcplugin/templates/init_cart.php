@@ -4,16 +4,16 @@ if(!isset($_SESSION)) {
      session_start();
 }
 
-if(isset($_SESSION['shoplist'])){
+if(isset($_SESSION['shoplist'])) {
      echo getOrders();
 }
 
-function getOrders(){
+function getOrders() {
 	$x ='<li><h4>Cart</h4></li>';
 	$shopqty=0;$shopamt=0;$shopppv=0;$shopwt=0;
 
-	if(isset($_SESSION['shoplist'])){
-		foreach($_SESSION['shoplist'] as $v){
+	if(isset($_SESSION['shoplist'])) {
+		foreach($_SESSION['shoplist'] as $v) {
 			$v1=$v[1];
 			$v2=utf8_encode($v[2]);
 			$v3=is_numeric($v[3])?$v[3]:0;
@@ -25,7 +25,7 @@ function getOrders(){
 			$shopppv+=$v4*$v3;
 			$shopamt+=$v5*$v3;
 			$shopwt+=$v7*$v3;
-			if($v3>0){
+			if($v3>0) {
 				$x.='<li data-pid="'.$v[1].'">';
 				$x.='<span class="s6 link" rel="'.$v6.'">'.($v2).'</span>';
 				$x.='<span class="s0 ct">'.number_format($v3).'</span>';

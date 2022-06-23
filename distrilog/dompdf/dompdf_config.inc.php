@@ -4,7 +4,7 @@
  * @link    http://www.dompdf.com/
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
  * @author  Helmut Tischer <htischer@weihenstephan.org>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: dompdf_config.inc.php 468 2012-02-05 10:51:40Z fabien.menager $
  */
@@ -45,7 +45,7 @@ if( !isset($_SERVER['DOCUMENT_ROOT']) ) {
 }
 
 /** Include the custom config file if it exists */
-if ( file_exists(DOMPDF_DIR . "/dompdf_config.custom.inc.php") ){
+if ( file_exists(DOMPDF_DIR . "/dompdf_config.custom.inc.php") ) {
   require_once(DOMPDF_DIR . "/dompdf_config.custom.inc.php");
 }
 

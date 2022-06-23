@@ -257,7 +257,7 @@ class Cellmap {
 
     $cols = $this->_frames[$key]["columns"];
     $w = 0;
-    foreach ($cols as $i)
+    foreach($cols as $i)
       $w += $this->_columns[$i]["used-width"];
 
     return $w;
@@ -273,7 +273,7 @@ class Cellmap {
 
     $rows = $this->_frames[$key]["rows"];
     $h = 0;
-    foreach ($rows as $i) {
+    foreach($rows as $i) {
       if ( !isset($this->_rows[$i]) )  {
         throw new Exception("foo");
       }
@@ -359,7 +359,7 @@ class Cellmap {
          in_array($display, Table_Frame_Decorator::$ROW_GROUPS) ) {
 
       $start_row = $this->__row;
-      foreach ( $frame->get_children() as $child )
+      foreach( $frame->get_children() as $child )
         $this->add_frame( $child );
 
       if ( $display === "table-row" )
@@ -418,7 +418,7 @@ class Cellmap {
 
     // Find the next available column (fix by Ciro Mondueri)
     $ac = $this->__col;
-    while ( isset($this->_cells[$this->__row][$ac]) )
+    while( isset($this->_cells[$this->__row][$ac]) )
        $ac++;
     $this->__col = $ac;
 
@@ -543,7 +543,7 @@ class Cellmap {
 
     // Find the next available column
     $i = 0;
-    while ( isset($this->_cells[$this->__row][$i]) )
+    while( isset($this->_cells[$this->__row][$i]) )
       $i++;
 
     $this->__col = $i;
@@ -569,8 +569,8 @@ class Cellmap {
     $columns = $this->_frames[$key]["columns"];
 
     // Remove all frames from this row
-    foreach ( $rows as $r ) {
-      foreach ( $columns as $c ) {
+    foreach( $rows as $r ) {
+      foreach( $columns as $c ) {
         if ( isset($this->_cells[$r][$c]) ) {
           $id = $this->_cells[$r][$c]->get_id();
           
@@ -602,7 +602,7 @@ class Cellmap {
       return;  // Presumably this row has alredy been removed
 
     $iter = $group->get_first_child();
-    while ($iter) {
+    while($iter) {
       $this->remove_row($iter);
       $iter = $iter->get_next_sibling();
     }
@@ -638,7 +638,7 @@ class Cellmap {
     }
     
     $x = $this->_columns[0]["x"];
-    foreach ( array_keys($this->_columns) as $j ) {
+    foreach( array_keys($this->_columns) as $j ) {
       $this->_columns[$j]["x"] = $x;
       $x += $this->_columns[$j]["used-width"];
 
@@ -650,7 +650,7 @@ class Cellmap {
     // Pre-condition: widths and heights of each column & row must be
     // calcluated
 
-    foreach ( $this->_frames as $arr ) {
+    foreach( $this->_frames as $arr ) {
       $frame = $arr["frame"];
 
       $h = 0;
@@ -678,11 +678,11 @@ class Cellmap {
 
 
     // Distribute the increased height proportionally amongst each row
-    foreach ( $this->_frames as $arr ) {
+    foreach( $this->_frames as $arr ) {
       $frame = $arr["frame"];
 
       $h = 0;
-      foreach ($arr["rows"] as $row ) {
+      foreach($arr["rows"] as $row ) {
         if ( !isset($this->_rows[$row]) )
           continue;
 
@@ -714,7 +714,7 @@ class Cellmap {
 
     $str .=  "Frames:<br/>";
     $arr = array();
-    foreach ( $this->_frames as $key => $val )
+    foreach( $this->_frames as $key => $val )
       $arr[$key] = array("columns" => $val["columns"], "rows" => $val["rows"]);
 
     $str .= pre_r($arr, true);

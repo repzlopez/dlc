@@ -5,7 +5,7 @@
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
  * @author  Orion Richardson <orionr@yahoo.com>
  * @author  Helmut Tischer <htischer@weihenstephan.org>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: cpdf_adapter.cls.php 466 2012-02-04 13:08:38Z fabien.menager $
  */
@@ -193,7 +193,7 @@ class CPDF_Adapter implements Canvas {
    * Deletes all temporary image files
    */
   function __destruct() {
-    foreach ($this->_image_cache as $img) {
+    foreach($this->_image_cache as $img) {
       //debugpng
       if (DEBUGPNG) print '[__destruct unlink '.$img.']';
       if (!DEBUGKEEPTEMP)
@@ -779,10 +779,10 @@ class CPDF_Adapter implements Canvas {
     $page_number = 1;
     $eval = null;
 
-    foreach ($this->_pages as $pid) {
+    foreach($this->_pages as $pid) {
       $this->reopen_object($pid);
 
-      foreach ($this->_page_text as $pt) {
+      foreach($this->_page_text as $pt) {
         extract($pt);
 
         switch ($_t) {

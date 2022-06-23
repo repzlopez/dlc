@@ -3,7 +3,7 @@
  * @package dompdf
  * @link    http://www.dompdf.com/
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: attribute_translator.cls.php 448 2011-11-13 13:00:03Z fabien.menager $
  */
@@ -214,7 +214,7 @@ class Attribute_Translator {
     if ( $style != "" )
       $style .= ";";
 
-    foreach ($attrs as $attr => $attr_node ) {
+    foreach($attrs as $attr => $attr_node ) {
       if ( !isset($valid_attrs[$attr]) )
         continue;
 
@@ -303,7 +303,7 @@ class Attribute_Translator {
   static protected function _set_table_cellpadding($node, $value) {
     $cell_list = self::get_cell_list($node);
     
-    foreach ($cell_list as $cell) {
+    foreach($cell_list as $cell) {
       self::append_style($cell, "; padding: {$value}px;");
     }
     
@@ -313,7 +313,7 @@ class Attribute_Translator {
   static protected function _set_table_border($node, $value) {
     $cell_list = self::get_cell_list($node);
 
-    foreach ($cell_list as $cell) {
+    foreach($cell_list as $cell) {
       $style = rtrim($cell->getAttribute(self::$_style_attr));
       $style .= "; border-width: " . ($value > 0 ? 1 : 0) . "pt; border-style: inset;";
       $style = ltrim($style, ";");
@@ -367,7 +367,7 @@ class Attribute_Translator {
 
     $cell_list = self::get_cell_list($node);
     
-    foreach ($cell_list as $cell) {
+    foreach($cell_list as $cell) {
       $style = $cell->getAttribute(self::$_style_attr);
       $style .= $new_style;
       $cell->setAttribute(self::$_style_attr, $style);
@@ -415,7 +415,7 @@ class Attribute_Translator {
   static protected function _set_table_row_align($node, $value) {
     $cell_list = self::get_cell_list($node);
 
-    foreach ($cell_list as $cell) {
+    foreach($cell_list as $cell) {
       self::append_style($cell, "; text-align: $value;");
     }
 
@@ -425,7 +425,7 @@ class Attribute_Translator {
   static protected function _set_table_row_valign($node, $value) {
     $cell_list = self::get_cell_list($node);
 
-    foreach ($cell_list as $cell) {
+    foreach($cell_list as $cell) {
       self::append_style($cell, "; vertical-align: $value;");
     }
 
@@ -436,7 +436,7 @@ class Attribute_Translator {
     $cell_list = self::get_cell_list($node);
     $value = self::_get_valid_color($value);
     
-    foreach ($cell_list as $cell) {
+    foreach($cell_list as $cell) {
       self::append_style($cell, "; background-color: $value;");
     }
 
@@ -447,7 +447,7 @@ class Attribute_Translator {
     $a_list = $node->getElementsByTagName("a");
     $value = self::_get_valid_color($value);
     
-    foreach ($a_list as $a) {
+    foreach($a_list as $a) {
       self::append_style($a, "; color: $value;");
     }
 

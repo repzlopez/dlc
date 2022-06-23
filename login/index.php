@@ -17,7 +17,7 @@ $page		='login';
 unset($_SESSION['first_login']);
 unset($_SESSION['bad_login']);
 unset($_SESSION['not_found']);
-if($firstlogin){ header("Location: ".$_SERVER['PHP_SELF']);}
+if($firstlogin) { header("Location: ".$_SERVER['PHP_SELF']);}
 
 $x='<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">

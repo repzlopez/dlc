@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    http://php-font-lib.googlecode.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id$
  */
@@ -44,7 +44,7 @@ class Font_Table_name_Record extends Font_Binary_Stream {
     return Font::UTF8ToUTF16($this->string);
   }
   
-  function __toString(){
+  function __toString() {
     return $this->string;
   }
 }

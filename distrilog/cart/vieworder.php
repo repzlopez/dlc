@@ -8,7 +8,7 @@ require('../../admin/setup.php');
 if(
 	(!ISIN_DISTRI&&!ISIN_ADMIN)||
 	(!verifyRef($_GET['ref']))
-){	reloadTo(DLC_ROOT);exit; }
+) {	reloadTo(DLC_ROOT);exit; }
 $_SESSION['lastURI']='mypage';
 $title='| ORDER DETAILS';
 $vieworder=true;
@@ -37,24 +37,24 @@ echo '<div class="vieworders"><a href="'.(ISIN_ADMIN?$_SESSION['lastpage']:$_SER
 echo ISIN_ADMIN?'<script type="text/javascript" src="../../admin/common.js"></script>':'';
 ob_end_flush();
 
-function verifyRef($ref){
+function verifyRef($ref) {
 	$con=SQLi('orders');
 	$rs=mysqli_query($con,"SELECT * FROM tblorders WHERE refNo = '$ref'") or die(mysqli_error($con));
 	$num=mysqli_num_rows($rs);
 	return ($num>0)?true:false;
 }
 
-function getStamp($ref){
+function getStamp($ref) {
 	$con=SQLi('orders');
 	$rs=mysqli_query($con,"SELECT stamp FROM tbllog WHERE refNo = '$ref' AND action=1") or die(mysqli_error($con));
 	$rw=mysqli_fetch_assoc($rs);
 	return date('m.d.Y h:ia',strtotime($rw['stamp']));
 }
 
-function getDelivery($ref){
+function getDelivery($ref) {
 	include('values.php');
 	$rw=getRows($ref);
-	if(ISIN_ADMIN){ $dlv=$dlv2; }
+	if(ISIN_ADMIN) { $dlv=$dlv2; }
 	else{ $dlv=$dlv1; }
 	$paid=$paid1;
 	$locked=(($rw['deliStat']!=1)?DISABLED:'');
@@ -88,7 +88,7 @@ function getDelivery($ref){
 	echo DIV_CLEAR.'</div>';
 }
 
-function viewOrder($ref){
+function viewOrder($ref) {
 	echo '<div class="orders"><ul>';
 	echo '<li class="hdr"><span class="s1 lt">CODE</span>';
 	echo '<span class="s6">DESCRIPTION</span>';
@@ -104,11 +104,11 @@ function viewOrder($ref){
 	$rw=mysqli_fetch_array($rs);
 	$data=explode("~",$rw['orders']);
 	mysqli_close($con);
-	foreach($data as $val){
+	foreach($data as $val) {
 		$idata[]=explode("|",$val);
 	}
 
-	foreach($idata as $v){
+	foreach($idata as $v) {
 		$v1=$v[1];
 		$v2=$v[2];
 		$v3=$v[3];
@@ -119,7 +119,7 @@ function viewOrder($ref){
 		$shopppv+=$v4*$v3;
 		$shopamt+=$v5*$v3;
 		$shopwt+=$v6*$v3;
-		if($v3>0){
+		if($v3>0) {
 			echo '<li>';
 			echo '<span class="s1 lt">'.$v1.'</span>';
 			echo '<span class="s6 nowrap">'.utf8_encode($v2).'</span>';
@@ -143,7 +143,7 @@ function viewOrder($ref){
 	echo '</ul></div>';
 }
 
-function getRows($ref){
+function getRows($ref) {
 	$con=SQLi('orders');
 	$rs=mysqli_query($con,"SELECT * FROM tblorders WHERE refNo = '$ref'") or die(mysqli_error($con));
 	return mysqli_fetch_array($rs);

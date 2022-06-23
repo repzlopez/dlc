@@ -26,7 +26,7 @@ if ($do==0) {
 	ORDER BY date DESC";
 
 	$rs = mysqli_query($con,$qry) or die(mysqli_error($con));
-	while ( $rw=mysqli_fetch_assoc($rs) ) {
+	while( $rw=mysqli_fetch_assoc($rs) ) {
 		$styleis =! $rw['status']?'bad':'';
 
 		$x .= '<li rel="'.$rw['id'].'">';
@@ -47,7 +47,7 @@ if ($do==0) {
 		$rs = mysqli_query($con,"SELECT * FROM $tbl WHERE id='$item'") or die(mysqli_error($con));
 		if ( mysqli_num_rows($rs)>0 ) {
 			$rw = mysqli_fetch_assoc($rs);
-			foreach ($rw as $i=>$v) $$i = "$v";
+			foreach($rw as $i=>$v) $$i = "$v";
 			mysqli_close($con);
 
 			$test    = testAllow($dssid);

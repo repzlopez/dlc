@@ -5,7 +5,7 @@ if(!isset($_SESSION)) {
 }
 define('INCLUDE_CHECK',1);
 require('../admin/setup.php');
-if(!ISIN_DISTRI||UPDATE_ON){ reloadTo('/');exit; }
+if(!ISIN_DISTRI||UPDATE_ON) { reloadTo('/');exit; }
 define('GET_PAGE',(isset($_GET['get'])?$_GET['get']:'pv'));
 define('LEVEL',isset($_GET['lvl'])?$_GET['lvl']:1);
 define('MAXDOWN',(LEVEL=='all')?MAXLOOP:LEVEL);
@@ -58,7 +58,7 @@ $x .= '<ul id="data_list"><span class="lt">'.(GET_PAGE=='downline'?$search:'').'
 $x .= '<li class="updated">'.(RTOR?'RT':'AS Updated as of '.getLastUpdate()).'</li>';
 echo $x;
 
-if(GET_PAGE!=''&&GET_PAGE!='pv'){ echo $getdata;ob_end_flush(); }
+if(GET_PAGE!=''&&GET_PAGE!='pv') { echo $getdata;ob_end_flush(); }
 else{
 	ob_implicit_flush(true);
 	ob_end_flush();
@@ -70,13 +70,13 @@ echo '</ul>';
 echo loadFoot('','',array('/js/jquery/jquery-1.7.1.min.js','/js/distrilog.js'));
 ob_end_flush();
 
-function getDistributor($id){$x=$dash='';
+function getDistributor($id) {$x=$dash='';
 	$ppv=0;$npv=0;$gpv=0;$lev=0;$ndpv=0;//$ref=0;$slots=0;
 	$baseid=strpos(DIST_ID,'-')!==false?substr(DIST_ID,0,strpos(DIST_ID,'-')):DIST_ID;
 	getTotalDownlines(DIST_ID,0);
 	list($ppv,$npv,$gpv,$lev,$ndpv)=getCurrentPV($id);
 	// list($ref,$slots)=getRefnSlot($id);
-	for($i=0;$i<=4;$i++){
+	for($i=0;$i<=4;$i++) {
 		if($i>0) $dash="-$i";
 		$x .= "(SELECT dsdid FROM distributors WHERE dsdid='$baseid$dash') id$i,";
 	}
@@ -94,7 +94,7 @@ function getDistributor($id){$x=$dash='';
 	$con=SQLi('distributor');
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
 	$rw=mysqli_fetch_array($rs);
-	foreach($rw as $k=>$v){ $$k=$v;}
+	foreach($rw as $k=>$v) { $$k=$v;}
 	$allid="$id0|$id1|$id2|$id3|$id4";
 	mysqli_close($con);
 
@@ -104,9 +104,9 @@ function getDistributor($id){$x=$dash='';
 	$x .= '<label class="s3">Sponsor ID:</label> <span id="spon_id" class="s4" title="Sponsor: '.ucwords(strtolower($sname)).'">'.$dssid.'</span>';
 	$x .= '<span class="s4"></span><span class="s5"></span><a href="profile.php" class="btn s2">Profile</a></div>';
 
-	if(isset($id1)){
+	if(isset($id1)) {
 		$x .= '<div><label class="s3">Other Accounts:</label> ';
-		foreach(explode('|',$allid) as $k){
+		foreach(explode('|',$allid) as $k) {
 			if($k!=DIST_ID) $x .= '<a href="?otherid='.$k.'" class="s4">'.$k.'</a>';
 		}
 		$x .= '</div>';
@@ -126,12 +126,12 @@ function getDistributor($id){$x=$dash='';
 	return array($x,$ppv);
 }
 
-function getData($dsdid,$ppv,$lvl){
+function getData($dsdid,$ppv,$lvl) {
 	global $data;
 	$x='';
 	$fail='<div class="getminpv">You need to fullfill your '.MINPV.'PV requirement to view this page.</div>';
 	// list($ppv,$npv,$gpv,$lev,$ndpv)=getCurrentPV($dsdid);
-	switch(GET_PAGE){
+	switch(GET_PAGE) {
 		case 'bonus': $x .= getBonusHistory($dsdid);break;
 		case 'order': $x .= getOrderHistory($dsdid);break;
 		case 'bbb': $x .= getBBBonus($dsdid);break;
@@ -139,8 +139,8 @@ function getData($dsdid,$ppv,$lvl){
 		case 'slots': $x .= getSlots($dsdid);break;
 		case 'mgrlist': getManagerList(); $x .= $data;break;
 		default:
-			if(SPECTATOR||MINPV<=$ppv){
-				switch(GET_PAGE){
+			if(SPECTATOR||MINPV<=$ppv) {
+				switch(GET_PAGE) {
 					case 'downline':getDistList($dsdid,$lvl,MAXDOWN);break;
 					default:getPV($dsdid,$lvl,MAXDOWN);break;
 				} $x .= $data;
@@ -153,15 +153,15 @@ function getData($dsdid,$ppv,$lvl){
 	return $x;
 }
 
-function getBonusHistory($id){
+function getBonusHistory($id) {
 	$con=SQLi('distributor');
 	$qry="SELECT * FROM bohstp WHERE bhdid='$id' ORDER BY bhpyr DESC,bhpmo DESC";
 	$x='<li class="hdr"><span class="s2">Year</span><span class="s2 ct">Mo/Wk</span><span class="w1 rt">Bonus Amount</span><span class="w1 rt">Personal PV</span><span class="w1 rt">Group PV</span><span class="w1 rt">Total PV</span><span class="w1 ct">End Level</span><span class="w1 ct">Mgr Lines</span></li>';
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)==0){
+	if(mysqli_num_rows($rs)==0) {
 		$x .= '<li class="nodata more ct">No data found</li>';
 	}else{
-		while($rw=mysqli_fetch_assoc($rs)){
+		while($rw=mysqli_fetch_assoc($rs)) {
 			$ppv = $rw['bhppv'];
 			$npv = $rw['bhnpv'];
 			$gpv = $npv-$ppv;
@@ -171,33 +171,33 @@ function getBonusHistory($id){
 	return $x;
 }
 
-function getOrderHistory($id){
+function getOrderHistory($id) {
 	$con=SQLi('distributor');
 	$qry="SELECT * FROM ormstp WHERE omdid='$id' ORDER BY ompyr DESC,ompmo DESC,ominv DESC";
 	$x='<li class="hdr"><span class="s2">Year</span><span class="s2 ct">Mo/Wk</span><span class="w1 rt">Order #</span><span class="w1 rt">Invoice #</span><span class="w1 ct">Order Date</span><span class="w1 rt">Order Amount</span><span class="w1 rt">Order PV</span></li>';
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)==0){
+	if(mysqli_num_rows($rs)==0) {
 		$x .= '<li class="nodata more ct">No data found</li>';
 	}else{
-		while($rw=mysqli_fetch_assoc($rs)){
+		while($rw=mysqli_fetch_assoc($rs)) {
 			$x .= '<li><span class="s2">'.$rw['ompyr'].'</span><span class="s2 ct">'.$rw['ompmo'].'</span><span class="w1 rt">'.$rw['omord'].'</span><span class="w1 rt">'.$rw['ominv'].'</span><span class="w1 ct">'.substr($rw['omodat'],4,2).'.'.substr($rw['omodat'],6,2).'.'.substr($rw['omodat'],0,4).'</span><span class="w1 rt">'.number_format($rw['ompov'],2).'</span><span class="w1 rt">'.number_format($rw['ompv'],2).'</span></li>';
 		}
 	}mysqli_close($con);
 	return $x;
 }
 
-function getBBBonus($id){
+function getBBBonus($id) {
 	$con=SQLi('orders');$rel_ok=0;$rel=0;$t=0;$old='';
 	$x='<li class="hdr"><span class="s0"></span><span class="s4 lt">From</span><span class="s5">Name</span><span class="s3 rt">BB Bonus</span><span class="s3 rt">Qualified</span><span class="s3 rt">Released</span></li>';
 	$rs=mysqli_query($con,"SELECT * FROM tblreferral WHERE rsdid='$id' ORDER BY released,rsdid,rsref DESC") or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)==0){
+	if(mysqli_num_rows($rs)==0) {
 		$x .= '<li class="nodata more ct">No data found</li>';
 	}else{
-		while($rw=mysqli_fetch_assoc($rs)){
-			foreach($rw as $k=>$v){ $$k=$v;}
+		while($rw=mysqli_fetch_assoc($rs)) {
+			foreach($rw as $k=>$v) { $$k=$v;}
 			$rel_ok=($released&&!$rel?1:0);
-			if(($old!=$rsdid&&$old!=''&&!$released)||($released&&$rel_ok)){ $x .= '<li><span class="s4"></span><strong class="s5 u">Total Unreleased</strong><strong class="s3 rt u">'.number_format($t,2).'</strong><strong class="s3 u">&nbsp;</strong><br></li>';$t=0; }
-			if($released&&$rel_ok){ $x .= '<li class="hdr"><br><span>Released</span></li>';$rel=1; }
+			if(($old!=$rsdid&&$old!=''&&!$released)||($released&&$rel_ok)) { $x .= '<li><span class="s4"></span><strong class="s5 u">Total Unreleased</strong><strong class="s3 rt u">'.number_format($t,2).'</strong><strong class="s3 u">&nbsp;</strong><br></li>';$t=0; }
+			if($released&&$rel_ok) { $x .= '<li class="hdr"><br><span>Released</span></li>';$rel=1; }
 			$x .= '<li><span class="s0"></span><span class="s4">'.$rslid.'</span>';
 			$x .= '<span class="s5">'.getName($rslid,'fml').'</span>';
 			$x .= '<span class="s3 rt">'.number_format($rsamt,2).'</span>';
@@ -209,15 +209,15 @@ function getBBBonus($id){
 	return $x;
 }
 
-function getSlots($id){
+function getSlots($id) {
 	// $con=SQLi('orders');
 	// $x='<li class="hdr"><span class="s0"></span><span class="s3 lt">Received</span><span class="s6">Sponsor</span><span class="s6">Downline</span><span class="s2 rt">Encoded</span></li>';
 	// $rs=mysqli_query($con,"SELECT * FROM tblslots WHERE dsdid='$id' ORDER BY (CASE WHEN (used='' OR used IS NULL) THEN used ELSE 0 END),used DESC,slotid") or die(mysqli_error($con));
-	// if(mysqli_num_rows($rs)==0){
+	// if(mysqli_num_rows($rs)==0) {
 	// 	$x .= '<li class="nodata more ct">No data found</li>';
 	// }else{
-	// 	while($rw=mysqli_fetch_assoc($rs)){
-	// 		foreach($rw as $k=>$v){ $$k=$v;}
+	// 	while($rw=mysqli_fetch_assoc($rs)) {
+	// 		foreach($rw as $k=>$v) { $$k=$v;}
 	// 		$x .= '<li><span class="s0"></span>';
 	// 		$x .= '<span class="s3 lt">'.substr($ref,0,4).' '.substr($ref,4,2).'</span>';
 	// 		$x .= '<span class="s6">'.($dsfor!=''?$dsfor.' '.getName($dsfor,'lfm'):'-').'</span>';
@@ -230,16 +230,16 @@ function getSlots($id){
 	//MODULE CURRENTLY DISABLED
 }
 
-function getPool($id){
+function getPool($id) {
 	$arr=array('PENDING','ENCODED','VOID');
 	$con=SQLi('beta');
 	$x='<li class="hdr"><span class="s0"></span><span class="s4">Distributor ID</span> <span class="s6">Name</span> <span class="s3 rt">Submitted</span> <span class="s4 rt">TIN</span> <span class="s4 ct">Status</span></li>';
 	$rs=mysqli_query($con,"SELECT * FROM tblolreg WHERE dsdid<>'".DIST_ID."' AND referrer='$id' AND status<2 ORDER BY date") or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)==0){
+	if(mysqli_num_rows($rs)==0) {
 		$x .= '<li class="nodata more ct">No data found</li>';
 	}else{
-		while($rw=mysqli_fetch_assoc($rs)){
-			foreach($rw as $k=>$v){ $$k=$v;}
+		while($rw=mysqli_fetch_assoc($rs)) {
+			foreach($rw as $k=>$v) { $$k=$v;}
 			$x .= '<li><a href="../reg/?i='.$id.'"><span class="s0"></span>';
 			$x .= '<span class="s4">'.$dsdid.'</span> ';
 			$x .= '<span class="s6">'.ucwords(strtolower("$dslnam, $dsfnam $dsmnam")).'</span> ';
@@ -251,7 +251,7 @@ function getPool($id){
 	return $x;
 }
 
-function getManagerList(){
+function getManagerList() {
 	if(SPECTATOR&&!OVERRIDE) exit;
 	global $data;
 	$_SESSION['is_mgrlist']=true;
@@ -287,14 +287,14 @@ function getManagerList(){
 	$data .= '<li class="hdr"><span class="w0"></span><span class="s4 ct">ID#</span><span class="s5">Name</span><span class="s2 rt">PPV</span><span class="s2 rt">GPV</span><span class="s2 rt">TPV</span><span class="s1 ct">Level</span><span class="s2 ct">Mgr Lines</span><span class="s4">Manager IDs</span></li>';
 	$con=SQLi('distributor');
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		getMgrIDs($rw['bddids'],$dwk,$dyr);
 	}
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)==0){
+	if(mysqli_num_rows($rs)==0) {
 		$data .= '<li class="nodata more ct">No data found</li>';
 	}else{$c=1;
-		while($rw=mysqli_fetch_assoc($rs)){
+		while($rw=mysqli_fetch_assoc($rs)) {
 			$id=$rw['bhdid'];
 			$ppv=$rw['bhppv'];
 			$npv=$rw['bhnpv'];
@@ -305,7 +305,7 @@ function getManagerList(){
 			$notmgr='';
 			$m_name=$rw['dsfnam'].' '.$rw['dslnam'];//getName($id,'full',true);
 
-			if(!empty($_SESSION['mgr_ids'][$id])){
+			if(!empty($_SESSION['mgr_ids'][$id])) {
 				$mgrids=implode(', ',$_SESSION['mgr_ids'][$id]);
 			}
 
@@ -337,7 +337,7 @@ function getManagerList(){
 	}mysqli_close($con);
 }
 
-function getMgrIDs($id,$wk,$yr){$x='';
+function getMgrIDs($id,$wk,$yr) {$x='';
 	$con=SQLi('distributor');
 	$arr=array();
 	$qry="SELECT bddids
@@ -348,13 +348,13 @@ function getMgrIDs($id,$wk,$yr){$x='';
 		AND bdmm='$wk'
 		AND bdtype='L'";
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)>0){
-		while($rw=mysqli_fetch_assoc($rs)){
+	if(mysqli_num_rows($rs)>0) {
+		while($rw=mysqli_fetch_assoc($rs)) {
 			$d=$rw['bddids'];
-			if(!empty($_SESSION['mgr_ids'])){
-				foreach($_SESSION['mgr_ids'] as $k=>$v){
-					foreach($v as $i=>$z){
-						if($z=$d){
+			if(!empty($_SESSION['mgr_ids'])) {
+				foreach($_SESSION['mgr_ids'] as $k=>$v) {
+					foreach($v as $i=>$z) {
+						if($z=$d) {
 							unset($_SESSION['mgr_ids'][$k][$d]);
 						}
 					}
@@ -367,16 +367,16 @@ function getMgrIDs($id,$wk,$yr){$x='';
 // echo "<br><br>";
 }
 
-function getHighLev($id){
+function getHighLev($id) {
 	$con=SQLi('beta');$n=0;
 	$rs=mysqli_query($con,"SELECT level FROM tblmanagers WHERE id='$id' AND status=1");
-	if(mysqli_num_rows($rs)>0){
+	if(mysqli_num_rows($rs)>0) {
 		$rw=mysqli_fetch_array($rs);
 		$n=($rw['level']>2?5:$rw['level']);
 	}else{
 		$con=SQLi('distributor');
 		$rs=mysqli_query($con,"SELECT bhelev FROM bohstp WHERE bhdid LIKE '$id' AND bhelev<>'' ORDER BY bhelev DESC LIMIT 1") or die(mysqli_error($con));
-		if(mysqli_num_rows($rs)>0){
+		if(mysqli_num_rows($rs)>0) {
 			$rw=mysqli_fetch_array($rs);
 			$n=($rw['bhelev']>2)?2:$rw['bhelev'];
 		}
@@ -384,10 +384,10 @@ function getHighLev($id){
 	return $n;
 }
 
-function getTotalDownlines($dssid,$lvl){
+function getTotalDownlines($dssid,$lvl) {
 	$con=SQLi('distributor');
-	if(GET_PAGE==null||GET_PAGE=='pv'){
-		if($lvl>=MAXDOWN){}
+	if(GET_PAGE==null||GET_PAGE=='pv') {
+		if($lvl>=MAXDOWN) {}
 		else{
 			$qry="
 				SELECT dsdid,dssid,bmdid,bmnpv
@@ -396,20 +396,20 @@ function getTotalDownlines($dssid,$lvl){
 				AND bmdid=dsdid
 			";
 			$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-			if(mysqli_num_rows($rs)>0){
-				while($rw=mysqli_fetch_assoc($rs)){
+			if(mysqli_num_rows($rs)>0) {
+				while($rw=mysqli_fetch_assoc($rs)) {
 					$_SESSION['total_downlines']++;
 					if($rw['bmnpv']>0) getTotalDownlines($rw['dsdid'],$lvl+1);
 				}
 			}
 		}
 	}else{
-		if($lvl>=MAXDOWN){}
+		if($lvl>=MAXDOWN) {}
 		else{
 			ini_set('memory_limit','-1');
 			set_time_limit(600);
 			$rs=mysqli_query($con,"SELECT dsdid FROM distributors WHERE dssid='$dssid'") or die(mysqli_error($con));
-			while($rw=mysqli_fetch_assoc($rs)){
+			while($rw=mysqli_fetch_assoc($rs)) {
 				$_SESSION['total_downlines']++;
 				getTotalDownlines($rw['dsdid'],$lvl+1);
 			}
@@ -417,7 +417,7 @@ function getTotalDownlines($dssid,$lvl){
 	}
 }
 
-function getPin($id){
+function getPin($id) {
 	$con=SQLi('beta');
 	$rs=mysqli_query($con,"SELECT level FROM tblmanagers WHERE id='$id'") or die(mysqli_error($con));
 	$rw=mysqli_fetch_array($rs);
@@ -429,7 +429,7 @@ function getPin($id){
 	return ($lvl>0)?'<img src="../src/pins/'.$pin.'.png" title="'.$pintitle.'" alt="'.$pintitle.'" />':'';
 }
 
-function getLastUpdate(){
+function getLastUpdate() {
 	$con=SQLi(RTDB);
 	$get=RTOR?'stamp':'date_updated';
 	$tbl=RTOR?'ormstp':'updates';
@@ -439,7 +439,7 @@ function getLastUpdate(){
 	mysqli_close($con);
 }
 
-function getRefnSlot($id){
+function getRefnSlot($id) {
 	$con=SQLi('orders');
 	$qry="SELECT
 		(SELECT SUM(rsamt) amt FROM tblreferral WHERE rsdid='$id' AND (released='' OR released IS NULL)) ref,
@@ -451,30 +451,30 @@ function getRefnSlot($id){
 	mysqli_close($con);
 }
 
-function generate_options($from,$to,$sel){
+function generate_options($from,$to,$sel) {
 	$x=array();
 	$r=array(15,20,25,30);
-	for($i=$from;$i<=$to;$i++){
+	for($i=$from;$i<=$to;$i++) {
 		$x[]='<option value='.$i.' '.(($i==$sel)?SELECTED:'').'>'.$i.'</option>';
 	}
-	foreach($r as $i){
+	foreach($r as $i) {
 		$x[]='<option value='.$i.' '.(($i==$sel)?SELECTED:'').'>'.$i.'</option>';
 	}
 	$x[] .= '<option value="all" '.(($sel=='all')?SELECTED:'').'>All</option>';
 	return join('',$x);
 }
 
-function generate_date(){
+function generate_date() {
 	$con=SQLi('distributor');
 	$qry="SELECT DISTINCT bhpyr,bhpmo FROM bohstp ORDER BY bhpyr DESC,bhpmo DESC";
 	$x=array();
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)==0){
+	if(mysqli_num_rows($rs)==0) {
 		echo '<li class="nodata more ct">No data found</li>';
 	}else{
 		$x[]='<option value='.date('mY',time()).' '.(($_SESSION['monyr']==date('mY',time()))?SELECTED:'').'>'.sprintf('%02d',date('m',time())).' / '.date('Y',time()).'</option>';
-		while($rw=mysqli_fetch_assoc($rs)){
-			if(sprintf('%02d',$rw['bhpmo']).$rw['bhpyr']!='000'){
+		while($rw=mysqli_fetch_assoc($rs)) {
+			if(sprintf('%02d',$rw['bhpmo']).$rw['bhpyr']!='000') {
 				$x[]='<option value='.sprintf('%02d',$rw['bhpmo']).$rw['bhpyr'].' '.(($_SESSION['monyr']==sprintf('%02d',$rw['bhpmo']).$rw['bhpyr'])?SELECTED:'').'>'.sprintf('%02d',$rw['bhpmo']).' / '.$rw['bhpyr'].'</option>';
 			}
 		}return join('',$x);

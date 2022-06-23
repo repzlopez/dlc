@@ -6,7 +6,7 @@ if(!isset($_SESSION)) {
 define('INCLUDE_CHECK',1);
 require('../admin/setup.php');
 require '../admin/getwebstat.php';
-if((!ISIN_DISTRI&&!DIST_ID&&!GUEST)||(SPECTATOR&&!OVERRIDE)||UPDATE_ON){ reloadTo('../');exit; }
+if((!ISIN_DISTRI&&!DIST_ID&&!GUEST)||(SPECTATOR&&!OVERRIDE)||UPDATE_ON) { reloadTo('../');exit; }
 
 $_SESSION['lastURI']='mypage';
 $_SESSION['lastpage']=$_SERVER['PHP_SELF'];
@@ -22,7 +22,7 @@ if(!GUEST) echo getArchive(DIST_ID,$met,$dlv1,$box);
 echo loadFoot();
 ob_end_flush();
 
-function getArchive($id,$met,$dlv,$box){
+function getArchive($id,$met,$dlv,$box) {
 	$x  = '<div class="print"><a href="javascript:window.print()"></a></div>';
 	$x .='<div class="orders" id="archive"><div class="blue">ORDERS ARCHIVE</div>';
 	$x .= '<ul>';
@@ -34,7 +34,7 @@ function getArchive($id,$met,$dlv,$box){
 	$x .= '<span class="s3 ct">Status</span></li>';
 	$con=SQLi('orders');
 	$rs=mysqli_query($con,"SELECT * FROM tblorders WHERE dsdid = '$id' ORDER BY refDate DESC,refNo") or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		foreach($rw as $k=>$v) $$k=$v;
 		$rdate=substr($refDate,4,2).'.'.substr($refDate,-2).'.'.substr($refDate,0,4);
 		$postdate=substr_replace($payDate,'.',2,0);

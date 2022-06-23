@@ -1,6 +1,6 @@
 <?php if(!defined('INCLUDE_CHECK')) die('Invalid Operation');
 if( !isset($_SESSION) ) session_start();
-if( !IS_GLOB ){
+if( !IS_GLOB ) {
 	reloadTo(DLC_ADMIN);
 	exit;
 }
@@ -24,12 +24,19 @@ if( $do==0 ) {
 } else {
 	$id = null;
 	$rs = mysqli_query($con,"DESC $tbl");
-	$rw = mysqli_fetch_assoc($rs);
-	while($rw=mysqli_fetch_assoc($rs)) $$rw['Field']=null;
+	// $rw = mysqli_fetch_assoc($rs);
 
-	if( $do==2 ) {
-		$rs=mysqli_query($con,"SELECT * FROM $tbl WHERE id='$item'") or die(mysqli_error($con));
-		while($rw=mysqli_fetch_assoc($rs)) foreach($rw as $k=>$v){ $$k=$v;}
+	switch( $do ) {
+		case 1:
+			while($r = mysqli_fetch_assoc($rs)) $$r['Field'] = null;
+			break;
+
+		case 2:
+			$rs = mysqli_query($con, "SELECT * FROM $tbl WHERE id='$item'") or die(mysqli_error($con));
+			while($rw = mysqli_fetch_assoc($rs)) foreach($rw as $k => $v) {
+				$$k = $v;
+			}
+			break;
 	}
 
 	mysqli_close($con);

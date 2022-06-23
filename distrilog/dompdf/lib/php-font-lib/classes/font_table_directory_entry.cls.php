@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    http://php-font-lib.googlecode.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: font_table_directory_entry.cls.php 38 2011-11-07 17:09:59Z fabien.menager $
  */
@@ -32,7 +32,7 @@ class Font_Table_Directory_Entry extends Font_Binary_Stream {
   
   protected $origF;
   
-  static function computeChecksum($data){
+  static function computeChecksum($data) {
     $len = strlen($data);
     $mod = $len % 4;
     
@@ -70,7 +70,7 @@ class Font_Table_Directory_Entry extends Font_Binary_Stream {
     $this->font_table = $font_table;
   }
   
-  function encode($entry_offset){
+  function encode($entry_offset) {
     Font::d("\n==== $this->tag ====");
     //Font::d("Entry offset  = $entry_offset");
     

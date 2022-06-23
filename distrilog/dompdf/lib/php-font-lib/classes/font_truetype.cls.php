@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    http://php-font-lib.googlecode.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: font_truetype.cls.php 41 2012-02-04 18:01:38Z fabien.menager $
  */
@@ -189,7 +189,7 @@ class Font_TrueType extends Font_Binary_Stream {
     "Ccaron", "ccaron", "dmacron"
   );
   
-  function getTable(){
+  function getTable() {
     $this->parseTableEntries();
     return $this->directory;
   }
@@ -288,7 +288,7 @@ class Font_TrueType extends Font_Binary_Stream {
         $this->skip($offset);
         $compoundOffset += $offset;
         
-      } while ($flags & Font_Table_glyf::MORE_COMPONENTS);
+      } while($flags & Font_Table_glyf::MORE_COMPONENTS);
     }
   }
   
@@ -358,7 +358,7 @@ class Font_TrueType extends Font_Binary_Stream {
     return $this->glyph_subset;
   }
   
-  function encode($tags = array()){
+  function encode($tags = array()) {
     if (!self::$raw) {
       $tags = array_merge(array("head", "hhea", "cmap", "hmtx", "maxp", "glyf", "loca", "name", "post"), $tags);
     }
@@ -395,7 +395,7 @@ class Font_TrueType extends Font_Binary_Stream {
     }
   }
   
-  function parseHeader(){
+  function parseHeader() {
     if (!empty($this->header)) {
       return;
     }
@@ -406,7 +406,7 @@ class Font_TrueType extends Font_Binary_Stream {
     $this->header->parse();
   }
   
-  function parseTableEntries(){
+  function parseTableEntries() {
     $this->parseHeader();
     
     if (!empty($this->directory)) {
@@ -421,7 +421,7 @@ class Font_TrueType extends Font_Binary_Stream {
     }
   }
   
-  function normalizeFUnit($value, $base = 1000){
+  function normalizeFUnit($value, $base = 1000) {
     return round($value * ($base / $this->getData("head", "unitsPerEm")));
   }
   
@@ -477,7 +477,7 @@ class Font_TrueType extends Font_Binary_Stream {
     $afm->write($file, $encoding);
   }
   
-  function reduce(){
+  function reduce() {
     $names_to_keep = array(0, 1, 2, 3, 4, 5, 6);
     foreach($this->data["name"]->data["records"] as $id => $rec) {
       if (in_array($id, $names_to_keep)) continue;

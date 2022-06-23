@@ -18,16 +18,16 @@ $qry="
 	ORDER BY bhdid DESC";
 
 $rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-if(mysqli_num_rows($rs)>0){
-	while($rw=mysqli_fetch_assoc($rs)){
+if(mysqli_num_rows($rs)>0) {
+	while($rw=mysqli_fetch_assoc($rs)) {
 		foreach($rw as $k=>$v) $$k=$v;
-		if($bhnpv>=$_SESSION['minpv'][5]){ $mgr[$bhdid]=$nam;}
+		if($bhnpv>=$_SESSION['minpv'][5]) { $mgr[$bhdid]=$nam;}
 		else $qlf[$bhdid]=array($nam,null,$bhnpv);
 	}
 
-	if(!empty($qlf)){
-		foreach($qlf as $k=>$v){
-			foreach($mgr as $a=>$b){
+	if(!empty($qlf)) {
+		foreach($qlf as $k=>$v) {
+			foreach($mgr as $a=>$b) {
 				getQmr($k,$a,$a);
 			}
 			$x.='<li><span class="s4">'.$k.'</span>';
@@ -40,12 +40,12 @@ if(mysqli_num_rows($rs)>0){
 $x.='</ul>';
 echo $x;
 
-function getQmr($id,$f,$m){
+function getQmr($id,$f,$m) {
 	global $qlf;
-	if($m!=EDDY){
+	if($m!=EDDY) {
 		$con=SQLi('distributor');
 		$rs=mysqli_query($con,"SELECT dssid,CONCAT(dsfnam,' ',dslnam) nam FROM distributors WHERE dsdid='$m'") or die(mysqli_error($con));
-		if(mysqli_num_rows($rs)>0){
+		if(mysqli_num_rows($rs)>0) {
 			$rw=mysqli_fetch_assoc($rs);
 			foreach($rw as $k=>$v) $$k=$v;
 			if($dssid==$id) $qlf[$id][1]=$f;
@@ -54,7 +54,7 @@ function getQmr($id,$f,$m){
 	}
 }
 
-function getDrop($do=''){$n='';
+function getDrop($do='') {$n='';
 	$con=SQLi('distributor');
 	$qry="
 		SELECT DISTINCT CONCAT(bhpmo,bhpyr) my
@@ -62,7 +62,7 @@ function getDrop($do=''){$n='';
 		WHERE bhpyr>=2019
 	";
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		foreach($rw as $k=>$v) $$k=$v;
 		$my=sprintf("%06d",$my);
 		$n.='<option '.($my==$do?SELECTED:'').'>'.$my.'</option>';

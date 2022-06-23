@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    http://php-font-lib.googlecode.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: font_table_post.cls.php 40 2012-01-22 21:48:41Z fabien.menager $
  */
@@ -25,7 +25,7 @@ class Font_Table_post extends Font_Table {
     "maxMemType1"        => self::uint32,
   );
   
-  protected function _parse(){
+  protected function _parse() {
     $font = $this->getFont();
     $data = $font->unpack($this->def);
     
@@ -81,7 +81,7 @@ class Font_Table_post extends Font_Table {
     $this->data = $data;
   }
   
-  function _encode(){
+  function _encode() {
     $font = $this->getFont();
     $data = $this->data;
     $data["format"] = 3;

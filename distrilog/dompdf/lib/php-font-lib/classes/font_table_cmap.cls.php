@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    http://php-font-lib.googlecode.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: font_table_cmap.cls.php 40 2012-01-22 21:48:41Z fabien.menager $
  */
@@ -33,7 +33,7 @@ class Font_Table_cmap extends Font_Table {
     "rangeShift"    => self::uint16,
   );
   
-  protected function _parse(){
+  protected function _parse() {
     $font = $this->getFont();
     
     $cmap_offset = $font->pos();
@@ -41,7 +41,7 @@ class Font_Table_cmap extends Font_Table {
     $data = $font->unpack(self::$header_format);
     
     $subtables = array();
-    for($i = 0; $i < $data["numberSubtables"]; $i++){
+    for($i = 0; $i < $data["numberSubtables"]; $i++) {
       $subtables[] = $font->unpack(self::$subtable_header_format);
     }
     $data["subtables"] = $subtables;
@@ -114,7 +114,7 @@ class Font_Table_cmap extends Font_Table {
     $this->data = $data;
   }
   
-  function _encode(){
+  function _encode() {
     $font = $this->getFont();
     $subset = $font->getSubset();
     
@@ -144,7 +144,7 @@ class Font_Table_cmap extends Font_Table {
     $endCode = array();
     $idDelta = array();
     
-    foreach($segments as $codes){
+    foreach($segments as $codes) {
       $start = reset($codes);
       $end   = end($codes);
       
@@ -158,7 +158,7 @@ class Font_Table_cmap extends Font_Table {
     
     $searchRange = 1;
     $entrySelector = 0;
-    while ($searchRange * 2 <= $segCount) {
+    while($searchRange * 2 <= $segCount) {
       $searchRange *= 2;
       $entrySelector++;
     }

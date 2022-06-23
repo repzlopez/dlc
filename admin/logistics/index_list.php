@@ -1,7 +1,7 @@
 <?php if(!defined('INCLUDE_CHECK')) die('Invalid Operation');
 if(!isset($_SESSION)) session_start();
 $con=SQLi('products');
-if(isset($_POST['submit'])&&$_POST['submit']=='UPLOAD'){
+if(isset($_POST['submit'])&&$_POST['submit']=='UPLOAD') {
 	$file=$_FILES['file'];
 	unset($_POST);
 	unset($_FILES);
@@ -9,7 +9,7 @@ if(isset($_POST['submit'])&&$_POST['submit']=='UPLOAD'){
 //	$temp_file='c://dlcwebtemp/prodstemp_'.date('Ymd',time()).'.csv';		//local
 //	$usefile=(strpos($_SERVER['SERVER_NAME'],'dlc')!==false)?$temp_file:$temp;
 	$msg='List upload failed';
-	if(isValid($file['type'])){
+	if(isValid($file['type'])) {
 		$tbl='tbllist';
 		$sqlcreate="CREATE TABLE IF NOT EXISTS $tbl (
 			id INT(5) UNSIGNED ZEROFILL,
@@ -88,7 +88,7 @@ unset($_SESSION['uprecap']);
 unset($_SESSION['lastrecap']);
 unset($_SESSION['listcount']);
 /*
-function getQuery($tbl,$cols,$file){
+function getQuery($tbl,$cols,$file) {
 	$qry='LOAD DATA LOCAL INFILE \''.$file.'\'
 		REPLACE INTO TABLE '.$tbl.'
 		FIELDS TERMINATED BY \',\'
@@ -101,17 +101,17 @@ function getQuery($tbl,$cols,$file){
 	return $qry;
 }
 */
-function updateTable($tbl,$idata){
+function updateTable($tbl,$idata) {
 	$con=SQLi('products');
 	$rs=mysqli_query($con,"SELECT id FROM tbllist") or die(mysqli_error($con));
-	while($rw=mysqli_fetch_array($rs,MYSQLI_BOTH)){
+	while($rw=mysqli_fetch_array($rs,MYSQLI_BOTH)) {
 		$id=$rw['id'];
 		$qry = "INSERT INTO $tbl VALUES ($id$idata) ON DUPLICATE KEY UPDATE id=id";
 		mysqli_query($con,$qry) or die(mysqli_error($con));
 	}
 }
 
-function getList(){
+function getList() {
 	$msg ='<ul class="list clear">';
 	$msg.='<li class="hdr"><span class="s1">Item</span><span class="s7">Description</span><span class="s1 rt">WSP</span><span class="s1 rt">SRP</span><span class="s2 rt">PV</span><span class="s1">Active</span></li>';
 
@@ -119,8 +119,8 @@ function getList(){
 	$rs=mysqli_query($con,"SELECT * FROM tbllist ORDER BY id") or die(mysqli_error($con));
 	$num=mysqli_num_rows($rs);
 	$_SESSION['listcount']=$num;
-	if($num>0){
-		while($rw=mysqli_fetch_array($rs,MYSQLI_BOTH)){
+	if($num>0) {
+		while($rw=mysqli_fetch_array($rs,MYSQLI_BOTH)) {
 			$msg.='<li>';
 			$msg.='<span class="s1">'.$rw['id'].'</span>';
 			$msg.='<span class="s7">'.utf8_encode($rw['name']).'</span>';
@@ -135,28 +135,28 @@ function getList(){
 	return $msg;
 }
 
-function countCols(){
+function countCols() {
 	$con=SQLi('products');
 	$rs=mysqli_query($con,"SELECT * FROM tblwarehouse WHERE status=1") or die(mysqli_error($con));
 	$num=mysqli_num_rows($rs);
-	while($rw=mysqli_fetch_array($rs)){
+	while($rw=mysqli_fetch_array($rs)) {
 		$id=$rw['id'];
 		$test = mysqli_query($con,"SHOW COLUMNS FROM tblstocks LIKE 'w$id'");
-		if ( trim($id)!='' && !mysqli_num_rows($test) ){
+		if ( trim($id)!='' && !mysqli_num_rows($test) ) {
 			mysqli_query($con,"ALTER TABLE tblstocks ADD w$id INT") or die(mysqli_error($con));
 		}
 	}
 	return str_pad("",$num*2,",0");
 }
 
-function isValid($ft){
+function isValid($ft) {
 	if($ft=='text/csv'||$ft=='application/csv'||$ft=='application/octet-stream'||$ft=='application/vnd.ms-excel') return true;
 }
 
-function postData($file,$tbl){
+function postData($file,$tbl) {
 	$hdr=0;
 	$data=fopen($file,'r');
-	while($rw=fgets($data)){
+	while($rw=fgets($data)) {
 		$line=str_getcsv($rw);
 		$x1=$line[1];
 		$x2=str_replace("'",'',$line[2]);
@@ -173,7 +173,7 @@ function postData($file,$tbl){
 	}
 }
 
-function getData($idata,$udata,$tbl){
+function getData($idata,$udata,$tbl) {
 	$con=SQLi('products');
 	// if($tbl=='tbllist') echo "$qry<br><br>";
 	mysqli_query($con,"INSERT INTO $tbl VALUES ($idata) ON DUPLICATE KEY UPDATE $udata") or die(mysqli_error($con));

@@ -66,7 +66,7 @@ class Page_Cache {
     // Update the font information
     self::__query("DELETE FROM page_fonts WHERE id='" . pg_escape_string($id) . "'");
 
-    foreach (array_keys($fonts) as $font)
+    foreach(array_keys($fonts) as $font)
       self::__query("INSERT INTO page_fonts (id, font_name) VALUES ('" .
                     pg_escape_string($id) . "', '" . pg_escape_string($font) . "')");
     self::__query("COMMIT");
@@ -99,7 +99,7 @@ class Page_Cache {
 
     // Ensure that the fonts needed by the cached document are loaded into
     // the pdf
-    while ($row = pg_fetch_assoc($res)) 
+    while($row = pg_fetch_assoc($res)) 
       $pdf->get_cpdf()->selectFont($row["font_name"]);
     
     $res = self::__query("SELECT data FROM page_cache WHERE id='" . pg_escape_string($id) . "'");
@@ -108,7 +108,7 @@ class Page_Cache {
       $pdf->new_page();
 
     $first = true;
-    while ($row = pg_fetch_assoc($res)) {
+    while($row = pg_fetch_assoc($res)) {
 
       if ( !$first ) 
         $pdf->new_page();

@@ -1,15 +1,15 @@
 <?php if(!defined('INCLUDE_CHECK')) die('Invalid Operation');
 if(!isset($_SESSION)) session_start();
 $con=SQLi('products');
-if(isset($_POST['submit'])){
-	if($_POST['submit']=='UPLOAD'){
+if(isset($_POST['submit'])) {
+	if($_POST['submit']=='UPLOAD') {
 		$file=$_FILES['file'];
 		unset($_POST);
 		unset($_FILES);
 		$temp=$file['tmp_name'];
 
 		$msg='FDA List upload failed';
-		if(isValid($file['type'])){
+		if(isValid($file['type'])) {
 			$tbl='tblfda';
 			$sqlcreate="CREATE TABLE IF NOT EXISTS $tbl (
 				id INT(5) UNSIGNED ZEROFILL,
@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
 
 			$msg='List successfully uploaded';
 		}echo $msg;
-	}else if($_POST['submit']=='RESET'){
+	}else if($_POST['submit']=='RESET') {
 		$rs=mysqli_query(SQLi('products'),"TRUNCATE ".DB."products.tblfda");
 		$msg='List successfully truncated';
 	}
@@ -43,7 +43,7 @@ $x.='<br><br>';
 echo $x.$data;
 ob_end_flush();
 
-function getList(){
+function getList() {
 	$msg ='<ul class="fdalist list clear">';
 	$msg.='<li class="hdr"><span class="s1">Code</span><span class="s5">Description</span><span class="s4">FDA #</span><span class="s3 ct">Expiry</span><span class="s1 ct">Renewal</span><span class="s6">FDA LINK</span></li>';
 
@@ -55,8 +55,8 @@ function getList(){
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
 	$num=mysqli_num_rows($rs);
 	$_SESSION['listcount']=$num;
-	if($num>0){
-		while($rw=mysqli_fetch_array($rs,MYSQLI_BOTH)){
+	if($num>0) {
+		while($rw=mysqli_fetch_array($rs,MYSQLI_BOTH)) {
 			foreach($rw as $k=>$v) $$k=$v;
 
 			$clsli=$clsdesc=$clsdate=$clsfda=$clsurl=$exp='';
@@ -65,26 +65,26 @@ function getList(){
 			$testurl=$url;
 			$testdate=formatDate($expiry,'Y-m-d','m/d/Y');
 
-			if(strpos($testdate,'INVALID')!==false){
+			if(strpos($testdate,'INVALID')!==false) {
 				$clsdate='bad b';
 			}else{
-				if(strtotime('now')>strtotime("-6 months",strtotime($testdate))){
+				if(strtotime('now')>strtotime("-6 months",strtotime($testdate))) {
 					$clsli='breakfda';
 				}
 			}
 
-			if($name==''){
+			if($name=='') {
 				$testdesc='PRODUCT NOT FOUND';
 				$clsdesc='bad b';
 			}
 
-			if($fda==''){
+			if($fda=='') {
 				$testfda='FDA NOT FOUND';
 				$clsfda='bad b';
 				$exp='FOR RENEWAL';
 			}
 
-			if($url==''||(filter_var($url,FILTER_VALIDATE_URL)===FALSE)){
+			if($url==''||(filter_var($url,FILTER_VALIDATE_URL)===FALSE)) {
 				$testurl='INVALID LINK';
 				$clsurl=$clsli!=''?'':'bad b';
 			}else $testurl='<a href="'.$url.'" target="_blank">Click to open FDA Link</a>';
@@ -103,14 +103,14 @@ function getList(){
 	return $msg;
 }
 
-function isValid($ft){
+function isValid($ft) {
 	if($ft=='text/csv'||$ft=='application/csv'||$ft=='application/octet-stream'||$ft=='application/vnd.ms-excel') return true;
 }
 
-function postData($file,$tbl){
+function postData($file,$tbl) {
 	$hdr=0;
 	$data=fopen($file,'r');
-	while($rw=fgets($data)){
+	while($rw=fgets($data)) {
 		$line=str_getcsv($rw);
 		$x1=str_replace("'",'',$line[0]);
 		$x2=str_replace("'",'',$line[1]);
@@ -127,7 +127,7 @@ function postData($file,$tbl){
 	}
 }
 
-function getData($idata,$udata,$tbl){
+function getData($idata,$udata,$tbl) {
 	$con=SQLi('products');
 	mysqli_query($con,"INSERT INTO $tbl VALUES ($idata) ON DUPLICATE KEY UPDATE $udata") or die(mysqli_error($con));
 }

@@ -4,7 +4,7 @@
  * @link    http://www.dompdf.com/
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
  * @author  Helmut Tischer <htischer@weihenstephan.org>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: functions.inc.php 448 2011-11-13 13:00:03Z fabien.menager $
  */
@@ -408,17 +408,17 @@ if ( !function_exists("mb_strlen") ) {
  * Decoder for RLE8 compression in windows bitmaps
  * http://msdn.microsoft.com/library/default.asp?url=/library/en-us/gdi/bitmaps_6x0u.asp
  */
-function rle8_decode ($str, $width){
+function rle8_decode ($str, $width) {
   $lineWidth = $width + (3 - ($width-1) % 4);
   $out = '';
   $cnt = strlen($str);
   
   for ($i = 0; $i <$cnt; $i++) {
     $o = ord($str[$i]);
-    switch ($o){
+    switch ($o) {
       case 0: # ESCAPE
         $i++;
-        switch (ord($str[$i])){
+        switch (ord($str[$i])) {
           case 0: # NEW LINE
             $padCnt = $lineWidth - strlen($out)%$lineWidth;
             if ($padCnt<$lineWidth) $out .= str_repeat(chr(0), $padCnt); # pad line
@@ -459,13 +459,13 @@ function rle4_decode ($str, $width) {
     switch ($o) {
       case 0: # ESCAPE
         $i++;
-        switch (ord($str[$i])){
+        switch (ord($str[$i])) {
           case 0: # NEW LINE
-            while (count($pixels)%$lineWidth!=0)
+            while(count($pixels)%$lineWidth!=0)
               $pixels[]=0;
             break;
           case 1: # END OF FILE
-            while (count($pixels)%$lineWidth!=0)
+            while(count($pixels)%$lineWidth!=0)
               $pixels[]=0;
             break 3;
           case 2: # DELTA
@@ -473,8 +473,8 @@ function rle4_decode ($str, $width) {
             break;
           default: # ABSOLUTE MODE
             $num = ord($str[$i]);
-            for ($j = 0; $j < $num; $j++){
-              if ($j%2 == 0){
+            for ($j = 0; $j < $num; $j++) {
+              if ($j%2 == 0) {
                 $c = ord($str[++$i]);
                 $pixels[] = ($c & 240)>>4;
               } else
@@ -565,7 +565,7 @@ function imagecreatefrombmp($filename) {
     $palette = unpack('l' . $meta['colors'], fread($fh, $meta['colors'] * 4));
     // in rare cases the color value is signed
     if ($palette[1] < 0) {
-      foreach ($palette as $i => $color) {
+      foreach($palette as $i => $color) {
         $palette[$i] = $color + 16777216;
       }
     }
@@ -592,9 +592,9 @@ function imagecreatefrombmp($filename) {
   $error = 'imagecreatefrombmp: ' . $filename . ' has not enough data!';
 
   // loop through the image data beginning with the lower left corner
-  while ($y >= 0) {
+  while($y >= 0) {
     $x = 0;
-    while ($x < $meta['width']) {
+    while($x < $meta['width']) {
       switch ($meta['bits']) {
         case 32:
         case 24:
@@ -786,7 +786,7 @@ function bt() {
   echo "\n";
 
   $i = 0;
-  foreach ($bt as $call) {
+  foreach($bt as $call) {
     $file = basename($call["file"]) . " (" . $call["line"] . ")";
     if ( isset($call["class"]) ) {
       $func = $call["class"] . "->" . $call["function"] . "()";
@@ -829,7 +829,7 @@ function print_memusage() {
   $initial = reset($memusage);
   echo (str_pad("Initial:", 40) . $initial . "\n\n");
 
-  foreach ($memusage as $key=>$mem) {
+  foreach($memusage as $key=>$mem) {
     $mem -= $initial;
     echo (str_pad("$key:" , 40));
     echo (str_pad("$mem", 12) . "(diff: " . ($mem - $prev) . ")\n");
@@ -883,17 +883,17 @@ function sys_get_temp_dir() {
 }
 
 if ( function_exists("memory_get_peak_usage") ) {
-  function DOMPDF_memory_usage(){
+  function DOMPDF_memory_usage() {
     return memory_get_peak_usage(true);
   }
 }
 else if ( function_exists("memory_get_usage") ) {
-  function DOMPDF_memory_usage(){
+  function DOMPDF_memory_usage() {
     return memory_get_usage(true);
   }
 }
 else {
-  function DOMPDF_memory_usage(){
+  function DOMPDF_memory_usage() {
     return "N/A";
   }
 }
@@ -931,7 +931,7 @@ else {
 if ( PHP_VERSION_ID < 50300 ) {
   function clear_object(&$object) {
     if ( is_object($object) ) {
-      foreach ($object as &$value) {
+      foreach($object as &$value) {
         clear_object($value);
       }
     }

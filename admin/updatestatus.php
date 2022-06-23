@@ -26,7 +26,9 @@ if( isset($submit) ) {
 			include('infoconfig.php');
 			include('setup.php');
 
-			if( ISIN_ADMIN && NOTIF_ON && $_SESSION['a_page']!='encoding' ) {
+			$is_encoding = isset($_SESSION['a_page']) && $_SESSION['a_page'] == 'encoding';
+
+			if( ISIN_ADMIN && NOTIF_ON && !$is_encoding ) {
 				$qry = "
 				SELECT
 					(SELECT COUNT(*) ord FROM ". DB ."orders.tblorders WHERE deliStat=1) ord,

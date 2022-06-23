@@ -34,7 +34,7 @@ class PHP_Evaluator {
     $PAGE_COUNT = $pdf->get_page_count();
     
     // Override those variables if passed in
-    foreach ($vars as $k => $v) {
+    foreach($vars as $k => $v) {
       $$k = $v;
     }
 

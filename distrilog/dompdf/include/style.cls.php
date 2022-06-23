@@ -4,7 +4,7 @@
  * @link    http://www.dompdf.com/
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
  * @author  Helmut Tischer <htischer@weihenstephan.org>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: style.cls.php 469 2012-02-05 22:25:30Z fabien.menager $
  */
@@ -428,7 +428,7 @@ class Style {
     }
 
     $ret = 0;
-    foreach ($length as $l) {
+    foreach($length as $l) {
 
       if ( $l === "auto" )
         return "auto";
@@ -532,7 +532,7 @@ class Style {
     // Set parent font size
     $this->_parent_font_size = $parent->get_font_size();
     
-    foreach (self::$_inherited as $prop) {
+    foreach(self::$_inherited as $prop) {
       //inherit the !important property also.
       //if local property is also !important, don't inherit.
       if ( isset($parent->_props[$prop]) &&
@@ -549,7 +549,7 @@ class Style {
       }
     }
       
-    foreach (array_keys($this->_props) as $prop) {
+    foreach(array_keys($this->_props) as $prop) {
       if ( $this->_props[$prop] === "inherit" ) {
         if ( isset($parent->_important_props[$prop]) ) {
           $this->_important_props[$prop] = true;
@@ -720,7 +720,7 @@ class Style {
     return $this->_prop_cache[$prop] = $this->_props[$prop];
   }
 
-  function get_font_family_raw(){
+  function get_font_family_raw() {
     return trim($this->_props["font_family"], " \t\n\r\x0B\"'");
   }
 
@@ -780,7 +780,7 @@ class Style {
     reset($families);
 
     $font = null;
-    while ( current($families) ) {
+    while( current($families) ) {
       list(,$family) = each($families);
       //remove leading and trailing string delimiters, e.g. on font names with spaces;
       //remove leading and trailing whitespace
@@ -1720,7 +1720,7 @@ class Style {
     $this->_set_style_side_type('border',$side,'_width',self::$_defaults['border_'.$side.'_width'],$important);
     $this->_set_style_side_type('border',$side,'_color',self::$_defaults['border_'.$side.'_color'],$important);
 
-    foreach ($arr as $value) {
+    foreach($arr as $value) {
       $value = trim($value);
       if ( in_array($value, self::$BORDER_STYLES) ) {
         $this->_set_style_side_type('border',$side,'_style',$value,$important);
@@ -1803,7 +1803,7 @@ class Style {
     
     $val = preg_replace("/\s*\,\s*/", ",", $val); // when rgb() has spaces
     $arr = explode(" ", $val);
-    foreach ($arr as $value) {
+    foreach($arr as $value) {
       $value = trim($value);
       if ( in_array($value, self::$BORDER_STYLES) ) {
         $this->set_outline_style($value);
@@ -1887,7 +1887,7 @@ class Style {
 
     static $positions = array("inside", "outside");
 
-    foreach ($arr as $value) {
+    foreach($arr as $value) {
       /* http://www.w3.org/TR/CSS21/generate.html#list-style
        * A value of 'none' for the 'list-style' property sets both 'list-style-type' and 'list-style-image' to 'none'
        */
@@ -2171,7 +2171,7 @@ class Style {
       $value = $val;
     }
     else {
-      if ( preg_match_all("/(".self::CSS_IDENTIFIER.")(?:\s+(".self::CSS_INTEGER."))?/", $val, $matches, PREG_SET_ORDER) ){
+      if ( preg_match_all("/(".self::CSS_IDENTIFIER.")(?:\s+(".self::CSS_INTEGER."))?/", $val, $matches, PREG_SET_ORDER) ) {
         $value = array();
         foreach($matches as $match) {
           $value[$match[1]] = isset($match[2]) ? $match[2] : 1;

@@ -5,8 +5,8 @@ if(!isset($_SESSION)) {
 }
 define('INCLUDE_CHECK',1);
 require('../admin/setup.php');
-if((!ISIN_DISTRI&&!ISIN_ADMIN)||UPDATE_ON){ reloadTo(DLC_MYPAGE);exit; }
-if(ISIN_ADMIN&&isset($_GET['u'])){ $_SESSION['u_site']=$_GET['u'];}
+if((!ISIN_DISTRI&&!ISIN_ADMIN)||UPDATE_ON) { reloadTo(DLC_MYPAGE);exit; }
+if(ISIN_ADMIN&&isset($_GET['u'])) { $_SESSION['u_site']=$_GET['u'];}
 $title		="| Distributor Recap";
 $homepage	='../';
 
@@ -31,7 +31,7 @@ ob_end_flush();
 if(!isset($_GET['w'])) echo '<META HTTP-EQUIV=Refresh CONTENT="0; URL='.basename($_SERVER['PHP_SELF']).'?w='.$_SESSION['recap0'].'">';
 $_SESSION['prints']=array('table'=>$out);
 
-function getRecapSched($id,$select){
+function getRecapSched($id,$select) {
 	$idx=0;$ret=array();
 	$qry="
 		SELECT DISTINCT bdyy,bdmm,s.wk,s.*
@@ -46,8 +46,8 @@ function getRecapSched($id,$select){
 	";
 	$con=SQLi('distributor');
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)>0){
-		while($rw=mysqli_fetch_array($rs)){
+	if(mysqli_num_rows($rs)>0) {
+		while($rw=mysqli_fetch_array($rs)) {
 			foreach($rw as $k=>$v) $$k=$v;
 			$str='Week'.sprintf('%02d',$wk).' '.date('M. d',strtotime($fst)).' - '.date('M. d',strtotime($lst)).', '.$yr;
 			$val=sprintf('%02d',$wk).$yr;

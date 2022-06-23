@@ -4,7 +4,7 @@
  * @link    http://www.dompdf.com/
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
  * @author  Helmut Tischer <htischer@weihenstephan.org>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: text_renderer.cls.php 471 2012-02-06 21:59:10Z fabien.menager $
  */
@@ -105,10 +105,10 @@ class Text_Renderer extends Abstract_Renderer {
     // Draw all applicable text-decorations.  Start with the root and work our way down.
     $p = $frame;
     $stack = array();
-    while ( $p = $p->get_parent() )
+    while( $p = $p->get_parent() )
       $stack[] = $p;
     
-    while ( isset($stack[0]) ) {
+    while( isset($stack[0]) ) {
       $f = array_pop($stack);
 
       if ( ($text_deco = $f->get_style()->text_decoration) === "none" )

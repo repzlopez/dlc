@@ -7,12 +7,12 @@ $salesid='004';$data='';
 $isapc=testScope("apc");
 $apcroot=(testScope("global|orders|apc"))?'../logistics/':'';
 $apcquery=$isapc?"WHERE whto='".substr($_SESSION['apc_id'],3)."'":"WHERE whfrom=$salesid OR whto=$salesid";
-if($do=='transarc'){
+if($do=='transarc') {
 	$notapc=$isapc?'':'<span class="s2">From</span>';
 	$data.='<li><span class="s4">Sales ID</span><span class="s2">Posted By</span>'.$notapc;
 	$con=SQLi('products');
 	$rs=mysqli_query($con,"SELECT * FROM tbllogtransfer $apcquery ORDER BY status,reqstamp") or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		$notapc=$isapc?'':'<span class="s2">'.$rw['whfrom'].'</span>';
 		$data.='<li><a href="'.$apcroot.'viewtransfer.php?id='.$rw['id'].'" class="s4">'.$rw['id'].'</a><span class="s2">'.$rw['reqid'].'</span>'.$notapc;
 	}
@@ -33,11 +33,11 @@ if($do=='transarc'){
 	echo '</ul><div id="submitbuttons"><input type="submit" name="submit" class="btn" value="SUBMIT" /><input type="button" id="cleartrans" class="btn" value="CLEAR" /></div></form>';
 }
 
-function popCat($tbl,$id,$val,$distinct='',$qry='',$selected='',$rel=''){
+function popCat($tbl,$id,$val,$distinct='',$qry='',$selected='',$rel='') {
 	$pCat='';
 	$con=SQLi('products');
 	$rs=mysqli_query($con,"SELECT $distinct FROM $tbl $qry") or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		$rel=($rel!='')?'rel="'.$rw['parent_id'].'"':'';
 		$pCat.= '<option value="'.$rw[$id].'" '.$rel.' '.(($selected==$rw[$id])?SELECTED:'').'>'.ucwords($rw[$val]).'</option>';
 	}

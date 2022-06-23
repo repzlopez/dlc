@@ -5,9 +5,11 @@ if(!isset($_SESSION)) {
 }
 define('INCLUDE_CHECK',1);
 require('../admin/setup.php');
-$img='beeprop.jpg';
-$msg='<p>We use <span class="product">Brazil Green Propolis</span><br />to protect our pages</p>';
+
+$img = 'beeprop.jpg';
+$msg = '<p>We use <span class="product">Brazil Green Propolis</span><br />to protect our pages</p>';
 ob_start();
+
 ?><html>
 <head>
 	<title>Oops..</title>

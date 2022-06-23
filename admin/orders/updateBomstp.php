@@ -3,7 +3,7 @@ if(!isset($_SESSION)) {
      session_set_cookie_params(0);
      session_start();
 }
-if(!defined('INCLUDE_CHECK')){
+if(!defined('INCLUDE_CHECK')) {
 	define('INCLUDE_CHECK',1);
 	require('../setup.php');
 }
@@ -29,14 +29,14 @@ $rubyMgr=array(
 	REPZ.'-2',
 );
 
-if(isset($_POST)&&isset($_POST['recalc'])){
-	switch($_POST['recalc']){
+if(isset($_POST)&&isset($_POST['recalc'])) {
+	switch($_POST['recalc']) {
 		case 'bomstp':recalc(0,WEEK,WKYR);break;
 		case 'slots':recalcSlots();break;
 	}
 }
 
-function updateBomstp($dsid,$pv,$wk,$z,$do,$mgr=''){
+function updateBomstp($dsid,$pv,$wk,$z,$do,$mgr='') {
 	global $rubyMgr;
 	$bmtpv=$lev=0;$bmsid='';
 	$ppv=($z<1?$pv:0);
@@ -49,9 +49,9 @@ function updateBomstp($dsid,$pv,$wk,$z,$do,$mgr=''){
 
 	$con=SQLi('orders');
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)>0){
+	if(mysqli_num_rows($rs)>0) {
 		$rw=mysqli_fetch_array($rs);
-		foreach($rw as $k=>$v){ $$k=$v;}
+		foreach($rw as $k=>$v) { $$k=$v;}
 	}
 // echo str_pad($dsid,16,"_")." | $bmtpv+$pv<br>";
 	$match=preg_split("/[|]+/",$bmsid,-1,PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
@@ -69,13 +69,13 @@ function updateBomstp($dsid,$pv,$wk,$z,$do,$mgr=''){
 	$qry="INSERT INTO bomstp VALUES ('$dsid','$mgr','$wk',$lev,$ppv,$npv) ON DUPLICATE KEY UPDATE $u1 $u2 $u3 $u4";
 	mysqli_query($con,$qry) or die(mysqli_error($con));
 
-	if($dsid==EDDY){}
+	if($dsid==EDDY) {}
 	else{$z++;
 		updateBomstp($dssid,$pv,$wk,$z,$do,($isMgr?$dsid:''));
 	}
 }
 
-function updateBreakaway($dsid,$pv,$z,$breakaway=0,$bkawpv=0){
+function updateBreakaway($dsid,$pv,$z,$breakaway=0,$bkawpv=0) {
 	$bmtpv=0;
 	$qry="SELECT dssid,bmsid,bmppv,bmnpv,ROUND(bmppv+bmnpv,2) bmtpv,bmelev
 		FROM bomstp
@@ -84,13 +84,13 @@ function updateBreakaway($dsid,$pv,$z,$breakaway=0,$bkawpv=0){
 
 	$con=SQLi('orders');
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)>0){
+	if(mysqli_num_rows($rs)>0) {
 		$rw=mysqli_fetch_array($rs);
-		foreach($rw as $k=>$v){ $$k=$v;}
+		foreach($rw as $k=>$v) { $$k=$v;}
 	}
 	$mline=substr_count($bmsid,'|');
 
-	if($breakaway){$isMgr=1;
+	if($breakaway) {$isMgr=1;
 		global $rubyMgr;
 
 		// $lev=isMgr($bmtpv-$bkawpv,$mline)||in_array($dsid,$rubyMgr)?5:getEndLvl($bmtpv-$bkawpv);
@@ -105,11 +105,11 @@ function updateBreakaway($dsid,$pv,$z,$breakaway=0,$bkawpv=0){
 // echo str_pad($dsid,16,"_")." | $bmtpv | $pv | $isMgr | $bmelev <br>";
 	}
 
-	if($dsid==EDDY){}
+	if($dsid==EDDY) {}
 	else updateBreakaway($dssid,$pv,$z++,$isMgr,$bkawpv);
 }
 
-function testMinForSlot($id,$yr,$mo){
+function testMinForSlot($id,$yr,$mo) {
 	$qry="SELECT
 		(SELECT COUNT(*) FROM ormstp WHERE omdid='$id' AND ompyr='$yr' AND ompmo='$mo' AND om40=1)-
 		(SELECT COUNT(*) FROM tblslots WHERE ref=CONCAT('$yr','$mo','$id') AND dsdid='$id') m
@@ -119,13 +119,13 @@ function testMinForSlot($id,$yr,$mo){
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
 	$rw=mysqli_fetch_assoc($rs);
 	$m=$rw['m'];
-	while($m>=1){
+	while($m>=1) {
 		mysqli_query($con,"INSERT INTO tblslots VALUES ('','$id',NULL,NULL,NULL,NULL,'$yr$mo$id')") or die(mysqli_error($con));
 		$m--;
 	}
 }
 
-function isMgr($pv,$mline){
+function isMgr($pv,$mline) {
 	return (
 		$pv>=$_SESSION['minpv'][5] ||
 		$mline==2&&$pv>=$_SESSION['minpv'][2] ||
@@ -133,7 +133,7 @@ function isMgr($pv,$mline){
 	);
 }
 
-function recalcSlots(){
+function recalcSlots() {
 	$qry="
 		SELECT omdid,ompyr,ompmo,
 			CONCAT(omdid,ompyr,ompmo) cut
@@ -144,12 +144,12 @@ function recalcSlots(){
 	";
 	$con=SQLi('orders');
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($r=mysqli_fetch_assoc($rs)){
+	while($r=mysqli_fetch_assoc($rs)) {
 		testMinForSlot($r['omdid'],$r['ompyr'],$r['ompmo']);
 	}mysqli_close($con);
 }
 
-function recalc($do,$wk,$yr){
+function recalc($do,$wk,$yr) {
 	$con=SQLi('orders');
 	mysqli_query($con,"TRUNCATE TABLE bomstp");
 	$qry="
@@ -160,14 +160,14 @@ function recalc($do,$wk,$yr){
 
 	";//ORDER BY ompv DESC
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($r1=mysqli_fetch_assoc($rs)){
+	while($r1=mysqli_fetch_assoc($rs)) {
 		// ini_set('max_execution_time',120);
 // echo "<br><br>";
 		updateBomstp($r1['omdid'],$r1['pv'],$wk,0,$do);
 	}
 
 	$rs=mysqli_query($con,"SELECT bmdid,bmppv FROM bomstp WHERE bmppv>0 ORDER BY bmppv DESC") or die(mysqli_error($con));
-	while($r2=mysqli_fetch_assoc($rs)){
+	while($r2=mysqli_fetch_assoc($rs)) {
 // echo "<br><br>";
 		updateBreakaway($r2['bmdid'],$r2['bmppv'],0);
 	}

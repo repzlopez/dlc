@@ -5,8 +5,10 @@ if(!isset($_SESSION)) {
 }
 define('INCLUDE_CHECK',1);
 require('../admin/setup.php');
-$_SESSION['lastURI']='error';
+
+$_SESSION['lastURI'] = 'error';
 ob_start();
+
 ?><html>
 <head>
 	<title>Oops..</title>

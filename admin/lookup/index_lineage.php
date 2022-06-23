@@ -5,7 +5,7 @@ $x='<form method="post" action="index.php?p=lineage"><ul>';
 $x.='<li><span class="blue">Distributor Lookup Lineage</span>';
 $x.='<li><span class="s3">LOOKUP:</span><input type="text" name="find" class="txt s5" /> <span class="small more">** dist.id</span></li>';
 $x.='</ul></form>';
-if(isset($_POST['find'])){
+if(isset($_POST['find'])) {
 	$id=trim_escape($_POST['find']);
 	$name=trim(getName($id,'fml'));
 
@@ -19,9 +19,9 @@ ob_start();
 echo $x;
 ob_end_flush();
 
-function getDistList($id){
+function getDistList($id) {
 	global $z;
-	if($id!=EDDY){
+	if($id!=EDDY) {
 		$con=SQLi('distributor');
 		$rs=mysqli_query($con,"SELECT dssid FROM distributors WHERE dsdid='$id'") or die(mysqli_error($con));
 		$rw=mysqli_fetch_assoc($rs);

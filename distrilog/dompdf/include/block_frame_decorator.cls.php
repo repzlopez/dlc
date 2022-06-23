@@ -133,7 +133,7 @@ class Block_Frame_Decorator extends Frame_Decorator {
            $this->add_line();
          
            // Add each child of the inline frame to the line individually
-           foreach ($frame->get_children() as $child)
+           foreach($frame->get_children() as $child)
              $this->add_frame_to_line( $child );     
     }
     else*/
@@ -203,7 +203,7 @@ class Block_Frame_Decorator extends Frame_Decorator {
     // Search backwards through the lines for $frame
     $i = $this->_cl;
 
-    while ($i >= 0) {
+    while($i >= 0) {
       if ( ($j = in_array($frame, $this->_line_boxes[$i]->get_frames(), true)) !== false )
         break;
       $i--;
@@ -213,7 +213,7 @@ class Block_Frame_Decorator extends Frame_Decorator {
       return;
 
     // Remove $frame and all frames that follow
-    while ($j < count($this->_line_boxes[$i]->get_frames())) {
+    while($j < count($this->_line_boxes[$i]->get_frames())) {
       $frames = $this->_line_boxes[$i]->get_frames();
       $f = $frames[$j];
       $frames[$j] = null;
@@ -224,13 +224,13 @@ class Block_Frame_Decorator extends Frame_Decorator {
 
     // Recalculate the height of the line
     $h = 0;
-    foreach ($this->_line_boxes[$i]->get_frames() as $f)
+    foreach($this->_line_boxes[$i]->get_frames() as $f)
       $h = max( $h, $f->get_margin_height() );
 
     $this->_line_boxes[$i]->h = $h;
 
     // Remove all lines that follow
-    while ($this->_cl > $i) {
+    while($this->_cl > $i) {
       $this->_line_boxes[ $this->_cl ] = null;
       unset($this->_line_boxes[ $this->_cl ]);
       $this->_cl--;

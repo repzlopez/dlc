@@ -110,7 +110,7 @@ class HTML5_TreeBuilder {
             $lookup = array();
             $r = new ReflectionClass('HTML5_TreeBuilder');
             $consts = $r->getConstants();
-            foreach ($consts as $const => $num) {
+            foreach($consts as $const => $num) {
                 if (!is_int($num)) continue;
                 $lookup[$num] = $const;
             }
@@ -155,7 +155,7 @@ class HTML5_TreeBuilder {
         $this->dom->strictErrorChecking = false;
     }
 		
-		public function getQuirksMode(){
+		public function getQuirksMode() {
 			return $this->quirks_mode;
 		}
 
@@ -315,14 +315,14 @@ class HTML5_TreeBuilder {
             } else {
                 do {
                     if ($system) {
-                        foreach ($publicStartsWithAndSystemForQuirks as $x) {
+                        foreach($publicStartsWithAndSystemForQuirks as $x) {
                             if (strncmp($public, $x, strlen($x)) === 0) {
                                 $this->quirks_mode = self::QUIRKS_MODE;
                                 break;
                             }
                         }
                         if (!is_null($this->quirks_mode)) break;
-                        foreach ($publicStartsWithAndSystemForLimitedQuirks as $x) {
+                        foreach($publicStartsWithAndSystemForLimitedQuirks as $x) {
                             if (strncmp($public, $x, strlen($x)) === 0) {
                                 $this->quirks_mode = self::LIMITED_QUIRKS_MODE;
                                 break;
@@ -330,14 +330,14 @@ class HTML5_TreeBuilder {
                         }
                         if (!is_null($this->quirks_mode)) break;
                     }
-                    foreach ($publicSetToForQuirks as $x) {
+                    foreach($publicSetToForQuirks as $x) {
                         if ($public === $x) {
                             $this->quirks_mode = self::QUIRKS_MODE;
                             break;
                         }
                     }
                     if (!is_null($this->quirks_mode)) break;
-                    foreach ($publicStartsWithForLimitedQuirks as $x) {
+                    foreach($publicStartsWithForLimitedQuirks as $x) {
                         if (strncmp($public, $x, strlen($x)) === 0) {
                             $this->quirks_mode = self::LIMITED_QUIRKS_MODE;
                         }
@@ -347,7 +347,7 @@ class HTML5_TreeBuilder {
                         $this->quirks_mode = self::QUIRKS_MODE;
                         break;
                     }
-                    foreach ($publicStartsWithForQuirks as $x) {
+                    foreach($publicStartsWithForQuirks as $x) {
                         if (strncmp($public, $x, strlen($x)) === 0) {
                             $this->quirks_mode = self::QUIRKS_MODE;
                             break;
@@ -356,7 +356,7 @@ class HTML5_TreeBuilder {
                     if (is_null($this->quirks_mode)) {
                         $this->quirks_mode = self::NO_QUIRKS;
                     }
-                } while (false);
+                } while(false);
             }
             $this->mode = self::BEFORE_HTML;
         } else {
@@ -1275,7 +1275,7 @@ class HTML5_TreeBuilder {
                         token, except with the "name" attribute set to the value
                         "isindex" (ignoring any explicit "name" attribute). */
                         $attr = array();
-                        foreach ($token['attr'] as $keypair) {
+                        foreach($token['attr'] as $keypair) {
                             if ($keypair['name'] === 'name' || $keypair['name'] === 'action' ||
                                 $keypair['name'] === 'prompt') continue;
                             $attr[] = $keypair;
@@ -1415,7 +1415,7 @@ class HTML5_TreeBuilder {
                             // parse error
                         }
                         $peek = array_pop($this->stack);
-                    } while ($peek->tagName !== 'ruby');
+                    } while($peek->tagName !== 'ruby');
                     $this->stack[] = $peek; // we popped one too many
                     $this->insertElement($token);
                 break;
@@ -1530,7 +1530,7 @@ class HTML5_TreeBuilder {
                         with that tag name has been popped from the stack. */
                         do {
                             $node = array_pop($this->stack);
-                        } while ($node->tagName !== $token['name']);
+                        } while($node->tagName !== $token['name']);
                     } else {
                         // parse error
                     }
@@ -1578,7 +1578,7 @@ class HTML5_TreeBuilder {
                          * been popped from the stack. */
                         do {
                             $node = array_pop($this->stack);
-                        } while ($node->tagName !== 'p');
+                        } while($node->tagName !== 'p');
 
                     } else {
                         // parse error
@@ -1607,7 +1607,7 @@ class HTML5_TreeBuilder {
                          * popped from the stack. */
                         do {
                             $node = array_pop($this->stack);
-                        } while ($node->tagName !== $token['name']);
+                        } while($node->tagName !== $token['name']);
                     } else {
                         // XERROR: parse error
                     }
@@ -1627,7 +1627,7 @@ class HTML5_TreeBuilder {
                          * been popped from the stack. */
                         do {
                             $node = array_pop($this->stack);
-                        } while ($node->tagName !== $token['name']);
+                        } while($node->tagName !== $token['name']);
 
                     } else {
                         // XERROR: parse error
@@ -1655,7 +1655,7 @@ class HTML5_TreeBuilder {
                         with one of those tag names has been popped from the stack. */
                         do {
                             $node = array_pop($this->stack);
-                        } while (!in_array($node->tagName, $elements));
+                        } while(!in_array($node->tagName, $elements));
                     } else {
                         // parse error
                     }
@@ -1909,7 +1909,7 @@ class HTML5_TreeBuilder {
                          * been popped from the stack. */
                         do {
                             $node = array_pop($this->stack);
-                        } while ($node->tagName !== $token['name']);
+                        } while($node->tagName !== $token['name']);
 
                         /* Clear the list of active formatting elements up to the
                          * last marker. */
@@ -1955,7 +1955,7 @@ class HTML5_TreeBuilder {
                             // XSKETCHY
                             do {
                                 $pop = array_pop($this->stack);
-                            } while ($pop !== $node);
+                            } while($pop !== $node);
                             break;
 
                         } else {
@@ -2118,7 +2118,7 @@ class HTML5_TreeBuilder {
             } else {
                 do {
                     $node = array_pop($this->stack);
-                } while ($node->tagName !== 'table');
+                } while($node->tagName !== 'table');
 
                 /* Reset the insertion mode appropriately. */
                 $this->resetInsertionMode();
@@ -2240,7 +2240,7 @@ class HTML5_TreeBuilder {
                 been popped from the stack. */
                 do {
                     $node = array_pop($this->stack);
-                } while ($node->tagName !== 'caption');
+                } while($node->tagName !== 'caption');
 
                 /* Clear the list of active formatting elements up to the last
                 marker. */
@@ -2549,7 +2549,7 @@ class HTML5_TreeBuilder {
                 tag name as the token has been popped from the stack. */
                 do {
                     $node = array_pop($this->stack);
-                } while ($node->tagName !== $token['name']);
+                } while($node->tagName !== $token['name']);
 
                 /* Clear the list of active formatting elements up to the last
                 marker. */
@@ -2729,7 +2729,7 @@ class HTML5_TreeBuilder {
                 element has been popped from the stack. */
                 do {
                     $node = array_pop($this->stack);
-                } while ($node->tagName !== 'select');
+                } while($node->tagName !== 'select');
 
                 /* Reset the insertion mode appropriately. */
                 $this->resetInsertionMode();
@@ -2883,7 +2883,7 @@ class HTML5_TreeBuilder {
             do {
                 $node = array_pop($this->stack);
                 // XDOM
-            } while ($node->namespaceURI !== self::NS_HTML);
+            } while($node->namespaceURI !== self::NS_HTML);
             $this->stack[] = $node;
             $this->mode = $this->secondary_mode;
             $this->emitToken($token);
@@ -3545,7 +3545,7 @@ class HTML5_TreeBuilder {
     private function getAttr($token, $key) {
         if (!isset($token['attr'])) return false;
         $ret = false;
-        foreach ($token['attr'] as $keypair) {
+        foreach($token['attr'] as $keypair) {
             if ($keypair['name'] === $key) $ret = $keypair['value'];
         }
         return $ret;
@@ -3617,7 +3617,7 @@ class HTML5_TreeBuilder {
      */
     private function printStack() {
         $names = array();
-        foreach ($this->stack as $i => $element) {
+        foreach($this->stack as $i => $element) {
             $names[] = $element->tagName;
         }
         echo "  -> stack [" . implode(', ', $names) . "]\n";
@@ -3629,7 +3629,7 @@ class HTML5_TreeBuilder {
     private function printActiveFormattingElements() {
         if (!$this->a_formatting) return;
         $names = array();
-        foreach ($this->a_formatting as $node) {
+        foreach($this->a_formatting as $node) {
             if ($node === self::MARKER) $names[] = 'MARKER';
             else $names[] = $node->tagName;
         }
@@ -3685,12 +3685,12 @@ class HTML5_TreeBuilder {
                     $this->form_pointer = $node;
                     break;
                 }
-            } while ($node = $node->parentNode);
+            } while($node = $node->parentNode);
         }
     }
 
     public function adjustMathMLAttributes($token) {
-        foreach ($token['attr'] as &$kp) {
+        foreach($token['attr'] as &$kp) {
             if ($kp['name'] === 'definitionurl') {
                 $kp['name'] = 'definitionURL';
             }
@@ -3763,7 +3763,7 @@ class HTML5_TreeBuilder {
             'ychannelselector' => 'yChannelSelector',
             'zoomandpan' => 'zoomAndPan',
         );
-        foreach ($token['attr'] as &$kp) {
+        foreach($token['attr'] as &$kp) {
             if (isset($lookup[$kp['name']])) {
                 $kp['name'] = $lookup[$kp['name']];
             }
@@ -3786,7 +3786,7 @@ class HTML5_TreeBuilder {
             'xmlns' => array(null, 'xmlns', self::NS_XMLNS),
             'xmlns:xlink' => array('xmlns', 'xlink', self::NS_XMLNS),
         );
-        foreach ($token['attr'] as &$kp) {
+        foreach($token['attr'] as &$kp) {
             if (isset($lookup[$kp['name']])) {
                 $kp['name'] = $lookup[$kp['name']];
             }
@@ -3797,7 +3797,7 @@ class HTML5_TreeBuilder {
     public function insertForeignElement($token, $namespaceURI) {
         $el = $this->dom->createElementNS($namespaceURI, $token['name']);
         if (!empty($token['attr'])) {
-            foreach ($token['attr'] as $kp) {
+            foreach($token['attr'] as $kp) {
                 $attr = $kp['name'];
                 if (is_array($attr)) {
                     $ns = $attr[2];

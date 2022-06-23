@@ -21,7 +21,7 @@ $y='';
 // ini_set('max_execution_time',60);
 $rs=mysqli_query($con,$qry) or die(mysqli_error($con));
 $num=mysqli_num_rows($rs);
-while($rw=mysqli_fetch_assoc($rs)){
+while($rw=mysqli_fetch_assoc($rs)) {
 	$y.='<li rel="'.$rw['dsdid'].'">';
 	$y.='<span class="s4"><a href="?p='.$page_on.'&id='.$rw['dsdid'].'">'.$rw['dsdid'].'</a></span>';
 	$y.='<span class="s6">'.$rw['dslnam'].', '.$rw['dsfnam'].' '.$rw['dsmnam'].'</span>';

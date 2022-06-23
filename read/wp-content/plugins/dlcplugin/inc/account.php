@@ -20,7 +20,7 @@ class DLCPluginAccount
           add_action( 'init', array( $this, 'unset_accounts' ) );
      }
 
-     function init_accounts(){
+     function init_accounts() {
           global $dlcuser, $resetstatus;
 
           if ( isset($_SESSION['resetstatus']) ) {

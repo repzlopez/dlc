@@ -26,8 +26,8 @@ $join=$all?"LEFT JOIN ".DB."distributor.$content d ON o.bmdid=d.bmdid":'';
 $qry.=" FROM ".DB."orders.$content o $join ORDER BY o.bmdid";
 
 $rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-while($rw=mysqli_fetch_assoc($rs)){
-	foreach($rw as $k=>$v){ $$k=$v;}
+while($rw=mysqli_fetch_assoc($rs)) {
+	foreach($rw as $k=>$v) { $$k=$v;}
 	$x.='<li rel="'.$bmdid.'" class="'.($all?($otpv!=number_format($dbmppv+$dbmnpv,2)?'bad':''):'').' '.($obmelev>4||($all&&$dbmelev>4)?'breakaway':'').'">';
 	$x.='<span class="s3">'.$bmdid.'</span>';
 	$x.='<span class="s4">'.getName($bmdid,'lfm').'</span>';

@@ -6,7 +6,7 @@ if( !isset($_SESSION) ) {
 define('INCLUDE_CHECK',1);
 require('../func.php');
 
-if( !ISIN_DISTRI && !GUEST ){
+if( !ISIN_DISTRI && !GUEST ) {
 	reloadTo(DLC_ROOT);
 	exit;
 }

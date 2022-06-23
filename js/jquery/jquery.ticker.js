@@ -1,5 +1,5 @@
-$(document).ready(function(){
-	if($('.news-item').length>0){
+$(document).ready(function() {
+	if($('.news-item').length>0) {
 		$('#js-news').ticker({
 			controls:false,
 			titleText:''
@@ -19,7 +19,7 @@ $(document).ready(function(){
     You should have received a copy of the GNU General Public License
     along with jQuery News Ticker.  If not, see <http://www.gnu.org/licenses/>.
 */
-(function($){  
+(function($) {  
 	$.fn.ticker = function(options) { 
 		// Extend our default options with those provided.
 		// Note that the first arg to extend is an empty object -
@@ -203,7 +203,7 @@ $(document).ready(function(){
 								cache: false,
 								dataType: opts.feedType,
 								async: true,
-								success: function(data){
+								success: function(data) {
 									count = 0;	
 									// get the 'root' node
 									for (var a = 0; a < data.childNodes.length; a++) {

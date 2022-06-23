@@ -4,7 +4,7 @@ if(!isset($_SESSION)) {
      session_start();
 }
 
-function getBrowser(){
+function getBrowser() {
 	$str='';
 	$ua=$_SERVER['HTTP_USER_AGENT'];
 	/* ==== Detect the OS ==== */
@@ -46,39 +46,39 @@ function getBrowser(){
 	/* ============================ */
 
 	//Tests for browsers and operating systems
-	if($ua){											// ---- Test if Handheld ----
+	if($ua) {											// ---- Test if Handheld ----
 		if($android) $str='Android';					// Android
 		if($blackberry) $str='Blackberry';				// Blackberry
 		if($iphone) $str='iPhone';						// iPhone
 		if($palm) $str='Palm';							// Palm
 		if($linux) $str='Linux';						// Linux Desktop
 
-		if($firefox){ $str='Firefox';					// ---- Test if Firefox ----
-			if($firefox_2){ $str.='v2';					// Firefox 2
+		if($firefox) { $str='Firefox';					// ---- Test if Firefox ----
+			if($firefox_2) { $str.='v2';					// Firefox 2
 			}elseif($firefox_3) { $str.='v3';			// Firefox 3
 			}elseif($firefox_3_6) { $str.='v3.6';		// Firefox 3.6
 			}else{ $str.='What Version do you use?';	// A version not listed
 			}
-		}elseif($nokiabrowser){ $str='Nokia Browser';	// ---- Test if Nokia Browser ----
-		}elseif($chrome){ $str='Chrome';				// Test if Chrome
-		}elseif(($safari||$chrome)&&!$iphone){			// ---- Test if Safari or Chrome ----
+		}elseif($nokiabrowser) { $str='Nokia Browser';	// ---- Test if Nokia Browser ----
+		}elseif($chrome) { $str='Chrome';				// Test if Chrome
+		}elseif(($safari||$chrome)&&!$iphone) {			// ---- Test if Safari or Chrome ----
 			if($safari&&!$chrome) $str='Safari';		// Test if Safari and not Chrome
 			if($mac&&$safari) $str.='Safari on Mac';	// Safari Mac
 			if($win&&$safari) $str.='Safari on Win';	// Safari Windows
-			if($safari_2){ $str.='v2';					// Safari 2
-			}elseif($safari_3){ $str.='v3';				// Safari 3
-			}elseif($safari_4){ $str.='v4';				// Safari 4
+			if($safari_2) { $str.='v2';					// Safari 2
+			}elseif($safari_3) { $str.='v3';				// Safari 3
+			}elseif($safari_4) { $str.='v4';				// Safari 4
 			}else{ $str.='What version are you using?';
 			}
-		}elseif($iphone&&$safari_3_1){ $str='Safari 3.1';// ---- Test if iPhone with Safari 3.1 ----
-		}elseif($msie){									// ---- Test if IE ----
-			if($msie_6){ $str='IE6';					// IE 6
-			}elseif($msie_7){ $str='IE7';				// IE 7
-			}elseif($msie_8){ $str='IE8';				// IE 8
+		}elseif($iphone&&$safari_3_1) { $str='Safari 3.1';// ---- Test if iPhone with Safari 3.1 ----
+		}elseif($msie) {									// ---- Test if IE ----
+			if($msie_6) { $str='IE6';					// IE 6
+			}elseif($msie_7) { $str='IE7';				// IE 7
+			}elseif($msie_8) { $str='IE8';				// IE 8
 			}else{ $str='IE<6';
 			}
-		}elseif($opera_mini){ $str='Opera Mini';		// ---- Test if Opera ----
-		}elseif($opera){ $str='Opera';					// ---- Test if Opera ----
+		}elseif($opera_mini) { $str='Opera Mini';		// ---- Test if Opera ----
+		}elseif($opera) { $str='Opera';					// ---- Test if Opera ----
 		}else { $str.='What browser are you using?';	// ---- If none of the above ----
 		}
 	}

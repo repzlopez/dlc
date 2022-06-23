@@ -10,7 +10,7 @@ $_SESSION['lastURI']='pcm';
 $pcm_dsdid=isset($_SESSION['pcm_dsdid'])?$_SESSION['pcm_dsdid']:null;
 $frm='';
 
-if(ISIN_PCM){
+if(ISIN_PCM) {
 	$frm.='<div id="user" rel="'.$pcm_dsdid.'" data-login="'.LOGIN_TYPE.'">'.(UPDATE_ON?'<span class="smaller">Update in progress...</span> ':'').'<span class="blue">PCM '.LOGIN_BRANCH.' | '.LOGIN_NAME.' |</span> <a href="/logout" class="lite">Logout</a></div>';
 }
 

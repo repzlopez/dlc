@@ -16,7 +16,7 @@ unset($_SESSION['pcm_edit']);
 unset($_SESSION['for_edit']);
 unset($_SESSION['post']);
 
-if(!ISIN_PCM){
+if(!ISIN_PCM) {
 	$_SESSION['catch_login']='pcm';
 	echo '<META HTTP-EQUIV=Refresh CONTENT="0; URL=/login">';exit;
 }
@@ -24,7 +24,7 @@ if(!ISIN_PCM){
 $y='';
 ob_start();
 include('head.php');
-if($content!=''){
+if($content!='') {
 	include("../admin/lookup/index_$content.php");
 }else{ $y.='<ul class="home">';
 	$y.=IS_PCM?'<li><a href="admin">ADMIN</a></li>':'';

@@ -2281,7 +2281,7 @@ class HTML5_Tokenizer {
             // and its codepoint ($codepoint).
             $codepoint = false;
             $char = $chars;
-            while ($char !== false && isset($refs[$char])) {
+            while($char !== false && isset($refs[$char])) {
                 $refs = $refs[$char];
                 if (isset($refs['codepoint'])) {
                     $id = $chars;
@@ -2379,7 +2379,7 @@ class HTML5_Tokenizer {
     protected function emitToken($token, $checkStream = true, $dry = false) {
         if ($checkStream) {
             // Emit errors from input stream.
-            while ($this->stream->errors) {
+            while($this->stream->errors) {
                 $this->emitToken(array_shift($this->stream->errors), false);
             }
         }
@@ -2400,7 +2400,7 @@ class HTML5_Tokenizer {
         if($token['type'] === self::STARTTAG) {
             // This could be changed to actually pass the tree-builder a hash
             $hash = array();
-            foreach ($token['attr'] as $keypair) {
+            foreach($token['attr'] as $keypair) {
                 if (isset($hash[$keypair['name']])) {
                     $this->emitToken(array(
                         'type' => self::PARSEERROR,

@@ -9,7 +9,7 @@ $status = $_POST['status'];
 $id		= $_POST['id'];
 $update	= $status;
 
-if(isset($_POST['submit'])&&$_POST['submit']=='Submit'){
+if(isset($_POST['submit'])&&$_POST['submit']=='Submit') {
 	date_default_timezone_set('Asia/Manila');
 	$con=SQLi('orders');
 	$time=date('Y-m-d H:i:s',time());
@@ -21,7 +21,7 @@ if(isset($_POST['submit'])&&$_POST['submit']=='Submit'){
 	echo $status;
 }
 
-function setReferral($id){
+function setReferral($id) {
 	$con=SQLi('orders');
 	$rs=mysqli_query($con,"SELECT dsdid,orders FROM tblorders WHERE refNo='$id'") or die(mysqli_error($con));
 	$rw=mysqli_fetch_array($rs);
@@ -29,16 +29,16 @@ function setReferral($id){
 	$dslid=$dsdid;
 
 	$d=explode("~",($rw['orders']!=''?$rw['orders']:'||||'));
-	foreach($d as $i){						//find package code
+	foreach($d as $i) {						//find package code
 		$e=explode("|",$i);
 		$r=getPackage($e[0]);
-		if($r!==true){$n=$e[3];				//if package found run function
+		if($r!==true) {$n=$e[3];				//if package found run function
 			$arrRef=explode("|",$r);
 
-			while($n>0){
+			while($n>0) {
 				$dsdid=$dslid;
-				foreach($arrRef as $k=>$v){
-					if($v!=''&&$v>0){
+				foreach($arrRef as $k=>$v) {
+					if($v!=''&&$v>0) {
 						$con=SQLi('orders');
 						mysqli_query($con,"INSERT INTO tblreferral VALUES ('','$dsdid','$dslid','$id',$v,'')") or die(mysqli_error($con));
 
@@ -53,14 +53,14 @@ function setReferral($id){
 	}
 }
 
-function getPackage($id){
+function getPackage($id) {
 	$con=SQLi('products');
 	$rs=mysqli_query($con,"SELECT referral FROM tblpackages WHERE id='$id' AND status=1") or die(mysqli_error($con));
 	$rw=mysqli_fetch_array($rs);
 	return $rw['referral'];
 }
 
-function SQLi($dbsrc){
+function SQLi($dbsrc) {
 	require('infoconfig.php');
 	$con=mysqli_connect(HOST,DB.USN,PSW,DB.$dbsrc);
 	if(!$con) die('Connection failed: '.mysqli_connect_error());

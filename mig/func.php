@@ -11,7 +11,7 @@ if ( ISIN_ADMIN&&!ISIN_MIG ) {
 	reloadTo(DLC_MGRT);
 }
 
-function getWHID($user){
+function getWHID($user) {
 	$con = SQLi('products');
 	$id  = null;$wh=null;$ds=null;$bn=null;
 	$rs  = mysqli_query($con,"SELECT id,wh,dsdid,bond FROM tblwarehouse WHERE id='$user' AND status=1") or die(mysqli_error());

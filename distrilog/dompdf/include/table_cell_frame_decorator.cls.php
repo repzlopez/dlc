@@ -80,8 +80,8 @@ class Table_Cell_Frame_Decorator extends Block_Frame_Decorator {
    
       if ( $y_offset ) {
         // Move our children
-        foreach ( $this->get_line_boxes() as $i => $line ) {
-          foreach ( $line->get_frames() as $frame )
+        foreach( $this->get_line_boxes() as $i => $line ) {
+          foreach( $line->get_frames() as $frame )
             $frame->move( 0, $y_offset );
         }
       }

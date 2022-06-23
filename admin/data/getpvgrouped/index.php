@@ -2,7 +2,7 @@
 if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
-if(!ISIN_ADMIN||!testScope("global|data")){
+if(!ISIN_ADMIN||!testScope("global|data")) {
 	reloadTo(DLC_ADMIN);exit;
 }else{
 	date_default_timezone_set('Asia/Manila');
@@ -24,15 +24,15 @@ if(!ISIN_ADMIN||!testScope("global|data")){
 	unset($_SESSION['datalist']);
 }
 
-function getDistList($sponsor,$lvl,$date,$tpv){
-	if($lvl>=MAXLOOP){}
+function getDistList($sponsor,$lvl,$date,$tpv) {
+	if($lvl>=MAXLOOP) {}
 	else{
 		$qry="SELECT dsdid,dslnam,dsfnam,dsprov FROM distributors WHERE dssid='$sponsor'";
 		$rs=mysql_query($qry) or die(mysql_error());
-		if(mysql_num_rows($rs)==0){
+		if(mysql_num_rows($rs)==0) {
 		}else{
-			while($rw=mysql_fetch_assoc($rs)){
-				if(hasPV($rw['dsdid'],$date,$tpv)){
+			while($rw=mysql_fetch_assoc($rs)) {
+				if(hasPV($rw['dsdid'],$date,$tpv)) {
 					$_SESSION['distlist'].='"'.$rw['dsdid'].'","'.$rw['dslnam'].'","'.$rw['dsfnam'].'","'.$rw['dsprov'].'",'.$_SESSION['datalist'];
 				}getDistList($rw['dsdid'],$lvl+1,$date,$tpv);
 			}
@@ -40,7 +40,7 @@ function getDistList($sponsor,$lvl,$date,$tpv){
 	}
 }
 
-function hasPV($id,$date,$tpv){
+function hasPV($id,$date,$tpv) {
 	$qry="
 		SELECT bhppv ppv,(bhnpv-bhppv) gpv,bhnpv tpv
 		FROM bohstp

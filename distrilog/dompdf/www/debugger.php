@@ -9,7 +9,7 @@ $files = glob("test/*.{html,htm,php}", GLOB_BRACE);
   <script type="text/javascript" src="jquery-1.4.2.js"></script>
   
   <script type="text/javascript">
-    function updateAddress(){
+    function updateAddress() {
       var addressbar = $('#addressbar'),
           preview = $('#preview'),
           preview_html = $('#preview_html'),
@@ -30,20 +30,20 @@ $files = glob("test/*.{html,htm,php}", GLOB_BRACE);
       // PDF file
       preview.attr("src", "about:blank");
 
-      setTimeout(function(){
+      setTimeout(function() {
         address = "../dompdf.php?base_path="+basePath+"&options[Attachment]=0&input_file="+addressPDF+"#toolbar=0&view=FitH&statusbar=0&messages=0&navpanes=0";
         preview.attr('src', address);
       }, 0.1);
     }
     
-    function log(str){
+    function log(str) {
       var console = $("#console");
       str = str || "(nothing)";
       console.html(console.html() + str + "<hr />");
       console.scrollTop(console[0].scrollHeight);
     }
     
-    function resizePage(){
+    function resizePage() {
       var page = $("#page");
       var height = $(window).height() - page.offset().top - 40;
       $("iframe, #console").height(height);
@@ -62,11 +62,11 @@ $files = glob("test/*.{html,htm,php}", GLOB_BRACE);
       updateAddress();
     }
 
-    $(function(){
+    $(function() {
       resizePage();
       $(window).resize(resizePage);
     
-      $('#preview').load(function(){
+      $('#preview').load(function() {
         if (this.src == "about:blank") return;
         
         $.ajax({

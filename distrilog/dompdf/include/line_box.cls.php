@@ -2,7 +2,7 @@
 /**
  * @package dompdf
  * @link    http://www.dompdf.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: line_box.cls.php 471 2012-02-06 21:59:10Z fabien.menager $
  */
@@ -110,7 +110,7 @@ class Line_Box {
     
     $childs = array();
     
-    foreach ($floating_frames as $_floating) {
+    foreach($floating_frames as $_floating) {
       $p = $_floating->get_parent();
       
       while(($p = $p->get_parent()) && $p !== $parent);
@@ -141,7 +141,7 @@ class Line_Box {
     $root = $block->get_root();
     $floating_frames = $this->get_floats_inside($root);
     
-    foreach ( $floating_frames as $child_key => $floating_frame ) {
+    foreach( $floating_frames as $child_key => $floating_frame ) {
       $id = $floating_frame->get_id();
       
       if ( isset($this->floating_blocks[$id]) ) {
@@ -186,7 +186,7 @@ class Line_Box {
     }
   }
   
-  function get_width(){
+  function get_width() {
     return $this->left + $this->w + $this->right;
   }
 
@@ -204,7 +204,7 @@ class Line_Box {
     $this->_frames[] = $frame;
   }
   
-  function __toString(){
+  function __toString() {
     $props = array("wc", "y", "w", "h", "left", "right", "br");
     $s = "";
     foreach($props as $prop) {

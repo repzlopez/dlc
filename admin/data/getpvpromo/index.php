@@ -2,7 +2,7 @@
 if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
-if(!ISIN_ADMIN||!testScope("global|data")){
+if(!ISIN_ADMIN||!testScope("global|data")) {
 	reloadTo(DLC_ADMIN);exit;
 }else{
 	date_default_timezone_set('Asia/Manila');
@@ -19,7 +19,7 @@ if(!ISIN_ADMIN||!testScope("global|data")){
 	print $csv;
 }
 
-function listPV($pv,$date,$single){
+function listPV($pv,$date,$single) {
 	$sum1=$single?'':'SUM';
 	$only1=$single?'':"GROUP BY omdid";
 	$qry="
@@ -36,7 +36,7 @@ function listPV($pv,$date,$single){
 	$str="Distributors with $pv PV and up [ ".($single?'Single Invoice':'Total PV')." ]\n";
 	$str.='"ID#","FIRST NAME","LAST NAME","INVOICE","PPV"'."\n";
 	$rs=mysql_query($qry) or die(mysql_error());
-	while($rw=mysql_fetch_assoc($rs)){
+	while($rw=mysql_fetch_assoc($rs)) {
 		$str.='"'.$rw['dsdid'].'",';
 		$str.='"'.$rw['dsfnam'].'",';
 		$str.='"'.$rw['dslnam'].'",';
@@ -47,7 +47,7 @@ function listPV($pv,$date,$single){
 	return $str;
 }
 
-function listPVMonth($pv,$date){
+function listPVMonth($pv,$date) {
 	$idate=substr($date,2,4).substr($date,0,2);
 	$qry="
 		SELECT DISTINCT d.dsdid,dsfnam,dslnam,
@@ -66,8 +66,8 @@ function listPVMonth($pv,$date){
 	$str="Distributors with $pv PV and up for ".date('F Y',strtotime(substr($date,2,4).'-'.substr($date,0,2).'-18'))."\n";
 	$str.='"ID#","FIRST NAME","LAST NAME","PPV"'."\n";
 	$rs=mysql_query($qry) or die(mysql_error());
-	while($rw=mysql_fetch_assoc($rs)){
-		if($rw['tpv']>=$pv){
+	while($rw=mysql_fetch_assoc($rs)) {
+		if($rw['tpv']>=$pv) {
 			$str.='"'.$rw['dsdid'].'",';
 			$str.='"'.$rw['dsfnam'].'",';
 			$str.='"'.$rw['dslnam'].'",';

@@ -4,7 +4,7 @@
  * @package dompdf
  * @link    http://www.dompdf.com/
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: load_font.php 467 2012-02-04 13:25:17Z fabien.menager $
  */
@@ -95,7 +95,7 @@ function install_font_family($fontname, $normal, $bold = null, $italic = null, $
     "bold_italic" => array("_Bold_Italic", "bi", "BI", "ib", "IB"),
   );
   
-  foreach ($patterns as $type => $_patterns) {
+  foreach($patterns as $type => $_patterns) {
     if ( !isset($$type) || !is_readable($$type) ) {
       foreach($_patterns as $_pattern) {
         if ( is_readable("$path$_pattern$ext") ) {
@@ -113,7 +113,7 @@ function install_font_family($fontname, $normal, $bold = null, $italic = null, $
   $entry = array();
 
   // Copy the files to the font directory.
-  foreach ($fonts as $var => $src) {
+  foreach($fonts as $var => $src) {
     if ( is_null($src) ) {
       $entry[$var] = DOMPDF_FONT_DIR . mb_substr(basename($normal), 0, -4);
       continue;
@@ -154,7 +154,7 @@ function install_font_family($fontname, $normal, $bold = null, $italic = null, $
 if ( $_SERVER["argv"][1] === "system_fonts" ) {
   $fonts = Font_Metrics::get_system_fonts();
   
-  foreach ( $fonts as $family => $files ) {
+  foreach( $fonts as $family => $files ) {
     echo " >> Installing '$family'... \n";
     
     if ( !isset($files["normal"]) ) {

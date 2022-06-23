@@ -3,7 +3,7 @@
  * @package dompdf
  * @link    http://www.dompdf.com/
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: dompdf.cls.php 468 2012-02-05 10:51:40Z fabien.menager $
  */
@@ -543,7 +543,7 @@ class DOMPDF {
           
     // load <link rel="STYLESHEET" ... /> tags
     $links = $this->_xml->getElementsByTagName("link");
-    foreach ($links as $link) {
+    foreach($links as $link) {
       if ( mb_strtolower($link->getAttribute("rel")) === "stylesheet" ||
            mb_strtolower($link->getAttribute("type")) === "text/css" ) {
         //Check if the css file is for an accepted media type
@@ -551,7 +551,7 @@ class DOMPDF {
         $formedialist = preg_split("/[\s\n,]/", $link->getAttribute("media"),-1, PREG_SPLIT_NO_EMPTY);
         if ( count($formedialist) > 0 ) {
           $accept = false;
-          foreach ( $formedialist as $type ) {
+          foreach( $formedialist as $type ) {
             if ( in_array(mb_strtolower(trim($type)), $acceptedmedia) ) {
               $accept = true;
               break;
@@ -579,7 +579,7 @@ class DOMPDF {
 
     // load <style> tags
     $styles = $this->_xml->getElementsByTagName("style");
-    foreach ($styles as $style) {
+    foreach($styles as $style) {
 
       // Accept all <style> tags by default (note this is contrary to W3C
       // HTML 4.0 spec:
@@ -594,7 +594,7 @@ class DOMPDF {
       if ( $style->hasChildNodes() ) {
 
         $child = $style->firstChild;
-        while ( $child ) {
+        while( $child ) {
           $css .= $child->nodeValue; // Handle <style><!-- blah --></style>
           $child = $child->nextSibling;
         }
@@ -641,7 +641,7 @@ class DOMPDF {
   function set_callbacks($callbacks) {
     if (is_array($callbacks)) {
       $this->_callbacks = array();
-      foreach ($callbacks as $c) {
+      foreach($callbacks as $c) {
         if (is_array($c) && isset($c['event']) && isset($c['f'])) {
           $event = $c['event'];
           $f = $c['f'];
@@ -658,7 +658,7 @@ class DOMPDF {
    * 
    * @return boolean true if quirks mode is active
    */
-  function get_quirksmode(){
+  function get_quirksmode() {
     return $this->_quirksmode;
   }
   
@@ -715,7 +715,7 @@ class DOMPDF {
     Font_Metrics::init($this->_pdf);
     
     if (DOMPDF_ENABLE_FONTSUBSETTING && $this->_pdf instanceof CPDF_Adapter) {
-      foreach ($this->_tree->get_frames() as $frame) {
+      foreach($this->_tree->get_frames() as $frame) {
         $style = $frame->get_style();
         $node  = $frame->get_node();
         
@@ -738,7 +738,7 @@ class DOMPDF {
     
     $root = null;
 
-    foreach ($this->_tree->get_frames() as $frame) {
+    foreach($this->_tree->get_frames() as $frame) {
       // Set up the root frame
       if ( is_null($root) ) {
         $root = Frame_Factory::decorate_root( $this->_tree->get_root(), $this );
@@ -822,7 +822,7 @@ class DOMPDF {
     global $_dompdf_warnings, $_dompdf_show_warnings;
     if ( $_dompdf_show_warnings ) {
       echo '<b>DOMPDF Warnings</b><br><pre>';
-      foreach ($_dompdf_warnings as $msg)
+      foreach($_dompdf_warnings as $msg)
         echo $msg . "\n";
       echo $this->get_canvas()->get_cpdf()->messages;
       echo '</pre>';

@@ -3,14 +3,14 @@ if(!isset($_SESSION)) {
      session_set_cookie_params(0);
      session_start();
 }
-if((!isset($_SESSION['u_site'])&&!isset($_SESSION['login_id']))){
+if((!isset($_SESSION['u_site'])&&!isset($_SESSION['login_id']))) {
 	echo '<META HTTP-EQUIV=Refresh CONTENT="0;URL=../../../">';exit;
 }
 $isadmin=isset($_SESSION['a_logged'])?1:0;
 $dbsrc=$isadmin?'beta':'distributor';
 require('../../admin/infoconfig.php');
 $pw=stripslashes(trim($_POST['pw']));
-if(isset($_POST['cancel'])&&$_POST['cancel']){
+if(isset($_POST['cancel'])&&$_POST['cancel']) {
 	$user=($isadmin)?$_SESSION['login_id']:$_SESSION['u_site'];
 	$pass=($isadmin)?md5($user.$pw.'@)!)'):sha1(stripslashes($pw));
 	$quer=($isadmin)?"SELECT pw FROM tbladmin WHERE un = '$user'":"SELECT password FROM accounts WHERE dsdid = '$user'";

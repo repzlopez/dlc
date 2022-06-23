@@ -13,7 +13,7 @@ if ( !ISIN_MIG ) { reloadTo(DLC_MGRT);exit; }
 $con = SQLi('beta');
 $idata=$udata= '';
 
-foreach ( $_POST as $k=>$v ) {
+foreach( $_POST as $k=>$v ) {
 	$dat = trim_escape($v);
 	$$k  = $dat;
 	if ( $k != 'submit' ) {

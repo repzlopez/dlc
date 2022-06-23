@@ -3,14 +3,14 @@ if(!isset($_SESSION)) {
      session_set_cookie_params(0);
      session_start();
 }
-if (!defined('INCLUDE_CHECK')) define('INCLUDE_CHECK',1);
+if(!defined('INCLUDE_CHECK')) define('INCLUDE_CHECK',1);
 require_once('setup.php');
 $con=SQLi('orders');
 $stat=(isset($_POST['admin'])&&$_POST['admin'])?$_POST['stat']:1;
 $shed=(isset($_POST['statheader'])?$_POST['statheader']:0);
 $anul=($stat==4?"AND refDate LIKE '".WKYR."%'":'');
 $rs=mysqli_query($con,"SELECT * FROM tblorders WHERE deliStat=$stat $anul ORDER BY deliStat,refDate,refNo") or die(mysqli_error($con));
-if($shed){
+if($shed) {
 	$dat ='<li><a href="?get=1">Incoming ( '.getOrderCount(1).' )</a></li>';
 	$dat.='<li><a href="?get=2">Processing ( '.getOrderCount(2).' )</a></li>';
 	$dat.='<li><a href="?get=3">Outgoing ( '.getOrderCount(3).' )</a></li>';
@@ -33,7 +33,7 @@ if($shed){
 	$pay=$met;
 	$box=$box;
 
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		$rdate=substr($rw['refDate'],4,2).'.'.substr($rw['refDate'],-2).'.'.substr($rw['refDate'],0,4);
 		$paiddate=substr_replace($rw['payDate'],'.',2,0);
 		$paiddate=substr_replace($paiddate,'.',5,0);
@@ -50,7 +50,7 @@ if($shed){
 	}mysqli_close($con);
 }echo $dat;
 
-function getOrderCount($stat){
+function getOrderCount($stat) {
 	$con=SQLi('orders');
 	$rs=mysqli_query($con,"SELECT * FROM tblorders WHERE deliStat=$stat") or die(mysqli_error($con));
 	return mysqli_num_rows($rs);

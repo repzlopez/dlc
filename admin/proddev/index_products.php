@@ -8,14 +8,14 @@ $filter_cat=getFilters()+count($filter_add);
 $filter=(strlen($filter_str)==$filter_cat)?$filter_str:str_pad('',getFilters(),'1').'000001';
 $psearch=isset($_SESSION['prodsearch'])?$_SESSION['prodsearch']:null;
 $con=SQLi('products');
-if($do==0){
+if($do==0) {
 	$d=0;
 	$_SESSION['filter_array']=array();
 	$rs=mysqli_query($con,"SELECT DISTINCT parent_id FROM tblcategories WHERE status=1") or die(mysqli_error($con));
 	$msg.='<div><ul id="filter" class="ct"><li class="s4">FILTER "<strong>Category</strong>"</li>';
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		$pid=$rw['parent_id'];
-			if(substr($filter,$d++,1)==1){
+			if(substr($filter,$d++,1)==1) {
 				$msg.='<li><input type="checkbox" '.C_K.' />'.$pid.'</li>';
 				$_SESSION['filter_array'][]=$pid;
 			}else{
@@ -24,7 +24,7 @@ if($do==0){
 	}
 	$msg.=DIV_CLEAR.'</ul></div>';
 	$msg.='<div><ul id="filter" class="ct"><li class="s4">FILTER "<strong>Status</strong>"</li>';
-	foreach($filter_add as $v){
+	foreach($filter_add as $v) {
 		$x=substr($filter,$d++,1);
 		$msg.='<li><input type="checkbox" '.($x>0?C_K:'').' value='.$x.' />'.$v.'</li>';
 		$_SESSION['filter_array'][]=$x;
@@ -35,9 +35,9 @@ if($do==0){
 	include '../updateproducts.php';
 	$msg.=$dat;
 }else{
-	if($do==2){
+	if($do==2) {
 		$rs=mysqli_query($con,"SELECT * FROM $tbl WHERE id='$item'") or die(mysqli_error($con));
-		while($rw=mysqli_fetch_assoc($rs)){
+		while($rw=mysqli_fetch_assoc($rs)) {
 			$id=$rw['id'];
 			$msg.='<li><label>Product ID:</label><input type="text" name="id" '.READ_ONLY.' value="'.$id.'" /></li>';
 			$msg.='<li><label>Name:</label><span>'.getPName($id).'</span></li>';
@@ -62,7 +62,7 @@ $msg.='<li><input type="hidden" name="pfda" class="txt" value="" /><input type="
 	echo $msg;
 }
 
-function getFilters(){
+function getFilters() {
 	$con=SQLi('products');
 	$rs=mysqli_query($con,"SELECT DISTINCT parent_id FROM tblcategories WHERE status=1") or die(mysqli_error($con));
 	return mysqli_num_rows($rs);

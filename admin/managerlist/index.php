@@ -5,7 +5,7 @@ if(!isset($_SESSION)) {
 }
 define('INCLUDE_CHECK',1);
 include('../setup.php');
-if(ISIN_DISTRI&&!in_array(DIST_ID,array(REPZ))){
+if(ISIN_DISTRI&&!in_array(DIST_ID,array(REPZ))) {
 	echo '<META HTTP-EQUIV=Refresh CONTENT="0;URL='.DLC_MYPAGE.'">';exit;
 }else{
 	$useDate=substr($_SESSION['monyr'],0,2).substr($_SESSION['monyr'],2,4);

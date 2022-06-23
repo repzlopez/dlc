@@ -19,13 +19,13 @@ $page="Orders";
 
 ob_start();
 require('../head.php');
-if(!ISIN_ADMIN){
+if(!ISIN_ADMIN) {
 	echo $mainlogo;
-}elseif($content!=''){
+}elseif($content!='') {
 	include("index_$content.php");
 	echo $backbtn;
 }else{
-	if(!isset($_GET['get'])){
+	if(!isset($_GET['get'])) {
 		echo '<ul class="home">';
 		echo '<li><a href="?get=1">ONLINE ORDERING</a></li>';
 		echo '<li><a href="?p=ormstp&do=0">REALTIME ORMSTP</a></li>';
@@ -40,7 +40,7 @@ if(!ISIN_ADMIN){
 		echo '<div id="orderhdr"><ul></ul></div>'.DIV_CLEAR;
 
 		$get=isset($_GET['get'])?$_GET['get']:1;
-		switch($get){
+		switch($get) {
 			case 0 :getOrders(0);break;
 			case 4 :getOrders(4);break;
 			case 3 :getOrders(3);break;
@@ -53,7 +53,7 @@ if(!ISIN_ADMIN){
 require('../foot.php');
 ob_end_flush();
 
-function getOrders($stat){
+function getOrders($stat) {
 	include_once('../../distrilog/cart/values.php');
 	$dlv=$dlv2;
 	echo '<div class="orders" rel='.$stat.'><div class="blue">'.array_search($stat,$dlv).'</div>';

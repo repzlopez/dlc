@@ -13,11 +13,11 @@ if ( !ISIN_MIG&&!LOGIN_ID&&!isset($_POST['submit']) ) {
 }
 
 $con = SQLi('beta');
-foreach ( $_POST as $k=>$v ) {
+foreach( $_POST as $k=>$v ) {
 	$_POST[$k] = trim_escape($v);
 }
 
-foreach($_SESSION as $k=>$v){
+foreach($_SESSION as $k=>$v) {
 	$_SESSION[$k]=trim_escape($v);
 }
 

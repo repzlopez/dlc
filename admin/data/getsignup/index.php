@@ -2,7 +2,7 @@
 if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
-if(!ISIN_ADMIN||!testScope("global|data")){
+if(!ISIN_ADMIN||!testScope("global|data")) {
 	reloadTo(DLC_ADMIN);exit;
 }else{
 	date_default_timezone_set('Asia/Manila');
@@ -16,13 +16,13 @@ if(!ISIN_ADMIN||!testScope("global|data")){
 	print listDistributors($filter);
 }
 
-function listDistributors($filter){
+function listDistributors($filter) {
 	$qry="SELECT * FROM distributors WHERE dscoid='DLCPH' AND dssetd LIKE '%$filter%' ORDER BY dssetd";
 //	$qry="SELECT * FROM distributors WHERE dscoid='DLCPH' AND dseadd LIKE '% $filter%'";
 	$str='"","ID#","Set Date","First Name","Middle Name","Last Name"'.',"Street","Brgy","City","Province"'."\n";
 	$i=1;
 	$rs=mysql_query($qry) or die(mysql_error());
-	while($rw=mysql_fetch_assoc($rs)){
+	while($rw=mysql_fetch_assoc($rs)) {
 		$str.='"'.$i++.'",';
 		$str.='"'.$rw['dsdid'].'",';
 		$str.='"'.$rw['dssetd'].'",';

@@ -14,16 +14,16 @@ require 'PHPMailer/src/SMTP.php';		//SMTP class
 
 require('../admin/setup.php');
 
-if(isset($_SESSION['first_login'])&&!$_SESSION['first_login']){ reloadTo('../'); }
+if(isset($_SESSION['first_login'])&&!$_SESSION['first_login']) { reloadTo('../'); }
 else{
-	if(isset($_POST['submit'])&&$_POST['submit']=='Change Password'){
-		if($_POST['new_pass']==''||$_POST['con_pass']==''||$_POST['email']==''){
+	if(isset($_POST['submit'])&&$_POST['submit']=='Change Password') {
+		if($_POST['new_pass']==''||$_POST['con_pass']==''||$_POST['email']=='') {
 			$_SESSION['err_msg']='** Required field missing!';
-		}elseif(strlen($_POST['new_pass'])<8){
+		}elseif(strlen($_POST['new_pass'])<8) {
 			$_SESSION['err_msg']='** Passwords must be at least eight (8) characters long!';
-		}elseif($_POST['new_pass']!=$_POST['con_pass']){
+		}elseif($_POST['new_pass']!=$_POST['con_pass']) {
 			$_SESSION['err_msg']='** Passwords does not match!';
-		}elseif(!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
+		}elseif(!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
 			$_SESSION['err_msg']='** Email address <strong>'.$_POST['email'].'</strong> is not valid!';
 		}else{
 			$con=SQLi('distributor');
@@ -71,7 +71,7 @@ else{
 <?php echo loadFoot();
 } ob_end_flush();
 
-function sendMail($email,$reset){
+function sendMail($email,$reset) {
 	$style='<style>
 	ul,div { -moz-border-radius:5px;-webkit-border-radius:5px;-khtml-border-radius:5px;border-radius:5px;border:#ccc solid 1px;list-style:none;margin:20px; }
 	ul,li,p { font:normal 14px "lucida sans unicode","Lucida Grande",sans-serif;padding:10px; }
@@ -122,16 +122,16 @@ function sendMail($email,$reset){
 		$mail->send();
 	}
 
-	catch (Exception $e){/* PHPMailer exception. */
+	catch (Exception $e) {/* PHPMailer exception. */
 		echo $e->errorMessage();
 	}
 
-	catch (\Exception $e){/* PHP exception (note the backslash to select the global namespace Exception class). */
+	catch (\Exception $e) {/* PHP exception (note the backslash to select the global namespace Exception class). */
 		echo $e->getMessage();
 	}
 }
 
-function sendVerifMail($mail,$rset){
+function sendVerifMail($mail,$rset) {
 	$hdr ='MIME-Version: 1.0'."\r\n";
 	$hdr.='Content-type: text/html; charset=iso-8859-1'."\r\n";
 	$hdr.='To: '.$mail."\r\n";

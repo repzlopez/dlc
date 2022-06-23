@@ -189,8 +189,8 @@ class PDFLib_Adapter implements Canvas {
 
     // Set up font paths
     $families = Font_Metrics::get_font_families();
-    foreach ($families as $family => $files) {
-      foreach ($files as $style => $file) {
+    foreach($families as $family => $files) {
+      foreach($files as $style => $file) {
         $face = basename($file);
 
         // Prefer ttfs to afms
@@ -359,7 +359,7 @@ class PDFLib_Adapter implements Canvas {
    */
   protected function _place_objects() {
 
-    foreach ( $this->_objs as $obj => $props ) {
+    foreach( $this->_objs as $obj => $props ) {
       $start = $props["start_page"];
       $where = $props["where"];
 
@@ -679,7 +679,7 @@ class PDFLib_Adapter implements Canvas {
     $x = array_pop($points);
     $this->_pdf->moveto($x,$y);
 
-    while (count($points) > 1) {
+    while(count($points) > 1) {
       $y = $this->y(array_pop($points));
       $x = array_pop($points);
       $this->_pdf->lineto($x,$y);
@@ -909,7 +909,7 @@ class PDFLib_Adapter implements Canvas {
     for ($p = 1; $p <= $this->_page_count; $p++) {
       $this->_pdf->resume_page("pagenumber=$p");
 
-      foreach ($this->_page_text as $pt) {
+      foreach($this->_page_text as $pt) {
         extract($pt);
 
         switch ($_t) {
@@ -977,7 +977,7 @@ class PDFLib_Adapter implements Canvas {
       if ( !$fh )
         throw new DOMPDF_Exception("Unable to load temporary PDF file: " . $this->_file);
 
-      while ( !feof($fh) )
+      while( !feof($fh) )
         echo fread($fh,$chunk);
       fclose($fh);
 

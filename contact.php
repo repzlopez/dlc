@@ -29,7 +29,7 @@
 </div>
 
 <?php
-function loadGOS(){
+function loadGOS() {
 	$arr=array(
 		array(
 			'branch'=>'33001',
@@ -71,9 +71,9 @@ function loadGOS(){
 	);
 
 	$x='<ul><lh>GOS</lh>';
-	foreach($arr as $key=>$val){
+	foreach($arr as $key=>$val) {
 		$x.='<li>';
-		foreach($val as $i=>$v){
+		foreach($val as $i=>$v) {
 			$x.='<span class="s3">'.ucwords($i).':</span> '.utf8_encode($v).'<br />';
 		}$x.='</li>';
 	}$x.='</ul>';

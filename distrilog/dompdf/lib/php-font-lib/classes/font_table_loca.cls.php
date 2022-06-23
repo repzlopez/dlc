@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    http://php-font-lib.googlecode.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: font_table_loca.cls.php 43 2012-02-05 22:26:53Z fabien.menager $
  */
@@ -13,7 +13,7 @@
  * @package php-font-lib
  */
 class Font_Table_loca extends Font_Table {
-  protected function _parse(){
+  protected function _parse() {
     $font = $this->getFont();
     $offset = $font->pos();
     
@@ -47,7 +47,7 @@ class Font_Table_loca extends Font_Table {
     $this->data = $data;
   }
   
-  function _encode(){
+  function _encode() {
     $font = $this->getFont();
     $data = $this->data;
     

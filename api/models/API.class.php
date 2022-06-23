@@ -110,7 +110,7 @@ abstract class API {
           $clean_input = Array();
 
           if (is_array($data)) {
-               foreach ($data as $k => $v) {
+               foreach($data as $k => $v) {
                     $clean_input[$k] = $this->_cleanInputs($v);
                }
           } else {

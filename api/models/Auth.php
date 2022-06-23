@@ -259,7 +259,7 @@ class Auth extends API {
                if(!empty($this->args)) {
                     $id = $this->args[0];
                     // $ret='*';
-                    if(array_key_exists(1,$this->args)){
+                    if(array_key_exists(1,$this->args)) {
                          foreach($this->args as $key => $value) {
                               if( $key==0 || preg_match("/id/i",$value) ) {}
                               else $arg.="$value,";
@@ -381,13 +381,13 @@ class Auth extends API {
           }
      }
 
-     protected function send($rs,$ret=''){
+     protected function send($rs,$ret='') {
           if( $rs->rowCount()>0 ) {
                $arr['data']=array();
                if($ret!='') $arr['lastid'] = $ret;
 
                while( $rw=$rs->fetch(PDO::FETCH_ASSOC) ) {
-                    foreach ($rw as $k=>$v) $item[$k] = $v;
+                    foreach($rw as $k=>$v) $item[$k] = $v;
                     array_push($arr['data'],$item);
                }
                return $arr;

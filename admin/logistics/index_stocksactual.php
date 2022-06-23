@@ -3,7 +3,7 @@ if(!isset($_SESSION)) session_start();
 
 if ( !empty($_POST) ) {
 	$idata=$udata=$sto='';
-	foreach ( $_POST as $k=>$v ) {
+	foreach( $_POST as $k=>$v ) {
 		$con=SQLi('products');
           $$k = $v;
           if ( !empty($pid) && !empty($stocks) ) {
@@ -20,7 +20,7 @@ if ( !empty($_POST) ) {
 }
 
 $_SESSION['isActualStocks']=true;
-if(substr($item,0,3)=='Add'){ reloadTo('?p=stocksactual&do=1');exit; }
+if(substr($item,0,3)=='Add') { reloadTo('?p=stocksactual&do=1');exit; }
 $allowed=testScope("global|logis|orders|apc",DLC_ADMIN);
 
 $con=SQLi('products');
@@ -33,14 +33,14 @@ $msg.='</div><span class="rt">Posted by: <strong class="blue">'.getPoster($item)
 $msg.='<ul id="'.$content.'" class="list clear"><input type="hidden" name="id" value="'.($do==2?$item:(($do==1)?time():'')).'" />';
 $msg.='<li class="hdr"><span class="s1">Item</span><span class="s7">Description</span><span class="s1">Qty</span></li>';
 
-while($rw=mysqli_fetch_array($rs,MYSQLI_BOTH)){
+while($rw=mysqli_fetch_array($rs,MYSQLI_BOTH)) {
 	$buff=0;$id=$rw['id'];
 	$pname=utf8_encode($rw['name']);
 	$qty=getActual($id);
 	$msg.='<li rel="'.$id.'">';
 	$msg.='<span class="s1">'.$id.'</span>';
 	$msg.='<span class="s7">'.$pname.'</span>';
-	if($do==0){
+	if($do==0) {
 		$msg.='<span class="s1">'.$buff.'</span></li>';
 	}else{
 		$msg.='<input type="hidden" name="pid[]" value="'.$id.'" />';
@@ -56,7 +56,7 @@ echo '<ul class="print"><li><a href="javascript:window.print()"></a></li></ul>';
 echo $msg;
 unset($_SESSION['actualstocks']);
 
-function getPoster($id){
+function getPoster($id) {
 	$con=SQLi('products');
 	$rs=mysqli_query($con,"SELECT * FROM tblstocksactual WHERE id='$id'") or die(mysqli_error($con));
 	$rw=mysqli_fetch_array($rs);
@@ -65,17 +65,17 @@ function getPoster($id){
 	return $nam;
 }
 
-function getActual($pcod){
-	foreach($_SESSION['actualstocks'] as $key){
-		if(substr($key,0,5)==$pcod){ return substr($key,6,strlen($key));break; }
+function getActual($pcod) {
+	foreach($_SESSION['actualstocks'] as $key) {
+		if(substr($key,0,5)==$pcod) { return substr($key,6,strlen($key));break; }
 	}
 }
 
-function popCat($tbl,$id,$val,$distinct='',$qry='',$selected=''){
+function popCat($tbl,$id,$val,$distinct='',$qry='',$selected='') {
 	$pCat='';
 	$con=SQLi('products');
 	$rs=mysqli_query($con,"SELECT $distinct FROM $tbl $qry") or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		$date=substr($rw[$val],0,8);
 		$date=substr($date,0,4).'.'.substr($date,4,2).'.'.substr($date,-2);
 		$time=substr($rw[$val],-6);

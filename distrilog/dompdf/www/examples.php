@@ -6,12 +6,12 @@ require_once("../dompdf_config.inc.php");
 <?php include("head.inc"); ?>
 
 <script type="text/javascript">
-function resizePreview(){
+function resizePreview() {
   var preview = $("#preview");
   preview.height($(window).height() - preview.offset().top - 2);
 }
 
-$(function(){
+$(function() {
   var preview = $("#preview");
   resizePreview();
 
@@ -62,7 +62,7 @@ if ( $dompdf == '/' || $dompdf == '\\') {
 $dompdf .= "/dompdf.php?base_path=" . rawurlencode("www/test/");
 
 
-foreach ( $test_files as $file ) {
+foreach( $test_files as $file ) {
   preg_match("@[\\/](([^_]+)_?(.*))\.(".implode("|", $extensions).")$@i", $file, $matches);
   $prefix = $matches[2];
 
@@ -74,11 +74,11 @@ foreach ( $test_files as $file ) {
   }
 }
 
-foreach ( $sections as $section => $files ) {
+foreach( $sections as $section => $files ) {
   echo "<h3>$section</h3>";
   
   echo "<ul class=\"samples\">";
-  foreach ( $files as $file ) {
+  foreach( $files as $file ) {
     $filename = basename($file[0]);
     $title = $file[1];
     $arrow = "images/arrow_0" . rand(1, 6) . ".gif";  

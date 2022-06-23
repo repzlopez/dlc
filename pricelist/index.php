@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION)) {
+if(!isset($_SESSION)) {
     session_set_cookie_params(0);
     session_start();
 }
@@ -24,7 +24,7 @@ ob_end_flush();
 
 unset($_SESSION['listcount']);
 
-function getList(){
+function getList() {
     $override= isset($_GET['lahat']) ? 1 : 0;
     $show_dp = ISIN_ADMIN || ISIN_DISTRI || ISIN_GOS || ISIN_PCM || $override;
     $nt = 0;//isset($_GET['nt']) ? 1 : 0;

@@ -2,7 +2,7 @@
 if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
-if(!ISIN_ADMIN||!testScope("global|data|accounting")){
+if(!ISIN_ADMIN||!testScope("global|data|accounting")) {
 	reloadTo(DLC_ADMIN);exit;
 }else{
 	date_default_timezone_set('Asia/Manila');
@@ -32,7 +32,7 @@ if(!ISIN_ADMIN||!testScope("global|data|accounting")){
 	if($getset) $str.='"SETUP",';
 	$str.='""'."\n";
 
-	if(isset($do)){
+	if(isset($do)) {
 		$_SESSION['downlines']='';
 		$con=SQLi('distributor');
 		$rs=mysqli_query($con,"SELECT * FROM distributors WHERE dsdid='$do' ORDER BY dssetd") or die(mysqli_error($con));
@@ -44,35 +44,35 @@ if(!ISIN_ADMIN||!testScope("global|data|accounting")){
 	mysqli_close($con);
 }
 
-function listDistributors($do){
+function listDistributors($do) {
 	global $rem;
 	$i=1;$x='';
 	$qry="SELECT * FROM distributors ORDER BY dsdid";
 	$con=SQLi('distributor');
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
-		if($rem&&strpos($rw['dsdid'],'-')!==false){}
+	while($rw=mysqli_fetch_assoc($rs)) {
+		if($rem&&strpos($rw['dsdid'],'-')!==false) {}
 		else $x.='"'.$i++.'",'.getLine($rw);
 	}return $x."\n\n";
 }
 
-function getDistList($sponsor,$lvl,$swit){
+function getDistList($sponsor,$lvl,$swit) {
 	global $rem;
-	if($lvl>=MAXLOOP){}
+	if($lvl>=MAXLOOP) {}
 	else{
 		$except=isset($_GET['ex'])?explode('|',$_GET['ex']):array();
 		$qry="SELECT * FROM distributors WHERE dssid='$sponsor' ORDER BY dssetd";
 		ini_set('max_execution_time',300);
 		$con=SQLi('distributor');
 		$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-		if(mysqli_num_rows($rs)==0){
+		if(mysqli_num_rows($rs)==0) {
 			if($lvl==0) $_SESSION['downlines'].='NO DATA';
 		}else{
 			// if($lvl==0) $_SESSION['downlines'].="['ID#/Name', 'Upline', 'Tooltip'],"."<br/>"."['$sponsor', null, 'The Upline'],"."<br/>";
-			while($rw=mysqli_fetch_assoc($rs)){
+			while($rw=mysqli_fetch_assoc($rs)) {
 				$swit=($swit&&in_array($rw['dsdid'],$except))?0:1;
-				if($swit){
-					if($rem&&strpos($rw['dsdid'],'-')!==false){}
+				if($swit) {
+					if($rem&&strpos($rw['dsdid'],'-')!==false) {}
 					else $_SESSION['downlines'].=$swit?'"",'.getLine($rw):'';
 					// $id=$rw['dsdid'];$up=$rw['dssid'];
 					// $name=ucwords(strtolower($rw['dsfnam'])).' '.ucwords(strtolower($rw['dslnam']));
@@ -84,7 +84,7 @@ function getDistList($sponsor,$lvl,$swit){
 	}
 }
 
-function getLine($rw){
+function getLine($rw) {
 	global $getbdy,$getcoid,$gettin,$getcon,$getmail,$getadd,$getset,$getups;
 	$bday=sprintf('%08d',$rw['dsbrth']);
 	$str ='"'.$rw['dsdid'].'",';
@@ -96,13 +96,13 @@ function getLine($rw){
 	if($getbdy) $str.='"'.($bday=='00000000'?'':formatDate($bday,'mdY')).'",';
 	if($getcoid) $str.='"'.$rw['dscoid'].'",';
 	if($gettin) $str.='"'.$rw['dstin'].'",';
-	if($getcon){
+	if($getcon) {
 		$str.='"'.$rw['dsoph'].'",';
 		$str.='"'.$rw['dshph'].'",';
 		$str.='"'.$rw['dsmph'].'",';
 	}
 	if($getmail) $str.='"'.$rw['dseadd'].'",';
-	if($getadd){
+	if($getadd) {
 		$str.='"'.$rw['dsstrt'].'",';
 		$str.='"'.$rw['dsbarn'].'",';
 		$str.='"'.$rw['dscity'].'",';

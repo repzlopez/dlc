@@ -7,8 +7,8 @@ if( !isset($_SESSION) ) {
 define('INCLUDE_CHECK',1);
 require('../admin/setup.php');
 
-if ( !ISIN_DISTRI && !GUEST && !RESELLER ) { reloadTo(DLC_ROOT); exit; }
-if ( !defined('SHOPLIST') ) define('SHOPLIST',isset($_SESSION['shoplist']));
+if( !ISIN_DISTRI && !GUEST && !RESELLER ) { reloadTo(DLC_ROOT); exit; }
+if( !defined('SHOPLIST') ) define('SHOPLIST',isset($_SESSION['shoplist']));
 
 $_SESSION['lastURI'] = 'onreg';
 $title    = ' | Online Registration';
@@ -18,7 +18,7 @@ $reseller = isset($_GET['reseller'])&&$_GET['reseller'];
 $imgpath  = '/images/products/';
 $reselleronly = $reseller ? '' :'NOT';
 
-$p=$msg='';
+$p= $msg= '';
 $con = SQLi('products');
 $qry = "SELECT l.id,name,srp,img,contains
 	FROM tblpackages k
@@ -32,15 +32,15 @@ $qry = "SELECT l.id,name,srp,img,contains
 	ORDER BY name";
 
 $rs = mysqli_query($con,$qry) or die(mysqli_error($con));
-while ( $rw=mysqli_fetch_assoc($rs) ) {
-	foreach ( $rw as $k=>$v ) $$k = $v;
-    if ( $reseller ) $_SESSION['reseller_packages'][$id] = $id;
+while( $rw=mysqli_fetch_assoc($rs) ) {
+	foreach( $rw as $k=>$v ) $$k = $v;
+    if( $reseller ) $_SESSION['reseller_packages'][$id] = $id;
 
 	$previmg = ( $img!='' || file_exists($imgpath.$img) ) ? $imgpath.$img : $imgpath.'default_product.jpg';
 	$p   .= '<li data-code="'.$id.'" data-price="'.$srp.'" '.($contains!=''?'title="Contains:'."\n".str_replace('<br>','',$contains).'"':'').'><p id="overlay" class="'.(OLREG_REF==$id?'blue':'').'">'."$name Php ".number_format($srp,0).'</p><img src="'.$previmg.'" /></li>';
 }
 
-if ( !$reseller ) {
+if( !$reseller ) {
 	$c100 = 'code_100.jpg';
 	$c500 = 'code_500.jpg';
 	$poc  = 'worth of products of your choice';
@@ -49,9 +49,7 @@ if ( !$reseller ) {
 	$p   .= '<li data-code="'.OLREG_Choice500.'" data-price="" title="500PV '.$poc.'"><p id="overlay" class="'.(OLREG_REF==OLREG_Choice500?'blue':'').'">'.OLREG_min500.'PV Products<br>of your choice</p><a href="/read/'.$shortlink.'/lifestyle-shop?olreg_ref='.OLREG_Choice500.'"><img src="'.(file_exists($imgpath.$c500)?$imgpath.$c500:$imgpath.'default_product.jpg').'" /></a></li>';
 
 } else {
-
 	$_SESSION['reseller'] = 1;
-
 }
 
 $cartpath  = '../distrilog/cart/';
@@ -76,16 +74,18 @@ $frm  = '<div id="topnav"><div id="user"><a href="/read/'.$shortlink.'lifestyle-
 if( strpos($_SERVER['REQUEST_URI'],'read')!==false ) {
 	$msg     .= '<link rel="stylesheet" href="/css/zebra_datepicker.css" type="text/css">';
 	$bottom   = 1;
+
 } else {
 	$msg     .= loadHead($title,'<link rel="stylesheet" href="/css/zebra_datepicker.css" type="text/css">');
 	$msg     .= loadLogo($frm);
 	$bottom   = 0;
 }
+
 $msg .= '<div id="container">'.$pak.'</div>';
 
 ob_start();
 echo $msg;
-$arrJs=array('/js/jquery/jquery-1.7.1.min.js','/js/jquery/zebra_datepicker.js','/js/cart.js');
+$arrJs = array('/js/jquery/jquery-1.7.1.min.js','/js/jquery/zebra_datepicker.js','/js/cart.js');
 echo loadFoot('','',$arrJs,$bottom);
 ob_end_flush();
 ?>

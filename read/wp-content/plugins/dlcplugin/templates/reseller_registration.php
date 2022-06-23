@@ -8,7 +8,7 @@ $dlcuser['reseller']=1;
 $_SESSION['rfr']='reseller';
 $_SESSION['reseller']=1;
 
-if(isset($_SESSION['post']['bad'])){
+if(isset($_SESSION['post']['bad'])) {
      echo '<h4 class="bad ct">'.$_SESSION['post']['bad'].'</h4>';
 }
 require_once( '../reg/index.php' );

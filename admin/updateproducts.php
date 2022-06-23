@@ -29,10 +29,10 @@ include('infoconfig.php');
 $active_products=0;
 $r1=mysqli_query($con,"SHOW TABLES LIKE 'tblproducts'") or die(mysqli_error($con));
 $r2=mysqli_query($con,"SHOW TABLES LIKE 'tbllist'") or die(mysqli_error($con));
-if(mysqli_num_rows($r1)>0&&mysqli_num_rows($r2)>0){
+if(mysqli_num_rows($r1)>0&&mysqli_num_rows($r2)>0) {
 	$rs=mysqli_query($con,$qry) or die(mysqli_error());
-	while($rw=mysqli_fetch_assoc($rs)){
-		if(in_array($rw['cat'],$_SESSION['filter_array'])){
+	while($rw=mysqli_fetch_assoc($rs)) {
+		if(in_array($rw['cat'],$_SESSION['filter_array'])) {
 			$fdalink=$rw['url']!=''?1:0;
 			$o.='<li rel="'.$rw['id'].'"><div class="s3"><img src="/images/products/'.$rw['img'].'" alt="'.$rw['name'].'" /></div>';
 			$o.='<span class="s3"><a href="?p=products&do=2&i='.$rw['id'].'">'.utf8_encode($rw['name']).'</a></span>';

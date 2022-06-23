@@ -38,7 +38,7 @@ $fonts = Font_Metrics::get_font_families();
 $extensions = array("ttf", "afm", "afm.php", "ufm", "ufm.php");
 ?>
 
-<button onclick="$('#clear-font-cache-message').load('controller.php?cmd=clear-font-cache', function(){ location.reload(); })">Clear font cache</button>
+<button onclick="$('#clear-font-cache-message').load('controller.php?cmd=clear-font-cache', function() { location.reload(); })">Clear font cache</button>
 <span id="clear-font-cache-message"></span>
 
 <table class="setup">
@@ -74,7 +74,7 @@ $extensions = array("ttf", "afm", "afm.php", "ufm", "ufm.php");
           <strong style='width: 10em;'>$name</strong> : $path<br />
         </td>";
         
-        foreach ($extensions as $ext) {
+        foreach($extensions as $ext) {
           $v = "";
           $class = "";
           
@@ -132,7 +132,7 @@ function checkFileName(form) {
     return false;
   }
   
-  $.each(fields, function(key, name){
+  $.each(fields, function(key, name) {
     var value = form.elements["file["+key+"]"].value;
 
     if (!value) return;

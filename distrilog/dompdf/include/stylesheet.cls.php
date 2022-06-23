@@ -4,7 +4,7 @@
  * @link    http://www.dompdf.com/
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
  * @author  Helmut Tischer <htischer@weihenstephan.org>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: stylesheet.cls.php 461 2012-01-26 20:26:02Z fabien.menager $
  */
@@ -395,7 +395,7 @@ class Stylesheet {
     $len = mb_strlen($selector);
     $i = 0;
 
-    while ( $i < $len ) {
+    while( $i < $len ) {
 
       $s = $selector[$i];
       $i++;
@@ -404,7 +404,7 @@ class Stylesheet {
       $tok = "";
       $in_attr = false;
       
-      while ($i < $len) {
+      while($i < $len) {
         $c = $selector[$i];
         $c_prev = $selector[$i-1];
         
@@ -594,7 +594,7 @@ class Stylesheet {
         $op = "";
         $value = "";
 
-        while ( $j < $tok_len ) {
+        while( $j < $tok_len ) {
           if ( in_array($tok[$j], $attr_delimiters) )
             break;
           $attr .= $tok[$j++];
@@ -624,7 +624,7 @@ class Stylesheet {
         // Read the attribute value, if required
         if ( $op != "" ) {
           $j++;
-          while ( $j < $tok_len ) {
+          while( $j < $tok_len ) {
             if ( $tok[$j] === "]" )
               break;
             $value .= $tok[$j++];
@@ -652,7 +652,7 @@ class Stylesheet {
           $values = explode(" ", $value);
           $query .=  "[";
 
-          foreach ( $values as $val )
+          foreach( $values as $val )
             $query .= "@$attr=\"$val\" or ";
 
           $query = rtrim($query, " or ") . "]";
@@ -662,7 +662,7 @@ class Stylesheet {
           $values = explode("-", $value);
           $query .= "[";
 
-          foreach ( $values as $val )
+          foreach( $values as $val )
             $query .= "starts-with(@$attr, \"$val\") or ";
 
           $query = rtrim($query, " or ") . "]";
@@ -691,7 +691,7 @@ class Stylesheet {
 //         // below.
 
 //         // Skip until the next special character, leaving the token as-is
-//         while ( $i < $len ) {
+//         while( $i < $len ) {
 //           if ( in_array($selector[$i], $delimiters) )
 //             break;
 //           $i++;
@@ -765,7 +765,7 @@ class Stylesheet {
     $xp = new DOMXPath($tree->get_dom());
     
     // Add generated content
-    foreach ($this->_styles as $selector => $style) {
+    foreach($this->_styles as $selector => $style) {
       if (strpos($selector, ":before") === false && 
           strpos($selector, ":after") === false) continue;
       
@@ -778,8 +778,8 @@ class Stylesheet {
         continue;
       }
       
-      foreach ($nodes as $i => $node) {
-        foreach ($query["pseudo_elements"] as $pos) {
+      foreach($nodes as $i => $node) {
+        foreach($query["pseudo_elements"] as $pos) {
           // Do not add a new pseudo element if another one already matched
           if ( $node->hasAttribute("dompdf_{$pos}_frame_id") ) {
             continue;
@@ -803,7 +803,7 @@ class Stylesheet {
     }
     
     // Apply all styles in stylesheet
-    foreach ($this->_styles as $selector => $style) {
+    foreach($this->_styles as $selector => $style) {
       $query = $this->_css_selector_to_xpath($selector);
 
       // Retrieve the nodes
@@ -813,7 +813,7 @@ class Stylesheet {
         continue;
       }
 
-      foreach ($nodes as $node) {
+      foreach($nodes as $node) {
         // Retrieve the node id
         if ( $node->nodeType != XML_ELEMENT_NODE ) // Only DOMElements get styles
           continue;
@@ -829,7 +829,7 @@ class Stylesheet {
     // Now create the styles and assign them to the appropriate frames.  (We
     // iterate over the tree using an implicit Frame_Tree iterator.)
     $root_flg = false;
-    foreach ($tree->get_frames() as $frame) {
+    foreach($tree->get_frames() as $frame) {
       // pre_r($frame->get_node()->nodeName . ":");
       if ( !$root_flg && $this->_page_styles["base"] ) {
         $style = $this->_page_styles["base"];
@@ -839,7 +839,7 @@ class Stylesheet {
 
       // Find nearest DOMElement parent
       $p = $frame;
-      while ( $p = $p->get_parent() )
+      while( $p = $p->get_parent() )
         if ($p->get_node()->nodeType == XML_ELEMENT_NODE )
           break;
 
@@ -881,9 +881,9 @@ class Stylesheet {
         if (DEBUGCSS) {
           $debug_nodename = $frame->get_node()->nodeName;
           print "<pre>\n[$debug_nodename\n";
-          foreach ($applied_styles as $spec => $arr) {
+          foreach($applied_styles as $spec => $arr) {
             printf("specificity: 0x%08x\n",$spec);
-            foreach ($arr as $s) {
+            foreach($arr as $s) {
               print "[\n";
               $s->debug_print();
               print "]\n";
@@ -892,8 +892,8 @@ class Stylesheet {
         }
         
         // Merge the new styles with the inherited styles
-        foreach ($applied_styles as $arr) {
-          foreach ($arr as $s)
+        foreach($applied_styles as $arr) {
+          foreach($arr as $s)
             $style->merge($s);
         }
       }
@@ -930,7 +930,7 @@ class Stylesheet {
 
     // We're done!  Clean out the registry of all styles since we
     // won't be needing this later.
-    foreach ( array_keys($this->_styles) as $key ) {
+    foreach( array_keys($this->_styles) as $key ) {
       $this->_styles[$key] = null;
       unset($this->_styles[$key]);
     }
@@ -988,7 +988,7 @@ class Stylesheet {
     // [7] => individual rules, outside of media rules
     //
     //pre_r($matches);
-    foreach ( $matches as $match ) {
+    foreach( $matches as $match ) {
       $match[2] = trim($match[2]);
 
       if ( $match[2] !== "" ) {
@@ -1138,7 +1138,7 @@ class Stylesheet {
       }
               
       // @import url media_type [media_type...]
-      foreach ( $arr as $type ) {
+      foreach( $arr as $type ) {
         if ( in_array(mb_strtolower(trim($type)), $acceptedmedia) ) {
           $accept = true;
           break;
@@ -1235,7 +1235,7 @@ class Stylesheet {
     // Create the style
     $style = new Style($this);
     
-    foreach ($properties as $prop) {
+    foreach($properties as $prop) {
       // If the $prop contains an url, the regex may be wrong
       // @todo: fix the regex so that it works everytime
       /*if (strpos($prop, "url(") === false) {
@@ -1319,7 +1319,7 @@ class Stylesheet {
 
     $sections = explode("}", $str);
     if (DEBUGCSS) print '[_parse_sections';
-    foreach ($sections as $sect) {
+    foreach($sections as $sect) {
       $i = mb_strpos($sect, "{");
 
       $selectors = explode(",", mb_substr($sect, 0, $i));
@@ -1327,7 +1327,7 @@ class Stylesheet {
       $style = $this->_parse_properties(trim(mb_substr($sect, $i+1)));
       
       // Assign it to the selected elements
-      foreach ($selectors as $selector) {
+      foreach($selectors as $selector) {
         $selector = trim($selector);
 
         if ($selector == "") {
@@ -1354,7 +1354,7 @@ class Stylesheet {
    */
   function __toString() {
     $str = "";
-    foreach ($this->_styles as $selector => $style)
+    foreach($this->_styles as $selector => $style)
       $str .= "$selector => " . $style->__toString() . "\n";
 
     return $str;

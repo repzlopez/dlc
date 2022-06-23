@@ -9,10 +9,10 @@ $submit	=isset($_POST['submit'])?$_POST['submit']:null;
 $do		=isset($_POST['do'])?$_POST['do']:null;
 $id		=isset($_POST['id'])?$_POST['id']:null;
 $data	='';$x='';$z='';
-if($submit=='.|.'){
+if($submit=='.|.') {
 	$con=SQLi('products');
 	$tbl='tblstocks';
-	switch($do){
+	switch($do) {
 		case 0:
 			$rs=mysqli_query($con,"SELECT id FROM $tbl WHERE id='$id'") or die(mysqli_error($con));
 			$rw=mysqli_num_rows($rs);
@@ -26,7 +26,7 @@ if($submit=='.|.'){
 			$con=SQLi('distributor');
 			$rs=mysqli_query($con,"SELECT dslnam,dsfnam,dsmnam,dscoid FROM distributors WHERE dsdid='$id'") or die(mysqli_error($con));
 			$rw=mysqli_fetch_array($rs);
-			if(mysqli_num_rows($rs)>0){
+			if(mysqli_num_rows($rs)>0) {
 				$z=utf8_encode($rw['dslnam'].', '.$rw['dsfnam'].' '.$rw['dsmnam']);
 			}else $z='NOT FOUND';
 			$x=json_encode(array($z));

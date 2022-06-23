@@ -114,7 +114,7 @@ class Table_Frame_Decorator extends Frame_Decorator {
       $first_header = null;
 
       // Insert copies of the table headers before $child
-      foreach ($this->_headers as $header) {
+      foreach($this->_headers as $header) {
 
         $new_header = $header->deep_copy();
 
@@ -135,7 +135,7 @@ class Table_Frame_Decorator extends Frame_Decorator {
 
       $iter = $child;
 
-      while ($iter) {
+      while($iter) {
         $this->_cellmap->remove_row($iter);
         $iter = $iter->get_next_sibling();
       }
@@ -168,7 +168,7 @@ class Table_Frame_Decorator extends Frame_Decorator {
    */
   static function find_parent_table(Frame $frame) {
 
-    while ( $frame = $frame->get_parent() )
+    while( $frame = $frame->get_parent() )
       if ( $frame->is_table() )
         break;
 
@@ -221,7 +221,7 @@ class Table_Frame_Decorator extends Frame_Decorator {
     $erroneous_frames = array();
     $anon_row = false;
     $iter = $this->get_first_child();
-    while ( $iter ) {
+    while( $iter ) {
       $child = $iter;
       $iter = $iter->get_next_sibling();
 
@@ -285,7 +285,7 @@ class Table_Frame_Decorator extends Frame_Decorator {
         }
 
         // Normalise other table parts (i.e. row groups)
-        foreach ($child->get_children() as $grandchild) {
+        foreach($child->get_children() as $grandchild) {
           if ( $grandchild->get_style()->display === "table-row" )
             $grandchild->normalise();
         }
@@ -306,7 +306,7 @@ class Table_Frame_Decorator extends Frame_Decorator {
       $this->_cellmap->add_row();
     }
 
-    foreach ($erroneous_frames as $frame)
+    foreach($erroneous_frames as $frame)
       $this->move_after($frame);
 
   }

@@ -12,7 +12,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 // Clear DB stored data
 $tests = get_posts( array( 'post_type' =>'dlcpost', 'numberposts' => -1 ) );
 
-foreach ( $tests as $test) {
+foreach( $tests as $test) {
      wp_delete_post( $test->ID, true );
 }
 

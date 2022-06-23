@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    http://php-font-lib.googlecode.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: font_table_glyf.cls.php 40 2012-01-22 21:48:41Z fabien.menager $
  */
@@ -24,7 +24,7 @@ class Font_Table_glyf extends Font_Table {
   const USE_MY_METRICS           = 512;
   const OVERLAP_COMPOUND         = 1024;
   
-  protected function getGlyphData($offset, $loca, $gid){
+  protected function getGlyphData($offset, $loca, $gid) {
     $font = $this->getFont();
     
     /*$entryStart = $this->entry->offset;
@@ -45,7 +45,7 @@ class Font_Table_glyf extends Font_Table {
     return $font->read($loca[$gid+1] - $loca[$gid]);
   }
   
-  protected function _parse(){
+  protected function _parse() {
     $font = $this->getFont();
     $offset = $font->pos();
     

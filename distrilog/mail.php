@@ -10,7 +10,7 @@ $name=$_SESSION['u_name'];
 $mess=$_POST['msg'];
 
 ob_start();
-if($name!='' And $mess!=''){
+if($name!='' And $mess!='') {
 	$final="From: $name \n\n$mess";
 //	mail("$recv@$domn", 'ORDERS', $final, "From: $addr");
 	echo '<div id="head"><img src="src/logo.png" id="logo" alt="" /><span id="nii"></span><span id="sfn" alt=""></span></div>';

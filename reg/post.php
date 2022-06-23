@@ -8,17 +8,18 @@ require('../admin/setup.php');
 // print_r($_POST);
 // echo GUEST .' == '. ISIN_GOS .' == '. ISIN_PCM .' == '. ISIN_MIG;
 // echo "<br><br>";
-if ( isset($_POST['submit']) ) {
+
+if( isset($_POST['submit']) ) {
 	$_SESSION['post'] = null;
 	$testArr = array('dslname','dsfname','dscont','dsprov','dsbday','dstin','dssid','dsscon');
 	$idata   = $udata = $dsscan = '';
 	$reqmiss = $noslot = 0;
 
 	$con = SQLi('beta');
-	foreach ($_POST as $k=>$v) {
-		if ( in_array($k,$testArr) ) {
-			if ( GUEST && $k=='dssid' ) {}
-			else if (trim($v)=='') $reqmiss++;
+	foreach($_POST as $k=>$v) {
+		if( in_array($k,$testArr) ) {
+			if( GUEST && $k=='dssid' ) {}
+			else if(trim($v)=='') $reqmiss++;
 		}
 
 		$dat = trim_escape($v);
@@ -26,7 +27,7 @@ if ( isset($_POST['submit']) ) {
 		$$k  = $dat;
 		$_SESSION['post'][$k] = $dat;
 
-		if ( $k!='do' && $k!='go' && $k!='submit' ) {
+		if( $k!='do' && $k!='go' && $k!='submit' ) {
 			$idata .= $k=='noslot' ? '': ( $k == 'id' ? (int)$dat . "," : "'$dat'," );
 			$udata .= $k=='dsdid' ? '': $k."='$dat',";
 		}
@@ -38,19 +39,19 @@ if ( isset($_POST['submit']) ) {
 	$url    = ( ISIN_GOS || ISIN_PCM || ISIN_MIG ) ? '/reg' : '/read/'. $shortlink .'account/registration/';
 	$dsscan = (isset($_FILES["dsscan"])?$_FILES["dsscan"]:null);
 
-	if ( $submit == 'SUBMIT' ) {
+	if( $submit == 'SUBMIT' ) {
 		$_SESSION['post']['bad'] = 'Unable to continue. ';
 
-		if ( !testExist($dssid,'distributor','distributors','dsdid') && $do<2 && !GUEST && !ISIN_GOS && !ISIN_PCM && !ISIN_MIG ) {
+		if( !testExist($dssid,'distributor','distributors','dsdid') && $do<2 && !GUEST && !ISIN_GOS && !ISIN_PCM && !ISIN_MIG ) {
 			$_SESSION['post']['bad'].='Sponsor ID does not exist.';
 	
-		} elseif ( $reqmiss>0 ) {
+		} elseif( $reqmiss>0 ) {
 			$_SESSION['post']['bad'].='Fields in RED are required.';
 
-		} elseif ( !formatDate($dsbday,'mdY',1) ) {
+		} elseif( !formatDate($dsbday,'mdY',1) ) {
 			$_SESSION['post']['bad'].='Invalid date. Please follow the date format (mmddyyyy).';
 
-		} elseif ( $dsdid==''&&$dsscan['error']>0 ) {
+		} elseif( $dsdid==''&&$dsscan['error']>0 ) {
 			$_SESSION['post']['bad'].='SCANNED COPY is required for NEW applications.';
 
 		} else {
@@ -61,12 +62,12 @@ if ( isset($_POST['submit']) ) {
 			mysqli_query($con,"INSERT INTO tblolreg VALUES ($idata) ON DUPLICATE KEY UPDATE $udata") or die(mysqli_error($con));
 			$idno   = sprintf('%016d',mysqli_insert_id($con));
 
-			if ( !$noslot ) mysqli_query($con,"UPDATE ".DB."orders.tblslots SET olregid='$idno',dsfor='$dssid' WHERE dsdid='".DIST_ID."' AND (dsfor='' OR dsfor IS NULL) ORDER BY slotid LIMIT 1") or die(mysqli_error($con));
+			if( !$noslot ) mysqli_query($con,"UPDATE ".DB."orders.tblslots SET olregid='$idno',dsfor='$dssid' WHERE dsdid='".DIST_ID."' AND (dsfor='' OR dsfor IS NULL) ORDER BY slotid LIMIT 1") or die(mysqli_error($con));
 
 			mysqli_close($con);
 			unset($_SESSION['post']);
 
-			if ( isset($dsscan) ) {
+			if( isset($dsscan) ) {
 				$img = $_FILES["dsscan"];
 				$ext = strtolower(pathinfo($img['name'],PATHINFO_EXTENSION));
 				$fn  = "$idno.$ext";

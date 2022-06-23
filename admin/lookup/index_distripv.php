@@ -8,15 +8,15 @@ $x.='<li><span class="s3">CURRENT:</span> Week '.WEEKDESC.'</li>';
 $x.='</ul></form>';
 $x.=isset($_SESSION['distripv'])?$_SESSION['distripv']:'';
 unset($_SESSION['distripv']);
-if(isset($_POST['find'])){$qry='';
+if(isset($_POST['find'])) {$qry='';
 	$id=trim_escape($_POST['find']);
 	unset($_POST);
-	if(strpos($id,',')!==false){
+	if(strpos($id,',')!==false) {
 		list($id,$do)=explode(',',$id);
 	}else $do=WEEK.WKYR;
 
 	$bmh=(WEEK.WKYR==$do)?'m':'h';
-	if(isset($do)&&$do!=''){
+	if(isset($do)&&$do!='') {
 		$wk=substr($do,0,2);
 		$yr=substr($do,2,4);
 		$qry=($bmh=='h')?" AND bhpmo=$wk AND bhpyr=$yr":BMPMO;

@@ -44,7 +44,7 @@ class Table_Row_Group_Frame_Decorator extends Frame_Decorator {
     $cellmap = $this->get_parent()->get_cellmap();
     $iter = $child;
 
-    while ( $iter ) {
+    while( $iter ) {
       $cellmap->remove_row($iter);
       $iter = $iter->get_next_sibling();
     }

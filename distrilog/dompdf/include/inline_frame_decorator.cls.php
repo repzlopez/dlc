@@ -55,7 +55,7 @@ class Inline_Frame_Decorator extends Frame_Decorator {
 
     // Add $frame and all following siblings to the new split node
     $iter = $frame;
-    while ($iter) {
+    while($iter) {
       $frame = $iter;      
       $iter = $iter->get_next_sibling();
       $frame->reset();

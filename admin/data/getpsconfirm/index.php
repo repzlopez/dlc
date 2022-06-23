@@ -2,7 +2,7 @@
 if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
-if(!ISIN_ADMIN||!testScope("global|data")){
+if(!ISIN_ADMIN||!testScope("global|data")) {
 	reloadTo(DLC_ADMIN);exit;
 }else{
 	$id=isset($_GET['id'])?$_GET['id']:null;		//id
@@ -24,9 +24,9 @@ if(!ISIN_ADMIN||!testScope("global|data")){
 	// file_put_contents($id.'.xml',$xml);
 }
 
-function weeks($id,$yr,$wk){
+function weeks($id,$yr,$wk) {
 	$x='';$d=13;$wk+=$d-1;
-	while($d>0){
+	while($d>0) {
 		$d=sprintf("%02d",$d);
 		list($ppv,$gpv,$tpv,$lev,$mgr)=getData($id,$yr,$wk);
 		$x.="<wk$d>$wk</wk$d><ppv$d>$ppv</ppv$d><gpv$d>$gpv</gpv$d><tpv$d>$tpv</tpv$d><lev$d>$lev</lev$d><mgr$d>$mgr</mgr$d>\n";
@@ -34,7 +34,7 @@ function weeks($id,$yr,$wk){
 	}return $x;
 }
 
-function getData($id,$yr,$wk){
+function getData($id,$yr,$wk) {
 	$con=SQLi('distributor');
 	$qry="SELECT *
 		FROM bohstp
@@ -45,7 +45,7 @@ function getData($id,$yr,$wk){
 	// echo $qry."<br>";
 	$empty=array('0.00','0.00','0.00','0%','0');
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)==0){ return $empty; }
+	if(mysqli_num_rows($rs)==0) { return $empty; }
 	else{
 		$rw=mysqli_fetch_array($rs);
 		$ppv=number_format($rw['bhppv'],2,'.','');
@@ -53,7 +53,7 @@ function getData($id,$yr,$wk){
 		$gpv=number_format($npv-$ppv,2,'.','');
 		$lev=getPercent($rw['bhelev']);
 		$mgr=$rw['bhqumr'];
-		// if(isEddyOrRick($rw['bhdid'])&&($ppv==0&&$mgr<3)){ return $empty; }
+		// if(isEddyOrRick($rw['bhdid'])&&($ppv==0&&$mgr<3)) { return $empty; }
 		// else
 		return array($ppv,$gpv,$npv,$lev,$mgr);
 	}mysqli_close($con);

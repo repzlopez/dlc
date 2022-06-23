@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    http://php-font-lib.googlecode.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: font_table_hmtx.cls.php 40 2012-01-22 21:48:41Z fabien.menager $
  */
@@ -13,7 +13,7 @@
  * @package php-font-lib
  */
 class Font_Table_hmtx extends Font_Table {
-  protected function _parse(){
+  protected function _parse() {
     $font = $this->getFont();
     $offset = $font->pos();
     
@@ -29,7 +29,7 @@ class Font_Table_hmtx extends Font_Table {
       $data[$gid] = array($advanceWidth, $leftSideBearing);
     }
     
-    if($numOfLongHorMetrics < $numGlyphs){
+    if($numOfLongHorMetrics < $numGlyphs) {
       $lastWidth = end($data);
       $data = array_pad($data, $numGlyphs, $lastWidth);
     }

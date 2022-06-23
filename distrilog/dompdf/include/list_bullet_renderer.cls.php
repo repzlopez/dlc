@@ -64,7 +64,7 @@ class List_Bullet_Renderer extends Abstract_Renderer {
   }
 
   //........................................................................
-  private function make_counter($n, $type, $pad = null){
+  private function make_counter($n, $type, $pad = null) {
     $n = intval($n);
     $text = "";
     $uppercase = false;

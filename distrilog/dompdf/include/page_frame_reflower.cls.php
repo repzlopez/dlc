@@ -3,7 +3,7 @@
  * @package dompdf
  * @link    http://www.dompdf.com/
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: page_frame_reflower.cls.php 448 2011-11-13 13:00:03Z fabien.menager $
  */
@@ -46,7 +46,7 @@ class Page_Frame_Reflower extends Frame_Reflower {
     $this->_stacking_context[$z_index][] = $frame;
   }
   
-  function apply_page_style(Frame $frame, $page_number){
+  function apply_page_style(Frame $frame, $page_number) {
     $style = $frame->get_style();
     $page_styles = $style->get_stylesheet()->get_page_styles();
     
@@ -95,7 +95,7 @@ class Page_Frame_Reflower extends Frame_Reflower {
     $child = $this->_frame->get_first_child();
     $current_page = 0;
     
-    while ($child) {
+    while($child) {
       $this->apply_page_style($this->_frame, $current_page + 1);
       
       $style = $this->_frame->get_style();
@@ -115,7 +115,7 @@ class Page_Frame_Reflower extends Frame_Reflower {
       // Only if it's the first page, we save the nodes with a fixed position
       if ($current_page == 0) {
         $children = $child->get_children();
-        foreach ($children as $onechild) {
+        foreach($children as $onechild) {
           if ($onechild->get_style()->position === "fixed") {
             $fixed_children[] = $onechild->deep_copy();
           }
@@ -130,7 +130,7 @@ class Page_Frame_Reflower extends Frame_Reflower {
     
       //Insert a copy of each node which have a fixed position
       if ($current_page >= 1) {
-        foreach ($fixed_children as $fixed_child) {
+        foreach($fixed_children as $fixed_child) {
           $child->insert_child_before($fixed_child->deep_copy(), $child->get_first_child());
         }
       }
@@ -152,7 +152,7 @@ class Page_Frame_Reflower extends Frame_Reflower {
       ksort($this->_stacking_context);
       
       foreach( $this->_stacking_context as $_frames ) {
-        foreach ( $_frames as $_frame ) {
+        foreach( $_frames as $_frame ) {
           $renderer->render($_frame);
         }
       }
@@ -203,7 +203,7 @@ class Page_Frame_Reflower extends Frame_Reflower {
       $info = array(0 => $this->_canvas, "canvas" => $this->_canvas,
                     1 => $frame, "frame" => $frame);
       $fs = $this->_callbacks[$event];
-      foreach ($fs as $f) {
+      foreach($fs as $f) {
         if (is_callable($f)) {
           if (is_array($f)) {
             $f[0]->$f[1]($info);

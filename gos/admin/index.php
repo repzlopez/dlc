@@ -6,7 +6,7 @@ if(!isset($_SESSION)) {
 define('INCLUDE_CHECK',1);
 require('../../admin/setup.php');
 require('../func.php');
-if(!ISIN_GOS){ reloadTo(DLC_GORT);exit; }
+if(!ISIN_GOS) { reloadTo(DLC_GORT);exit; }
 $title='GOS | Admin';
 $content='admin';
 $item=isset($_GET['i'])?$_GET['i']:'';
@@ -16,12 +16,12 @@ include('../head.php');
 
 $tbl='tbladmin';
 $con=SQLi('gos');
-if($do==0){
+if($do==0) {
 	$_SESSION['gos_last']=DLC_GORT;
 	echo '<ul class="list">';
 	echo '<li class="hdr"><span class="s3">Admin ID</span><span class="s5">Name</span><span class="s2">Scope</span><span class="s2">Enabled</span></li>';
 	$rs=mysqli_query($con,"SELECT * FROM $tbl ORDER BY un") or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		list($whid,$name,$dsdid,$bond)=getWHID($rw['un']);
 		echo '<li rel="'.$rw['un'].'"><span class="s3"><a href="?do=2&i='.$rw['un'].'">'.$rw['un'].'</a></span><span class="s5">'.($name==''?'-- CLOSED --':$name).'</span><span class="s2">'.$rw['scop'].'</span><span class="s2 stat '.(!$rw['status']?'bad':'').'">'.($rw['status']?'yes':'no').'</span></li>';
 	}mysqli_close($con);
@@ -41,11 +41,11 @@ if($do==0){
 	$ded=($do>1)?$do.','.$rw['un']:$do;
 	mysqli_close($con);
 
-	if(isset($_SESSION['post'])){
+	if(isset($_SESSION['post'])) {
 		$sespost=$_SESSION['post'];
 		$bad=$sespost['bad_distri'];
 		$styleis=(strpos($sespost['bad_distri'],'RED')!==false)?RED:'';
-		foreach($sespost as $key=>$val){
+		foreach($sespost as $key=>$val) {
 			$$key=$val;
 		}
 	}
@@ -58,7 +58,7 @@ if($do==0){
 include('../foot.php');
 ob_end_flush();
 
-function getDrop($id=''){$n='';
+function getDrop($id='') {$n='';
 	$con=SQLi('products');
 	$qry="
 		SELECT DISTINCT w.id,w.wh,a.un
@@ -70,7 +70,7 @@ function getDrop($id=''){$n='';
 		ORDER BY w.id
 	";
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
           $n.='<option value="'.$rw['id'].'" '.($rw['id']==$id?SELECTED:'').'>'.$rw['id'].' '.$rw['wh'].'</option>';
 	}mysqli_close($con);
 	return $n;

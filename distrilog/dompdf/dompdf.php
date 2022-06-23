@@ -54,7 +54,7 @@ function getoptions() {
     return $opts;
 
   $i = 1;
-  while ($i < $_SERVER["argc"]) {
+  while($i < $_SERVER["argc"]) {
 
     switch ($_SERVER["argv"][$i]) {
 
@@ -144,7 +144,7 @@ switch ( $sapi ) {
   if ( isset($opts["l"]) ) {
     echo "\nUnderstood paper sizes:\n";
 
-    foreach (array_keys(CPDF_Adapter::$PAPER_SIZES) as $size)
+    foreach(array_keys(CPDF_Adapter::$PAPER_SIZES) as $size)
       echo "  " . mb_strtoupper($size) . "\n";
     exit;
   }
@@ -183,7 +183,7 @@ switch ( $sapi ) {
   if ( isset($opts['t']) ) {
     $arr = split(',',$opts['t']);
     $types = array();
-    foreach ($arr as $type)
+    foreach($arr as $type)
       $types[ trim($type) ] = 1;
     $_DOMPDF_DEBUG_TYPES = $types;
   }
@@ -238,7 +238,7 @@ $dompdf = new DOMPDF();
 
 if ( $file === "-" ) {
   $str = "";
-  while ( !feof(STDIN) )
+  while( !feof(STDIN) )
     $str .= fread(STDIN, 4096);
 
   $dompdf->load_html($str);
@@ -256,7 +256,7 @@ $dompdf->render();
 
 if ( $_dompdf_show_warnings ) {
   global $_dompdf_warnings;
-  foreach ($_dompdf_warnings as $msg)
+  foreach($_dompdf_warnings as $msg)
     echo $msg . "\n";
   echo $dompdf->get_canvas()->get_cpdf()->messages;
   flush();

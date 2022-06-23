@@ -6,7 +6,7 @@ if(!isset($_SESSION)) {
 $ref=isset($_GET['ref'])?$_GET['ref']:NULL;
 define('INCLUDE_CHECK',1);
 include('../fetch.php');
-if(!verifyRef($ref)){
+if(!verifyRef($ref)) {
 	reloadTo($_SESSION['lastpage']);exit;
 }
 $adminpage='phiorders';
@@ -35,16 +35,16 @@ echo '<div><a href="./" class="back" id="download">BACK</a></div>';
 <?php
 ob_end_flush();
 
-function verifyRef($ref){
+function verifyRef($ref) {
 	$con=SQLi('orders');
 	$rs=mysqli_query($con,"SELECT refNo FROM tblorders WHERE refNo = '$ref'") or die(mysqli_error($con));
 	return (mysqli_num_rows($rs)>0)?true:false;
 }
 
-function viewOrder($ref,$qry,$boxpay){
+function viewOrder($ref,$qry,$boxpay) {
 	$con=SQLi('orders');
 	$rs=mysqli_query($con,"SELECT dsdid,orders,deliBox FROM tblorders WHERE $qry") or die(mysqli_error($con));
-	while($rw=mysqli_fetch_array($rs)){
+	while($rw=mysqli_fetch_array($rs)) {
 		$id=$rw['dsdid'];
 		$data=explode("~",$rw['orders']);
 		$_SESSION['boxsize']=$rw['deliBox'];
@@ -54,20 +54,20 @@ function viewOrder($ref,$qry,$boxpay){
 	mysqli_close($con);
 }
 
-function setData($id,$data,$boxpay){
+function setData($id,$data,$boxpay) {
 	if($boxpay) include_once('../../distrilog/cart/values.php');
 	$pass1=true;
-	foreach($data as $val){
+	foreach($data as $val) {
 		$idata[]=explode("|",$val);
 	}
 
-	foreach($idata as $v){
+	foreach($idata as $v) {
 		$v1=$v[1];//cod
 		$v2=$v[2];//nam
 		$v3=$v[3];//qy
 		$v4=$v[4];//pvv
 		$v5=$v[5];//wsp
-		if($v3>0){
+		if($v3>0) {
 			$id=($pass1)?$id:array_search($_SESSION['boxsize'],$box);
 			echo '<li><span class="s4 lt">'.$id.'</span>';
 			echo '<span class="s1 rt">'.$v1.'</span>';

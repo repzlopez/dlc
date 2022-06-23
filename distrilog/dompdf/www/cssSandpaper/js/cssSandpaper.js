@@ -25,7 +25,7 @@ if (!document.querySelectorAll) {
     document.querySelectorAll = cssQuery;
 }
 
-var cssSandpaper = new function(){
+var cssSandpaper = new function() {
     var me = this;
     
     var styleNodes, styleSheets = new Array();
@@ -52,7 +52,7 @@ var cssSandpaper = new function(){
     var body;
     
     
-    me.init = function(reinit){
+    me.init = function(reinit) {
    
         if (EventHelpers.hasPageLoadHappened(arguments) && !reinit) {
             return;
@@ -79,7 +79,7 @@ var cssSandpaper = new function(){
     
     }
     
-    me.setOpacity = function(obj, value){
+    me.setOpacity = function(obj, value) {
         var property = CSS3Helpers.findProperty(document.body, 'opacity');
         
         if (property == "filter") {
@@ -99,7 +99,7 @@ var cssSandpaper = new function(){
     }
     
     
-    function fixOpacity(){
+    function fixOpacity() {
     
         var transformRules = getRuleList('opacity').values;
         
@@ -117,7 +117,7 @@ var cssSandpaper = new function(){
     
     
     
-    me.setTransform = function(obj, transformString){
+    me.setTransform = function(obj, transformString) {
         var property = CSS3Helpers.findProperty(obj, 'transform');
         
         if (property == "filter") {
@@ -128,7 +128,7 @@ var cssSandpaper = new function(){
         }
     }
     
-    function fixTransforms(){
+    function fixTransforms() {
     
         var transformRules = getRuleList('-sand-transform').values;
         var property = CSS3Helpers.findProperty(document.body, 'transform');
@@ -146,7 +146,7 @@ var cssSandpaper = new function(){
         
     }
     
-    me.setBoxShadow = function(obj, value){
+    me.setBoxShadow = function(obj, value) {
         var property = CSS3Helpers.findProperty(obj, 'boxShadow');
         
         var values = CSS3Helpers.getBoxShadowValues(value);
@@ -162,7 +162,7 @@ var cssSandpaper = new function(){
         }
     }
     
-    function fixBoxShadow(){
+    function fixBoxShadow() {
     
         var transformRules = getRuleList('-sand-box-shadow').values;
         
@@ -185,7 +185,7 @@ var cssSandpaper = new function(){
         
     }
     
-    function setGradientFilter(node, values){
+    function setGradientFilter(node, values) {
     
         if (values.colorStops.length == 2 &&
         values.colorStops[0].stop == 0.0 &&
@@ -205,7 +205,7 @@ var cssSandpaper = new function(){
         }
     }
     
-    me.setGradient = function(node, value){
+    me.setGradient = function(node, value) {
     
         var support = CSS3Helpers.reportGradientSupport();
         
@@ -233,7 +233,7 @@ var cssSandpaper = new function(){
         }
     }
     
-    me.setRGBABackground = function(node, value){
+    me.setRGBABackground = function(node, value) {
     
         var support = CSS3Helpers.reportColorSpaceSupport('RGBA', colorType.BACKGROUND);
         
@@ -332,7 +332,7 @@ var cssSandpaper = new function(){
     }
     
     
-    function fixLinearGradients(){
+    function fixLinearGradients() {
     
         var backgroundRules = getRuleList('background').values.concat(getRuleList('background-image').values);
         
@@ -345,7 +345,7 @@ var cssSandpaper = new function(){
         }
     }
     
-    function fixBackgrounds(){
+    function fixBackgrounds() {
     
         var support = CSS3Helpers.reportColorSpaceSupport('RGBA', colorType.BACKGROUND);
         if (support == implementation.NATIVE) {
@@ -432,7 +432,7 @@ var cssSandpaper = new function(){
     
     
     
-    function listColorStops(colorStops){
+    function listColorStops(colorStops) {
         var sb = new StringBuffer();
         
         for (var i = 0; i < colorStops.length; i++) {
@@ -446,7 +446,7 @@ var cssSandpaper = new function(){
     }
     
     
-    function getStyleSheet(node){
+    function getStyleSheet(node) {
         var sheetCssText;
         switch (node.nodeName.toLowerCase()) {
             case 'style':
@@ -465,7 +465,7 @@ var cssSandpaper = new function(){
         return sheetCssText;
     }
     
-    function getStyleSheets(){
+    function getStyleSheets() {
     
         styleNodes = document.querySelectorAll('style, link[rel="stylesheet"]');
         
@@ -476,7 +476,7 @@ var cssSandpaper = new function(){
         }
     }
     
-    function indexRules(){
+    function indexRules() {
     
         for (var i = 0; i < styleSheets.length; i++) {
             var sheet = styleSheets[i];
@@ -508,7 +508,7 @@ var cssSandpaper = new function(){
         
     }
     
-    function getRuleList(name){
+    function getRuleList(name) {
         var list = ruleLists[name];
         if (!list) {
             list = new RuleList(name);
@@ -516,7 +516,7 @@ var cssSandpaper = new function(){
         return list;
     }
     
-    function setClasses(){
+    function setClasses() {
     
     
         var htmlNode = document.getElementsByTagName('html')[0];
@@ -532,43 +532,43 @@ var cssSandpaper = new function(){
 		// Now .. remove the initially hidden classes
 		var hiddenNodes = CSSHelpers.getElementsByClassName(document, 'cssSandpaper-initiallyHidden');
 		
-		for (var i=0; i<hiddenNodes.length; i++){
+		for (var i=0; i<hiddenNodes.length; i++) {
 			CSSHelpers.removeClass(hiddenNodes[i], 'cssSandpaper-initiallyHidden');
 		} 
     }
 }
 
-function RuleList(propertyName){
+function RuleList(propertyName) {
     var me = this;
     me.values = new Array();
     me.propertyName = propertyName;
-    me.add = function(selector, value){
+    me.add = function(selector, value) {
         me.values.push(new CSSRule(selector, me.propertyName, value));
     }
 }
 
-function CSSRule(selector, name, value){
+function CSSRule(selector, name, value) {
     var me = this;
     me.selector = selector;
     me.name = name;
     me.value = value;
     
-    me.toString = function(){
+    me.toString = function() {
         return StringHelpers.sprintf("%s { %s: %s}", me.selector, me.name, me.value);
     }
 }
 
-var MatrixGenerator = new function(){
+var MatrixGenerator = new function() {
     var me = this;
     var reUnit = /[a-z]+$/;
     me.identity = $M([[1, 0, 0], [0, 1, 0], [0, 0, 1]]);
     
     
-    function degreesToRadians(degrees){
+    function degreesToRadians(degrees) {
         return (degrees - 360) * Math.PI / 180;
     }
     
-    function getRadianScalar(angleStr){
+    function getRadianScalar(angleStr) {
     
         var num = parseFloat(angleStr);
         var unit = angleStr.match(reUnit);
@@ -601,16 +601,16 @@ var MatrixGenerator = new function(){
         return rad;
     }
     
-    me.prettyPrint = function(m){
+    me.prettyPrint = function(m) {
         return StringHelpers.sprintf('| %s %s %s | - | %s %s %s | - |%s %s %s|', m.e(1, 1), m.e(1, 2), m.e(1, 3), m.e(2, 1), m.e(2, 2), m.e(2, 3), m.e(3, 1), m.e(3, 2), m.e(3, 3))
     }
     
-    me.rotate = function(angleStr){
+    me.rotate = function(angleStr) {
         var num = getRadianScalar(angleStr);
         return Matrix.RotationZ(num);
     }
     
-    me.scale = function(sx, sy){
+    me.scale = function(sx, sy) {
         sx = parseFloat(sx)
         
         if (!sy) {
@@ -623,15 +623,15 @@ var MatrixGenerator = new function(){
         return $M([[sx, 0, 0], [0, sy, 0], [0, 0, 1]]);
     }
     
-    me.scaleX = function(sx){
+    me.scaleX = function(sx) {
         return me.scale(sx, 1);
     }
     
-    me.scaleY = function(sy){
+    me.scaleY = function(sy) {
         return me.scale(1, sy);
     }
     
-    me.skew = function(ax, ay){
+    me.skew = function(ax, ay) {
         var xRad = getRadianScalar(ax);
         var yRad;
         
@@ -649,16 +649,16 @@ var MatrixGenerator = new function(){
 		}
     }
     
-    me.skewX = function(ax){
+    me.skewX = function(ax) {
     
         return me.skew(ax, "0");
     }
     
-    me.skewY = function(ay){
+    me.skewY = function(ay) {
         return me.skew("0", ay);
     }
     
-    me.translate = function(tx, ty){
+    me.translate = function(tx, ty) {
     
         var TX = parseInt(tx);
         var TY = parseInt(ty)
@@ -668,23 +668,23 @@ var MatrixGenerator = new function(){
         return $M([[1, 0, TX], [0, 1, TY], [0, 0, 1]]);
     }
     
-    me.translateX = function(tx){
+    me.translateX = function(tx) {
         return me.translate(tx, 0);
     }
     
-    me.translateY = function(ty){
+    me.translateY = function(ty) {
         return me.translate(0, ty);
     }
     
     
-    me.matrix = function(a, b, c, d, e, f){
+    me.matrix = function(a, b, c, d, e, f) {
     
         // for now, e and f are ignored
         return $M([[a, c, parseInt(e)], [b, d, parseInt(f)], [0, 0, 1]])
     }
 }
 
-var CSS3Helpers = new function(){
+var CSS3Helpers = new function() {
     var me = this;
     
     
@@ -705,7 +705,7 @@ var CSS3Helpers = new function(){
     var cache = new Array();
     
     
-    me.supports = function(cssProperty){
+    me.supports = function(cssProperty) {
         if (CSS3Helpers.findProperty(document.body, cssProperty) != null) {
             return true;
         } else {
@@ -713,7 +713,7 @@ var CSS3Helpers = new function(){
         }
     }
     
-    me.getCanvas = function(){
+    me.getCanvas = function() {
     
         if (canvas) {
             return canvas;
@@ -723,7 +723,7 @@ var CSS3Helpers = new function(){
         }
     }
     
-    me.getTransformationMatrix = function(CSS3TransformProperty, doThrowIfError){
+    me.getTransformationMatrix = function(CSS3TransformProperty, doThrowIfError) {
     
         var transforms = CSS3TransformProperty.match(reTransformListSplitter);
 		
@@ -779,7 +779,7 @@ var CSS3Helpers = new function(){
         
     }
     
-    me.getBoxShadowValues = function(propertyValue){
+    me.getBoxShadowValues = function(propertyValue) {
         var r = new Object();
         
         var values = propertyValue.split(reSpaces);
@@ -807,7 +807,7 @@ var CSS3Helpers = new function(){
         return r;
     }
     
-    me.getGradient = function(propertyValue){
+    me.getGradient = function(propertyValue) {
         var r = new Object();
         r.colorStops = new Array();
         
@@ -896,13 +896,13 @@ var CSS3Helpers = new function(){
         return r;
     }
     
-    function swapIndices(array, index1, index2){
+    function swapIndices(array, index1, index2) {
         var tmp = array[index1];
         array[index1] = array[index2];
         array[index2] = tmp;
     }
     
-    function parseColorStop(colorStop, index){
+    function parseColorStop(colorStop, index) {
         var r = new Object();
         var substring = me.getBracketedSubstring(colorStop, 'color-stop');
         var from = me.getBracketedSubstring(colorStop, 'from');
@@ -935,7 +935,7 @@ var CSS3Helpers = new function(){
         return r;
     }
     
-    function normalizePercentage(s){
+    function normalizePercentage(s) {
         if (s.substring(s.length - 1, s.length) == '%') {
             return parseFloat(s) / 100 + "";
         } else {
@@ -944,7 +944,7 @@ var CSS3Helpers = new function(){
         
     }
     
-    me.reportGradientSupport = function(){
+    me.reportGradientSupport = function() {
     
         if (!cache["gradientSupport"]) {
             var r;
@@ -978,7 +978,7 @@ var CSS3Helpers = new function(){
         return cache["gradientSupport"];
     }
     
-    me.reportColorSpaceSupport = function(colorSpace, type){
+    me.reportColorSpaceSupport = function(colorSpace, type) {
     	
         if (!cache[colorSpace + type]) {
             var r;
@@ -1052,7 +1052,7 @@ var CSS3Helpers = new function(){
     
     
     
-    me.getBracketedSubstring = function(s, header){
+    me.getBracketedSubstring = function(s, header) {
         var gradientIndex = s.indexOf(header + '(')
         
         if (gradientIndex != -1) {
@@ -1083,7 +1083,7 @@ var CSS3Helpers = new function(){
     }
     
     
-    me.setMatrixFilter = function(obj, matrix){
+    me.setMatrixFilter = function(obj, matrix) {
 	
 	
 		if (!hasIETransformWorkaround(obj)) {
@@ -1164,12 +1164,12 @@ var CSS3Helpers = new function(){
 		return r;
     }
     
-    function hasIETransformWorkaround(obj){
+    function hasIETransformWorkaround(obj) {
     
         return CSSHelpers.isMemberOfClass(obj.parentNode, 'IETransformContainer');
     }
     
-    function addIETransformWorkaround(obj){
+    function addIETransformWorkaround(obj) {
         if (!hasIETransformWorkaround(obj)) {
             var parentNode = obj.parentNode;
             var filter;
@@ -1265,7 +1265,7 @@ var CSS3Helpers = new function(){
         
     }
     
-    me.addFilter = function(obj, filterName, filterValue){
+    me.addFilter = function(obj, filterName, filterValue) {
         // now ... insert the filter so we can exploit its wonders
         
         var filter;
@@ -1297,11 +1297,11 @@ var CSS3Helpers = new function(){
     }
     
     
-    function degreesToRadians(degrees){
+    function degreesToRadians(degrees) {
         return (degrees - 360) * Math.PI / 180;
     }
     
-    me.findProperty = function(obj, type){
+    me.findProperty = function(obj, type) {
         capType = type.capitalize();
         
         var r = cache[type]
@@ -1332,7 +1332,7 @@ var CSS3Helpers = new function(){
      *  percentages or the keywords top, bottom, left and right for point values."
      *  This keywords and percentages into pixel equivalents
      */
-    me.parseCoordinate = function(value, max){
+    me.parseCoordinate = function(value, max) {
         //Convert keywords
         switch (value) {
             case 'top':
@@ -1356,7 +1356,7 @@ var CSS3Helpers = new function(){
         return value;
     }
     
-    me.applyCanvasGradient = function(el, gradient){
+    me.applyCanvasGradient = function(el, gradient) {
     
         var canvas = me.getCanvas();
         var computedStyle = document.defaultView.getComputedStyle(el, null);
@@ -1397,7 +1397,7 @@ var CSS3Helpers = new function(){
     
 }
 
-function MSFilterList(node){
+function MSFilterList(node) {
     var me = this;
     
     me.list = new Array();
@@ -1407,7 +1407,7 @@ function MSFilterList(node){
     
     var styleAttr = node.style;
     
-    function init(){
+    function init() {
     
         var filterCalls = styleAttr.filter.match(reFilterListSplitter);
         
@@ -1424,7 +1424,7 @@ function MSFilterList(node){
         
     }
     
-    me.toString = function(){
+    me.toString = function() {
         var sb = new StringBuffer();
         
         for (var i = 0; i < me.list.length; i++) {
@@ -1438,7 +1438,7 @@ function MSFilterList(node){
     }
     
     
-    me.fixFilterStyle = function(){
+    me.fixFilterStyle = function() {
     
         try {
             me.node.style.filter = me.toString();
@@ -1452,7 +1452,7 @@ function MSFilterList(node){
     init();
 }
 
-function MSFilter(node, filterCall){
+function MSFilter(node, filterCall) {
     var me = this;
     
     me.node = node;
@@ -1462,7 +1462,7 @@ function MSFilter(node, filterCall){
     var reParameterName = /([a-zA-Z0-9]+\s*)=/g;
     
     
-    function init(){
+    function init() {
         me.name = me.filterCall.match(reFilterNameSplitter)[0].replace('progid:', '');
         
         //This may not be the best way to do this.
@@ -1475,7 +1475,7 @@ function MSFilter(node, filterCall){
         
     }
     
-    me.toString = function(){
+    me.toString = function() {
     
         var sb = new StringBuffer();
         
@@ -1505,7 +1505,7 @@ function MSFilter(node, filterCall){
     init();
 }
 
-var implementation = new function(){
+var implementation = new function() {
     this.NONE = 0;
     
     // Native Support.
@@ -1532,7 +1532,7 @@ var colorType = new function () {
  * Extra helper routines
  */
 if (!window.StringHelpers) {
-StringHelpers = new function(){
+StringHelpers = new function() {
     var me = this;
     
     // used by the String.prototype.trim()			
@@ -1554,15 +1554,15 @@ StringHelpers = new function(){
      * Legal: Use this code at your own risk. K&L Productions assumes NO
      * resposibility for anything.
      ******************************************************************************/
-    me.sprintf = function(fstring){
-        var pad = function(str, ch, len){
+    me.sprintf = function(fstring) {
+        var pad = function(str, ch, len) {
             var ps = '';
             for (var i = 0; i < Math.abs(len); i++) 
                 ps += ch;
             return len > 0 ? str + ps : ps + str;
         }
-        var processFlags = function(flags, width, rs, arg){
-            var pn = function(flags, arg, rs){
+        var processFlags = function(flags, width, rs, arg) {
+            var pn = function(flags, arg, rs) {
                 if (arg >= 0) {
                     if (flags.indexOf(' ') >= 0) 
                         rs = ' ' + rs;
@@ -1591,30 +1591,30 @@ StringHelpers = new function(){
             return rs;
         }
         var converters = new Array();
-        converters['c'] = function(flags, width, precision, arg){
+        converters['c'] = function(flags, width, precision, arg) {
             if (typeof(arg) == 'number') 
                 return String.fromCharCode(arg);
             if (typeof(arg) == 'string') 
                 return arg.charAt(0);
             return '';
         }
-        converters['d'] = function(flags, width, precision, arg){
+        converters['d'] = function(flags, width, precision, arg) {
             return converters['i'](flags, width, precision, arg);
         }
-        converters['u'] = function(flags, width, precision, arg){
+        converters['u'] = function(flags, width, precision, arg) {
             return converters['i'](flags, width, precision, Math.abs(arg));
         }
-        converters['i'] = function(flags, width, precision, arg){
+        converters['i'] = function(flags, width, precision, arg) {
             var iPrecision = parseInt(precision);
             var rs = ((Math.abs(arg)).toString().split('.'))[0];
             if (rs.length < iPrecision) 
                 rs = pad(rs, ' ', iPrecision - rs.length);
             return processFlags(flags, width, rs, arg);
         }
-        converters['E'] = function(flags, width, precision, arg){
+        converters['E'] = function(flags, width, precision, arg) {
             return (converters['e'](flags, width, precision, arg)).toUpperCase();
         }
-        converters['e'] = function(flags, width, precision, arg){
+        converters['e'] = function(flags, width, precision, arg) {
             iPrecision = parseInt(precision);
             if (isNaN(iPrecision)) 
                 iPrecision = 6;
@@ -1623,7 +1623,7 @@ StringHelpers = new function(){
                 rs = rs.replace(/^(.*)(e.*)$/, '$1.$2');
             return processFlags(flags, width, rs, arg);
         }
-        converters['f'] = function(flags, width, precision, arg){
+        converters['f'] = function(flags, width, precision, arg) {
             iPrecision = parseInt(precision);
             if (isNaN(iPrecision)) 
                 iPrecision = 6;
@@ -1632,10 +1632,10 @@ StringHelpers = new function(){
                 rs = rs + '.';
             return processFlags(flags, width, rs, arg);
         }
-        converters['G'] = function(flags, width, precision, arg){
+        converters['G'] = function(flags, width, precision, arg) {
             return (converters['g'](flags, width, precision, arg)).toUpperCase();
         }
-        converters['g'] = function(flags, width, precision, arg){
+        converters['g'] = function(flags, width, precision, arg) {
             iPrecision = parseInt(precision);
             absArg = Math.abs(arg);
             rse = absArg.toExponential();
@@ -1653,7 +1653,7 @@ StringHelpers = new function(){
             rs = rse.length < rsf.length ? rse : rsf;
             return processFlags(flags, width, rs, arg);
         }
-        converters['o'] = function(flags, width, precision, arg){
+        converters['o'] = function(flags, width, precision, arg) {
             var iPrecision = parseInt(precision);
             var rs = Math.round(Math.abs(arg)).toString(8);
             if (rs.length < iPrecision) 
@@ -1662,10 +1662,10 @@ StringHelpers = new function(){
                 rs = '0' + rs;
             return processFlags(flags, width, rs, arg);
         }
-        converters['X'] = function(flags, width, precision, arg){
+        converters['X'] = function(flags, width, precision, arg) {
             return (converters['x'](flags, width, precision, arg)).toUpperCase();
         }
-        converters['x'] = function(flags, width, precision, arg){
+        converters['x'] = function(flags, width, precision, arg) {
             var iPrecision = parseInt(precision);
             arg = Math.abs(arg);
             var rs = Math.round(arg).toString(16);
@@ -1675,7 +1675,7 @@ StringHelpers = new function(){
                 rs = '0x' + rs;
             return processFlags(flags, width, rs, arg);
         }
-        converters['s'] = function(flags, width, precision, arg){
+        converters['s'] = function(flags, width, precision, arg) {
             var iPrecision = parseInt(precision);
             var rs = arg;
             if (rs.length > iPrecision) 
@@ -1702,7 +1702,7 @@ StringHelpers = new function(){
      * @param {String} s - an HTML block
      * @return {String} s - the HTML block uncommented.
      */
-    me.uncommentHTML = function(s){
+    me.uncommentHTML = function(s) {
         if (s.indexOf('-->') != -1 && s.indexOf('<!--') != -1) {
             return s.replace("<!--", "").replace("-->", "");
         } else {
@@ -1714,7 +1714,7 @@ StringHelpers = new function(){
 
 if (!window.XMLHelpers) {
 
-XMLHelpers = new function(){
+XMLHelpers = new function() {
 
     var me = this;
     
@@ -1779,7 +1779,7 @@ XMLHelpers = new function(){
 
 
 if (!window.CSSHelpers) {
-CSSHelpers = new function(){
+CSSHelpers = new function() {
     var me = this;
     
     var blankRe = new RegExp('\\s');
@@ -1804,7 +1804,7 @@ CSSHelpers = new function(){
      * @param {Object} obj - an HTML object.
      * @param {Object} className - the CSS class name.
      */
-    me.isMemberOfClass = function(obj, className){
+    me.isMemberOfClass = function(obj, className) {
     
         if (blankRe.test(className)) 
             return false;
@@ -1822,7 +1822,7 @@ CSSHelpers = new function(){
      * @param {Object} obj - an HTML object
      * @param {String} className - a CSS class name.
      */
-    me.addClass = function(obj, className){
+    me.addClass = function(obj, className) {
         if (blankRe.test(className)) {
             return;
         }
@@ -1839,7 +1839,7 @@ CSSHelpers = new function(){
      * @param {Object} obj - an HTML object
      * @param {Object} className - a CSS class name.
      */
-    me.removeClass = function(obj, className){
+    me.removeClass = function(obj, className) {
     
         if (blankRe.test(className)) {
             return;
@@ -1901,7 +1901,7 @@ CSSHelpers = new function(){
      *
      * @param {String} className - a name of a CSS class.
      */
-    function getClassReString(className){
+    function getClassReString(className) {
         return '\\s' + className + '\\s|^' + className + '\\s|\\s' + className + '$|' + '^' + className + '$';
     }
     
@@ -1915,7 +1915,7 @@ CSSHelpers = new function(){
  * http://www.faqts.com/knowledge_base/view.phtml/aid/1678/fid/1 and
  * http://blog.stevenlevithan.com/archives/faster-trim-javascript
  */
-String.prototype.trim = function(){
+String.prototype.trim = function() {
     var str = this;
     
     // The first method is faster on long strings than the second and 
@@ -1923,7 +1923,7 @@ String.prototype.trim = function(){
     if (this.length > 6000) {
         str = this.replace(StringHelpers.initWhitespaceRe, '');
         var i = str.length;
-        while (StringHelpers.whitespaceRe.test(str.charAt(--i))) 
+        while(StringHelpers.whitespaceRe.test(str.charAt(--i))) 
             ;
         return str.slice(0, i + 1);
     } else {
@@ -1971,7 +1971,7 @@ DOMHelpers = new function () {
 //+ Jonas Raoni Soares Silva
 //@ http://jsfromhell.com/string/capitalize [v1.0]
 
-String.prototype.capitalize = function(){ //v1.0
+String.prototype.capitalize = function() { //v1.0
     return this.charAt(0).toUpperCase() + this.substr(1);
     
 };
@@ -1981,30 +1981,30 @@ String.prototype.capitalize = function(){ //v1.0
  *  stringBuffer.js - ideas from
  *  http://www.multitask.com.au/people/dion/archives/000354.html
  */
-function StringBuffer(){
+function StringBuffer() {
     var me = this;
     
     var buffer = [];
     
     
-    me.append = function(string){
+    me.append = function(string) {
         buffer.push(string);
         return me;
     }
     
-    me.appendBuffer = function(bufferToAppend){
+    me.appendBuffer = function(bufferToAppend) {
         buffer = buffer.concat(bufferToAppend);
     }
     
-    me.toString = function(){
+    me.toString = function() {
         return buffer.join("");
     }
     
-    me.getLength = function(){
+    me.getLength = function() {
         return buffer.length;
     }
     
-    me.flush = function(){
+    me.flush = function() {
         buffer.length = 0;
     }
     
@@ -2016,7 +2016,7 @@ function StringBuffer(){
  * @link   http://www.phpied.com/rgb-color-parser-in-javascript/
  * @license Use it if you like it
  */
-function RGBColor(color_string){
+function RGBColor(color_string) {
 
     var me = this;
     
@@ -2190,31 +2190,31 @@ function RGBColor(color_string){
     var color_defs = [{
         re: /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/,
         example: ['rgb(123, 234, 45)', 'rgb(255,234,245)'],
-        process: function(bits){
+        process: function(bits) {
             return [parseInt(bits[1]), parseInt(bits[2]), parseInt(bits[3])];
         }
     }, {
         re: /^(\w{2})(\w{2})(\w{2})$/,
         example: ['#00ff00', '336699'],
-        process: function(bits){
+        process: function(bits) {
             return [parseInt(bits[1], 16), parseInt(bits[2], 16), parseInt(bits[3], 16)];
         }
     }, {
         re: /^(\w{1})(\w{1})(\w{1})$/,
         example: ['#fb0', 'f0f'],
-        process: function(bits){
+        process: function(bits) {
             return [parseInt(bits[1] + bits[1], 16), parseInt(bits[2] + bits[2], 16), parseInt(bits[3] + bits[3], 16)];
         }
     }, {
         re: /^rgba\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),\s*(0{0,1}\.\d{1,}|0\.{0,}0*|1\.{0,}0*)\)$/,
         example: ['rgba(123, 234, 45, 22)', 'rgba(255, 234,245, 34)'],
-        process: function(bits){
+        process: function(bits) {
             return [parseInt(bits[1]), parseInt(bits[2]), parseInt(bits[3]), parseFloat(bits[4])];
         }
     }, {
         re: /^hsla\((\d{1,3}),\s*(\d{1,3}%),\s*(\d{1,3}%),\s*(0{0,1}\.\d{1,}|0\.{0,}0*|1\.{0,}0*)\)$/,
         example: ['hsla(0,100%,50%,0.2)'],
-        process: function(bits){
+        process: function(bits) {
         	var result = hsl2rgb(parseInt(bits[1]), parseInt(bits[2]), parseInt(bits[3]), parseFloat(bits[4]));
         	
         	return [result.r, result.g, result.b, parseFloat(bits[4])];
@@ -2223,7 +2223,7 @@ function RGBColor(color_string){
     }, {
         re: /^hsl\((\d{1,3}),\s*(\d{1,3}%),\s*(\d{1,3}%)\)$/,
         example: ['hsl(0,100%,50%)'],
-        process: function(bits){
+        process: function(bits) {
         	var result = hsl2rgb(parseInt(bits[1]), parseInt(bits[2]), parseInt(bits[3]), 1);
         	
         	return [result.r, result.g, result.b, 1];
@@ -2259,12 +2259,12 @@ function RGBColor(color_string){
     
     
     // some getters
-    me.toRGB = function(){
+    me.toRGB = function() {
         return 'rgb(' + me.r + ', ' + me.g + ', ' + me.b + ')';
     }
     
     // some getters
-    me.toRGBA = function(){
+    me.toRGBA = function() {
         return 'rgba(' + me.r + ', ' + me.g + ', ' + me.b + ', ' + me.a + ')';
     }
     
@@ -2282,7 +2282,7 @@ function RGBColor(color_string){
      * @param   Number  b       The blue color value
      * @return  Array           The HSV representation
      */
-    me.toHSV = function(){
+    me.toHSV = function() {
         var r = me.r / 255, g = me.g / 255, b = me.b / 255;
         var max = Math.max(r, g, b), min = Math.min(r, g, b);
         var h, s, v = max;
@@ -2360,7 +2360,7 @@ function RGBColor(color_string){
     
     
     
-    me.toHex = function(){
+    me.toHex = function() {
         var r = me.r.toString(16);
         var g = me.g.toString(16);
         var b = me.b.toString(16);

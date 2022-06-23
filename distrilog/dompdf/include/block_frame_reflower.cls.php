@@ -3,7 +3,7 @@
  * @package dompdf
  * @link    http://www.dompdf.com/
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: block_frame_reflower.cls.php 471 2012-02-06 21:59:10Z fabien.menager $
  */
@@ -401,7 +401,7 @@ class Block_Frame_Reflower extends Frame_Reflower {
 
     default:
     case "left":
-      foreach ($this->_frame->get_line_boxes() as $line) {
+      foreach($this->_frame->get_line_boxes() as $line) {
         if ( !$line->left ) continue;
         foreach($line->get_frames() as $frame) {
           if ( $frame instanceof Block_Frame_Decorator) continue;
@@ -411,7 +411,7 @@ class Block_Frame_Reflower extends Frame_Reflower {
       return;
 
     case "right":
-      foreach ($this->_frame->get_line_boxes() as $line) {
+      foreach($this->_frame->get_line_boxes() as $line) {
         // Move each child over by $dx
         $dx = $width - $line->w - $line->right;
         
@@ -439,7 +439,7 @@ class Block_Frame_Reflower extends Frame_Reflower {
       // One space character's width. Will be used to get a more accurate spacing
       $space_width = Font_Metrics::get_text_width(" ", $style->font_family, $style->font_size);
       
-      foreach ($lines as $i => $line) {
+      foreach($lines as $i => $line) {
         if ( $line->left ) {
           foreach($line->get_frames() as $frame) {
             if ( !$frame instanceof Text_Frame_Decorator )
@@ -485,11 +485,11 @@ class Block_Frame_Reflower extends Frame_Reflower {
 
     case "center":
     case "centre":
-      foreach ($this->_frame->get_line_boxes() as $line) {
+      foreach($this->_frame->get_line_boxes() as $line) {
         // Centre each line by moving each frame in the line by:
         $dx = ($width + $line->left - $line->w - $line->right ) / 2;
         
-        foreach ($line->get_frames() as $frame) {
+        foreach($line->get_frames() as $frame) {
           // Block frames are not aligned by text-align
           if ($frame instanceof Block_Frame_Decorator) continue;
           
@@ -508,11 +508,11 @@ class Block_Frame_Reflower extends Frame_Reflower {
     
     $canvas = null;
     
-    foreach ( $this->_frame->get_line_boxes() as $line ) {
+    foreach( $this->_frame->get_line_boxes() as $line ) {
 
       $height = $line->h;
     
-      foreach ( $line->get_frames() as $frame ) {
+      foreach( $line->get_frames() as $frame ) {
         $style = $frame->get_style();
 
         if ( $style->display !== "inline" && $style->display !== "text" )
@@ -567,7 +567,7 @@ class Block_Frame_Reflower extends Frame_Reflower {
     }
   }
   
-  function process_clear(Frame $child){
+  function process_clear(Frame $child) {
     if ( !DOMPDF_ENABLE_CSS_FLOAT ) {
       return;
     }
@@ -593,7 +593,7 @@ class Block_Frame_Reflower extends Frame_Reflower {
     }
   }
   
-  function process_float(Frame $child, $cb_x, $cb_w){
+  function process_float(Frame $child, $cb_x, $cb_w) {
     if ( !DOMPDF_ENABLE_CSS_FLOAT ) {
       return;
     }
@@ -709,7 +709,7 @@ class Block_Frame_Reflower extends Frame_Reflower {
     $this->_frame->get_current_line_box()->get_float_offsets();
     
     // Set the containing blocks and reflow each child
-    foreach ( $this->_frame->get_children() as $child ) {
+    foreach( $this->_frame->get_children() as $child ) {
       
       // Bail out if the page is full
       if ( $page->is_full() )
@@ -743,7 +743,7 @@ class Block_Frame_Reflower extends Frame_Reflower {
       $orig_style = $this->_frame->get_original_style();
       if ( $orig_style->width === "auto" && ($orig_style->left === "auto" || $orig_style->right === "auto") ) {
         $width = 0;
-        foreach ($this->_frame->get_line_boxes() as $line) {
+        foreach($this->_frame->get_line_boxes() as $line) {
           $width = max($line->w, $width);
         }
         $style->width = $width;

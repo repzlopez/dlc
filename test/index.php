@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION)) {
+if(!isset($_SESSION)) {
      session_set_cookie_params(0);
      session_start();
 }
@@ -13,15 +13,15 @@ include_once '../admin/getwebstat.php';
 $title = 'DLC API TEST';
 $x = loadHead($title);
 
-if ( isset($_POST['id']) ) {
+if( isset($_POST['id']) ) {
      $_SESSION['u_site'] = $_POST['id'];
 }
 
-if ( $_SESSION['u_site'] != '' ) {
+if( $_SESSION['u_site'] != '' ) {
      $endpoint = '/distributors/' . $_SESSION['u_site'] ;
      require_once 'init_api.php';
 
-     foreach ($data as $k => $v) {
+     foreach($data as $k => $v) {
           $$k = $v;
 
           $y .= '<h3>'. $dsdid .'</h3>';

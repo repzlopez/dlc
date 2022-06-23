@@ -53,7 +53,7 @@ class Block_Renderer extends Abstract_Renderer {
     }
     
     if (DEBUG_LAYOUT && DEBUG_LAYOUT_LINES && $frame->get_decorator()) {
-      foreach ($frame->get_decorator()->get_line_boxes() as $line) {
+      foreach($frame->get_decorator()->get_line_boxes() as $line) {
         $frame->_debug_layout(array($line->x, $line->y, $line->w, $line->h), "orange");
       }
     }
@@ -86,7 +86,7 @@ class Block_Renderer extends Abstract_Renderer {
                     $style->length_in_pt($bp["bottom"]["width"]),
                     $style->length_in_pt($bp["left"]["width"]));
     
-    foreach ($bp as $side => $props) {
+    foreach($bp as $side => $props) {
       list($x, $y, $w, $h) = $bbox;
 
       if ( !$props["style"] || 
@@ -159,7 +159,7 @@ class Block_Renderer extends Abstract_Renderer {
     $widths = array_fill(0, 4, $props["width"]);
     $sides = array("top", "right", "left", "bottom");
     
-    foreach ($sides as $side) {
+    foreach($sides as $side) {
       list($x, $y, $w, $h) = $bbox;
 
       switch($side) {

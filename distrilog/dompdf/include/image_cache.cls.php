@@ -147,7 +147,7 @@ class Image_Cache {
   static function clear() {
     if ( empty(self::$_cache) || DEBUGKEEPTEMP ) return;
     
-    foreach ( self::$_cache as $file ) {
+    foreach( self::$_cache as $file ) {
       if (DEBUGPNG) print "[clear unlink $file]";
       unlink($file);
     }

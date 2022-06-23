@@ -3,7 +3,7 @@
  * @package dompdf
  * @link    http://www.dompdf.com/
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: gd_adapter.cls.php 448 2011-11-13 13:00:03Z fabien.menager $
  */
@@ -270,7 +270,7 @@ class GD_Adapter implements Canvas {
       } else {
 
         $i = 0;
-        foreach ($style as $length) {
+        foreach($style as $length) {
 
           if ( $i % 2 == 0 ) {
             // 'On' pattern
@@ -326,7 +326,7 @@ class GD_Adapter implements Canvas {
     if ( !is_null($style) ) {
       $gd_style = array();
 
-      foreach ($style as $length) {
+      foreach($style as $length) {
         for ($i = 0; $i < $length; $i++) {
           $gd_style[] = $c;
         }
@@ -441,7 +441,7 @@ class GD_Adapter implements Canvas {
   function polygon($points, $color, $width = null, $style = null, $fill = false) {
 
     // Scale each point by the AA factor
-    foreach (array_keys($points) as $i)
+    foreach(array_keys($points) as $i)
       $points[$i] *= $this->_aa_factor;
 
     $c = $this->_allocate_color($color);
@@ -450,7 +450,7 @@ class GD_Adapter implements Canvas {
     if ( !is_null($style) && !$fill ) {
       $gd_style = array();
 
-      foreach ($style as $length) {
+      foreach($style as $length) {
         for ($i = 0; $i < $length; $i++) {
           $gd_style[] = $c;
         }
@@ -497,7 +497,7 @@ class GD_Adapter implements Canvas {
     if ( !is_null($style) && !$fill ) {
       $gd_style = array();
 
-      foreach ($style as $length) {
+      foreach($style as $length) {
         for ($i = 0; $i < $length; $i++) {
           $gd_style[] = $c;
         }
@@ -692,19 +692,19 @@ class GD_Adapter implements Canvas {
     $this->_page_count++;
   }    
 
-  function open_object(){
+  function open_object() {
     // N/A
   }
 
-  function close_object(){
+  function close_object() {
     // N/A
   }
 
-  function add_object(){
+  function add_object() {
     // N/A
   }
 
-  function page_text(){
+  function page_text() {
     // N/A
   }
   

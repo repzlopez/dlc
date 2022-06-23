@@ -2,13 +2,13 @@
 if(!isset($_SESSION)) session_start();
 
 $id=$name=$msg=$c=$x='';
-if(isset($_POST['submit'])&&isset($_POST['id'])){
+if(isset($_POST['submit'])&&isset($_POST['id'])) {
 	$id   = trim_escape($_POST['id']);
 	$name = getName($id,'fml');
 	$test = testAllow($id);
 
 	$msg='ALLOWED';
-	if($test>0){ $c='good';}
+	if($test>0) { $c='good';}
 	else{ $msg="NOT $msg";$c='bad'; }
 	unset($_POST);
 }

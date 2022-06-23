@@ -16,7 +16,7 @@ unset($_SESSION['gos_edit']);
 unset($_SESSION['for_edit']);
 unset($_SESSION['post']);
 
-if(!ISIN_GOS){
+if(!ISIN_GOS) {
 	$_SESSION['catch_login']='gos';
 	echo '<META HTTP-EQUIV=Refresh CONTENT="0; URL=/login">';exit;
 }
@@ -24,7 +24,7 @@ if(!ISIN_GOS){
 $y='';
 ob_start();
 include('head.php');
-if($content!=''){
+if($content!='') {
 	include("../admin/lookup/index_$content.php");
 }else{ $y.='<ul class="home">';
 	$y.=IS_GOS?'<li><a href="admin">ADMIN</a></li>':'';

@@ -1,14 +1,14 @@
 <?php 
 
-function auth_ok(){
+function auth_ok() {
   return isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] === true;
 }
 
-function auth_get_link(){
+function auth_get_link() {
   return '<a href="'.get_php_self().'?login=1">Authenticate to access this section</a>';
 }
 
-function get_php_self(){
+function get_php_self() {
   return isset($_SERVER['PHP_SELF']) ? htmlentities(strip_tags($_SERVER['PHP_SELF'],''), ENT_QUOTES, 'UTF-8') : '';
 }
 

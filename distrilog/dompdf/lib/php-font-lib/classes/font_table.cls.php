@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    http://php-font-lib.googlecode.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: font_table.cls.php 37 2011-11-07 07:38:44Z fabien.menager $
  */
@@ -29,11 +29,11 @@ class Font_Table extends Font_Binary_Stream {
   /**
    * @return Font_TrueType
    */
-  public function getFont(){
+  public function getFont() {
     return $this->entry->getFont();
   }
   
-  protected function _encode(){
+  protected function _encode() {
     if (empty($this->data)) {
       Font::d("  >> Table is empty");
       return 0;
@@ -42,19 +42,19 @@ class Font_Table extends Font_Binary_Stream {
     return $this->getFont()->pack($this->def, $this->data);
   }
   
-  protected function _parse(){
+  protected function _parse() {
     $this->data = $this->getFont()->unpack($this->def);
   }
   
-  protected function _parseRaw(){
+  protected function _parseRaw() {
     $this->data = $this->getFont()->read($this->entry->length);
   }
   
-  protected function _encodeRaw(){
+  protected function _encodeRaw() {
     return $this->getFont()->write($this->data, $this->entry->length);
   }
   
-  final public function encode(){
+  final public function encode() {
     $this->entry->startWrite();
     
     if (false && empty($this->def)) {
@@ -69,7 +69,7 @@ class Font_Table extends Font_Binary_Stream {
     return $length;
   }
   
-  final public function parse(){
+  final public function parse() {
     $this->entry->startRead();
     
     if (false && empty($this->def)) {

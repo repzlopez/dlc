@@ -6,7 +6,7 @@ $x.='<ul id="'.$content.'" class="list">'.loadNewDisWik(WEEK-1).'</ul>';
 $x.='<ul id="'.$content.'" class="list">'.loadNewDisWik((int)WEEK).'</ul>';
 echo $x;
 
-function loadNewDisWik($wk){
+function loadNewDisWik($wk) {
 	$con=SQLi('distributor');
 	$hdr='<li class="hdr"><span class="s0"></span><span class="s4">ID</span>
 		<span class="s6">Name</span>
@@ -30,7 +30,7 @@ function loadNewDisWik($wk){
 	";
 
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($r=mysqli_fetch_assoc($rs)){$pv=0;
+	while($r=mysqli_fetch_assoc($rs)) {$pv=0;
 		foreach($r as $k=>$v) $$k=$v;
 
 		$x.='<li><span class="s0"></span><span class="s4">'.$dsdid.'</span>

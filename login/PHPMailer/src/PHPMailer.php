@@ -1184,7 +1184,7 @@ class PHPMailer
         if ($useimap && function_exists('imap_rfc822_parse_adrlist')) {
             //Use this built-in parser if it's available
             $list = imap_rfc822_parse_adrlist($addrstr, '');
-            foreach ($list as $address) {
+            foreach($list as $address) {
                 if (('.SYNTAX-ERROR.' !== $address->host) && static::validateAddress(
                     $address->mailbox . '@' . $address->host
                 )) {
@@ -1197,7 +1197,7 @@ class PHPMailer
         } else {
             //Use this simpler parser
             $list = explode(',', $addrstr);
-            foreach ($list as $address) {
+            foreach($list as $address) {
                 $address = trim($address);
                 //Is there a separate name part?
                 if (strpos($address, '<') === false) {
@@ -1336,15 +1336,15 @@ class PHPMailer
                  * Feel free to use and redistribute this code. But please keep this copyright notice.
                  */
                 return (bool) preg_match(
-                    '/^(?!(?>(?1)"?(?>\\\[ -~]|[^"])"?(?1)){255,})(?!(?>(?1)"?(?>\\\[ -~]|[^"])"?(?1)){65,}@)' .
+                    '/^(?!(?>(?1)"?(?>\\\[ -~]|[^"])"?(?1)) {255,})(?!(?>(?1)"?(?>\\\[ -~]|[^"])"?(?1)) {65,}@)' .
                     '((?>(?>(?>((?>(?>(?>\x0D\x0A)?[\t ])+|(?>[\t ]*\x0D\x0A)?[\t ]+)?)(\((?>(?2)' .
                     '(?>[\x01-\x08\x0B\x0C\x0E-\'*-\[\]-\x7F]|\\\[\x00-\x7F]|(?3)))*(?2)\)))+(?2))|(?2))?)' .
                     '([!#-\'*+\/-9=?^-~-]+|"(?>(?2)(?>[\x01-\x08\x0B\x0C\x0E-!#-\[\]-\x7F]|\\\[\x00-\x7F]))*' .
                     '(?2)")(?>(?1)\.(?1)(?4))*(?1)@(?!(?1)[a-z0-9-]{64,})(?1)(?>([a-z0-9](?>[a-z0-9-]*[a-z0-9])?)' .
-                    '(?>(?1)\.(?!(?1)[a-z0-9-]{64,})(?1)(?5)){0,126}|\[(?:(?>IPv6:(?>([a-f0-9]{1,4})(?>:(?6)){7}' .
-                    '|(?!(?:.*[a-f0-9][:\]]){8,})((?6)(?>:(?6)){0,6})?::(?7)?))|(?>(?>IPv6:(?>(?6)(?>:(?6)){5}:' .
-                    '|(?!(?:.*[a-f0-9]:){6,})(?8)?::(?>((?6)(?>:(?6)){0,4}):)?))?(25[0-5]|2[0-4][0-9]|1[0-9]{2}' .
-                    '|[1-9]?[0-9])(?>\.(?9)){3}))\])(?1)$/isD',
+                    '(?>(?1)\.(?!(?1)[a-z0-9-]{64,})(?1)(?5)) {0,126}|\[(?:(?>IPv6:(?>([a-f0-9]{1,4})(?>:(?6)) {7}' .
+                    '|(?!(?:.*[a-f0-9][:\]]) {8,})((?6)(?>:(?6)) {0,6})?::(?7)?))|(?>(?>IPv6:(?>(?6)(?>:(?6)) {5}:' .
+                    '|(?!(?:.*[a-f0-9]:) {6,})(?8)?::(?>((?6)(?>:(?6)) {0,4}):)?))?(25[0-5]|2[0-4][0-9]|1[0-9]{2}' .
+                    '|[1-9]?[0-9])(?>\.(?9)) {3}))\])(?1)$/isD',
                     $address
                 );
             case 'html5':
@@ -1485,7 +1485,7 @@ class PHPMailer
             $this->mailHeader = '';
 
             // Dequeue recipient and Reply-To addresses with IDN
-            foreach (array_merge($this->RecipientsQueue, $this->ReplyToQueue) as $params) {
+            foreach(array_merge($this->RecipientsQueue, $this->ReplyToQueue) as $params) {
                 $params[1] = $this->punyencodeAddress($params[1]);
                 call_user_func_array([$this, 'addAnAddress'], $params);
             }
@@ -1494,7 +1494,7 @@ class PHPMailer
             }
 
             // Validate From, Sender, and ConfirmReadingTo addresses
-            foreach (['From', 'Sender', 'ConfirmReadingTo'] as $address_kind) {
+            foreach(['From', 'Sender', 'ConfirmReadingTo'] as $address_kind) {
                 $this->$address_kind = trim($this->$address_kind);
                 if (empty($this->$address_kind)) {
                     continue;
@@ -1652,7 +1652,7 @@ class PHPMailer
         $sendmail = sprintf($sendmailFmt, escapeshellcmd($this->Sendmail), $this->Sender);
 
         if ($this->SingleTo) {
-            foreach ($this->SingleToArray as $toAddr) {
+            foreach($this->SingleToArray as $toAddr) {
                 $mail = @popen($sendmail, 'w');
                 if (!$mail) {
                     throw new Exception($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
@@ -1767,7 +1767,7 @@ class PHPMailer
         $header = static::stripTrailingWSP($header) . static::$LE . static::$LE;
 
         $toArr = [];
-        foreach ($this->to as $toaddr) {
+        foreach($this->to as $toaddr) {
             $toArr[] = $this->addrFormat($toaddr);
         }
         $to = implode(', ', $toArr);
@@ -1790,7 +1790,7 @@ class PHPMailer
         }
         $result = false;
         if ($this->SingleTo && count($toArr) > 1) {
-            foreach ($toArr as $toAddr) {
+            foreach($toArr as $toAddr) {
                 $result = $this->mailPassthru($toAddr, $this->Subject, $body, $header, $params);
                 $this->doCallback($result, [$toAddr], $this->cc, $this->bcc, $this->Subject, $body, $this->From, []);
             }
@@ -1871,8 +1871,8 @@ class PHPMailer
 
         $callbacks = [];
         // Attempt to send to all recipients
-        foreach ([$this->to, $this->cc, $this->bcc] as $togroup) {
-            foreach ($togroup as $to) {
+        foreach([$this->to, $this->cc, $this->bcc] as $togroup) {
+            foreach($togroup as $to) {
                 if (!$this->smtp->recipient($to[0], $this->dsn)) {
                     $error = $this->smtp->getError();
                     $bad_rcpt[] = ['to' => $to[0], 'error' => $error['detail']];
@@ -1899,7 +1899,7 @@ class PHPMailer
             $this->smtp->close();
         }
 
-        foreach ($callbacks as $cb) {
+        foreach($callbacks as $cb) {
             $this->doCallback(
                 $cb['issent'],
                 [$cb['to']],
@@ -1915,7 +1915,7 @@ class PHPMailer
         //Create error message for any bad addresses
         if (count($bad_rcpt) > 0) {
             $errstr = '';
-            foreach ($bad_rcpt as $bad) {
+            foreach($bad_rcpt as $bad) {
                 $errstr .= $bad['to'] . ': ' . $bad['error'];
             }
             throw new Exception($this->lang('recipients_failed') . $errstr, self::STOP_CONTINUE);
@@ -1959,7 +1959,7 @@ class PHPMailer
         $hosts = explode(';', $this->Host);
         $lastexception = null;
 
-        foreach ($hosts as $hostentry) {
+        foreach($hosts as $hostentry) {
             $hostinfo = [];
             if (!preg_match(
                 '/^(?:(ssl|tls):\/\/)?(.+?)(?::(\d+))?$/',
@@ -2175,7 +2175,7 @@ class PHPMailer
     public function addrAppend($type, $addr)
     {
         $addresses = [];
-        foreach ($addr as $address) {
+        foreach($addr as $address) {
             $addresses[] = $this->addrFormat($address);
         }
 
@@ -2235,11 +2235,11 @@ class PHPMailer
         $lines = explode(static::$LE, $message);
         //Message will be rebuilt in here
         $message = '';
-        foreach ($lines as $line) {
+        foreach($lines as $line) {
             $words = explode(' ', $line);
             $buf = '';
             $firstword = true;
-            foreach ($words as $word) {
+            foreach($words as $word) {
                 if ($qp_mode && (strlen($word) > $length)) {
                     $space_left = $length - strlen($buf) - $crlflen;
                     if (!$firstword) {
@@ -2261,7 +2261,7 @@ class PHPMailer
                         }
                         $buf = '';
                     }
-                    while ($word !== '') {
+                    while($word !== '') {
                         if ($length <= 0) {
                             break;
                         }
@@ -2316,7 +2316,7 @@ class PHPMailer
     {
         $foundSplitPos = false;
         $lookBack = 3;
-        while (!$foundSplitPos) {
+        while(!$foundSplitPos) {
             $lastChunk = substr($encodedText, $maxLength - $lookBack, $lookBack);
             $encodedCharPos = strpos($lastChunk, '=');
             if (false !== $encodedCharPos) {
@@ -2389,7 +2389,7 @@ class PHPMailer
         // To be created automatically by mail()
         if ($this->SingleTo) {
             if ('mail' !== $this->Mailer) {
-                foreach ($this->to as $toaddr) {
+                foreach($this->to as $toaddr) {
                     $this->SingleToArray[] = $this->addrFormat($toaddr);
                 }
             }
@@ -2454,7 +2454,7 @@ class PHPMailer
         }
 
         // Add custom headers
-        foreach ($this->CustomHeader as $header) {
+        foreach($this->CustomHeader as $header) {
             $result .= $this->headerLine(
                 trim($header[0]),
                 $this->encodeHeader(trim($header[1]))
@@ -2665,7 +2665,7 @@ class PHPMailer
                 $body .= static::$LE;
                 if (!empty($this->Ical)) {
                     $method = static::ICAL_METHOD_REQUEST;
-                    foreach (static::$IcalMethods as $imethod) {
+                    foreach(static::$IcalMethods as $imethod) {
                         if (stripos($this->Ical, 'METHOD:' . $imethod) !== false) {
                             $method = $imethod;
                             break;
@@ -2733,7 +2733,7 @@ class PHPMailer
                 $body .= static::$LE;
                 if (!empty($this->Ical)) {
                     $method = static::ICAL_METHOD_REQUEST;
-                    foreach (static::$IcalMethods as $imethod) {
+                    foreach(static::$IcalMethods as $imethod) {
                         if (stripos($this->Ical, 'METHOD:' . $imethod) !== false) {
                             $method = $imethod;
                             break;
@@ -3039,7 +3039,7 @@ class PHPMailer
         $incl = [];
 
         // Add all attachments
-        foreach ($this->attachment as $attachment) {
+        foreach($this->attachment as $attachment) {
             // Check if it is a valid disposition_filter
             if ($attachment[6] === $disposition_type) {
                 // Check for string attachment
@@ -3370,7 +3370,7 @@ class PHPMailer
                 $chunk = mb_substr($str, $i, $offset, $this->CharSet);
                 $chunk = base64_encode($chunk);
                 ++$lookBack;
-            } while (strlen($chunk) > $length);
+            } while(strlen($chunk) > $length);
             $encoded .= $chunk . $linebreak;
         }
 
@@ -3435,7 +3435,7 @@ class PHPMailer
                 unset($matches[0][$eqkey]);
                 array_unshift($matches[0], '=');
             }
-            foreach (array_unique($matches[0]) as $char) {
+            foreach(array_unique($matches[0]) as $char) {
                 $encoded = str_replace($char, '=' . sprintf('%02X', ord($char)), $encoded);
             }
         }
@@ -3664,7 +3664,7 @@ class PHPMailer
      */
     protected function cidExists($cid)
     {
-        foreach ($this->attachment as $attachment) {
+        foreach($this->attachment as $attachment) {
             if ('inline' === $attachment[6] && $cid === $attachment[7]) {
                 return true;
             }
@@ -3680,7 +3680,7 @@ class PHPMailer
      */
     public function inlineImageExists()
     {
-        foreach ($this->attachment as $attachment) {
+        foreach($this->attachment as $attachment) {
             if ('inline' === $attachment[6]) {
                 return true;
             }
@@ -3696,7 +3696,7 @@ class PHPMailer
      */
     public function attachmentExists()
     {
-        foreach ($this->attachment as $attachment) {
+        foreach($this->attachment as $attachment) {
             if ('attachment' === $attachment[6]) {
                 return true;
             }
@@ -3735,7 +3735,7 @@ class PHPMailer
      */
     public function clearAddresses()
     {
-        foreach ($this->to as $to) {
+        foreach($this->to as $to) {
             unset($this->all_recipients[strtolower($to[0])]);
         }
         $this->to = [];
@@ -3747,7 +3747,7 @@ class PHPMailer
      */
     public function clearCCs()
     {
-        foreach ($this->cc as $cc) {
+        foreach($this->cc as $cc) {
             unset($this->all_recipients[strtolower($cc[0])]);
         }
         $this->cc = [];
@@ -3759,7 +3759,7 @@ class PHPMailer
      */
     public function clearBCCs()
     {
-        foreach ($this->bcc as $bcc) {
+        foreach($this->bcc as $bcc) {
             unset($this->all_recipients[strtolower($bcc[0])]);
         }
         $this->bcc = [];
@@ -4012,7 +4012,7 @@ class PHPMailer
                 // Ensure $basedir has a trailing /
                 $basedir .= '/';
             }
-            foreach ($images[2] as $imgindex => $url) {
+            foreach($images[2] as $imgindex => $url) {
                 // Convert data URIs into embedded images
                 //e.g. "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                 $match = [];
@@ -4522,7 +4522,7 @@ class PHPMailer
         $signHeader = preg_replace('/\r\n[ \t]+/', ' ', $signHeader);
         //Break headers out into an array
         $lines = explode(self::CRLF, $signHeader);
-        foreach ($lines as $key => $line) {
+        foreach($lines as $key => $line) {
             //If the header is missing a :, skip it as it's invalid
             //This is likely to happen because the explode() above will also split
             //on the trailing LE, leaving an empty line
@@ -4607,7 +4607,7 @@ class PHPMailer
         $parsedHeaders = [];
         $headerLineIndex = 0;
         $headerLineCount = count($headerLines);
-        foreach ($headerLines as $headerLine) {
+        foreach($headerLines as $headerLine) {
             $matches = [];
             if (preg_match('/^([^ \t]*?)(?::[ \t]*)(.*)$/', $headerLine, $matches)) {
                 if ($currentHeaderLabel !== '') {
@@ -4629,7 +4629,7 @@ class PHPMailer
         $copiedHeaders = [];
         $headersToSignKeys = [];
         $headersToSign = [];
-        foreach ($parsedHeaders as $header) {
+        foreach($parsedHeaders as $header) {
             //Is this header one that must be included in the DKIM signature?
             if (in_array(strtolower($header['label']), $autoSignHeaders, true)) {
                 $headersToSignKeys[] = $header['label'];
@@ -4643,7 +4643,7 @@ class PHPMailer
             //Is this an extra custom header we've been asked to sign?
             if (in_array($header['label'], $this->DKIM_extraHeaders, true)) {
                 //Find its value in custom headers
-                foreach ($this->CustomHeader as $customHeader) {
+                foreach($this->CustomHeader as $customHeader) {
                     if ($customHeader[0] === $header['label']) {
                         $headersToSignKeys[] = $header['label'];
                         $headersToSign[] = $header['label'] . ': ' . $header['value'];
@@ -4662,7 +4662,7 @@ class PHPMailer
             //Assemble a DKIM 'z' tag
             $copiedHeaderFields = ' z=';
             $first = true;
-            foreach ($copiedHeaders as $copiedHeader) {
+            foreach($copiedHeaders as $copiedHeader) {
                 if (!$first) {
                     $copiedHeaderFields .= static::$LE . ' |';
                 }

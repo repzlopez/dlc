@@ -20,9 +20,9 @@ $page="Logistics";
 $str='';
 ob_start();
 include('../head.php');
-if(!$_SESSION['a_logged']&&!$_SESSION['gos_logged']&&!$_SESSION['pcm_logged']){
+if(!$_SESSION['a_logged']&&!$_SESSION['gos_logged']&&!$_SESSION['pcm_logged']) {
 	$str.=$mainlogo;
-}elseif($content!=''){
+}elseif($content!='') {
 	$_SESSION['dbprod']=true;
 	include("index_$content.php");
 	$str.='<div id="'.$adminpage.'" class="clear"><a href="../logistics" class="back" id="download">BACK</a></div>';

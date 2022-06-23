@@ -71,7 +71,7 @@ abstract class Frame_Reflower {
     // Collapse vertical margins:
     $n = $frame->get_next_sibling();
     if ( $n && !$n->is_block() ) {
-      while ( $n = $n->get_next_sibling() ) {
+      while( $n = $n->get_next_sibling() ) {
         if ( $n->is_block() ) {
           break;
         }
@@ -93,7 +93,7 @@ abstract class Frame_Reflower {
     // Collapse our first child's margin
     /*$f = $this->_frame->get_first_child();
     if ( $f && !$f->is_block() ) {
-      while ( $f = $f->get_next_sibling() ) {
+      while( $f = $f->get_next_sibling() ) {
         if ( $f->is_block() ) {
           break;
         }
@@ -157,7 +157,7 @@ abstract class Frame_Reflower {
       $inline_max = 0;
 
       // Add all adjacent inline widths together to calculate max width
-      while ( $iter->valid() && in_array( $iter->current()->get_style()->display, Style::$INLINE_TYPES ) ) {
+      while( $iter->valid() && in_array( $iter->current()->get_style()->display, Style::$INLINE_TYPES ) ) {
 
         $child = $iter->current();
 
@@ -248,7 +248,7 @@ abstract class Frame_Reflower {
       return;
       
     $quotes_array = array();
-    foreach($matches as &$_quote){
+    foreach($matches as &$_quote) {
       $quotes_array[] = $this->_parse_string($_quote[0], true);
     }
     
@@ -286,7 +286,7 @@ abstract class Frame_Reflower {
       
     $text = "";
 
-    foreach ($matches as $match) {
+    foreach($matches as $match) {
       
       if ( isset($match[2]) && $match[2] !== "" )
         $match[1] = $match[2];
@@ -338,7 +338,7 @@ abstract class Frame_Reflower {
 
           $p = $this->_frame->lookup_counter_frame($counter_id);
           $tmp = "";
-          while ($p) {
+          while($p) {
             $tmp = $p->counter_value($counter_id, $type) . $string . $tmp;
             $p = $p->lookup_counter_frame($counter_id);
           }
@@ -387,7 +387,7 @@ abstract class Frame_Reflower {
   /**
    * Sets the generated content of a generated frame
    */
-  protected function _set_content(){
+  protected function _set_content() {
     $frame = $this->_frame;
     $style = $frame->get_style();
   

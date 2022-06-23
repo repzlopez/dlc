@@ -9,7 +9,7 @@ if ( ! defined( 'GUEST' ) ) {
 	require_once( '../admin/setup.php' );
 }
 
-function getDetails($id,$name,$addy,$cont){//(GUEST?'hide':'')
+function getDetails($id,$name,$addy,$cont) {//(GUEST?'hide':'')
 	$x ='<div class="orders '.('hide').'" id="details"><h3 class="blue">DISTRIBUTOR DETAILS</h3>';
 	$x.='<ul>';
 	$x.='<li><label class="s4 lbl">ID:</label><span class="s7">'.$id.'</span></li>';
@@ -20,7 +20,7 @@ function getDetails($id,$name,$addy,$cont){//(GUEST?'hide':'')
 	return $x;
 }
 
-function getDelivery($dlv,$box){
+function getDelivery($dlv,$box) {
 	$dlv=array('Outgoing'=>0);
 	$x ='<div class="orders" id="delivery"><h3 class="blue">DELIVERY DETAILS '.(!GUEST?'<span class="s2"></span><label><input type="checkbox" id="useDist" /> Use Distributor Details</label>':'').'</h3><ul>';
 	$x.='<li><span class="s4 lbl">Deliver To:</span> <input type="text" id="deliName" name="deliName" placeholder="Name of receiver" required /></li>';
@@ -34,9 +34,9 @@ function getDelivery($dlv,$box){
 	return $x;
 }
 
-function getPayment($met){
+function getPayment($met) {
 	global $boxfee;$olreg_msg=$ol_pv='';$nosf=0;
-	switch(OLREG_REF){
+	switch(OLREG_REF) {
 		case OLREG_Choice100:$ol_pv=OLREG_min100;$ol_proc=1;break;
 		case OLREG_Choice500:$ol_pv=OLREG_min500;$ol_proc=1;break;
 		default:$ol_proc=0;
@@ -64,7 +64,7 @@ function getPayment($met){
 	return $x;
 }
 
-function getNotice(){
+function getNotice() {
 	$timedaily='10:00am - 6:00pm';
 	$daysdaily='Monday - Saturday';
 	$exceptday='holidays';
@@ -75,7 +75,7 @@ function getNotice(){
 	$rw=mysqli_fetch_array($rs);
 
 	$x ='<div class="orders" id="notice"><h3 class="blue">NOTICE</h3><ul>';
-	if(GUEST&&!RESELLER){
+	if(GUEST&&!RESELLER) {
 		$x.='<li><span class="s4 lbl">Referrer Info</span><span class="s3 lt">ID #:</span> <span>'.GUEST.'</span><br>';
 		$x.='<span class="s4"></span><span class="s3 lt">Name:</span> <span>'.$rw['name'].'</span><br>';
 		$x.='<span class="s4"></span><span class="s3 lt">Contact:</span> <span>'.$rw['dsmph'].'</span></li>';
@@ -91,7 +91,7 @@ function getNotice(){
 	return $x;
 }
 
-function getOrders(){
+function getOrders() {
 	global $dlcuser;
 	$ttl=isset($dlcuser)?'':'<div class="blue">SHOPPING CART</div>';
 
@@ -105,8 +105,8 @@ function getOrders(){
 	$x.='<span class="s3 rt">Total Amt</span></li>';
 	$shopqty=0;$shopamt=0;$shopppv=0;$shopwt=0;
 
-	if(isset($_SESSION['shoplist'])){
-		foreach($_SESSION['shoplist'] as $v){
+	if(isset($_SESSION['shoplist'])) {
+		foreach($_SESSION['shoplist'] as $v) {
 			$v1=$v[1];
 			$v2=utf8_encode($v[2]);
 			$v3=is_numeric($v[3])?$v[3]:0;
@@ -118,7 +118,7 @@ function getOrders(){
 			$shopppv+=$v4*$v3;
 			$shopamt+=$v5*$v3;
 			$shopwt+=$v7*$v3;
-			if($v3>0){
+			if($v3>0) {
 				$x.='<li>';
 				$x.='<span class="s1 lt">'.$v1.'</span>';
 				$x.='<span class="s6 link" rel="'.$v6.'">'.($v2).'</span>';

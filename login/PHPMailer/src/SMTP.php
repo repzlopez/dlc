@@ -510,7 +510,7 @@ class SMTP
             if (empty($authtype)) {
                 //If no auth mechanism is specified, attempt to use these, in this order
                 //Try CRAM-MD5 first as it's more secure than the others
-                foreach (['CRAM-MD5', 'LOGIN', 'PLAIN', 'XOAUTH2'] as $method) {
+                foreach(['CRAM-MD5', 'LOGIN', 'PLAIN', 'XOAUTH2'] as $method) {
                     if (in_array($method, $this->server_caps['AUTH'], true)) {
                         $authtype = $method;
                         break;
@@ -718,14 +718,14 @@ class SMTP
             $in_headers = true;
         }
 
-        foreach ($lines as $line) {
+        foreach($lines as $line) {
             $lines_out = [];
             if ($in_headers && $line === '') {
                 $in_headers = false;
             }
             //Break this line up into several smaller lines if it's too long
             //Micro-optimisation: isset($str[$len]) is faster than (strlen($str) > $len),
-            while (isset($line[self::MAX_LINE_LENGTH])) {
+            while(isset($line[self::MAX_LINE_LENGTH])) {
                 //Working backwards, try to find a space within the last MAX_LINE_LENGTH chars of the line to break on
                 //so as to avoid breaking in the middle of a word
                 $pos = strrpos(substr($line, 0, self::MAX_LINE_LENGTH), ' ');
@@ -749,7 +749,7 @@ class SMTP
             $lines_out[] = $line;
 
             //Send the lines to the server
-            foreach ($lines_out as $line_out) {
+            foreach($lines_out as $line_out) {
                 //RFC2821 section 4.5.2
                 if (!empty($line_out) && $line_out[0] === '.') {
                     $line_out = '.' . $line_out;
@@ -822,7 +822,7 @@ class SMTP
         $this->server_caps = [];
         $lines = explode("\n", $this->helo_rply);
 
-        foreach ($lines as $n => $s) {
+        foreach($lines as $n => $s) {
             //First 4 chars contain response code followed by - or space
             $s = trim(substr($s, 4));
             if (empty($s)) {
@@ -920,7 +920,7 @@ class SMTP
             if (strpos($dsn, 'NEVER') !== false) {
                 $notify[] = 'NEVER';
             } else {
-                foreach (['SUCCESS', 'FAILURE', 'DELAY'] as $value) {
+                foreach(['SUCCESS', 'FAILURE', 'DELAY'] as $value) {
                     if (strpos($dsn, $value) !== false) {
                         $notify[] = $value;
                     }
@@ -1192,7 +1192,7 @@ class SMTP
         }
         $selR = [$this->smtp_conn];
         $selW = null;
-        while (is_resource($this->smtp_conn) && !feof($this->smtp_conn)) {
+        while(is_resource($this->smtp_conn) && !feof($this->smtp_conn)) {
             //Must pass vars in here as params are by reference
             //solution for signals inspired by https://github.com/symfony/symfony/pull/6540
             set_error_handler([$this, 'errorHandler']);
@@ -1398,7 +1398,7 @@ class SMTP
             $this->last_smtp_transaction_id = null;
         } else {
             $this->last_smtp_transaction_id = false;
-            foreach ($this->smtp_transaction_id_patterns as $smtp_transaction_id_pattern) {
+            foreach($this->smtp_transaction_id_patterns as $smtp_transaction_id_pattern) {
                 $matches = [];
                 if (preg_match($smtp_transaction_id_pattern, $reply, $matches)) {
                     $this->last_smtp_transaction_id = trim($matches[1]);

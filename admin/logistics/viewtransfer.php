@@ -25,13 +25,13 @@ $ttl=$isasm?'Assembly':($issales?'Sales':'Transfer');
 
 $con=SQLi('products');
 $rs=mysqli_query($con,"SELECT * FROM $tbl WHERE id='$id'") or die(mysqli_error($con));
-if(mysqli_num_rows($rs)>0){
+if(mysqli_num_rows($rs)>0) {
 	$rec=null;
 	$rw=mysqli_fetch_assoc($rs);
 	$data.='<li class="hdr blue">'.$ttl.' Details<span class="blk s6 rt">ID: <strong class="blue">'.$rw['id'].'</strong></span></li>';
 	if(isset($rw['relstamp'])&&$rw['relstamp']=='') $_SESSION['releasing']=true;
 
-	if($isasm){
+	if($isasm) {
 		$data.='<li><span>Assembly: <strong class="blue">'.getPName($id).'</strong></span></li>';
 		$data.='<li><span class="s3 ct">Item</span><span class="s5">Description</span><span class="s3 rt">Qty</span></li>';
 	}else{
@@ -44,7 +44,7 @@ if(mysqli_num_rows($rs)>0){
 	$req=explode("~",$rw['reqdesc']);
 	$rel=isset($rw['reldesc'])?explode("~",$rw['reldesc']):null;
 	mysqli_close($con);
-	foreach($req as $v){
+	foreach($req as $v) {
 		$ireq[]=explode("|",$v);
 	}
 	$sig='<span id="sig"><br /><br />'.str_pad('Signature:',50,"_").'</span>';

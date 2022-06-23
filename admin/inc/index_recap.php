@@ -1,6 +1,6 @@
 <?php if(!defined('INCLUDE_CHECK')) die('Invalid Operation');
 if(!isset($_SESSION)) session_start();
-if(!IS_GLOB && !testScope("accounting")){reloadTo(DLC_ADMIN);exit;}
+if(!IS_GLOB && !testScope("accounting")) {reloadTo(DLC_ADMIN);exit;}
 $con=SQLi('distributor');
 $msg=$old=getRows();
 $smdata=$bonussum='';
@@ -9,14 +9,14 @@ $rdat=isset($_POST['recapavail'])?$_POST['recapavail']:null;
 $_SESSION['multirecap']=true;
 $availrecap=getAvailRecap($rdat);
 
-if(isset($_POST['submit'])){
+if(isset($_POST['submit'])) {
 	if(isset($_FILES['file'])) $file=$_FILES['file'];
-	if($_POST['submit']=='UPLOAD'){
+	if($_POST['submit']=='UPLOAD') {
 		postData($file['tmp_name']);
 /*
 		$temp=$file['tmp_name'];												//live
 		$temp_file='c://dlcwebtemp/bodstptemp_'.date('Ymd',time()).'.csv';		//local
-		if(isValid($file['type'])){
+		if(isValid($file['type'])) {
 			move_uploaded_file($temp,$temp_file);
 			$sqlcreate="CREATE TABLE IF NOT EXISTS bodstp (
 				bdyy VARCHAR(4) NOT NULL default '',
@@ -48,18 +48,18 @@ if(isset($_POST['submit'])){
 		$msg=' Upload successful. '.($adrow-$old).' rows added.';
 		reloadTo('index.php?p=recap');
 	//	}
-	}elseif($_POST['submit']=='GET RECAP'){
+	}elseif($_POST['submit']=='GET RECAP') {
 		getRecapData($file['tmp_name']);
 		$_SESSION['recapdate']=$rdat;
 		$rec='PREPARING RECAP FILE';
 		reloadTo('../distrilog/print_pdf.php');
-	}elseif($_POST['submit']=='GET BONUS SUM'){
+	}elseif($_POST['submit']=='GET BONUS SUM') {
 		ob_end_clean();
 
 		header('Content-type: application/vnd.ms-excel');
 		header('Content-disposition: filename=BONUS_SUM '.substr($rdat,-4).' '.substr($rdat,0,2).'.csv');
 		print getBonusSum($rdat);
-	}elseif($_POST['submit']=='GET SM DATA'){
+	}elseif($_POST['submit']=='GET SM DATA') {
 		$smdata=getSMData($rdat);
 	}
 	unset($_POST);
@@ -100,28 +100,28 @@ unset($_SESSION['lastrecap']);
 unset($_SESSION['recap_data']);
 unset($_SESSION['recapcreated']);
 
-function isValid($ft){
+function isValid($ft) {
 	if($ft=='text/csv'||$ft=='application/csv'||$ft=='application/vnd.ms-excel') return true;
 }
 
-function getRecapSched(){
+function getRecapSched() {
 	$yr=($_SESSION['lastrecap']>0)?substr($_SESSION['lastrecap'],-4):date('Y');
 	$qry="SELECT *	FROM tblsched WHERE yr='$yr'";
 	$con=SQLi('beta');$dat='';
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)>0){
-		while($rw=mysqli_fetch_array($rs)){
+	if(mysqli_num_rows($rs)>0) {
+		while($rw=mysqli_fetch_array($rs)) {
 			foreach($rw as $k=>$v) $$k=$v;
 			if($wk>substr($_SESSION['lastrecap'],0,2)) $dat.='<option>Week '.sprintf('%02d',$wk).': upload on '.date('M. d, Y',strtotime($vb)).'</option>';
 		}
 	}echo '<select id="uploadrecapsched">'.$dat.'</select>';
 }
 
-function getAvailRecap($my=''){$x='';
+function getAvailRecap($my='') {$x='';
 	$con=SQLi('distributor');
 	$qry="SELECT DISTINCT bdmm,bdyy FROM bodstp ORDER BY bdyy DESC,CAST(bdmm AS unsigned) DESC";
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		$mmyy=sprintf('%02d',$rw['bdmm']).$rw['bdyy'];
 		$x.='<option value="'.$mmyy.'" '.($mmyy==$my?SELECTED:'').'>'.$mmyy.'</option>';
 	}
@@ -129,26 +129,26 @@ function getAvailRecap($my=''){$x='';
 	return '<select name="recapavail" id="getavailrecap">'.$x.'</select>';
 }
 
-function getRecapData($file){$x='';
+function getRecapData($file) {$x='';
 	$addDistri=array(EDDY,RICK);
 	$data=fopen($file,'r');
 	while($rw=fgets($data)) $x.=$rw.',';
 	$_SESSION['recapdistri']=array_merge($addDistri,explode(',',rtrim($x,',')));
 }
 
-function getSMData($mmyy){$x=$a=$b='';
+function getSMData($mmyy) {$x=$a=$b='';
 	$m=substr($mmyy,0,2);
 	$y=substr($mmyy,-4);
 
-	if($y<=2017&&$m<36){ $smWk='Weekly';$smMgr=12;$smHalf=2000; }
+	if($y<=2017&&$m<36) { $smWk='Weekly';$smMgr=12;$smHalf=2000; }
 	else{ $smWk='Semi-Monthly';$smMgr=10;$smHalf=1000; }
 
 	$r1=array('Z','Y','X','W','V');
-	foreach($r1 as $k){
+	foreach($r1 as $k) {
 	     $a.="(SELECT ROUND(".($k=='Z'?'':'AVG')."(bdbamt)) FROM bodstp WHERE bdyy=$y AND bdmm=$m AND bdtype='$k'".($k=='Z'?' ORDER BY bdbamt DESC LIMIT 1':'').") $k,";
 	}
 	$r2=array('Z1'=>' AND bdbamt=(SELECT Z)','Z2'=>' AND bdbamt=(SELECT Zz)','Y1'=>'','X1'=>'','W1'=>'','V1'=>'');
-	foreach($r2 as $k=>$v){
+	foreach($r2 as $k=>$v) {
 	     $b.="(SELECT COUNT(*) FROM bodstp WHERE bdyy=$y AND bdmm=$m AND bdtype='".substr($k,0,1)."' $v) $k,";
 	}
 	$b=substr($b,0,-1);
@@ -158,7 +158,7 @@ function getSMData($mmyy){$x=$a=$b='';
 	$con=SQLi('distributor');
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
 	$rw=mysqli_fetch_array($rs);
-	foreach ($rw as $k=>$v) $$k=$v;
+	foreach($rw as $k=>$v) $$k=$v;
 	$x.='<ul>';
 	$x.='<li>Philippines '.$y.' '.$smWk.' '.$m.', POV = 0</li>';
 	$x.='<li>Manager '.$smMgr.'% = '.$Z1.' person Amount = '.number_format($Z,0).'</li>';
@@ -171,7 +171,7 @@ function getSMData($mmyy){$x=$a=$b='';
 	return $x;
 }
 
-function getBonusSum($mmyy){
+function getBonusSum($mmyy) {
 	$m=substr($mmyy,0,2);
 	$y=substr($mmyy,-4);
 	$qry="SELECT b.bdsid,CONCAT(dslnam,', ',dsfnam,' ',dsmnam) nam,
@@ -186,8 +186,8 @@ function getBonusSum($mmyy){
 
 	$con=SQLi('distributor');
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
-		foreach ($rw as $k=>$v) $$k=$v;
+	while($rw=mysqli_fetch_assoc($rs)) {
+		foreach($rw as $k=>$v) $$k=$v;
 
 		$str.='"",';
 		$str.='"'.$nam.'",';
@@ -206,7 +206,7 @@ echo $str;
 	return $str;
 }
 
-function getRows(){
+function getRows() {
 	$n=0;
 	$_SESSION['lastrecap']=0;
 	$con=SQLi('distributor');
@@ -227,10 +227,10 @@ function getRows(){
 	return $n.' entries found.';
 }
 
-function postData($file){
+function postData($file) {
 	$hdr=0;
 	$data=fopen($file,'r');
-	while($rw=fgets($data)){
+	while($rw=fgets($data)) {
 		$line=explode(',',$rw);
 		// if($hdr==1)
 		getData("'".$line[0]."','".$line[1]."','".$line[3]."','".$line[5]."','".$line[7]."','".$line[8]."',".$line[9].",".$line[12].",".$line[13].",".$line[14].",".$line[15]);
@@ -238,7 +238,7 @@ function postData($file){
 	}
 }
 
-function getData($idata){
+function getData($idata) {
 	$con=SQLi('distributor');
 	$qry=mysqli_query($con,"INSERT INTO bodstp VALUES ($idata);");
 	mysqli_close($con);

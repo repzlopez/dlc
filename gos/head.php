@@ -10,7 +10,7 @@ $_SESSION['lastURI']='gos';
 $gos_dsdid=isset($_SESSION['gos_dsdid'])?$_SESSION['gos_dsdid']:null;
 $frm='';
 
-if(ISIN_GOS){
+if(ISIN_GOS) {
 	$frm.='<div id="user" rel="'.$gos_dsdid.'" data-login="'.LOGIN_TYPE.'">'.(UPDATE_ON?'<span class="smaller">Update in progress...</span> ':'').'<span class="blue">GOS '.LOGIN_BRANCH.' | '.LOGIN_NAME.' |</span> <a href="/logout" class="lite">Logout</a></div>';
 }
 

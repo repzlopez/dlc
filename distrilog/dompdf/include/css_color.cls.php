@@ -3,7 +3,7 @@
  * @package dompdf
  * @link    http://www.dompdf.com/
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: css_color.cls.php 448 2011-11-13 13:00:03Z fabien.menager $
  */
@@ -197,7 +197,7 @@ class CSS_Color {
       if (count($triplet) != 3)
         return null;
       
-      foreach (array_keys($triplet) as $c) {
+      foreach(array_keys($triplet) as $c) {
         $triplet[$c] = trim($triplet[$c]);
         
         if ( $triplet[$c][mb_strlen($triplet[$c]) - 1] === "%" ) 
@@ -221,7 +221,7 @@ class CSS_Color {
       if (count($values) != 4)
         return null;
       
-      foreach ($values as &$c) {
+      foreach($values as &$c) {
         $c = floatval(trim($c));
         if ($c > 1.0) $c = 1.0;
         if ($c < 0.0) $c = 0.0;

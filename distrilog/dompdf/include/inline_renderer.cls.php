@@ -42,7 +42,7 @@ class Inline_Renderer extends Abstract_Renderer {
     
     $first_row = true;
 
-    foreach ($frame->get_children() as $child) {
+    foreach($frame->get_children() as $child) {
       list($child_x, $child_y, $child_w, $child_h) = $child->get_padding_box();
       
       if ( !is_null($w) && $child_x < $x + $w ) {
@@ -89,7 +89,7 @@ class Inline_Renderer extends Abstract_Renderer {
         if ( $frame->get_node()->nodeName === "a" ) {
           $link_node = $frame->get_node();
         }
-        else if ( $frame->get_parent()->get_node()->nodeName === "a" ){
+        else if ( $frame->get_parent()->get_node()->nodeName === "a" ) {
           $link_node = $frame->get_parent()->get_node();
         }
         
@@ -171,7 +171,7 @@ class Inline_Renderer extends Abstract_Renderer {
       }
     }
     
-    if ( $frame->get_parent() && $frame->get_parent()->get_node()->nodeName === "a" ){
+    if ( $frame->get_parent() && $frame->get_parent()->get_node()->nodeName === "a" ) {
       $link_node = $frame->get_parent()->get_node();
     }
     

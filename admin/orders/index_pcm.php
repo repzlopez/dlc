@@ -22,8 +22,8 @@ $qry="SELECT * $ad1
 //echo "$qry<br>";
 $con=SQLi('pcm');
 $rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-while($rw=mysqli_fetch_assoc($rs)){
-	foreach($rw as $k=>$v){ $$k=$v;}
+while($rw=mysqli_fetch_assoc($rs)) {
+	foreach($rw as $k=>$v) { $$k=$v;}
 	$x.='<li><a '.(IS_GLOB||IS_PCM?'href="/pcm/remit/?p=remit&do=1&i='.$refno.'"':'').' class="s4" target="_blank">'.$refno.'</a>';
 	$x.='<span class="s3">'.formatDate($refdate,'Ymd').'</span>';
 	$x.='<span class="s4">'.$dsdid.'</span>';

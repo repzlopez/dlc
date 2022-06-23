@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    http://php-font-lib.googlecode.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: font_eot.cls.php 34 2011-10-23 13:53:25Z fabien.menager $
  */
@@ -20,7 +20,7 @@ class Font_EOT extends Font_TrueType {
   
   public $header;
   
-  function parseHeader(){
+  function parseHeader() {
     $this->header = $this->unpack(array(
       "EOTSize"        => self::uint32,
       "FontDataSize"   => self::uint32,

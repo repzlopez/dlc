@@ -12,7 +12,7 @@ if( !GUEST && !ISIN_DISTRI && !DIST_ID && !isset($_POST['submit']) ) {
 $action	= '';
 $newref	= setRefNo();
 $idata	= "'".$newref."','".setDatePosted()."','".(GUEST?GUEST:(DIST_ID?DIST_ID:''))."','".(GUEST?GUEST:(DIST_ID?DIST_ID:''))."',";
-foreach ( $_POST as $k=>$v ) {
+foreach( $_POST as $k=>$v ) {
 	$$k = $v;
 	if( $k=='payAmt' ) $v = str_replace(',','',$v);
 	if( $k=='payDate' ) $v = str_replace('.','',$v);
@@ -24,7 +24,7 @@ $shopppv = 0;
 $idata   = substr_replace($idata,'',-1);
 
 if ( isset($_SESSION['shoplist']) ) {
-	foreach ( $_SESSION['shoplist'] as $v ) {
+	foreach( $_SESSION['shoplist'] as $v ) {
 		$v0 = $v[0];
 		$v1 = $v[1];
 		$v2 = $v[2];
@@ -86,14 +86,14 @@ switch($submit) {
 unset($_SESSION['shoplist']);
 unset($_POST);
 
-function setLog($refno,$user,$action){
+function setLog($refno,$user,$action) {
 	date_default_timezone_set('Asia/Manila');
 	$time = date(TMDSET,time());
 	$con  = SQLi('orders');
 	mysqli_query($con,"INSERT INTO tbllog VALUES ('$refno','$time','$user','$action')");
 }
 
-function setRefNo(){
+function setRefNo() {
 	$con  = SQLi('orders');
 	$date = setDatePosted();
 
@@ -102,7 +102,7 @@ function setRefNo(){
 	return '1-'.$date.sprintf("%04d",$num++);
 }
 
-function setDatePosted(){
+function setDatePosted() {
 	date_default_timezone_set('Asia/Manila');
 	$date = date('Ymd',time());
 	return $date;

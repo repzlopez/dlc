@@ -6,10 +6,10 @@ if(!isset($_SESSION)) {
 if(isset($_POST['submit'])&&$_POST['submit']=='pabili') echo buildOrders();
 if(isset($_POST['totals'])&&$_POST['totals']) echo getTotals();
 
-function buildOrders(){
+function buildOrders() {
 	$msg='';
-	if(isset($_SESSION['center_orders'])){
-		foreach($_SESSION['center_orders'] as $key=>$val){
+	if(isset($_SESSION['center_orders'])) {
+		foreach($_SESSION['center_orders'] as $key=>$val) {
 			$pid=$val[0];
 			$msg.='<li rel="'.$pid.'">';
 			$msg.='<span class="s1">'.$pid.'</span>';
@@ -23,10 +23,10 @@ function buildOrders(){
 	}return $msg;
 }
 
-function getTotals(){
+function getTotals() {
 	$msg='';$d=0;$d1=0;$d2=0;
-	if(isset($_SESSION['center_orders'])){
-		foreach($_SESSION['center_orders'] as $key=>$val){
+	if(isset($_SESSION['center_orders'])) {
+		foreach($_SESSION['center_orders'] as $key=>$val) {
 			$d1+=($val[2]*(float)$val[3]);
 			$d2+=($val[2]*(float)$val[4]);
 			$d++;

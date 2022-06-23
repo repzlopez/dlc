@@ -32,7 +32,7 @@ class Table_Row_Frame_Reflower extends Frame_Reflower {
     $style = $this->_frame->get_style();
     $cb = $this->_frame->get_containing_block();
 
-    foreach ($this->_frame->get_children() as $child) {
+    foreach($this->_frame->get_children() as $child) {
 
       if ( $page->is_full() )
         return;

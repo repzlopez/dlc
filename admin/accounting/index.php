@@ -19,9 +19,9 @@ $page="Accounting";
 $str='';
 ob_start();
 include('../head.php');
-if(!ISIN_ADMIN){
+if(!ISIN_ADMIN) {
 	$str.=$mainlogo;
-}elseif($content!=''){
+}elseif($content!='') {
 	include("index_$content.php");
 	$str.=$backbtn;
 }else{

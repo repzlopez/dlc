@@ -393,7 +393,7 @@ a.back { $frgt $imp;$mar_5 10px;$pad_5 20px $imp; }
 
 CSS;
 
-if($addcss==1){
+if($addcss==1) {
 echo <<<CSS
 #bg { $bk:$bg;$h100;$pad_0 10px;$posfix;bottom:0;$maxwid;z-index:-99; }
 
@@ -499,7 +499,7 @@ ul#filter li input { $bor_0;$mar_0;$pad_0;width:20px; }
 CSS;
 }
 
-if($req=='mypage'){
+if($req=='mypage') {
 echo <<<CSS
 
 /*	distributors 	*/
@@ -584,7 +584,7 @@ span.gen1 { color:#c82536 $imp; }
 /*	distributors 	*/
 
 CSS;
-}else if($req=='onreg'){
+}else if($req=='onreg') {
 echo <<<CSS
 
 /*	online reg 	*/
@@ -616,7 +616,7 @@ textarea { $pad_5; }
 /*	online reg 	*/
 
 CSS;
-}else if($req=='first_login'){
+}else if($req=='first_login') {
 echo <<<CSS
 
 /*	first login 	*/
@@ -634,7 +634,7 @@ $in_sub { $w_aut; }
 /*	first login 	*/
 
 CSS;
-}else if($req=='error'){
+}else if($req=='error') {
 echo <<<CSS
 
 /*		error			*/
@@ -656,7 +656,7 @@ body { $h100;$ov_hid; }
 /*		error			*/
 
 CSS;
-}else if($req=='gos'||$req=='pcm'){
+}else if($req=='gos'||$req=='pcm') {
 echo <<<CSS
 
 /*	gos 	*/
@@ -751,14 +751,14 @@ CSS;
 }
 ?>
 <?php
-if($req=='calendar'){
+if($req=='calendar') {
 	$dbsrc='beta';
 	require('../admin/infoconfig.php');
 	$tbl='tbllocations';
 	$rs = mysqli_query($con,"SHOW TABLES LIKE '$tbl'") or die(mysqli_error($con));
 	if(mysqli_num_rows($rs)==1) {
 		$rs=mysqli_query($con,"SELECT * FROM $tbl WHERE status=1") or die(mysqli_error($con));
-		while ($rw = mysqli_fetch_assoc($rs)){
+		while($rw = mysqli_fetch_assoc($rs)) {
 			echo '.'.$rw['id'].' { color:'.$rw['color'].' '.$imp.'; }'."\n";
 		}
 	}
@@ -766,23 +766,23 @@ if($req=='calendar'){
 	echo '/*	calendar 	*/';
 }?>
 <?php
-if($addcss==2){
+if($addcss==2) {
 $mgronly='';$astocks='';$calprint='';
 $willshow=(isset($_SESSION['is_recap'])&&$_SESSION['is_recap'])?'':$dnon;
-if(isset($_SESSION['is_mgrlist'])&&$_SESSION['is_mgrlist']){
+if(isset($_SESSION['is_mgrlist'])&&$_SESSION['is_mgrlist']) {
 	$mgronly="#head,#distdata,#tab,.updated{ $dnon }
 #data_list{ $posabs;top:0; }";
 }
-if(isset($_SESSION['isActualStocks'])&&$_SESSION['isActualStocks']){
+if(isset($_SESSION['isActualStocks'])&&$_SESSION['isActualStocks']) {
 	$astocks="#head,.nav2,input { $dnon $imp; } #sig,.pbut { $diblok $imp; } #stocksactual li { $pad_0; } #stocksactual input { $pad_0;height:18px; }
 ";
 }
-if($req=='calendar'){
+if($req=='calendar') {
 	$calprint="#cart,.lava,.nav2,.caltitle,input { $dnon $imp; }
 	.lastmonth,.nextmonth { color:#fff $imp; }
 	.calendar_page li { $bor1 #999;border-width:0 1px 1px 0; }";
 }
-if($req=='gos'||$req=='pcm'){
+if($req=='gos'||$req=='pcm') {
 	$center="
 	#head,#shortnav,.nav2 { $dnon; }
 	.remit ul { $mar_0 $imp;$bor_0; }

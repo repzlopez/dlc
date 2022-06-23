@@ -59,7 +59,7 @@ class Inline_Frame_Reflower extends Frame_Reflower {
 
     // Set the containing blocks and reflow each child.  The containing
     // block is not changed by line boxes.
-    foreach ( $frame->get_children() as $child ) {
+    foreach( $frame->get_children() as $child ) {
       $child->set_containing_block($cb);
       $child->reflow($block);
     }

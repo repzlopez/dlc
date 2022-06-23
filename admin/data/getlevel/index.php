@@ -2,7 +2,7 @@
 if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
-if(!ISIN_ADMIN||!testScope("global|data")){
+if(!ISIN_ADMIN||!testScope("global|data")) {
 	reloadTo(DLC_ADMIN);exit;
 }else{
 	date_default_timezone_set('Asia/Manila');
@@ -25,7 +25,7 @@ if(!ISIN_ADMIN||!testScope("global|data")){
 	print $csv;
 }
 
-function listLevel($level,$date){
+function listLevel($level,$date) {
 	$year=substr($date,2,4);
 	$useWhere="bhdid=dsdid AND bhpmo='".intval(substr($date,0,2))."' AND bhpyr='".$year."'";
 	$useCoID="bhcoid='DLCPH'";
@@ -41,7 +41,7 @@ function listLevel($level,$date){
 
 	$rs=mysql_query($qry) or die(mysql_error());
 	$ctr=mysql_num_rows($rs);
-	if($ctr>0){
+	if($ctr>0) {
 		while($rw=mysql_fetch_assoc($rs)) {
 			$dat.='"'.number_format($rw['bhdid'],0).'",';
 			$dat.='"'.$rw['dslnam'].'",';

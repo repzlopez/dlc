@@ -10,7 +10,7 @@
  *   http://www.opensource.org/licenses/mit-license.php
  *
  *******************************************************************************/
-var EventHelpers = new function(){
+var EventHelpers = new function() {
     var me = this;
     
     var safariTimer;
@@ -22,7 +22,7 @@ var EventHelpers = new function(){
 			return;	
 		}
 		
-		if (document.createEventObject){
+		if (document.createEventObject) {
 	        // dispatch for IE
 	        globalEvent = document.createEventObject();
 	    } else 	if (document.createEvent) {
@@ -44,13 +44,13 @@ var EventHelpers = new function(){
      * @param {String} evType - an event to attach to the object.
      * @param {Function} fn - the function that is attached to the event.
      */
-    me.addEvent = function(obj, evType, fn){
+    me.addEvent = function(obj, evType, fn) {
     
         if (obj.addEventListener) {
             obj.addEventListener(evType, fn, false);
         } else if (obj.attachEvent) {
             obj['e' + evType + fn] = fn;
-            obj[evType + fn] = function(){
+            obj[evType + fn] = function() {
                 obj["e" + evType + fn](self.event);
             }
             obj.attachEvent("on" + evType, obj[evType + fn]);
@@ -66,7 +66,7 @@ var EventHelpers = new function(){
      * @param {String} evType - an event attached to the object.
      * @param {Function} fn - the function that is called when the event fires.
      */
-    me.removeEvent = function(obj, evType, fn){
+    me.removeEvent = function(obj, evType, fn) {
     
         if (obj.removeEventListener) {
             obj.removeEventListener(evType, fn, false);
@@ -82,7 +82,7 @@ var EventHelpers = new function(){
         }
     }
     
-    function removeEventAttribute(obj, beginName){
+    function removeEventAttribute(obj, beginName) {
         var attributes = obj.attributes;
         for (var i = 0; i < attributes.length; i++) {
             var attribute = attributes[i]
@@ -94,7 +94,7 @@ var EventHelpers = new function(){
         }
     }
     
-    me.addScrollWheelEvent = function(obj, fn){
+    me.addScrollWheelEvent = function(obj, fn) {
         if (obj.addEventListener) {
             /** DOMMouseScroll is for mozilla. */
             obj.addEventListener('DOMMouseScroll', fn, true);
@@ -107,7 +107,7 @@ var EventHelpers = new function(){
         
     }
     
-    me.removeScrollWheelEvent = function(obj, fn){
+    me.removeScrollWheelEvent = function(obj, fn) {
         if (obj.removeEventListener) {
             /** DOMMouseScroll is for mozilla. */
             obj.removeEventListener('DOMMouseScroll', fn, true);
@@ -126,7 +126,7 @@ var EventHelpers = new function(){
      * @param {Object} e - a DOM Event object.
      * @return {int} - the mouse pointer's x-coordinate.
      */
-    me.getMouseX = function(e){
+    me.getMouseX = function(e) {
         if (!e) {
             return;
         }
@@ -150,7 +150,7 @@ var EventHelpers = new function(){
      * @param {Object} e - a DOM Event Object.
      * @return {int} - the mouse pointer's y-coordinate.
      */
-    me.getMouseY = function(e){
+    me.getMouseY = function(e) {
         // NS4
         if (e.pageY != null) 
             return e.pageY;
@@ -170,7 +170,7 @@ var EventHelpers = new function(){
      * @return {int} - the mouse wheel's delta.  It is greater than 0, the
      * scroll wheel was spun upwards; if less than 0, downwards.
      */
-    me.getScrollWheelDelta = function(e){
+    me.getScrollWheelDelta = function(e) {
         var delta = 0;
         if (!e) /* For IE. */ 
             e = window.event;
@@ -199,7 +199,7 @@ var EventHelpers = new function(){
      *
      * @param {Function} func - the function that you want a mouse event to fire.
      */
-    me.addMouseEvent = function(func){
+    me.addMouseEvent = function(func) {
     
         if (document.captureEvents) {
             document.captureEvents(Event.MOUSEMOVE);
@@ -219,7 +219,7 @@ var EventHelpers = new function(){
      * @param {Object} e - an HTML object
      * @return {Object} - the HTML object that fired the event.
      */
-    me.getEventTarget = function(e){
+    me.getEventTarget = function(e) {
         // first, IE method for mouse events(also supported by Safari and Opera)
         if (e.toElement) {
             return e.toElement;
@@ -244,7 +244,7 @@ var EventHelpers = new function(){
      * @param {Object} e - an event object.
      * @return {String} - the ASCII character code representing the key associated with the event.
      */
-    me.getKey = function(e){
+    me.getKey = function(e) {
         if (e.keyCode) {
             return e.keyCode;
         } else if (e.event && e.event.keyCode) {
@@ -278,7 +278,7 @@ var EventHelpers = new function(){
      *
      * @param {String} funcName - a string containing the function to be called.
      */
-    me.addPageLoadEvent = function(funcName){
+    me.addPageLoadEvent = function(funcName) {
     
         var func = eval(funcName);
         
@@ -293,7 +293,7 @@ var EventHelpers = new function(){
             
             if (!safariTimer) {
             
-                safariTimer = setInterval(function(){
+                safariTimer = setInterval(function() {
                     if (/loaded|complete/.test(document.readyState)) {
                         clearInterval(safariTimer);
                         
@@ -319,7 +319,7 @@ var EventHelpers = new function(){
     
     var pageLoadEventArray = new Array();
     
-    me.runPageLoadEvents = function(e){
+    me.runPageLoadEvents = function(e) {
         if (isSafari || e.srcElement.readyState == "complete") {
         
             for (var i = 0; i < pageLoadEventArray.length; i++) {
@@ -334,7 +334,7 @@ var EventHelpers = new function(){
      * @see addPageLoadEvent
      * @param {Function} funcArgs - the arguments of the containing. function
      */
-    me.hasPageLoadHappened = function(funcArgs){
+    me.hasPageLoadHappened = function(funcArgs) {
         // If the function already been called, return true;
         if (funcArgs.callee.done) 
             return true;
@@ -352,7 +352,7 @@ var EventHelpers = new function(){
      * @param {Object} e - an event object.
      * @return {Boolean} - always false
      */
-    me.preventDefault = function(e){
+    me.preventDefault = function(e) {
     
         if (e.preventDefault) {
             e.preventDefault();
@@ -367,7 +367,7 @@ var EventHelpers = new function(){
         
     }
     
-    me.cancelBubble = function(e){
+    me.cancelBubble = function(e) {
         if (e.stopPropagation) {
             e.stopPropagation();
         }
@@ -388,13 +388,13 @@ var EventHelpers = new function(){
 	 * @param {Function} fn - the function that is called when the event fires.
 	 * 
 	 */
-	me.fireEvent = function (element,event, options){
+	me.fireEvent = function (element,event, options) {
 		
 		if(!element) {
 			return;
 		}
 		
-	    if (document.createEventObject){
+	    if (document.createEventObject) {
 	        /* 
 			var stack = DebugHelpers.getStackTrace();
 			var s = stack.toString();
@@ -415,7 +415,7 @@ var EventHelpers = new function(){
 }
     
     /* EventHelpers.init () */
-    function init(){
+    function init() {
         // Conditional comment alert: Do not remove comments.  Leave intact.
         // The detection if the page is secure or not is important. If 
         // this logic is removed, Internet Explorer will give security

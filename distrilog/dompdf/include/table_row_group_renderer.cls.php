@@ -33,7 +33,7 @@ class Table_Row_Group_Renderer extends Block_Renderer {
     }
     
     if (DEBUG_LAYOUT && DEBUG_LAYOUT_LINES && $frame->get_decorator()) {
-      foreach ($frame->get_decorator()->get_line_boxes() as $line) {
+      foreach($frame->get_decorator()->get_line_boxes() as $line) {
         $frame->_debug_layout(array($line->x, $line->y, $line->w, $line->h), "orange");
       }
     }

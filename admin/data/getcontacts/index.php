@@ -2,18 +2,18 @@
 if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
-if(!ISIN_ADMIN||!testScope("global|data")){
+if(!ISIN_ADMIN||!testScope("global|data")) {
 	reloadTo(DLC_ADMIN);exit;
 }else{
 	date_default_timezone_set('Asia/Manila');
 	header('Content-type: application/vnd.ms-excel');
 	header('Content-disposition: filename=Contacts_asof_'.date('mdY',time()).'.csv');
-	if(isset($_GET['do'])){
+	if(isset($_GET['do'])) {
 		print listEmails($_GET['do']);
 	}else print listContacts();
 }
 
-function listContacts(){$str='';
+function listContacts() {$str='';
 	$smart=array('63907','63908','63909','63910','63912',
 				'63918','63919','63920','63921','63928',
 				'63929','63930','63938','63939','63946',
@@ -23,7 +23,7 @@ function listContacts(){$str='';
 				'63937','63996','63997');
 	$sun=array('63922','63923','63932','63933','63942','63943');
 	$arr=array_merge($smart,$globe,$sun);
-	foreach($arr as $v){
+	foreach($arr as $v) {
 		$qry="
 			SELECT * FROM distributors
 			WHERE dscoid='DLCPH' AND dsmph LIKE '$v%'
@@ -45,7 +45,7 @@ function listContacts(){$str='';
 	return $str;
 }
 
-function listEmails($do){
+function listEmails($do) {
 	$filter=($do)?'AND email!=dseadd':'';
 	$qry="
 		SELECT a.dsdid,concat(dslnam,' ',dsfnam) name,email,dseadd
@@ -58,7 +58,7 @@ function listEmails($do){
 	$str.="\n";
 	$con=SQLi('distributor');
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		$str.='"'.$i++.'",';
 		$str.='"'.$rw['dsdid'].'",';
 		$str.='"'.$rw['name'].'",';

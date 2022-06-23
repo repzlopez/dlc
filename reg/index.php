@@ -31,17 +31,17 @@ if( isset($_GET['i']) ) {
 	$con = SQLi('beta');
 	$rs  = mysqli_query($con,"SELECT * FROM tblolreg WHERE $wer");
 
-	if ( mysqli_num_rows($rs)>0 ) {
+	if( mysqli_num_rows($rs)>0 ) {
 		$found = 1;
 		$rw = mysqli_fetch_assoc($rs);
-		foreach ( $rw as $k=>$v ) $$k = $v;
+		foreach( $rw as $k=>$v ) $$k = $v;
 	}//else if(!ISIN_DISTRI) reloadTo('../errors');
 
 	$scan = testImg("scan/$i");
 }
 
 if( !$found && $i===DIST_ID && isset($_SESSION['dsmstp_update']) ) {
-	foreach ( $_SESSION['dsmstp_update'] as $k=>$v ) {
+	foreach( $_SESSION['dsmstp_update'] as $k=>$v ) {
 		$_SESSION['post'][$k] = $v;
 	}
 
@@ -49,7 +49,7 @@ if( !$found && $i===DIST_ID && isset($_SESSION['dsmstp_update']) ) {
 }
 
 if( isset($_SESSION['post']) ) {
-	foreach ( $_SESSION['post'] as $k=>$v ) $$k=$v;
+	foreach( $_SESSION['post'] as $k=>$v ) $$k=$v;
 
 	$styleis = (strpos($bad,'RED')!==false) ? RED :'';
 	$baddate = (strpos($bad,'invalid date')!==false) ? RED :'';

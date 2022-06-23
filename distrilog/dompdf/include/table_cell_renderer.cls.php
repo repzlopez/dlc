@@ -67,7 +67,7 @@ class Table_Cell_Renderer extends Block_Renderer {
 
 
     // Draw the horizontal borders
-    foreach ( $cells["columns"] as $j ) {
+    foreach( $cells["columns"] as $j ) {
       $bp = $cellmap->get_border_properties($i, $j);
 
       $y = $top_row["y"] - $bp["top"]["width"] / 2;
@@ -113,7 +113,7 @@ class Table_Cell_Renderer extends Block_Renderer {
       $draw_right = false;
 
     // Draw the vertical borders
-    foreach ( $cells["rows"] as $i ) {
+    foreach( $cells["rows"] as $i ) {
       $bp = $cellmap->get_border_properties($i, $j);
 
       $x = $left_col["x"] - $bp["left"]["width"] / 2;

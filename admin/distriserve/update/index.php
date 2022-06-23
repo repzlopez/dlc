@@ -18,9 +18,9 @@ $page='Distributor Service';
 
 ob_start();
 include('../../head.php');
-if(!ISIN_ADMIN){
+if(!ISIN_ADMIN) {
 	echo $mainlogo;
-}elseif($content!=''){
+}elseif($content!='') {
 	$updating=getStatus('996')?'UPDATE IN PROGRESS. ':'';
 	include("index_$content.php");
 }else{ echo '<ul class="home">';
@@ -34,7 +34,7 @@ if(!ISIN_ADMIN){
 require('../../foot.php');
 ob_end_flush();
 
-function getLastUpdate(){
+function getLastUpdate() {
 	$con=SQLi('distributor');
 	$rs=mysqli_query($con,"SELECT date_updated FROM updates ORDER BY date_updated DESC LIMIT 1") or die(mysqli_error($con));
 	$rw=mysqli_fetch_assoc($rs);

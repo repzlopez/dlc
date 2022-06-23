@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    http://php-font-lib.googlecode.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: font_truetype_header.cls.php 34 2011-10-23 13:53:25Z fabien.menager $
  */
@@ -23,7 +23,7 @@ class Font_TrueType_Header extends Font_Header {
     "rangeShift"    => self::uint16,
   );
   
-  public function parse(){
+  public function parse() {
     parent::parse();
     
     $format = $this->data["format"];

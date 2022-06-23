@@ -13,11 +13,11 @@ if ( !ISIN_GOS&&!LOGIN_ID&&!isset($_POST['submit']) ) {
 }
 
 $con = SQLi('gos');
-foreach ( $_POST as $key=>$val ) {
+foreach( $_POST as $key=>$val ) {
 	$_POST[$key] = trim_escape($val);
 }
 
-foreach($_SESSION as $key=>$val){
+foreach($_SESSION as $key=>$val) {
 	$_SESSION[$key]=trim_escape($val);
 }
 

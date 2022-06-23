@@ -16,9 +16,9 @@ $page="Lookup Service";
 $y='';
 ob_start();
 include('../head.php');
-if(!ISIN_ADMIN){
+if(!ISIN_ADMIN) {
 	$y.=$mainlogo;
-}elseif($content!=''){
+}elseif($content!='') {
 	include("index_$content.php");
 	$y.=$backbtn;
 }else{ $y.='<ul class="home">';

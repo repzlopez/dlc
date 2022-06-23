@@ -29,7 +29,7 @@ class Table_Row_Group_Frame_Reflower extends Frame_Reflower {
     
     $cb = $this->_frame->get_containing_block();
     
-    foreach ( $this->_frame->get_children() as $child) {
+    foreach( $this->_frame->get_children() as $child) {
       // Bail if the page is full
       if ( $page->is_full() )
         return;

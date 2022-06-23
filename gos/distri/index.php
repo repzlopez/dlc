@@ -23,7 +23,7 @@ $qry = "SELECT o.*,o.status stat,CONCAT(d.dslnam,', ',d.dsfnam) sponsor FROM tbl
      AND o.status<2
      ORDER BY o.status,o.id";
      $rs = mysqli_query($con,$qry) or die(mysqli_error($con));
-     while ( $r=mysqli_fetch_assoc($rs) ) {
+     while( $r=mysqli_fetch_assoc($rs) ) {
      $test = testAllow($r['dssid']);
      $new  = $r['status'];
 

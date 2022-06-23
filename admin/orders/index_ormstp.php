@@ -9,7 +9,7 @@ $_SESSION['showall']=$all;
 list($wk1,$yr,,$wed)=getDatWk(date('Y-m-d'));
 list($wk,,$thu,)=getDatWk(($wk1>2?sprintf("%02d",$wk1-1):'01').$yr,1);
 
-if($do==0){
+if($do==0) {
 	$_SESSION['ormstp']=$_SERVER['REQUEST_URI'];
 	$sort=$srt?'omdid':'LENGTH(o.ominv) DESC,o.ominv DESC';
 	$wer=$all?"WHERE o.ompyr='$yr' AND d.ompyr='$yr'".(sprintf("%02d",$wk1)=='01'?" OR (o.ompyr='".($yr-1)."' AND SUBSTRING(o.omodat,5,2)='12')":''):"WHERE (o.ompmo='".sprintf("%02d",$wk1)."' OR o.ompmo='".sprintf("%02d",$wk1-1)."') AND o.ompyr='$yr' AND UPPER(o.ominv)<>'VOID'";
@@ -18,7 +18,7 @@ if($do==0){
 	$qry="SELECT o.ompmo,SUM(o.ompv)*25 oompv FROM ormstp o WHERE o.ompyr='$yr' AND o.ompmo BETWEEN $wk0 AND $wk1 GROUP BY o.ompmo";
 	$con=SQLi('orders');
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){ $r[$rw['ompmo']]=$rw['oompv']; }
+	while($rw=mysqli_fetch_assoc($rs)) { $r[$rw['ompmo']]=$rw['oompv']; }
 	$curr=isset($r[$wk1])?number_format($r[$wk1],2):'NO DATA';
 	$prev=isset($r[$wk0])?number_format($r[$wk0],2):'NO DATA';
 	$approx="APPROX [ Week $wk1: ".$curr." ] [ Week $wk0: ".$prev." ]";
@@ -39,7 +39,7 @@ if($do==0){
 		ORDER BY ompmo DESC, $sort
 		";
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		$x.='<li rel="'.$rw['oominv'].'" '.($rw['oompv']!=$rw['dompv']?'class="bad"':'').'>';
 		$x.='<span class="s2"><a href="?p='.$content.'&do=2&i='.$rw['oominv'].'" class="s2">'.$rw['ompmo'].'</a></span>';
 		$x.='<span class="s2"><a href="?p='.$content.'&do=2&i='.$rw['oominv'].'" class="s2">'.$rw['oominv'].'</a></span>';
@@ -61,15 +61,15 @@ if($do==0){
 	$rs=mysqli_query($con,"DESC ormstp");
 	while($rw=mysqli_fetch_assoc($rs)) $$rw['Field']=null;
 
-	if($do==1){
+	if($do==1) {
 		$omodat=date('Ymd');$ompyr=$yr;$ompmo=$wk1;$ompov=0;$ompv=0;$pov=0;$pv=0;
-		if($item!=''){
+		if($item!='') {
 			$con=SQLi($center);
 			$qry="SELECT * FROM tblorders WHERE refno='$item'";
 			$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-			while($rw=mysqli_fetch_assoc($rs)) foreach($rw as $k=>$v){ $$k=$v;}
+			while($rw=mysqli_fetch_assoc($rs)) foreach($rw as $k=>$v) { $$k=$v;}
 			$d=explode("~",($orders!=''?$orders:'||||'));
-			foreach($d as $i){
+			foreach($d as $i) {
 				$e=explode("|",$i);
 				$pov+=((float)$e[3]*$e[2]);
 				$pv+=((float)$e[4]*$e[2]);
@@ -83,7 +83,7 @@ if($do==0){
 		}
 	}else{
 		$rs=mysqli_query($con,"SELECT * FROM $tbl WHERE ominv='$item'") or die(mysqli_error($con));
-		while($rw=mysqli_fetch_assoc($rs)) foreach($rw as $k=>$v){ $$k=$v;}
+		while($rw=mysqli_fetch_assoc($rs)) foreach($rw as $k=>$v) { $$k=$v;}
 	}
 
 	$x.='<li><span class="s2 lt">Date</span>: <input type="text" class="s2 rt req" id="omodat" name="omodat" value="'.$omodat.'" /><span class="s2"></span><span class="s1 lt">Year</span>: <input type="text" class="s1 ct req" name="ompyr" value="'.$ompyr.'" /><span class="s1"></span><span class="s1">Week</span>: <input type="text" class="s1 ct req" name="ompmo" value="'.sprintf("%02d",$ompmo).'"/></li>';
@@ -98,13 +98,13 @@ if($do==0){
 }echo $x;
 unset($_SESSION['errmsg']);
 
-function loadCenter($db,$wk,$thu,$wed,$all=0,$yr=''){
+function loadCenter($db,$wk,$thu,$wed,$all=0,$yr='') {
 	$ad1=($all?'':",CONCAT(LEFT(refdate,4),'-',SUBSTRING(refdate,5,2),'-',RIGHT(refdate,2)) rdate");
 	$ad2=($all?"AND LEFT(refdate,4)='".($yr)."' OR LEFT(refdate,6)='".($yr-1)."12'":"HAVING rdate BETWEEN '$thu' AND '$wed'");
 	$qry="SELECT refno,refdate,dsdid $ad1 FROM tblorders WHERE invoice='' $ad2 ORDER BY refdate DESC";
 	$con=SQLi($db);$r='';
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		if($all) list($wk,,,)=getDatWk(substr($rw['refdate'],0,4).'-'.substr($rw['refdate'],4,2).'-'.substr($rw['refdate'],-2));
 		$href='?p=ormstp&do=1&c='.$db.'&i='.$rw['refno'];
 		$r.='<li rel="'.$rw['refno'].'"><span class="s2"><a href="'.$href.'" class="s2">'.sprintf("%02d",$wk).'</a></span>';

@@ -3,7 +3,7 @@ if(!isset($_SESSION)) {
      session_set_cookie_params(0);
      session_start();
 }
-if(!defined('INCLUDE_CHECK')){
+if(!defined('INCLUDE_CHECK')) {
 	define('INCLUDE_CHECK',1);
 	require('../admin/setup.php');
 }
@@ -21,7 +21,7 @@ $_SESSION['recap0']='';
 
 $_SESSION['recap_data']=getRecap();
 
-function getRecap(){
+function getRecap() {
 	$dist_id	=$_SESSION['u_site'];
 	$defmonyer	=getDefaultMonYear(date('Y',time()));
 	$selmonyer	=isset($_GET['w'])?$_GET['w']:WKYR;//$defmonyer
@@ -41,7 +41,7 @@ function getRecap(){
 	return $rd;
 }
 
-function getDistributor($id,$wk,$yr){
+function getDistributor($id,$wk,$yr) {
 	$qry="
 		SELECT dsdid,dsstrt,dsbarn,dscity,dsprov
 		FROM distributors
@@ -66,7 +66,7 @@ function getDistributor($id,$wk,$yr){
 	return $dat;
 }
 
-function getData($sponsor,$wk,$yr){
+function getData($sponsor,$wk,$yr) {
 	$_SESSION['recap_grpbonus']=0;
 	$_SESSION['recap_ppvgpv']=0;
 	$_SESSION['recap_rebate']=0;
@@ -95,7 +95,7 @@ function getData($sponsor,$wk,$yr){
 	return $dat;
 }
 
-function getList($qry,$hdr=null){
+function getList($qry,$hdr=null) {
 	$dat='';$n=0;
 	$namelimit=20;
 	$con=SQLi('distributor');
@@ -103,8 +103,8 @@ function getList($qry,$hdr=null){
 	$num=mysqli_num_rows($rs);
 	if($hdr=='L'&&$num>0) $dat.='<li><span class="s5 rt">Leadership Bonus</span></li>';
 	if($hdr=='W'&&$num>0) $dat.='<li><span class="s5 rt">Weekly Profit Sharing</span></li>';
-	if(mysqli_num_rows($rs)>0){
-		while($rw=mysqli_fetch_assoc($rs)){
+	if(mysqli_num_rows($rs)>0) {
+		while($rw=mysqli_fetch_assoc($rs)) {
 			if(isset($_SESSION['recap_tax'])&&$_SESSION['recap_tax']=='') $_SESSION['recap_tax']=$rw['bdctxp'];
 			$id=str_replace('--','-',implode("-",str_split($rw['bddids'],3)));
 			$uname=getName($rw['bddids'],'lfm');
@@ -115,7 +115,7 @@ function getList($qry,$hdr=null){
 			$dat.='<span class="s3 rt">'.number_format($rw['bdpov'],2).'</span>';
 			$dat.='<span class="s2 rt">'.number_format($rw['bdbpct']*100,1).'</span>';
 			$dat.='<span class="s3 rt">'.number_format($rw['bdbamt'],2).'</span></li>';
-			if($rw['bddids']==strtoupper($_SESSION['u_site'])&&!isset($hdr)){
+			if($rw['bddids']==strtoupper($_SESSION['u_site'])&&!isset($hdr)) {
 				$_SESSION['recap_ppv']=$rw['bdppv'];
 				$_SESSION['recap_rebate']=$rw['bdbamt'];
 				$_SESSION['recap_pct']=$rw['bdbpct'];
@@ -123,7 +123,7 @@ function getList($qry,$hdr=null){
 			}else{
 				$_SESSION['recap_grpbonus']+=$rw['bdbamt'];
 				$_SESSION['recap_ppvgpv']+=$rw['bdppv'];
-				if($rw['bdbpct']==$_SESSION['recap_pct']){
+				if($rw['bdbpct']==$_SESSION['recap_pct']) {
 					$_SESSION['recap_ndpv']+=$rw['bdppv'];
 				}
 			}
@@ -132,7 +132,7 @@ function getList($qry,$hdr=null){
 	return $dat;
 }
 
-function getTotals(){
+function getTotals() {
 	$ttp  =array(''=>'0','Domestic '=>'10','Domestic'=>'15','Foreigner'=>'25') ;
 	$tax  =$_SESSION['recap_tax'];
 	$rppv =$_SESSION['recap_ppv'];
@@ -156,7 +156,7 @@ function getTotals(){
 	return $dat;
 }
 
-function getOrders($id,$yr,$wk){
+function getOrders($id,$yr,$wk) {
 	$dat='';
 	$qry="
 		SELECT ominv,omodat
@@ -168,8 +168,8 @@ function getOrders($id,$yr,$wk){
 	";
 	$con=SQLi('distributor');
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)>0){
-		while($rw=mysqli_fetch_assoc($rs)){
+	if(mysqli_num_rows($rs)>0) {
+		while($rw=mysqli_fetch_assoc($rs)) {
 			$date=str_split($rw['omodat'],2);
 			$date=$date[0].$date[1].'/'.$date[2].'/'.$date[3];
 			$dat.='<li><span class="s4"></span><span class="s3 rt">'.$rw['ominv'].'</span><span class="s3 rt">'.$date.'</span></li>';
@@ -177,7 +177,7 @@ function getOrders($id,$yr,$wk){
 	}
 }
 
-function getBonusRec($id,$wk,$yr){
+function getBonusRec($id,$wk,$yr) {
 	$qry="
 		SELECT bdbpct
 		FROM bodstp
@@ -197,7 +197,7 @@ function getBonusRec($id,$wk,$yr){
 	return array($now,$bak);
 }
 
-function getDefaultMonYear($yr){
+function getDefaultMonYear($yr) {
 	$qry="
 		SELECT DISTINCT bdmm,bdyy
 		FROM bodstp
@@ -205,7 +205,7 @@ function getDefaultMonYear($yr){
 	";
 	$con=SQLi('distributor');
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)>0){
+	if(mysqli_num_rows($rs)>0) {
 		$rw=mysqli_fetch_array($rs);
 		return sprintf('%02d',$rw['bdmm']).$rw['bdyy'];
 	}

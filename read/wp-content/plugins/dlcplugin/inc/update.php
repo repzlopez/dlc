@@ -9,7 +9,7 @@
 //       * $action 'plugin_information'
 //       * $args stdClass Object ( [slug] => woocommerce [is_ssl] => [fields] => Array ( [banners] => 1 [reviews] => 1 [downloaded] => [active_installs] => 1 ) [per_page] => 24 [locale] => en_US )
 //       */
-//      function dlcplugin_info( $res, $action, $args ){
+//      function dlcplugin_info( $res, $action, $args ) {
 // echo "TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST ".$args->slug."<br>";
 //      	// do nothing if this is not about getting plugin information
 //      	if( 'plugin_information' !== $action ) {
@@ -82,7 +82,7 @@
 //      }
 
      add_filter( 'site_transient_update_plugins', 'dlcplugin_push_update' );
-     function dlcplugin_push_update( $transient ){
+     function dlcplugin_push_update( $transient ) {
 
      	if ( empty($transient->checked ) ) {
                  return $transient;

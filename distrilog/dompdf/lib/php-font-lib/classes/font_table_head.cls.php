@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    http://php-font-lib.googlecode.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: font_table_head.cls.php 34 2011-10-23 13:53:25Z fabien.menager $
  */
@@ -33,7 +33,7 @@ class Font_Table_head extends Font_Table {
     "glyphDataFormat"    => self::int16,
   );
   
-  protected function _parse(){
+  protected function _parse() {
     parent::_parse();
     
     if($this->data["magicNumber"] != 0x5F0F3CF5) {

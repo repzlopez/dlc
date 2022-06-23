@@ -6,7 +6,7 @@ if(!isset($_SESSION)) {
 if((!isset($_SESSION['a_logged'])||!$_SESSION['a_logged'])&&(
 	(isset($_SESSION['gos_logged'])&&$_SESSION['gos_logged'])||
      (isset($_SESSION['pcm_logged'])&&$_SESSION['pcm_logged'])||
-     (isset($_SESSION['mig_logged'])&&$_SESSION['mig_logged']))){
+     (isset($_SESSION['mig_logged'])&&$_SESSION['mig_logged']))) {
 	$_SESSION['a_logged']   = 1;
 	$_SESSION['bad_admin']  = 0;
 	$_SESSION['gos_logged'] = 0;
@@ -68,25 +68,25 @@ $backbtn  = '<div class="clear"><a href="'.(isset($_SESSION['lastpage'])?$_SESSI
 $mainlogo = '<div id="main_logo"><img src="/src/dlc_logo.png" alt="'.DLC_FULL.'" /></div>';
 $nicEditButtons = '<div id="nicEditButtons"><button id="addArea">Add Panel</button><button id="remArea">Remove Panel</button></div>';
 
-function isEddyOrRick($id){
+function isEddyOrRick($id) {
 	return ($id==EDDY||$id==RICK);
 }
 
-function getWHID($id){
+function getWHID($id) {
 	$con = SQLi('products');
 	$rs  = mysqli_query($con,"SELECT * FROM tblwarehouse WHERE wh='$id'") or die(mysqli_error($con));
 	$rw  = mysqli_fetch_array($rs);
 	return $rw['id'];
 }
 
-function countWHID(){
+function countWHID() {
 	$con = SQLi('products');
 	$rs  = mysqli_query($con,"SELECT count(*) i FROM information_schema.columns WHERE table_name ='tblstocks'") or die(mysqli_error($con));
 	$rw  = mysqli_fetch_array($rs);
 	return $rw['i'];
 }
 
-function getTransfers($transfers,$reciv=null,$reles=null){
+function getTransfers($transfers,$reciv=null,$reles=null) {
      $i       = 0;
 	$tran    = '';
 	$lev0    = testScope("global|logis|gos|pcm");
@@ -94,7 +94,7 @@ function getTransfers($transfers,$reciv=null,$reles=null){
 	$issales = ( isset($_SESSION['isSales']) && $_SESSION['isSales'] );
 	$istransfer = isset($_SESSION['transfers']);
 	$release = ( isset($_SESSION['releasing']) && $_SESSION['releasing'] );
-	foreach ( $transfers as $v ) {
+	foreach( $transfers as $v ) {
 		$v0 = $v[0];
 		$v1 = $v[1];
 		$v2 = $v[2];
@@ -110,17 +110,17 @@ function getTransfers($transfers,$reciv=null,$reles=null){
 	} return $tran;
 }
 
-function populateCat($tbl,$id,$val,$distinct='',$qry='',$selected='',$rel='',$db=''){
+function populateCat($tbl,$id,$val,$distinct='',$qry='',$selected='',$rel='',$db='') {
 	$pCat = '';
 	$con  = SQLi( $db!='' ? $db : 'beta' );
 	$rs   = mysqli_query($con,"SELECT $distinct FROM $tbl $qry") or die(mysqli_error($con));
-	while ( $rw=mysqli_fetch_assoc($rs) ) {
+	while( $rw=mysqli_fetch_assoc($rs) ) {
 		$rel = ($rel!='') ? 'rel="'.$rw['parent_id'].'"' : '';
 		$pCat .= '<option value="'.$rw[$id].'" '.$rel.' '.(($selected==$rw[$id])?SELECTED:'').'>'.ucwords($rw[$val]).'</option>';
 	} return $pCat;
 }
 
-function getButtons($con,$item,$do){
+function getButtons($con,$item,$do) {
 	$cal_date	= ($con=='calendar')?"&i=$item":'';
 	$btn		= '<ul id="buttons" rel="'.$con.'">';
 	$add		= '<li class="add"><a href="?p='.$con.'&do=1'.$cal_date.'" title="Add"></a></li>';
@@ -139,7 +139,7 @@ function getButtons($con,$item,$do){
 		$btn .= $home;
           $do   = '';
 	}
-	switch($do){
+	switch($do) {
 		case '' : break;
 		case 0 : $btn.=$home.$add; break;
 		case 1 : $btn.=$save.$cancel; break;
@@ -150,7 +150,7 @@ function getButtons($con,$item,$do){
 	return $btn.='</ul>';
 }
 
-function isDownload($f){
+function isDownload($f) {
 	if (
           $f=='application/vnd.ms-powerpoint' ||
           $f=='application/pdf'

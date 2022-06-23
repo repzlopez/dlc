@@ -9,12 +9,12 @@ $apcid=isset($_SESSION['apc_id'])?substr($_SESSION['apc_id'],3):null;
 $isapc=testScope("apc");
 $apcroot=testScope("global|orders|apc")?'../logistics/':'';
 $apcquery=$isapc?"AND whto='".substr($_SESSION['apc_id'],3)."'":(testScope("orders")&&!testScope("logis")?"AND whfrom=$counterid OR whto=$counterid":'');
-if($do=='transarc'){
+if($do=='transarc') {
 	$notapc=$isapc?'':'<span class="s2">From</span><span class="s2">To</span>';
 	$data.='<li><span class="s4">Transfer ID</span><span class="s2">Requester</span>'.$notapc.'<span class="s1">Closed</span>';
 	$con=SQLi('products');
 	$rs=mysqli_query($con,"SELECT * FROM tbllogtransfer WHERE whto!='004' $apcquery ORDER BY status,reqstamp") or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		$notapc=$isapc?'':'<span class="s2">'.$rw['whfrom'].'</span><span class="s2">'.$rw['whto'].'</span>';
 		$data.='<li><a href="'.$apcroot.'viewtransfer.php?id='.$rw['id'].'" class="s4">'.$rw['id'].'</a><span class="s2">'.$rw['reqid'].'</span>'.$notapc.'<span class="s1 '.($rw['status']?'':'bad').'">'.$rw['status'].'</span>';
 	}
@@ -39,7 +39,7 @@ ob_start();
 echo $msg;
 ob_end_flush();
 
-function getTransferSelect($id){
+function getTransferSelect($id) {
 	$arrTransfer=array(
 		'000'=>'Beginning',
 		'001'=>'Taiwan',
@@ -51,22 +51,22 @@ function getTransferSelect($id){
 		'009'=>'Others'
 	);$tran='';
 
-	foreach($arrTransfer as $key=>$val){
+	foreach($arrTransfer as $key=>$val) {
 		if((int)$key<=$id) $tran.= '<option value="'.$key.'">'.$val.'</option>';
 	}return $tran;
 }
 
-function popCat($tbl,$id,$val,$distinct='',$qry='',$select='',$rel=''){
+function popCat($tbl,$id,$val,$distinct='',$qry='',$select='',$rel='') {
 	$pCat='';
 	$con=SQLi('products');
 	$rs=mysqli_query($con,"SELECT $distinct FROM $tbl $qry") or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)){
+	while($rw=mysqli_fetch_assoc($rs)) {
 		$rel=($rel!='')?'rel="'.$rw['parent_id'].'"':'';
 		$pCat.= '<option value="'.$rw[$id].'" '.$rel.' '.(($select==$rw[$id])?SELECTED:'').'>'.ucwords($rw[$val]).'</option>';
 	}return $pCat;
 }
 
-function getCounterID(){
+function getCounterID() {
 	$con=SQLi('products');
 	$rs=mysqli_query($con,"SELECT * FROM tblwarehouse WHERE wh='counter'") or die(mysqli_error($con));
 	$rw=mysqli_fetch_array($rs);

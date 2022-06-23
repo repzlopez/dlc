@@ -5,11 +5,11 @@ if(!isset($_SESSION)) {
 }
 if (!defined('INCLUDE_CHECK')) define('INCLUDE_CHECK',1);
 
-if(isset($_GET['gcref'])){
+if(isset($_GET['gcref'])) {
 	require('../../admin/setup.php');
 	printOrders($_GET['gcref']);
 	unset($_GET);
-	if($_SESSION['for_edit']){
+	if($_SESSION['for_edit']) {
 		echo 'Please wait while we prepare your orders.';
 		reloadTo('../orders/');
 	}else{
@@ -18,12 +18,12 @@ if(isset($_GET['gcref'])){
 	}
 }
 
-function printOrders($ref){
+function printOrders($ref) {
 	$con=SQLi('gos');
 	$rs=mysqli_query($con,"SELECT * FROM tblorders WHERE refNo='$ref'") or die(mysqli_error($con));
 	$rw=mysqli_fetch_array($rs);
 	$data=explode("~",($rw['orders']!=''?$rw['orders']:'||||'));
-	foreach($data as $val){
+	foreach($data as $val) {
 		$idata[]=explode("|",$val);
 	}
 	$_SESSION['for_edit']=($rw['paystat']==0)?true:false;
@@ -33,7 +33,7 @@ function printOrders($ref){
 	$_SESSION['center_orders_data']=$rw['dsdid'].'|'.$rw['dsnam'].'|'.$rw['dscon'].'|'.$rw['dstin'].'|'.$rw['paycash'].'|'.$rw['paycard'].'|'.$rw['paychek'].'|'.$rw['payfund'].'|'.$rw['paydate'].'|'.$rw['payconf'];
 	$msg='<li class="hdr"><span class="s1 lt">Code</span><span class="s4">Description</span><span class="s1 rt">Qty</span><span class="s2 rt">PV</span><span class="s2 rt">Amount</span></li>';
 	$v=array();$shopppv=0;$shopamt=0;$tppv=0;$tamt=0;$limit=20;
-	foreach($idata as $v){
+	foreach($idata as $v) {
 		$v1=$v[0];
 		$v2=utf8_encode($v[1]);
 		$v3=$v[2];

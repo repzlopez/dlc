@@ -53,16 +53,16 @@ $paid2=array(
 	'PAID'	=>1
 );
 
-function popRadio($arr,$chk,$name){$x='';
+function popRadio($arr,$chk,$name) {$x='';
 	global $boxfee;
-	foreach($arr as $k=>$v){
+	foreach($arr as $k=>$v) {
 		$chk=($chk==$v)?C_K:'';
 		$x.='<label for="'.$k.'" class="s3 lt"><input type="radio" id="'.$k.'" name="'.$name.'" value="'.$v.'" data-boxfee="'.$boxfee[$v].'" '.$chk.' /> '.$k.'</label> ';
   	}return $x;
 }
 
-function popSelects($arr,$sel,$option){$p='';
-	foreach($arr as $k=>$v){
+function popSelects($arr,$sel,$option) {$p='';
+	foreach($arr as $k=>$v) {
 		$p.='<option value="'.$v.'" '.($sel==$v?SELECTED:'').'>'.$k.'</option>';
  	}return $p;
 }

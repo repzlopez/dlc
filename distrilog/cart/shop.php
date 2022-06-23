@@ -29,14 +29,14 @@ if ( isset($id) && strlen($id)==5 ) {
 
 	$rs = mysqli_query($con,$qry) or die(mysqli_error($con));
 	$rw = mysqli_fetch_array($rs);
-	foreach ( $rw as $k=>$v ) $$k = $v;
+	foreach( $rw as $k=>$v ) $$k = $v;
 
 	$pvv = ($cat=='productaids') ? 0 : $pv;
 	$wsp = ($cat=='productaids'||GUEST||OLREG_REF===false) ? $srp : $wsp;//(isset($isPack)&&$isPack==1)||
 	mysqli_close($con);
 
 	if ( !isset($_SESSION['shoplist']) ) $_SESSION['shoplist'] = array();
-	while ( $i<count($_SESSION['shoplist']) && $_SESSION['shoplist'][$i][0]!=$id ) $i++;
+	while( $i<count($_SESSION['shoplist']) && $_SESSION['shoplist'][$i][0]!=$id ) $i++;
 	if ( $i<count($_SESSION['shoplist']) ) {
 		if ( $_SESSION['shoplist'][$i][3]+$qy >= 0 ) {
 			$_SESSION['shoplist'][$i][3] += $qy;

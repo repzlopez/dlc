@@ -199,7 +199,7 @@ class Frame {
   }
   
   // WIP : preprocessing to remove all the unused whitespace
-  protected function ws_trim(){
+  protected function ws_trim() {
     if ( $this->ws_keep() ) return;
     
     switch(self::$_ws_state) {
@@ -231,12 +231,12 @@ class Frame {
     }
   }
   
-  protected function ws_keep(){
+  protected function ws_keep() {
     $whitespace = $this->get_style()->white_space;
     return in_array($whitespace, array("pre", "pre-wrap", "pre-line"));
   }
   
-  protected function ws_is_text(){
+  protected function ws_is_text() {
     $node = $this->get_node();
     
     if ($node->nodeName === "img") {
@@ -262,7 +262,7 @@ class Frame {
   function dispose($recursive = false) {
 
     if ( $recursive ) {
-      while ( $child = $this->_first_child )
+      while( $child = $this->_first_child )
         $child->dispose(true);
     }
 
@@ -447,7 +447,7 @@ class Frame {
     ), $this->_containing_block["w"]);
   }
   
-  function get_break_margins(){
+  function get_break_margins() {
     $style = $this->_style;
     
     return $style->length_in_pt(array(
@@ -569,8 +569,8 @@ class Frame {
   }
   
   function set_containing_block($x = null, $y = null, $w = null, $h = null) {
-    if ( is_array($x) ){
-      foreach($x as $key => $val){
+    if ( is_array($x) ) {
+      foreach($x as $key => $val) {
         $$key = $val;
       }
     }
@@ -665,7 +665,7 @@ class Frame {
     return $this->_is_cache["in_flow"] = !(DOMPDF_ENABLE_CSS_FLOAT && $this->get_style()->float !== "none" || $this->is_absolute());
   }
   
-  function is_pre(){
+  function is_pre() {
     if ( isset($this->_is_cache["pre"]) ) {
       return $this->_is_cache["pre"];
     }
@@ -675,7 +675,7 @@ class Frame {
     return $this->_is_cache["pre"] = in_array($white_space, array("pre", "pre-wrap"));
   }
   
-  function is_table(){
+  function is_table() {
     if ( isset($this->_is_cache["table"]) ) {
       return $this->_is_cache["table"];
     }
@@ -901,7 +901,7 @@ class Frame {
         "<br/>";
 
     $d = $this->get_decorator();
-    while ($d && $d != $d->get_decorator()) {
+    while($d && $d != $d->get_decorator()) {
       $str .= "Decorator: " . get_class($d) . "<br/>";
       $d = $d->get_decorator();
     }
@@ -915,8 +915,8 @@ class Frame {
 
     if ( $this->_decorator instanceof Block_Frame_Decorator ) {
       $str .= "Lines:<pre>";
-      foreach ($this->_decorator->get_line_boxes() as $line) {
-        foreach ($line->get_frames() as $frame) {
+      foreach($this->_decorator->get_line_boxes() as $line) {
+        foreach($line->get_frames() as $frame) {
           if ($frame instanceof Text_Frame_Decorator) {
             $str .= "\ntext: ";          
             $str .= "'". htmlspecialchars($frame->get_text()) ."'";
@@ -1105,7 +1105,7 @@ class FrameTreeIterator implements Iterator {
     // Push all children onto the stack in reverse order
     if ( $c = $b->get_last_child() ) {
       $this->_stack[] = $c;
-      while ( $c = $c->get_prev_sibling() )
+      while( $c = $c->get_prev_sibling() )
         $this->_stack[] = $c;
     }
     return $b;

@@ -6,7 +6,7 @@ if(!isset($_SESSION)) {
 define('INCLUDE_CHECK',1);
 require('../../admin/setup.php');
 require('../func.php');
-if(!ISIN_PCM){ reloadTo(DLC_PCRT);exit; }
+if(!ISIN_PCM) { reloadTo(DLC_PCRT);exit; }
 $_SESSION['pcm_last']=DLC_PCRT;
 $title='PCM | Setup';
 $content='setup';
@@ -18,7 +18,7 @@ $con=SQLi('pcm');
 $did=LOGIN_ID;$dwh=LOGIN_BRANCH;$drc='';$dcn='';$dad='';$dcr='';
 $rs=mysqli_query($con,"SELECT * FROM $tbl WHERE id='".LOGIN_BRANCH."'") or die(mysqli_error($con));
 $rw=mysqli_fetch_array($rs);
-if(mysqli_num_rows($rs)>0){
+if(mysqli_num_rows($rs)>0) {
 	$did=$rw['id'];
 	$dwh=$rw['wh'];
 	$drc=$rw['dfrec'];

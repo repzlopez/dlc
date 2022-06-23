@@ -168,7 +168,7 @@ class Renderer extends Abstract_Renderer {
   
     $page = $frame->get_root()->get_reflower();
     
-    foreach ($frame->get_children() as $child) {
+    foreach($frame->get_children() as $child) {
       $child_style = $child->get_style();
       $_stacking = $stacking;
       
@@ -216,7 +216,7 @@ class Renderer extends Abstract_Renderer {
       $info = array(0 => $this->_canvas, "canvas" => $this->_canvas,
                     1 => $frame, "frame" => $frame);
       $fs = $this->_callbacks[$event];
-      foreach ($fs as $f) {
+      foreach($fs as $f) {
         if (is_callable($f)) {
           if (is_array($f)) {
             $f[0]->$f[1]($info);

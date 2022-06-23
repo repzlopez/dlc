@@ -2,7 +2,7 @@
 if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
-if(!ISIN_ADMIN||!testScope("global|data")){
+if(!ISIN_ADMIN||!testScope("global|data")) {
 	reloadTo(DLC_ADMIN);exit;
 }else{
 	date_default_timezone_set('Asia/Manila');
@@ -18,8 +18,8 @@ if(!ISIN_ADMIN||!testScope("global|data")){
 	print $csv;
 }
 
-function listPV($pv,$date,$monyr,$tpv=null,$area=false){
-	if($date!=''){
+function listPV($pv,$date,$monyr,$tpv=null,$area=false) {
+	if($date!='') {
 		$bmh='bh';
 		$useTable='bohstp';
 		$useWhere="bhdid=dsdid AND bhpmo='".intval(substr($date,0,2))."' AND bhpyr='".substr($date,2,4)."'";
@@ -42,9 +42,9 @@ function listPV($pv,$date,$monyr,$tpv=null,$area=false){
 	$str="Distributors with $pvhdr PV [ $monyr ]\n";
 	$str.='"ID#","LAST NAME","FIRST NAME","PPV","GPV","TPV","LEVEL"'.($area?',"AREA"':'')."\n";
 	$rs=mysql_query($qry) or die(mysql_error());
-	while($rw=mysql_fetch_assoc($rs)){
+	while($rw=mysql_fetch_assoc($rs)) {
 		$getGPV=$rw['tpv']-$rw['ppv'];
-//		if($getGPV>=$pvhdr){
+//		if($getGPV>=$pvhdr) {
 			$str.='"'.$rw['dsdid'].'",';
 			$str.='"'.$rw['dslnam'].'",';
 			$str.='"'.$rw['dsfnam'].'",';

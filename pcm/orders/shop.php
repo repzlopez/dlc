@@ -5,7 +5,7 @@ if(!isset($_SESSION)) {
 }
 define('INCLUDE_CHECK',1);
 
-if(isset($_POST['submit'])&&$_POST['submit']=='pabili'){
+if(isset($_POST['submit'])&&$_POST['submit']=='pabili') {
 	$id=isset($_POST['id'])?$_POST['id']:null;
 	$qy=isset($_POST['qy'])?$_POST['qy']:0;
 	$i=0;
@@ -22,20 +22,20 @@ if(isset($_POST['submit'])&&$_POST['submit']=='pabili'){
 
 	if(!isset($_SESSION['center_orders'])) $_SESSION['center_orders']=array();
 	while($i<count($_SESSION['center_orders'])&&$_SESSION['center_orders'][$i][0]!=$id) $i++;
-	if($i<count($_SESSION['center_orders'])){
-		if($_SESSION['center_orders'][$i][2]+$qy>=0){
+	if($i<count($_SESSION['center_orders'])) {
+		if($_SESSION['center_orders'][$i][2]+$qy>=0) {
 			$_SESSION['center_orders'][$i][2]=$qy;
 			$_SESSION['center_orders'][$i][3]=$wsp;
 			$_SESSION['center_orders'][$i][4]=$pvv;
 		}
 	}else $_SESSION['center_orders'][]=array($cod,$nam,$qy,$wsp,$pvv);
-	if($_SESSION['center_orders'][$i][2]+$qy==0||$_SESSION['center_orders'][$i][2]+$qy==''){
+	if($_SESSION['center_orders'][$i][2]+$qy==0||$_SESSION['center_orders'][$i][2]+$qy=='') {
 		unset($_SESSION['center_orders'][$i]);
 		$_SESSION['center_orders']=array_values($_SESSION['center_orders']);
 	}
 }
 
-if(isset($_POST['clear'])&&$_POST['clear']){
+if(isset($_POST['clear'])&&$_POST['clear']) {
 	unset($_SESSION['pcm_edit_orders']);
 	unset($_SESSION['center_orders_data']);
 	unset($_SESSION['center_orders']);

@@ -31,7 +31,7 @@ if( isset($submit) && $submit=='Login' ) {
 		$_SESSION['bad_admin'] = true;
 		reloadTo('../');
 	}
-	while($info=mysqli_fetch_array($check)){
+	while($info=mysqli_fetch_array($check)) {
 		$pwql = stripslashes($info['pw']);
 		$name = stripslashes($info['nn']);
 		mysqli_close($con);

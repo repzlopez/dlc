@@ -122,7 +122,7 @@ class Table_Frame_Reflower extends Frame_Reflower {
     // If the whole table fits on the page, then assign each column it's max width
     if ( $width == $max_width ) {
 
-      foreach (array_keys($columns) as $i)
+      foreach(array_keys($columns) as $i)
         $cellmap->set_column_width($i, $columns[$i]["max-width"]);
 
       return;
@@ -151,7 +151,7 @@ class Table_Frame_Reflower extends Frame_Reflower {
       if ( $absolute_used == 0 && $percent_used == 0 ) {
         $increment = $width - $min_width;
 
-        foreach (array_keys($columns) as $i)
+        foreach(array_keys($columns) as $i)
           $cellmap->set_column_width($i, $columns[$i]["min-width"] + $increment * ($columns[$i]["max-width"] / $max_width));
         return;
       }
@@ -164,7 +164,7 @@ class Table_Frame_Reflower extends Frame_Reflower {
           $increment = ($width - $auto_min - $absolute_used) / count($auto);
 
         // Use the absolutely specified width or the increment
-        foreach (array_keys($columns) as $i) {
+        foreach(array_keys($columns) as $i) {
 
           if ( $columns[$i]["absolute"] > 0 && count($auto) )
             $cellmap->set_column_width($i, $columns[$i]["min-width"]);
@@ -198,7 +198,7 @@ class Table_Frame_Reflower extends Frame_Reflower {
         // Account for the minimum space used by the unassigned auto columns
         $used_width = $auto_min;
 
-        foreach ($percent as $i) {
+        foreach($percent as $i) {
           $columns[$i]["percent"] *= $scale;
 
           $slack = $width - $used_width;
@@ -218,7 +218,7 @@ class Table_Frame_Reflower extends Frame_Reflower {
         if ( count($auto) > 0 ) {
           $increment = ($width - $used_width) / count($auto);
 
-          foreach ($auto as $i)
+          foreach($auto as $i)
             $cellmap->set_column_width($i, $columns[$i]["min-width"] + $increment);
 
         }
@@ -232,7 +232,7 @@ class Table_Frame_Reflower extends Frame_Reflower {
 
         $used_width = $auto_min;
 
-        foreach ($absolute as $i) {
+        foreach($absolute as $i) {
           $cellmap->set_column_width($i, $columns[$i]["min-width"]);
           $used_width +=  $columns[$i]["min-width"];
         }
@@ -246,7 +246,7 @@ class Table_Frame_Reflower extends Frame_Reflower {
 
         $remaining_width = $width - $used_width;
 
-        foreach ($percent as $i) {
+        foreach($percent as $i) {
           $slack = $remaining_width - $used_width;
 
           $columns[$i]["percent"] *= $scale;
@@ -262,7 +262,7 @@ class Table_Frame_Reflower extends Frame_Reflower {
         if ( count($auto) > 0 ) {
           $increment = ($width - $used_width) / count($auto);
 
-          foreach ($auto as $i)
+          foreach($auto as $i)
             $cellmap->set_column_width($i, $columns[$i]["min-width"] + $increment);
 
         }
@@ -274,7 +274,7 @@ class Table_Frame_Reflower extends Frame_Reflower {
     } else { // we are over constrained
 
       // Each column gets its minimum width
-      foreach (array_keys($columns) as $i)
+      foreach(array_keys($columns) as $i)
         $cellmap->set_column_width($i, $columns[$i]["min-width"]);
 
     }
@@ -294,7 +294,7 @@ class Table_Frame_Reflower extends Frame_Reflower {
 
     // Determine our content height
     $content_height = 0;
-    foreach ( $rows as $r )
+    foreach( $rows as $r )
       $content_height += $r["height"];
 
     $cb = $this->_frame->get_containing_block();
@@ -459,7 +459,7 @@ class Table_Frame_Reflower extends Frame_Reflower {
     $cellmap->assign_x_positions();
 
     // Set the containing block of each child & reflow
-    foreach ( $frame->get_children() as $child ) {
+    foreach( $frame->get_children() as $child ) {
 
       // Bail if the page is full
       if ( !$page->in_nested_table() && $page->is_full() )
@@ -523,7 +523,7 @@ class Table_Frame_Reflower extends Frame_Reflower {
     $this->_state["auto"] = array();
 
     $columns =& $this->_frame->get_cellmap()->get_columns();
-    foreach (array_keys($columns) as $i) {
+    foreach(array_keys($columns) as $i) {
       $this->_state["min_width"] += $columns[$i]["min-width"];
       $this->_state["max_width"] += $columns[$i]["max-width"];
 

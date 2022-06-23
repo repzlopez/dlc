@@ -16,7 +16,7 @@ if ( isset($_POST['submit'])&&$_POST['submit']=='Submit' ) {
 	$_SESSION['post']['bad_distri'] = '';
 	$con = SQLi('beta');
 
-	foreach ( $_POST as $k=>$v ) {
+	foreach( $_POST as $k=>$v ) {
 		if ( in_array($k,$testArr) ) {
 			if ( trim($v)=='' ) $reqmiss++;
 		}

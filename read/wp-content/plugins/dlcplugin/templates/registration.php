@@ -5,7 +5,7 @@ if(!isset($_SESSION)) {
 }
 global $dlcuser;
 
-if(isset($_SESSION['post']['bad'])){
+if(isset($_SESSION['post']['bad'])) {
      echo '<h4 class="bad ct">'.$_SESSION['post']['bad'].'</h4>';
 }
 require_once( '../reg/index.php' );

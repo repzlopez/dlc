@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    http://php-font-lib.googlecode.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: font_truetype_collection.cls.php 34 2011-10-23 13:53:25Z fabien.menager $
  */
@@ -28,7 +28,7 @@ class Font_TrueType_Collection extends Font_Binary_Stream implements Iterator, C
   protected $version;
   protected $numFonts;
   
-  function parse(){
+  function parse() {
     if (isset($this->numFonts)) {
       return;
     }

@@ -3,7 +3,7 @@
  * @package dompdf
  * @link    http://www.dompdf.com/
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: autoload.inc.php 448 2011-11-13 13:00:03Z fabien.menager $
  */
@@ -42,7 +42,7 @@ if ( function_exists("spl_autoload_register") ) {
     // Unregister existing autoloaders... 
     $compat = (PHP_VERSION_ID <= 50102 && PHP_VERSION_ID >= 50100);
               
-    foreach ($funcs as $func) { 
+    foreach($funcs as $func) { 
       if (is_array($func)) { 
         // :TRICKY: There are some compatibility issues and some 
         // places where we need to error out 
@@ -63,7 +63,7 @@ if ( function_exists("spl_autoload_register") ) {
     spl_autoload_register($autoload); 
     
     // Now, go back and re-register all of our old ones. 
-    foreach ($funcs as $func) { 
+    foreach($funcs as $func) { 
       spl_autoload_register($func); 
     }
     

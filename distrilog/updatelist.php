@@ -3,18 +3,18 @@ if(!isset($_SESSION)) {
      session_set_cookie_params(0);
      session_start();
 }
-if(!defined('INCLUDE_CHECK')){
+if(!defined('INCLUDE_CHECK')) {
 	define('INCLUDE_CHECK',1);
 	require('../admin/setup.php');
 }
 global $data,$isNDPV;$data='';
 
-if(isset($_POST)){$x='';
+if(isset($_POST)) {$x='';
 	$con=SQLi('distributor');
 	foreach($_POST as $k=>$v) $$k=trim_escape($v);
 	unset($_POST);
 
-	if(isset($find)){
+	if(isset($find)) {
 		$src=strtolower($find);
 		$_SESSION['src_found']=0;
 		$_SESSION['src_result']='';
@@ -23,9 +23,9 @@ if(isset($_POST)){$x='';
 		$x.='<tr><th colspan="4" class="lt">'.$_SESSION['src_found'].' result(s) found: <strong>'.$src.'</strong></th></tr>';
 		$x.='<tr><th>Dist. ID</th><th>Name</th><th>Address</th><th>Phone</th></tr>';
 		$x.=$data;
-	}elseif(isset($collapse)){
+	}elseif(isset($collapse)) {
 		$l=explode('|',$collapse);
-		switch($tab){
+		switch($tab) {
 			case 'pv':getPV($l[0],$l[1],$l[1]+1);
 				// $x.=$data;
 				break;
@@ -34,20 +34,20 @@ if(isset($_POST)){$x='';
 	}echo $x;
 }
 
-function getDistList($sponsor,$lvl,$max,$col=false){
+function getDistList($sponsor,$lvl,$max,$col=false) {
 	global $data;
-	if($lvl>=$max){}
+	if($lvl>=$max) {}
 	else{
 		$con=SQLi('distributor');
 		$qry="SELECT * FROM distributors WHERE dssid='$sponsor' ORDER BY dssetd";
 		$_SESSION['total_downlines']++;
 		$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-		if(mysqli_num_rows($rs)==0){
+		if(mysqli_num_rows($rs)==0) {
 			if($lvl==0) $data.='<li class="nodata more ct">No data found</li>';
 		}else{
 			if($lvl==0) $data.='<ul><li class="hdr"><span class="s0"></span><span class="w1">Dist. ID</span> <span class="w2">Name</span> <span class="s6">Address</span> <span class="s3 ct">Phone</span> <span class="s3 ct">Joined</span></li>';
-			while($rw=mysqli_fetch_assoc($rs)){
-				if(strpos($rw['dslnam'],'**TERMINATED**')===false){
+			while($rw=mysqli_fetch_assoc($rs)) {
+				if(strpos($rw['dslnam'],'**TERMINATED**')===false) {
 					$did=$rw['dsdid'];
 					$dname=$rw['dsfnam'].' '.(($rw['dsmnam']!='')?substr($rw['dsmnam'],0,1).'.':'').' '.$rw['dslnam'];
 					$setup=substr($rw['dssetd'],4,2).'.'.substr($rw['dssetd'],6,2).'.'.substr($rw['dssetd'],0,4);
@@ -61,12 +61,12 @@ function getDistList($sponsor,$lvl,$max,$col=false){
 	}
 }
 
-function getPV($sponsor,$lvl,$max){
+function getPV($sponsor,$lvl,$max) {
 	global $data,$isNDPV;
 //	ob_start();
 
 	// $hav=RTOR?'':'';//HAVING tpv>0	HAVING bmppv>0 OR bmnpv>0
-	if($lvl>=$max){}
+	if($lvl>=$max) {}
 	else{
 		$con=SQLi(RTDB);
 		$qry="
@@ -82,22 +82,22 @@ function getPV($sponsor,$lvl,$max){
 		set_time_limit(0);
 		// ignore_user_abort(1);
 		$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-		if(mysqli_num_rows($rs)==0&&!RTOR){
+		if(mysqli_num_rows($rs)==0&&!RTOR) {
 			// isNoPVandNextIsMgr($sponsor,$lvl);
-			// if($isNDPV!=''){ $x.=$isNDPV; }
+			// if($isNDPV!='') { $x.=$isNDPV; }
 			// else
 			if($lvl==0) echo '<li class="nodata more ct">No data found</li>';
 		}else{
 			if($lvl==0) echo '<li class="hdr"><span class="updn s0"> </span><span class="w1">Dist. ID</span><span class="w2">Name</span><span class="s1 ct">Level</span><span class="w1 rt">Personal PV</span><span class="w1 rt">Group PV</span><span class="w1 rt">Total PV</span></li>';
-			if(mysqli_num_rows($rs)>0){
-				while($rw=mysqli_fetch_assoc($rs)){
+			if(mysqli_num_rows($rs)>0) {
+				while($rw=mysqli_fetch_assoc($rs)) {
 					$z='';
 					$did=$rw['dsdid'];
 					$ppv=$rw['bmppv'];
 					$npv=$rw['bmnpv'];
 					$lev=$rw['bmelev'];
 					$tpv=$rw['tpv'];
-					if($tpv==0&&$lev<1){}
+					if($tpv==0&&$lev<1) {}
 					else{
 						$pct=getPercent($lev,date('Y'),WEEK);
 						$dname=$rw['dsfnam'].' '.(($rw['dsmnam']!='')?substr($rw['dsmnam'],0,1).'.':'').' '.$rw['dslnam'];
@@ -124,9 +124,9 @@ function getPV($sponsor,$lvl,$max){
 	// return $data;
 }
 
-function findDist($sponsor,$src,$lvl){	//search downline
+function findDist($sponsor,$src,$lvl) {	//search downline
 	global $data;$x='';
-	if($lvl>=MAXLOOP){}
+	if($lvl>=MAXLOOP) {}
 	else{
 		$con=SQLi('distributor');
 		$qry="
@@ -135,14 +135,14 @@ function findDist($sponsor,$src,$lvl){	//search downline
 			ORDER BY dssetd
 		";
 		$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-		while($rw=mysqli_fetch_assoc($rs)){
+		while($rw=mysqli_fetch_assoc($rs)) {
 			foreach($rw as $k=>$v) $$k=$v;
 			if(
 				strpos($dsdid,$src)!==false||
 				strpos(strtolower($dsfnam),$src)!==false||
 				strpos(strtolower($dsmnam),$src)!==false||
 				strpos(strtolower($dslnam),$src)!==false
-			){
+			) {
 				$x.='<tr>';
 				$x.="<td>$dsdid</td>";
 				$x.="<td>$dslnam, $dsfnam $dsmnam</td>";
@@ -158,18 +158,18 @@ function findDist($sponsor,$src,$lvl){	//search downline
 	return $data;
 }
 
-function isNoPVandNextIsMgr($id,$lvl){
+function isNoPVandNextIsMgr($id,$lvl) {
 	global $isNDPV;
 	$con=SQLi('distributor');
 	$rs=mysqli_query($con,"SELECT dsdid,dsfnam,dsmnam,dslnam FROM distributors WHERE dssid='$id'") or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)>0){
+	if(mysqli_num_rows($rs)>0) {
 		ini_set('max_execution_time',120);
 		ini_set('memory_limit','-1');
 		set_time_limit(600);
-		while($rw=mysqli_fetch_assoc($rs)){
+		while($rw=mysqli_fetch_assoc($rs)) {
 			$did=$rw['dsdid'];
 			list($ppv,$npv,$gpv,$lev,$ndpv)=getCurrentPV($did);
-			if(isMgr($ppv,$lev)){
+			if(isMgr($ppv,$lev)) {
 				$dname=$rw['dsfnam'].' '.(($rw['dsmnam']!='')?substr($rw['dsmnam'],0,1).'.':'').' '.$rw['dslnam'];
 				if($lvl==1) $isNDPV.= '<li class="hdr"><span class="w1">Dist. ID</span><span class="w2">Name</span><span class="w1 ct">Ending Level</span><span class="w1 rt">Personal PV</span><span class="w1 rt">Group PV</span><span class="w1 rt">Total PV</span></li>';
 				$isNDPV.='<li><span class="w1">'.$id.'</span><span class="w2"><span class="pad">'.str_repeat('_',$lvl-1).'</span>'.($lvl).'> <span'.(($lvl==1)?' class="gen1"':'').'>'.$dname.'</span></span><span class="w1 ct">0%</span><span class="w1 rt">0.00</span><span class="w1 rt">0.00</span><span class="w1 rt">0.00</span></li>';
@@ -180,7 +180,7 @@ function isNoPVandNextIsMgr($id,$lvl){
 	}
 }
 
-function getCurrentPV($id){
+function getCurrentPV($id) {
 	$_SESSION['ndpv']=0;
 	$con=SQLi(RTDB);
 // echo RTDB." | SELECT * FROM bomstp WHERE bmdid='$id' ".BMPMO."<br>";
@@ -189,7 +189,7 @@ function getCurrentPV($id){
 	return array($rw['bmppv'],$rw['bmnpv'],$rw['bmppv']+$rw['bmnpv'],$rw['bmelev'],getNDPV($id));
 }
 
-function getNDPV($dssid){
+function getNDPV($dssid) {
 	$con=SQLi('distributor');
 	$qry="
 		SELECT dsdid,bmppv
@@ -199,8 +199,8 @@ function getNDPV($dssid){
 		AND bmelev=0
 	";
 	$rs=mysqli_query($con,$qry) or die(mysqli_error($con));
-	if(mysqli_num_rows($rs)>=0){
-		while($rw=mysqli_fetch_assoc($rs)){
+	if(mysqli_num_rows($rs)>=0) {
+		while($rw=mysqli_fetch_assoc($rs)) {
 			$_SESSION['ndpv']+=$rw['bmppv'];
 			getNDPV($rw['dsdid']);
 		}
@@ -208,7 +208,7 @@ function getNDPV($dssid){
 	mysqli_close($con);
 }
 
-function isMgr($tpv,$lev){
+function isMgr($tpv,$lev) {
 	if($tpv>=MINPV&&$lev>=5) return true;
 }
 ?>

@@ -2,7 +2,7 @@
 if(!isset($_SESSION)) session_start();
 define('INCLUDE_CHECK',1);
 require('../../fetch.php');
-if(!ISIN_ADMIN||!testScope("global|data")){
+if(!ISIN_ADMIN||!testScope("global|data")) {
 	reloadTo(DLC_ADMIN);exit;
 }else{
 	date_default_timezone_set('Asia/Manila');
@@ -21,8 +21,8 @@ if(!ISIN_ADMIN||!testScope("global|data")){
 	print $csv;
 }
 
-function listLevel($n,$yr){$str='';$add='';
-	if(substr($n,-1)>4){
+function listLevel($n,$yr) {$str='';$add='';
+	if(substr($n,-1)>4) {
 		$add="AND (
 			(bhnpv>=".$_SESSION['minpv'][$n]." AND bhqumr<=1) OR
 			(bhnpv>=500 AND bhqumr=2) OR
@@ -42,9 +42,9 @@ function listLevel($n,$yr){$str='';$add='';
 	include('../../infoconfig.php');
 	$rs=mysql_query($qry) or die(mysql_error());
 	ini_set('max_execution_time',300);
-	while($rw=mysql_fetch_assoc($rs)){
+	while($rw=mysql_fetch_assoc($rs)) {
 		$newid=$rw['bhdid'];
-		if($oldid!=$newid){
+		if($oldid!=$newid) {
 			$oldid=$rw['bhdid'];
 			$monyr=$rw['bhpyr'].'|'.sprintf('%02d',$rw['bhpmo']);
 			$str.='"'.$rw['bhdid'].'",';

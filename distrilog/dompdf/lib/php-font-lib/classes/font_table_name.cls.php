@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    http://php-font-lib.googlecode.com/
- * @author  Fabien Ménager <fabien.menager@gmail.com>
+ * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  * @version $Id: font_table_name.cls.php 36 2011-11-03 23:02:06Z fabien.menager $
  */
@@ -21,7 +21,7 @@ class Font_Table_name extends Font_Table {
     "stringOffset" => self::uint16,
   );
   
-  protected function _parse(){
+  protected function _parse() {
     $font = $this->getFont();
     $data = array();
     
@@ -51,7 +51,7 @@ class Font_Table_name extends Font_Table {
     $this->data = $data;
   }
   
-  protected function _encode(){
+  protected function _encode() {
     $font = $this->getFont();
     
     $records = $this->data["records"];

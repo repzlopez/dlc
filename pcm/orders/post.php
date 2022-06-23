@@ -6,7 +6,7 @@ if(!isset($_SESSION)) {
 define('INCLUDE_CHECK',1);
 require_once('../../admin/setup.php');
 require_once('../func.php');
-if(!ISIN_PCM){ reloadTo(DLC_PCRT);exit; }
+if(!ISIN_PCM) { reloadTo(DLC_PCRT);exit; }
 $isedit=isset($_SESSION['pcm_edit'])?true:false;
 $editrf=$isedit?$_SESSION['pcm_edit']:null;
 $useref=$isedit?$editrf:LOGIN_BRANCH.setRefNo();
@@ -17,14 +17,14 @@ $idata="'$useref','$usedat',";
 $ilog="null,'$useref','".date(TMDSET,time())."','$action','".LOGIN_ID."'";
 $udata="refdate='$usedat',";
 $con=SQLi('pcm');
-if(isset($_POST)){
-	foreach($_POST as $key=>$val){
+if(isset($_POST)) {
+	foreach($_POST as $key=>$val) {
 		$dat=trim_escape($val);
 		$$key=$dat;
-		if($key=='paystat'){
+		if($key=='paystat') {
 			$idata.="$dat,";
 			$udata.=$key."=$dat,";
-		}elseif($key=='payconf'){
+		}elseif($key=='payconf') {
 			$idata.=(trim($val)!='')?"'$dat',":"'',";
 			$udata.=$key."='[$dat]',";
 		}else{
@@ -35,8 +35,8 @@ if(isset($_POST)){
 	$idata=substr_replace($idata,'',-6);
 	$udata=substr_replace($udata,'',-13);
 }
-if(isset($_SESSION['center_orders'])){
-	foreach($_SESSION['center_orders'] as $v){
+if(isset($_SESSION['center_orders'])) {
+	foreach($_SESSION['center_orders'] as $v) {
 		$v0=$v[0];
 		$v1=$v[1];
 		$v2=$v[2];
@@ -46,12 +46,12 @@ if(isset($_SESSION['center_orders'])){
 		updateStocks($v0,$v2,'-');
 	}
 }
-if(isset($_SESSION['pcm_edit_orders'])){
-	foreach($_SESSION['pcm_edit_orders'] as $v){
+if(isset($_SESSION['pcm_edit_orders'])) {
+	foreach($_SESSION['pcm_edit_orders'] as $v) {
 		updateStocks($v[0],$v[1],'+');
 	}
 }
-if(isset($submit)&&$submit=='_ _'){
+if(isset($submit)&&$submit=='_ _') {
 	$orders=substr_replace($orders,'',-1);
 	$idata.="'','','$orders'";
 	$udata.="orders='$orders'";
@@ -69,7 +69,7 @@ unset($_SESSION['pcm_edit']);
 unset($_SESSION['for_edit']);
 unset($_POST);
 
-function updateStocks($cod,$qty,$o){
+function updateStocks($cod,$qty,$o) {
 	$con=SQLi('products');
 	$brn='w'.LOGIN_BRANCH;
 	mysqli_query($con,"UPDATE tblstocks SET $brn=$brn $o $qty WHERE id='$cod'");

@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION)) {
+if(!isset($_SESSION)) {
     session_set_cookie_params(0);
     session_start();
 }
@@ -29,7 +29,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $response = json_decode(curl_exec($ch), true);
 
 //Check if any errors occured.
-if (curl_errno($ch)) {
+if(curl_errno($ch)) {
     // throw the an Exception.
     throw new Exception(curl_error($ch));
 }
