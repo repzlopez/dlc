@@ -12,9 +12,9 @@ if( $do==0 ) {
 	$x .= '<li class="hdr"><span class="s3">Admin ID</span><span class="s4">Name</span><span class="s2">Status</span></li>';
 
 	$rs = mysqli_query($con,"SELECT * FROM $tbl ORDER BY un") or die(mysqli_error($con));
-	while($rw=mysqli_fetch_assoc($rs)) {
-		$styleis =! $rw['status'] ? 'bad' :'';
-		if( $rw['un']!='repz' ) $x .= '<li rel="'.$rw['id'].'"><span class="s3"><a href="?p='.$content.'&do=2&i='.$rw['id'].'">'.$rw['un'].'</a></span><span class="s4">'.$rw['nn'].'</span><span class="s2 stat '.$styleis.'">'.$rw['status'].'</span></li>';
+	while($r=$rs->fetch_assoc()) {
+		$styleis =! $r['status'] ? 'bad' :'';
+		if( $r['un']!='repz' ) $x .= '<li rel="'.$r['id'].'"><span class="s3"><a href="?p='.$content.'&do=2&i='.$r['id'].'">'.$r['un'].'</a></span><span class="s4">'.$r['nn'].'</span><span class="s2 stat '.$styleis.'">'.$r['status'].'</span></li>';
 	}
 
 	mysqli_close($con);
@@ -23,18 +23,16 @@ if( $do==0 ) {
 
 } else {
 	$id = null;
-	$rs = mysqli_query($con,"DESC $tbl");
-	// $rw = mysqli_fetch_assoc($rs);
-
 	switch( $do ) {
 		case 1:
-			while($r = mysqli_fetch_assoc($rs)) $$r['Field'] = null;
-			break;
+			$rs = mysqli_query($con, "DESC $tbl");
+			while ($r = $rs->fetch_assoc()) $arr[$r['Field']] = '';
+			foreach ($arr as $k => $v) $$k = $v;
 
 		case 2:
 			$rs = mysqli_query($con, "SELECT * FROM $tbl WHERE id='$item'") or die(mysqli_error($con));
-			while($rw = mysqli_fetch_assoc($rs)) foreach($rw as $k => $v) {
-				$$k = $v;
+			while($r = $rs->fetch_assoc()) {
+				foreach ($r as $k => $v) $$k = $v;
 			}
 			break;
 	}

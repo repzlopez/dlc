@@ -53,9 +53,9 @@ define( 'OLREG_NOSLOT', preg_match( "/18143|18144|". OLREG_Choice100 ."|" .OLREG
 define( 'PROC_FEE', 1500 );
 
 define( 'IS_GLOB', ISIN_ADMIN ? ( testScope('global') ? 1:0 ) :0 );
-define( 'IS_GOS', testScope("global|gos") );
-define( 'IS_PCM', testScope("global|pcm") );
-define( 'IS_MIG', testScope("global|mig") );
+define( 'IS_GOS', ISIN_ADMIN ? ( testScope("global|gos") ? 1:0 ) :0 );
+define( 'IS_PCM', ISIN_ADMIN ? ( testScope("global|pcm") ? 1:0 ) :0 );
+define( 'IS_MIG', ISIN_ADMIN ? ( testScope("global|mig") ? 1:0 ) :0 );
 
 define( 'NOTIF_ON', getStatus('991') );
 define( 'UPDATE_ON', getStatus('996') );
@@ -90,17 +90,17 @@ define( 'BMPMO', RTOR ? " AND bmpmo='$wk'" :'' );
 define( 'MAXLOOP', 999999 );
 define( 'SLOTMIN', 100 ); 						//min pv to get slot
 define( 'GUESTMINPV', OLREG_REF ? 20 : 100 ); 	//min pv to signup
-define( 'minAllow', 100 );
-define( 'MINPEARL', getMinPV(WKYR,WEEK) );
-define( 'MINPV', $_SESSION['minpv'][0]);
-define( 'MINPV_6pct', $_SESSION['minpv'][1]);
-define( 'newDistriDays', 30 ); 				//min pv to get slot
+define( 'minAllow', 100 );						//min pv to allow to sponsor (discontinued)
+define( 'MINPEARL', getMinPV(WKYR,WEEK) );		//min pv to qualify for pearl
+define( 'MINPV', $_SESSION['minpv'][0]);		//min pv per cutoff
+define( 'MINPV_6pct', $_SESSION['minpv'][2]);	//min pv to be 6%
+define( 'newDistriDays', 30 ); 					//min pv to get slot
 
 unset( $_SESSION['minpv'] );
 unset( $_SESSION['browser'] );
 
 global $c_y,$c_n;
-$ynArr=array('No'=>0,'Yes'=>1);
+$ynArr = array('No'=>0,'Yes'=>1);
 
 function SQLi($dbsrc) {
 	require('infoconfig.php');
@@ -109,8 +109,8 @@ function SQLi($dbsrc) {
 
 function getName($id,$fmt,$nomid=false) {
 	$con = SQLi('distributor');
-	$rs  = mysqli_query($con,"SELECT dsfnam,dsmnam,dslnam FROM distributors WHERE dsdid='$id'") or die(mysqli_error($con));
-	$rw  = mysqli_fetch_array($rs);
+	$rs  = $con->query("SELECT dsfnam,dsmnam,dslnam FROM distributors WHERE dsdid='$id'") or die(mysqli_error($con));
+	$rw  = $rs->fetch_array();
 	$fn  = $rw['dsfnam'];
 	$mn  = $nomid?'':$rw['dsmnam'];
 	$ln  = $rw['dslnam'];
@@ -122,14 +122,15 @@ function getName($id,$fmt,$nomid=false) {
 		case 'lfm' : $nam = $ln .', '. $fn .' '. ( ($mn!='') ? substr($mn,0,1) .'.' :''); break;
 		case 'lff' : $nam = $ln .', '. $fn .' '. $mn; break;
 		default: break;
-	}return titleCase($nam);
+	}
+
+	return titleCase($nam);
 }
 
 function getPName($id) {
 	$con = SQLi('products');
-	$name= '';
-	$rs  = mysqli_query($con, "SELECT name FROM tbllist WHERE id='$id'") or die(mysqli_error($con));
-	$rw  = mysqli_fetch_array($rs);
+	$rs  = $con->query("SELECT name FROM tbllist WHERE id='$id'") or die(mysqli_error($con));
+	$rw  = $rs->fetch_array();
 	return utf8_encode($rw['name']);
 }
 
@@ -194,7 +195,7 @@ function getDatWk($dat,$wk=0,$recap=0) {
 	$ad  = ( $wk ? "wk='".substr($dat,0,2)."' AND yr='".substr($dat,-4)."'" : "'$dat' BETWEEN fst AND lst" );
 	$con = SQLi('beta');
 
-	$s = mysqli_query($con, "SELECT * FROM tblsched WHERE $ad") or die(mysqli_error($con));
+	$s = $con->query("SELECT * FROM tblsched WHERE $ad") or die(mysqli_error($con));
 	$r = mysqli_fetch_assoc($s);
 
 	return array(sprintf("%02d", $r['wk']), $r['yr'], $r['fst'], $r['lst'], $r['vb']);
@@ -203,17 +204,24 @@ function getDatWk($dat,$wk=0,$recap=0) {
 
 function getStatus($id) {
 	$con = SQLi('beta');
-	$rs  = mysqli_query($con,"SELECT status FROM tbladmin WHERE id=$id") or die(mysqli_error($con));
-	$rw  = mysqli_fetch_array($rs);
+	$rs  = $con->query("SELECT status FROM tbladmin WHERE id=$id") or die(mysqli_error($con));
+	$rw  = $rs->fetch_array();
 	return $rw['status'];
 	mysqli_close($con);
 }
 
 function getDat($db,$tbl,$ret,$wer,$weris) {
-	$con = SQLi($db);
-	$r   = mysqli_query($con,"SELECT $ret FROM $tbl WHERE $wer=$weris") or die(mysqli_error($con));
-	$rw  = mysqli_fetch_array($r);
-	return $rw[$ret];
+	$con= SQLi($db);
+	$rs = $con->query("SELECT $ret FROM $tbl WHERE $wer=$weris") or die(mysqli_error($con));
+
+	if($rs->num_rows>0) {
+		$r  = $rs->fetch_array();
+		return $r[$ret];
+
+	} else {
+		return '';
+	}
+
 	mysqli_close($con);
 }
 
@@ -222,7 +230,7 @@ function titleCase($n) {
 	$lcase = array('the','van','den','von','und','der','de','da','of','and',"l'","d'");
 	$ucase = array('II','III','IV','VI','VII','VIII','IX','JR');
 
-	$n=strtolower($n);
+	$n = strtolower($n);
 	foreach($split as $d) {
 		$words = explode($d,$n);
 		$new = array();
@@ -237,13 +245,16 @@ function titleCase($n) {
 
 		$n = join($d,$new);
 	}
+
 	return $n;
 }
 
 function formatDate($dat,$fm='Ymd',$ret='Y.m.d') {
 	if(strlen($dat)<8) { $bak='INVALID DATE';
-	}else{
+
+	} else {
 		$d=DateTime::createFromFormat($fm,$dat);
+
 		if(($d&&$d->format($fm)==$dat)) {
 			// switch($ret) {
 				// case 0:$bak=$d->format('Y.m.d');break;
@@ -251,8 +262,10 @@ function formatDate($dat,$fm='Ymd',$ret='Y.m.d') {
 				$bak=$d->format($ret);
 				// break;
 			// }
-		}else $bak='INVALID DATE';
-	}return $bak;
+		} else $bak='INVALID DATE';
+	}
+
+	return $bak;
 }
 
 function dropDate($sel,$f) {
@@ -262,9 +275,9 @@ function dropDate($sel,$f) {
 		case 'mo':
 
 			for($i=1;$i<=12;$i++) {
-				$i    = sprintf("%02d", $i);
-				$obj  = DateTime::createFromFormat('!m',$i);
-				$op  .= '<option value="'.$i.'" '.($sel==$i?SELECTED:'').'>'.$obj->format('F').'</option>';
+				$i   = sprintf("%02d", $i);
+				$obj = DateTime::createFromFormat('!m',$i);
+				$op .= '<option value="'.$i.'" '.($sel==$i?SELECTED:'').'>'.$obj->format('F').'</option>';
 			}
 			break;
 
@@ -272,7 +285,7 @@ function dropDate($sel,$f) {
 
 			for($i=2010;$i<=date('Y');$i++) {
 				$obj = DateTime::createFromFormat('!Y',$i);
-				$op  .= '<option value="'.$i.'" '.($sel==$i?SELECTED:'').'>'.$obj->format('Y').'</option>';
+				$op .= '<option value="'.$i.'" '.($sel==$i?SELECTED:'').'>'.$obj->format('Y').'</option>';
 			}
 			break;
 
@@ -357,8 +370,8 @@ function testScope($n,$url='') {
 		$m   = explode( '|', $n);
 
 		foreach($m as $a=>$b) {
-			$rs = mysqli_query($con,"SELECT $b FROM tbladmin WHERE un='".LOGIN_ID."'") or die(mysqli_error($con));
-			$rw = mysqli_fetch_array($rs);
+			$rs = $con->query("SELECT $b FROM tbladmin WHERE un='".LOGIN_ID."'") or die(mysqli_error($con));
+			$rw = $rs->fetch_array();
 			$i += (int)$rw[$b];
 		}
 
@@ -377,8 +390,8 @@ function test_input(&$dat) {
 
 function testExist($id,$db,$tbl,$fld) {
 	$con = SQLi($db);
-	$rs  = mysqli_query($con, "SELECT $fld FROM $tbl WHERE $fld='$id'");
-	return (mysqli_num_rows($rs)==1);
+	$rs  = $con->query("SELECT $fld FROM $tbl WHERE $fld='$id'");
+	return ($rs->num_rows==1);
 }
 
 function testImg($path,$full=0) {
@@ -401,17 +414,17 @@ function testAllow($id) {
 	$test  = 0;
 
 	$con   = SQLi('distributor');
-	$qry   = "SELECT bhppv FROM bohstp WHERE bhdid='$id' GROUP BY bhpyr,bhpmo HAVING bhppv>=".minAllow;
-	$rs    = mysqli_query($con,$qry) or die(mysqli_error($con));
-	$test += mysqli_num_rows($rs);
+	$qry   = "SELECT bhppv FROM bohstp WHERE bhdid='$id'";
+	$rs    = $con->query($qry) or die(mysqli_error($con));
+	$test += $rs->num_rows;
 
 	$qry   = "SELECT SUM(ompv) pv FROM ormstp WHERE omdid='$id' GROUP BY ompyr,ompmo HAVING pv>=".minAllow;
-	$rs    = mysqli_query($con,$qry) or die(mysqli_error($con));
-	$test += mysqli_num_rows($rs);
+	$rs    = $con->query($qry);
+	$test += $rs->num_rows;
 
 	$con   = SQLi('orders');
-	$rs    = mysqli_query($con,$qry) or die(mysqli_error($con));
-	$test += mysqli_num_rows($rs);
+	$rs    = $con->query($qry);
+	$test += $rs->num_rows;
 
 	mysqli_close($con);
 	return $test;

@@ -30,6 +30,7 @@ if(!ISIN_ADMIN) {
 		echo '<li><a href="?get=1">ONLINE ORDERING</a></li>';
 		echo '<li><a href="?p=ormstp&do=0">REALTIME ORMSTP</a></li>';
 		echo '<li><a href="?p=bomstp">REALTIME BOMSTP</a></li>';
+		echo '<li><a href="?p=preferred_member">PREF MEMBER BONUS</a></li>';
 		echo DIV_CLEAR.'</ul>';
 		echo '<ul class="home">';
 		echo '<li><a href="?p=newdiswik">NEW<br/>THIS WEEK</a></li>';

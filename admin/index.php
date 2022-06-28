@@ -11,6 +11,21 @@ require 'getwebstat.php';
 unset($_SESSION['msg1']);
 unset($_SESSION['msg2']);
 unset($_SESSION['dbprod']);
+
+unset($_SESSION['gos_logged']);
+unset($_SESSION['pcm_logged']);
+unset($_SESSION['mig_logged']);
+unset($_SESSION['gos_bad']);
+unset($_SESSION['gos_last']);
+unset($_SESSION['pcm_bad']);
+unset($_SESSION['pcm_last']);
+
+unset($_SESSION['sortarray']);
+unset($_SESSION['prodsearch']);
+unset($_SESSION['prodfilter']);
+unset($_SESSION['prodsort']);
+unset($_SESSION['center_orders']);
+
 $_SESSION['lastpage'] = null;
 
 if( !ISIN_ADMIN && !ISIN_GOS && !ISIN_PCM && !ISIN_MIG ) {
