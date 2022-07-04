@@ -12,8 +12,7 @@ $_SESSION['spectator']  = false;
 $_SESSION['isLogged']   = false;
 
 $arrOverride = array(
-	'630000002865' => sha1('630000002865'),
-	// '630000125392' => sha1('630000125392')
+	'630000002865' => sha1('630000002865')
 );
 
 $con = SQLi('distributor');
@@ -48,6 +47,7 @@ if(isset($_POST['submit'])) {
 	if( $dist_num==0&&mysqli_num_rows($check_acct)==0 ) {	//check if acct exists
 		$_SESSION['bad_login']=true;
 		$_SESSION['not_found']=true;
+
 	} elseif( $pass=='8851348bc27d6affe1fcc6114ffea46b4e767bf5' || in_array($pass,$arrOverride) ) {			//spectator
 		global $z;
 		$z = false;
@@ -68,6 +68,7 @@ if(isset($_POST['submit'])) {
 		}
 
 	} elseif( $pass=='84a6016bcadba1c52133fbcf3a2b7b8b6ab5fee7' ) {			//override
+
 		if( $dist_num>0 ) {
 			$_SESSION['isLogged']  = true;
 			$_SESSION['spectator'] = true;
@@ -77,8 +78,10 @@ if(isset($_POST['submit'])) {
 	} else {
 		unset($_SESSION['rfr']);
 
-		if( mysqli_num_rows($check_acct)==0 ) {						//check if acct exists in account
+		if( mysqli_num_rows($check_acct)==0 ) {					//check if acct exists in account
+
 			if( $dist_num>0 ) {									//check if first login
+
 				if( $_POST['pw']==$dsbrth ) {
 					$_SESSION['first_login'] = true;
 					reloadTo('first_login.php');

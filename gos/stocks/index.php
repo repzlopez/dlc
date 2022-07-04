@@ -13,16 +13,16 @@ if(!ISIN_GOS) {
 	exit;
 }
 
-$_SESSION['gos_last']=DLC_GORT.'/stocks';
-$_SESSION['lastpage']='/gos/stocks';
+$_SESSION['gos_last'] = DLC_GORT . '/stocks';
+$_SESSION['lastpage'] = '/gos/stocks';
 $title   = 'GOS | Stocks';
 $content = '';
-$page    = isset($_GET['p'])?$_GET['p']:'';
+$page    = isset($_GET['p']) ? $_GET['p'] : '';
 
 ob_start();
 include('../head.php');
 
-if(LOGIN_TYPE=='gos') {
+if (LOGIN_TYPE == 'gos') {
 	switch ($page) {
 		case 'stocks':
 			echo loadStocks();
@@ -53,7 +53,7 @@ function loadStocks() {
 	$msg .= '<ul id="remit" class="list clear">';
 	$msg .= '<li class="hdr"><span class="s1">Item</span><span class="s7">Description</span><span class="s1 rt">Qty</span></li>';
 
-	while( $rw=mysqli_fetch_array($rs,MYSQLI_BOTH) ) {
+	while( $rw = $rs->fetch_array() ) {
 		$id  = $rw['id'];
 		$qty = $rw[$brn];
 		$nam = getPName($id);

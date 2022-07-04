@@ -12,15 +12,29 @@ if( ($_POST['id']!='null') && $_POST['submit']=='pabili' ) {
 
 	require_once('../../admin/setup.php');
 
+	$order_type = isset($_SESSION['order_type']) ? $_SESSION['order_type'] : '';
+
+	switch ($order_type) {
+		case '':
+		case 'distributor':
+			$use_price = "wsp"; break;
+
+		case 'preferred':
+			$use_price = "pmp"; break;
+
+		case 'customer':
+			$use_price = "srp"; break;
+	}
+
 	$con = SQLi('products');
 	$qry = "SELECT * FROM tbllist WHERE id=$id";
 	$rs  = $con->query($qry);
-	$rw  = $rs->fetch_assoc();
+	$r   = $rs->fetch_assoc();
 
-	$cod = $rw['id'];
-	$nam = $rw['name'];
-	$pvv = $rw['pv'];
-	$wsp = $rw['wsp'];
+	$cod = $r['id'];
+	$nam = $r['name'];
+	$pvv = $r['pv'];
+	$prc = $r[$use_price];
 
 	mysqli_close($con);
 
@@ -31,11 +45,11 @@ if( ($_POST['id']!='null') && $_POST['submit']=='pabili' ) {
 	if( $i<count($_SESSION['center_orders']) ) {
 		if( $_SESSION['center_orders'][$i][2] + $qy >= 0 ) {
 			$_SESSION['center_orders'][$i][2] = $qy;
-			$_SESSION['center_orders'][$i][3] = $wsp;
+			$_SESSION['center_orders'][$i][3] = $prc;
 			$_SESSION['center_orders'][$i][4] = $pvv;
 		}
 
-	} else $_SESSION['center_orders'][] = array($cod,$nam,$qy,$wsp,$pvv);
+	} else $_SESSION['center_orders'][] = array($cod,$nam,$qy,$prc,$pvv);
 
 	if( $_SESSION['center_orders'][$i][2] + $qy==0 || $_SESSION['center_orders'][$i][2] + $qy=='' ) {
 		unset($_SESSION['center_orders'][$i]);

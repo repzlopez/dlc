@@ -124,6 +124,10 @@ if( isset($submit) && $submit=='Submit' ) {
 			$con->query("UPDATE responsor SET status=0 WHERE dsdid='$oldid'") or die(mysqli_error($con));
 			$_SESSION['lastpage']='distriserve/?p=responsor&do=0';
 
+		} elseif ($url == 'pm_bonus') {
+			$con = SQLi('orders');
+			$con->query("UPDATE $url SET released=NOW(),status=1 $qry") or die(mysqli_error($con));
+
 		} else {
 			$con->query("UPDATE $tbl SET $udata $qry") or die(mysqli_error($con));
 		}

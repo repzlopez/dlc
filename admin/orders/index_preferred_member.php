@@ -36,7 +36,7 @@ function prepPrefMemberBonus() {
 	";
 // echo $qry . '<br>';
 
-	$rs = $con->query( $qry);
+	$rs = $con->query($qry) or die(mysqli_error($con));
 
 	if( $rs->num_rows > 0 ) {
 		echo "<h3>Processing PM Bonus...</h3><br>";
@@ -74,10 +74,11 @@ function calcPMBonus($invoice,$dsdid,$item,$qty) {
 
 	echo "<p> - $item (x $qty): Bonus ". number_format($bonus,2) ." ADDED<p>";
 
-	$qry = "INSERT INTO pm_bonus VALUES ('',$invoice,'$dsdid',$item,$bonus,0)";
+	$qry = "INSERT INTO pm_bonus VALUES (0,$invoice,'$dsdid',$item,$bonus,null,0)";
+// echo $qry . '<br>';
 
 	$con = SQLi('orders');
-	$con->query($qry);
+	$con->query($qry) or die(mysqli_error($con));
 }
 
 function loadPrefMemberBonus($wk) {
@@ -86,7 +87,7 @@ function loadPrefMemberBonus($wk) {
 		<span class="s6">Name</span>
 		<span class="s2 rt">Invoice</span>
 		<span class="s3 rt">Bonus</span>
-		<span class="s2 rt">Status</span></li>';
+		<span class="s2 ct">Status</span></li>';
 
 	$x = '<li class="blue"><br><h3>Preferred Member Bonus</h3><br></li>'.$hdr;
 
@@ -98,18 +99,18 @@ function loadPrefMemberBonus($wk) {
 		LEFT JOIN ".DB. "distributor.distributors d
 			ON d.dsdid=b.dsdid
 	";
+// echo $qry . '<br>';
 
-	$rs = mysqli_query($con,$qry);
+	$rs = $con->query($qry) or die(mysqli_error($con));
 	while($r=$rs->fetch_assoc()) {
 
-		$pv = 0;
 		foreach($r as $k=>$v) $$k = $v;
 
 		$x .= '<li><span class="s0"></span><span class="s4">'.$dsdid.'</span>
 			<span class="s6" title="'.$nam.'">'.$nam. '</span>
 			<span class="s2 rt">'. $invoice . '</span>
 			<span class="s3 rt">'. number_format($bonus, 2, '.', ',') .'</span>
-			<span class="s2 rt">'. $status .'</span></li>';
+			<span class="s2 ct">'. $status .'</span></li>';
 	}
 
 	mysqli_close($con);

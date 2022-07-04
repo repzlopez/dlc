@@ -10,8 +10,10 @@ $con = SQLi('products');
 if( isset($_POST['submit']) && $_POST['submit']=='UPLOAD' ) {
 	$file = $_FILES['file'];
 	$temp = $file['tmp_name'];											//live
+
 	//	$temp_file='c://dlcwebtemp/prodstemp_'.date('Ymd',time()).'.csv';		//local
 	//	$usefile=(strpos($_SERVER['SERVER_NAME'],'dlc')!==false) ? $temp_file:$temp;
+
 	unset($_POST);
 	unset($_FILES);
 
@@ -32,23 +34,28 @@ if( isset($_POST['submit']) && $_POST['submit']=='UPLOAD' ) {
 			status TINYINT(1) NULL default '0'
 		)";
 // echo "1 $sqlcreate<br>";
+
 		// $sqluniq="ALTER TABLE $tbl ADD UNIQUE(id)";
-		// mysqli_query($con,$sqlcreate) or die(mysqli_error($con));
-		// mysqli_query($con,$sqluniq) or die(mysqli_error($con));
+		// $con->query($sqlcreate) or die(mysqli_error($con));
+		// $con->query($sqluniq) or die(mysqli_error($con));
 		postData($temp,$tbl);
+
 /*
 		move_uploaded_file($temp,$temp_file);
-		mysqli_query($con,getQuery($tbl,'(@x,id,name,@x,pv,wsp,pov,srp,wt,@stat) SET status = IF(@stat="",1,0)',$usefile)) or die(mysqli_error($con));
+		$con->query(getQuery($tbl,'(@x,id,name,@x,pv,wsp,pov,srp,wt,@stat) SET status = IF(@stat="",1,0)',$usefile)) or die(mysqli_error($con));
 */
+
 		$tbl = 'tblstocks';
 		$sqlcreate = "CREATE TABLE IF NOT EXISTS $tbl (
 			id INT(5) UNSIGNED ZEROFILL,
 			safeqty INT(5) NOT NULL default '0'
 		)";
 // echo "2 $sqlcreate<br>";
+
 		// $sqluniq="ALTER TABLE $tbl ADD UNIQUE(id)";
-		// mysqli_query($con,$sqlcreate) or die(mysqli_error($con));
-		// mysqli_query($con,$sqluniq) or die(mysqli_error($con));
+		// $con->query($sqlcreate) or die(mysqli_error($con));
+		// $con->query($sqluniq) or die(mysqli_error($con));
+
 		$idata = ",0". countCols();
 		updateTable($tbl, $idata);
 
@@ -71,9 +78,11 @@ if( isset($_POST['submit']) && $_POST['submit']=='UPLOAD' ) {
 			status TINYINT(1) NULL default '0'
 		)";
 // echo "3 $sqlcreate<br>";
+
 		// $sqluniq="ALTER TABLE $tbl ADD UNIQUE(id)";
-		// mysqli_query($con,$sqlcreate) or die(mysqli_error($con));
-		// mysqli_query($con,$sqluniq) or die(mysqli_error($con));
+		// $con->query($sqlcreate) or die(mysqli_error($con));
+		// $con->query($sqluniq) or die(mysqli_error($con));
+
 		$idata = ",'','','','','','','','999','',0,0,0,0,0";
 		updateTable($tbl, $idata);
 
@@ -122,33 +131,44 @@ function getQuery($tbl,$cols,$file) {
 */
 function updateTable($tbl,$idata) {
 	$con = SQLi('products');
-	$rs = mysqli_query($con,"SELECT id FROM tbllist") or die(mysqli_error($con));
-	while( $r=mysqli_fetch_array($rs,MYSQLI_BOTH) ) {
+	$rs = $con->query("SELECT id FROM tbllist") or die(mysqli_error($con));
+	while( $r= $rs->fetch_array() ) {
 		$id  = $r['id'];
 		$qry = "INSERT INTO $tbl VALUES ($id$idata) ON DUPLICATE KEY UPDATE id=id";
-		mysqli_query($con,$qry) or die(mysqli_error($con));
+		$con->query($qry) or die(mysqli_error($con));
 	}
 }
 
 function getList() {
 	$msg  = '<ul class="list clear">';
-	$msg .= '<li class="hdr"><span class="s1">Item</span><span class="s7">Description</span><span class="s1 rt">WSP</span><span class="s1 rt">SRP</span><span class="s2 rt">Bonus</span><span class="s2 rt">PV</span><span class="s1">Active</span></li>';
+	$msg .= '<li class="hdr">';
+	$msg .= '<span class="s1">Item</span>';
+	$msg .= '<span class="s6">Description</span>';
+	$msg .= '<span class="s1 rt">WSP</span>';
+	$msg .= '<span class="s1 rt">PMP</span>';
+	$msg .= '<span class="s1 rt">SRP</span>';
+	$msg .= '<span class="s2 rt">Bonus</span>';
+	$msg .= '<span class="s2 rt">PV</span>';
+	$msg .= '<span class="s1">Active</span>';
+	$msg .= '</li>';
 
 	$con = SQLi('products');
-	$rs  = mysqli_query($con,"SELECT * FROM tbllist ORDER BY id") or die(mysqli_error($con));
-	$num = mysqli_num_rows($rs);
-	$_SESSION['listcount']=$num;
+	$rs  = $con->query("SELECT * FROM tbllist ORDER BY id") or die(mysqli_error($con));
+	$num = $rs->num_rows;
+
+	$_SESSION['listcount'] = $num;
 
 	if( $num>0 ) {
-		while( $rw=mysqli_fetch_array($rs,MYSQLI_BOTH) ) {
+		while( $rw= $rs->fetch_array() ) {
 			$msg .= '<li>';
-			$msg .= '<span class="s1">'. $rw['id'] .'</span>';
-			$msg .= '<span class="s7">'. utf8_encode($rw['name']) .'</span>';
-			$msg .= '<span class="s1 rt">'. sprintf('%05d',$rw['wsp']) .'</span>';
-			$msg .= '<span class="s1 rt">'. sprintf('%05d',$rw['srp']) .'</span>';
+			$msg .= '<span class="s1">' . $rw['id'] . '</span>';
+			$msg .= '<span class="s6">' . utf8_encode($rw['name']) . '</span>';
+			$msg .= '<span class="s1 rt">' . sprintf('%05d', $rw['wsp']) . '</span>';
+			$msg .= '<span class="s1 rt">' . sprintf('%05d', $rw['pmp']) . '</span>';
+			$msg .= '<span class="s1 rt">' . sprintf('%05d', $rw['srp']) . '</span>';
 			$msg .= '<span class="s2 rt">' . number_format($rw['pmbonus'], 2, '.', '') . '</span>';
 			$msg .= '<span class="s2 rt">' . number_format($rw['pv'], 2, '.', '') . '</span>';
-			$msg .= '<span class="s1">'.$rw['status'].'</span>';
+			$msg .= '<span class="s1">' . $rw['status'] . '</span>';
 			$msg .= '</li>';
 		}
 	}
@@ -159,15 +179,15 @@ function getList() {
 
 function countCols() {
 	$con = SQLi('products');
-	$rs  = mysqli_query($con,"SELECT * FROM tblwarehouse WHERE status=1") or die(mysqli_error($con));
-	$num = mysqli_num_rows($rs);
+	$rs  = $con->query("SELECT * FROM tblwarehouse WHERE status=1") or die(mysqli_error($con));
+	$num = $rs->num_rows;
 
-	while( $rw=mysqli_fetch_array($rs) ) {
+	while( $rw= $rs->fetch_array() ) {
 		$id   = $rw['id'];
-		$test = mysqli_query($con,"SHOW COLUMNS FROM tblstocks LIKE 'w$id'");
+		$test = $con->query("SHOW COLUMNS FROM tblstocks LIKE 'w$id'");
 
-		if ( trim($id)!='' && !mysqli_num_rows($test) ) {
-			mysqli_query($con,"ALTER TABLE tblstocks ADD w$id INT") or die(mysqli_error($con));
+		if( trim($id)!='' && !mysqli_num_rows($test) ) {
+			$con->query("ALTER TABLE tblstocks ADD w$id INT") or die(mysqli_error($con));
 		}
 	}
 
@@ -176,10 +196,10 @@ function countCols() {
 
 function isValid($ft) {
 	if(
-		$ft=='text/csv' ||
-		$ft=='application/csv' ||
-		$ft=='application/octet-stream' ||
-		$ft=='application/vnd.ms-excel'
+		$ft == 'text/csv' ||
+		$ft == 'application/csv' ||
+		$ft == 'application/octet-stream' ||
+		$ft == 'application/vnd.ms-excel'
 	) return true;
 }
 
@@ -215,6 +235,6 @@ function postData($file,$tbl) {
 function getData($idata,$udata,$tbl) {
 	$con = SQLi('products');
 	// if($tbl=='tbllist') echo "$qry<br><br>";
-	mysqli_query($con,"INSERT INTO $tbl VALUES ($idata) ON DUPLICATE KEY UPDATE $udata") or die(mysqli_error($con));
+	$con->query("INSERT INTO $tbl VALUES ($idata) ON DUPLICATE KEY UPDATE $udata") or die(mysqli_error($con));
 }
 ?>

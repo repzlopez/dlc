@@ -387,7 +387,7 @@ a.back { $frgt $imp;$mar_5 10px;$pad_5 20px $imp; }
 .s3 { width:100px $imp; }
 .s4 { width:150px $imp; }
 .s5 { width:200px $imp; }
-.s6 { width:300px $imp;$ov_aut;}
+.s6 { width:300px $imp;}
 .s7 { width:500px $imp;$ov_aut; }
 /*	classes		*/
 

@@ -453,6 +453,17 @@ $(document).ready(function() {
 		$('#datePicker').Zebra_DatePicker({format:'Y.m.d',direction:false,first_day_of_week:0,show_icon:false,zero_pad:true,offset:[-495,30]});
 	}
 
+	if ($('#distrilookup').length > 0) {
+		$('#distrilookup').on('submit', function (e) {
+			e.preventDefault();
+		});
+
+		$('form').on('change', '#distid', function () {
+			$('#distrilookup input[type=text]').next().empty().text('Searching... Please wait.');
+			lookupDistri($('#distid').val(), getUrlVars()['p']);
+		});
+	}
+
 	if($('.monyr').length>0) {
 		var tab=getUrlVars()['tab'];
 		tab = tab!=null ? 'tab='+getUrlVars()['tab']+'&' :'';
@@ -592,6 +603,20 @@ function findDistri(id) {
 			$('input[name=gc_ctin]').val(dat[2]);
 			$('input[name=gc_name]').attr('rel',dat[0]);
 			$('#msg').text('');
+		}
+	});
+}
+
+function lookupDistri(id,page) {
+	$.ajax({
+		type: 'POST',
+		url: '/admin/updatedistri.php',
+		data: {'find':id,'page':page},
+		beforeSend: function() {$('#distrilookup input[type=text]').next().empty().text('Updating...');},
+		success: function(n) {
+			$('#distri').remove();
+			$('#distrilookup').append(n);
+			$('#distrilookup input[type=text]').next().empty().text('** dist.id, name');
 		}
 	});
 }

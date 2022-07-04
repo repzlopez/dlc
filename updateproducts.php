@@ -36,8 +36,8 @@ $qry = "SELECT *
 		ORDER BY sort_order,l.id";
 
 $con = SQLi('products');
-$rs  = mysqli_query($con,$qry) or die(mysqli_error($con));
-while( $rw = mysqli_fetch_assoc($rs) ) {
+$rs  = $con->query($qry) or die(mysqli_error($con));
+while( $rw = $rs->fetch_assoc() ) {
 	$v3 = 0;
 	if( isset($shoplist) && is_array($shoplist) ) {
 		foreach($shoplist as $value) {
@@ -52,6 +52,7 @@ while( $rw = mysqli_fetch_assoc($rs) ) {
 
 	if( file_exists( $path . $rw['img'] ) ) {
 		$previmg = $path . $rw['img'];
+
 	} else
 		$previmg = $path . 'default_product.jpg';
 
@@ -61,14 +62,14 @@ while( $rw = mysqli_fetch_assoc($rs) ) {
 		$title = $rw['id'] .'-'. sprintf("%05d", $rw['wsp']) .'-'. sprintf("%05d", $rw['pov']);
 		$nam   = '<p>'. utf8_encode($rw['name']) .'</p>';
 		$srp   = SRP_ON ? '<label>P '. number_format($rw['srp'], 0, '', ',') .'</label>' :'';
-		$add   = ( ( (CART_ON&&ISIN_DISTRI) || GUEST ) && $rw['stock']==1 ) ? '<input type="button" class="addtocart" data-id="'. $rw['id'] .'" title="Add to Cart" value="" />' :'';
+		$add   = ( ( ( CART_ON && ISIN_DISTRI ) || GUEST ) && $rw['stock']==1 ) ? '<input type="button" class="addtocart" data-id="'. $rw['id'] .'" title="Add to Cart" value="" />' :'';
 
 		$wp_path = '/read/'. $shortlink .'lifestyle-shop/?pid='. $rw['id'];
 		$data .= '<li>'. $add .'<a href="'. $wp_path .'" title="'. $title .'" data-cat="'. $rw['cat'] .'" data-id="'. $rw['id'] .'" class="prev">'. $img . $ico . $nam . $srp .'</a></li>';
 
 	} else {
 		$morles = '<input type="button" class="qtydn" title="Less" /><input type="text" rel="'. $rw['id'] .'" maxlength=3 value="'. $v3 .'" '. DISABLED .' /><input type="button" class="qtyup" title="More" />';
-/*cart*/	$shop = ( ( (CART_ON&&ISIN_DISTRI) || GUEST ) && $rw['stock']==1 ) ? '<div id="shop">'. $morles .'</div>' :'';
+/*cart*/	$shop = ( ( (CART_ON && ISIN_DISTRI) || GUEST ) && $rw['stock']==1 ) ? '<div id="shop">'. $morles .'</div>' :'';
 		$data .= '<li>'. ($icon!='' ? '<img src="src/'. $icon .'.png" class="nostock nostockprev" alt="" />' :'') . $shop .'<a href="products.php?p='. $rw['cat'] .'&pid='. $rw['id'] .'" class="prev"><img src="'. $previmg .'" alt="'. (SRP_ON ? $rw['srp'] :'') .'"/><p>'. utf8_encode($rw['name']) .'</p></a></li>';
 	}
 }

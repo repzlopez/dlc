@@ -8,9 +8,7 @@ define('INCLUDE_CHECK',1);
 require('../admin/setup.php');
 require('func.php');
 
-$_SESSION['gos_last']=DLC_GORT;
-$title='GOS | '.DLC_GOS;
-$content=isset($_GET['p'])?$_GET['p']:'';
+$_SESSION['gos_last'] = DLC_GORT;
 
 unset($_SESSION['gos_edit_orders']);
 unset($_SESSION['center_orders_data']);
@@ -38,14 +36,32 @@ if($content!='') {
 
 } else {
 	$y .= '<ul class="home">';
-	$y .= IS_GOS ? '<li><a href="admin">ADMIN</a></li>':'';
-	$y .= !IS_GOS ? '<li><a href="orders">ORDERS</a></li>':'';
-	$y .= '<li><a href="remit">REMIT</a></li>';
-	$y .= !IS_GOS ? '<li><a href="distri">DISTRI</a></li>':'';
-	$y .= '<li><a href="'.(IS_GOS ? "/admin/logistics/?p=stocks&do=0":'stocks').'">STOCKS</a></li>';
-	$y .= !IS_GOS ? '<li><a href="setup">SETUP</a></li>':'';
-	$y .= IS_GOS ? '<li><a href="'.DLC_ADMIN.'">DLC<br>ADMIN</a></li>':'';
-	$y .= !IS_GOS ? '<li><a href="?p=allowsponsor&do=0">ALLOWED TO SPONSOR</a></li>':'';
+
+	if (LOGIN_TYPE == 'admin') {
+		$y .= '<li><a href="admin">ADMIN</a></li>';
+		$y .= '<li><a href="remit">REMIT</a></li>';
+		$y .= '<li><a href="/admin/logistics/?p=stocks&do=0">STOCKS</a></li>';
+		$y .= '<li><a href="' . DLC_ADMIN . '">DLC<br>ADMIN</a></li>';
+	}
+
+	if( LOGIN_TYPE == 'gos' ) {
+		$y .= '<li><a href="orders">DISTRIBUTOR ORDERS</a></li>';
+		$y .= '<li><a href="orders?preferred">PREF MEMBER ORDERS</a></li>';
+		$y .= '<li><a href="orders?customer">CUSTOMER ORDERS</a></li>';
+		$y .= DIV_CLEAR . '</ul>';
+
+		$y .= '<ul class="home">';
+		$y .= '<li><a href="remit">REMIT</a></li>';
+		$y .= '<li><a href="distri">DISTRI</a></li>';
+		$y .= '<li><a href="stocks">STOCKS</a></li>';
+		$y .= '<li><a href="setup">SETUP</a></li>';
+		$y .= DIV_CLEAR . '</ul>';
+
+		$y .= '<ul class="home">';
+		$y .= '<li><a href="?p=distrilookup&do=0">LOOKUP</a></li>';
+		$y .= '<li><a href="?p=preferredmember&do=0">PREF MEMBER CHECK</a></li>';
+	}
+
 	$y .= DIV_CLEAR.'</ul>';
 }
 

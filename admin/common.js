@@ -244,6 +244,23 @@ $(document).ready(function() {
 		return false;
 	});
 
+	$('.pm_release').click(function () {
+		var id = $(this).attr('rel');
+		var tbl = 'pm_bonus';
+
+		if(confirm("Release PM Bonus?")) {
+			$.ajax({
+				type: 'POST',
+				url: '/admin/update.php?t=pm_bonus',
+				data: { 'do': '2,' + id, 'submit': 'Submit' },
+				success: function (n) {
+					document.location = window.location.pathname + '?p=' + tbl + '&do=0';
+				}
+			});
+			return false;
+		}
+	});
+
 	$('#responsor_form').submit(function() {
 		if($('#distname').val()=='') {
 			alert('Unable to continue. No match found.');return false;

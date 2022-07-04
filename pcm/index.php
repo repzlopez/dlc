@@ -37,15 +37,23 @@ if($content!='') {
 
 } else {
 	$y .= '<ul class="home">';
-	$y .= IS_PCM ? '<li><a href="admin">ADMIN</a></li>':'';
-	$y .= !IS_PCM ? '<li><a href="orders">ORDERS</a></li>':'';
-	$y .= '<li><a href="remit">REMIT</a></li>';
-	$y .= !IS_PCM ? '<li><a href="distri">DISTRI</a></li>':'';
-	$y .= '<li><a href="'.(IS_PCM?"/admin/logistics/?p=stocks&do=0":'stocks').'">STOCKS</a></li>';
-	$y .= !IS_PCM ? '<li><a href="setup">SETUP</a></li>':'';
-	$y .= IS_PCM ? '<li><a href="'.DLC_ADMIN.'">DLC<br>ADMIN</a></li>':'';
-	$y .= !IS_PCM ? '<li><a href="?p=allowsponsor&do=0">ALLOWED TO SPONSOR</a></li>':'';
-	$y .= DIV_CLEAR.'</ul>';
+
+	if (LOGIN_TYPE == 'admin') {
+		$y .= '<li><a href="admin">ADMIN</a></li>';
+		$y .= '<li><a href="' . DLC_ADMIN . '">DLC<br>ADMIN</a></li>';
+	}
+
+	if (LOGIN_TYPE == 'pcm') {
+		$y .= '<li><a href="orders">ORDERS</a></li>';
+		$y .= '<li><a href="remit">REMIT</a></li>';
+		$y .= '<li><a href="distri">DISTRI</a></li>';
+		$y .= '<li><a href="stocks">STOCKS</a></li>';
+		$y .= '<li><a href="setup">SETUP</a></li>';
+		// $y .= '<li><a href="?p=allowsponsor&do=0">ALLOWED TO SPONSOR</a></li>';
+		$y .= '<li><a href="?p=preferredmember&do=0">PREFERRED MEMBERS</a></li>';
+	}
+
+	$y .= DIV_CLEAR . '</ul>';
 }
 
 echo $y;
