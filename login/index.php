@@ -39,7 +39,7 @@ $x .= '<div class="box"><div class="box-content"><ul>';
 $x .= '<li><a href="' . LOGO_LINK . '"><img src="/src/dlc_logo_min.png" alt="' . DLC_FULL . '" /></a>' . DIV_CLEAR;
 $x .= '<h1>Aim Higher!</h1><br><a href="' . DLC_ROOT . '/read/">HOME</a></li>';
 $x .= '<li><form method="post" action="' . $path . 'login.php" id="login"><ul>';
-$x .= '<li><input type="text" name="un" placeholder="' . ($login != '' ? 'Username' : 'Distributor ID') . '" value="' . $userno . '" /></li>';
+$x .= '<li><input type="text" name="un" placeholder="' . ($login != '' ? ($login == 'admin' ? 'Username' : 'Branch ID') : 'Distributor ID') . '" value="' . $userno . '" /></li>';
 $x .= '<li><input type="password" name="pw" placeholder="Password" /></li>';
 $x .= '<li><input type="submit" name="submit" value="Login" /></li>';
 $x .= '<li><a href="' . DLC_ROOT . '/read/at-your-service/forgot-password/" class="lite">Forgot password?</a></li>';

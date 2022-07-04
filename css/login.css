@@ -1,15 +1,16 @@
-html,body,ul,ol,li,form,input,a { margin:0;padding:0;outline:none; }
+@import 'inc/reset.css';
+@import 'inc/placeholder.css';
+
 body { background:url('/src/bg.jpg') no-repeat center;font:14px "lucida sans unicode",arial,sans-serif;height:100vh;margin:0;position:relative; }
-ol,ul,li { list-style:none; }
 ul>li { display:inline-block;vertical-align:top;width:300px; }
 h1 { font:xxx-large "Shadows Into Light";margin:0; }
-a { color:#aaa;display:inline-block;text-decoration:none; }
+a { color:#aaa;display:inline-block;font-size:14px;text-decoration:none; }
 
 #login { text-align:center; }
 #login li { margin-bottom:10px; }
 #login li:last-child { height:20px;line-height:20px; }
 #login input { font-size:18px;padding:10px;width:280px; }
-#login input[type=submit] { background:#00539b;color:#fff;width:302px; }
+#login input[type=submit] { background:var(--blue);color:#fff;width:302px; }
 #login input {
      border:#ccc solid 1px;
      -moz-border-radius:10px;
@@ -44,18 +45,3 @@ a { color:#aaa;display:inline-block;text-decoration:none; }
      border-radius:1em;
      padding:20px;
 }
-
-/*	placeholder		*/
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
- color: #ccc;
- opacity: 1; /* Firefox */
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
- color: #ccc;
-}
-
-::-ms-input-placeholder { /* Microsoft Edge */
- color: #ccc;
-}
-/*	placeholder		*/

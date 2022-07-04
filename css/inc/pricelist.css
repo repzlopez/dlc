@@ -1,0 +1,16 @@
+/*	pricelist 	*/
+#pricelist li {
+    padding: 5px;
+    width: 920px;
+    border: 1px solid #eee;
+}
+
+#pricelist li.hdr {
+    background: #eee;
+}
+
+#pricelist li * {
+    vertical-align: top;
+}
+
+/*	pricelist 	*/

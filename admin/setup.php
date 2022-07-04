@@ -325,8 +325,8 @@ function loadHead($title,$tail='',$add=0) {
 	<meta http-equiv="Content-Language" content="en" />
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<link rel="shortcut icon" href="/src/favicon.ico"></link>
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/styles.php'.($add?'?css=1':'').'"></link>
-	<link rel="stylesheet" type="text/css" media="print" href="/css/styles.php?css=2"></link>';
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/styles.css"></link>
+	<link rel="stylesheet" type="text/css" media="print" href="/css/print.css"></link>';
 
 	$msg .= $tail.$pixel.'</head><body><div id="bg"> </div><div class="loading"><img src="/src/loading.gif" alt="" /></div>';
 	return $msg;

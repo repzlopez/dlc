@@ -66,7 +66,7 @@ function getList() {
             $new = $r['cat'];
 
             if( $old != $new ) {
-                $x .= '<li class="hdr ct"><h4>' . strtoupper(str_replace('others', 'packages',$new)) . '</h4></li>';
+                $x .= '<li class="hdr ct"><h4>' . ($new!='' ? strtoupper(str_replace('others', 'packages',$new))  : 'OTHER PRODUCTS') . '</h4></li>';
                 $x .= '<li class="hdr">';
                 $x .= '<strong class="s2">Item</strong>';
                 $x .= '<strong class="s7">Description</strong>';

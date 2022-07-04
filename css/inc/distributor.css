@@ -1,0 +1,81 @@
+/*	distributors 	*/
+#foot { height:50px; }
+#download { float:left;font-size:12px;padding:5px; }
+#container { min-height:100%; }
+#distdata span { display:inline-block;width:90px;vertical-align:middle; }
+#distdata div { line-height:22px;margin:2px 0;border:0; }
+#distdata img { float:right;margin:-80px 100px 0 0; }
+#distdata label { color:#777;display:inline-block; }
+#spon_id { cursor:pointer; }
+#data_list { border:1px solid #ccc;margin:0; }
+#data_list li { border-bottom:#eee solid 1px;padding:5px 0; }
+#data_list li:hover { background:var(--bg); }
+#data_list li ul { background:var(--bg);padding:0; }
+#data_list .hdr { background:none !important; }
+#data_list input { text-align:center;width:40px; }
+#data_list span { color:#1b3f8b;display:inline-block;padding:0;vertical-align:top; }
+#dl_list { text-align:right; }
+#recaplookup { position:absolute;top:10px;right:10px; }
+#recaplookup a { float:right; }
+#dsmstp li { padding:5px 0; }
+#dsmstp span { color:#1b3f8b;display:inline-block;padding:0 10px;vertical-align:middle; }
+#dsmstp input[type=text] { padding:5px;width:400px; }
+.recap { border:0 !important; }
+.recap div,.recap li,.recap label,.recap span,.recaphead { font:normal 14px 'courier new' !important; }
+.recap .s8 { width:450px !important; }
+.recaphead { font-size:16px !important;text-align:center; }
+.recaptotals { margin-left:430px; }
+.blue { color:#00539b;font-family:var(--fonts);font-size:14px; }
+.hdr { padding:10px 5px; }
+.hdr span { font-weight:bold; }
+.lookup_data { display:none;background:var(--bg);border:1px solid #00539b;width:100%;padding:10px;position:absolute;top:329px;left:-1px; }
+#searchresults { border-collapse:collapse; }
+#searchresults td,
+#searchresults th { border:1px solid #eee;padding:5px;text-align:left; }
+#searchresults tr:nth-child(even) { background:#eee; }
+#searchresults tr:hover { background:#fdb913; }
+#tab a:hover,.current { background:#eee !important; }
+
+#totals  { padding:0 50px;width:860px; }
+#totals a { float:right; }
+.orders { border:1px solid #ccc;font-size:14px;margin:10px 50px;padding:10px 20px; }
+.orders ul { padding:5px 0; }
+.orders li { border-bottom:#eee solid 1px;font-size:14px;padding:5px 0; }
+.orders li span { overflow:hidden;vertical-align:top; }
+.orders li .s6 { overflow:inherit; }
+.orders li .lbl { color:#00539b; }
+.orders .lt { text-align:left; }
+.orders .rt { text-align:right; }
+.orders .blue { background:url(../../src/left.png) no-repeat;padding:2px 5px; }
+.orders div.s7 { line-height:22px; }
+.orders select { margin-left:4px;padding:5px; width:510px !important; }
+.orders select[name=payOp] { width:282px !important; }
+.vieworders { padding:5px;overflow:hidden; }
+.vieworders ul { border:1px solid #ccc;display:inline-block;margin:5px;padding:10px;vertical-align:top;width:390px; }
+.vieworders .s8 { display:inline-block;width:270px; }
+.cancelorder { border:1px solid #ccc;cursor:pointer;float:right;padding:2px; }
+textarea { padding:5px; }
+input:not(type=radio) { padding:5px;width:500px; }
+input[type=submit] { float:right;margin-right:2px;width:100px;overflow:hidden; }
+#totals input[type=submit] { background:url(../../src/checkout.png) no-repeat;height:32px; }
+#totals input[type=submit]:hover { background:url(../../src/checkout.png) no-repeat; }
+#validate { background:darkred;border:1px solid #ccc;display:none;margin:0 auto;padding:20px;position:absolute;margin:0 0 0 510px;z-index:1000; }
+#validate input { margin:2px;width:100px; }
+#validate span { color:#fff; }
+#cover { position:absolute; }
+input[name=payDate],.updn { cursor:pointer; }
+
+.w0 { width:50px; }
+.w1 { width:120px; }
+.w2 { width:250px; }
+.w3 { width:350px; }
+li.gen1 { background:#eee; }
+span.gen1 { color:#c82536 !important; }
+.fff { background:#fff !important;border:0 !important;padding:0 !important; }
+.pad { color:#fff !important; }
+.print select { font-family:'courier new';text-align:right; }
+.updated { border:0 !important;color:#999;font-size:11px;font-style:italic;height:30px;margin:2px 10px;padding:0 !important;text-align:right; }
+.updated:hover { background:var(--bg) !important; }
+.btn { background:var(--btn_bg);border:1px solid #eee;cursor:pointer;padding:5px; }
+.btn:hover { border:1px solid #ccc; }
+/*	distributors 	*/

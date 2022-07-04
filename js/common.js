@@ -48,14 +48,6 @@ $(document).ready(function() {
 		});
 	}
 
-	$('#nav').lavaLamp({
-		fx:'easeInOutBack',
-		speed:600,
-		click:function(event,menuItem) {
-			return true;
-		}
-	});
-
 	$('.more,.link').live('click',function() {
 		window.location = $(this).attr('href');
 	});

@@ -96,7 +96,7 @@ $x .= '<li class="'.(GUEST?' hide':'').'"><label>Sponsor Contact:</label><input 
 $x .= '<li class="smaller"><label></label>* Required fields'.(ISIN_DISTRI&&$noslot?'<input type="hidden" name="noslot" value=1 />':'').'</li>';
 
 if( !ISIN_DISTRI ) {
-	$x .= '<li class="noprint"><label>Photo / Scanned Copy of <br />ID / DAF with Signature:</label>'. ( $scan!='' ? '<a href="'.$scan.'" target="_blank">CLICK TO VIEW SCANNED COPY</a>' : '<input type="file" class="txt ex" name="dsscan" '. $badscan .' />') .'</li>';
+	$x .= '<li class="noprint"><label></label>'. ( $scan!='' ? '<a href="'.$scan.'" target="_blank">CLICK TO VIEW SCANNED COPY</a>' : '<input type="file" class="txt ex" name="dsscan" '. $badscan . ' /><br><span class="smaller noprint"><label></label>** copy of ID / DAF with signature:</span>') .'</li>';
 	$x .= '<li class="ct noprint"><br /><h3>SAMPLE</h3><img src="/reg/scan/sample.jpg" class="sampleimg" title="Sample upload" /><img src="/reg/scan/sampledaf.jpg" class="hide" /><br /><br />';
 	$x .= '<p class="bad ct">Requests will not be processed without a PHOTO/SCANNED COPY of a valid ID <br />and Signature</p></li>';
 }

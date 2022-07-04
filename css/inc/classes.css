@@ -1,0 +1,50 @@
+/*	classes		*/
+.dark { color:#333 !important; }
+.good { color:darkgreen; }
+.bad { color:red !important; }
+.blue { color:var(--blue) !important;font-weight:bold; }
+.gold { color:var(--gold);font-weight:bold; }
+.lite { color:#999 !important; }
+
+.clear { clear:both; }
+.ct { text-align:center; }
+.lt { text-align:left !important; }
+.rt { text-align:right !important; }
+.b { font-weight:bold; }
+.u { border-bottom:#000 dotted 1px; }
+.fnon { float:none !important; }
+
+.breakaway { background:#ffd !important; }
+.breakoff { background:#ddd !important; }
+.breakfda { background:red !important;color:#fff !important; }
+.print { float:right;position:fixed;top:20px;right:20px; }
+.print li { padding:5px 0;clear:both; }
+.print a { background:url(../../src/print.gif) 0 no-repeat;float:right;display:block;height:40px;width:120px; }
+.printonly,.hide { display:none; }
+.pbut { border:1px solid #ccc !important;display:none !important;height:24px !important;width:50px !important; }
+.monyr { padding:10px; }
+input.monyr { padding:5px; }
+.more { color:var(--blue);cursor:pointer;font-size:11px;font-style:italic; }
+.note { background:url(../../src/diamond.png) no-repeat;color:var(--blue);padding-left:20px; }
+.loading,.responsor { display:block;height:25px;padding:0 10px;position:absolute;top:75px;width:var(--maxwid); }
+.responsor { height:20px;top:90px;padding:0 50px 0 300px;width:620px; }
+.smaller { color:#777;font-size:11px;font-style:italic; }
+.nobg,.nobor { background:none !important; }
+.nobor { border:0 !important; }
+.nowrap { overflow:hidden !important;white-space:nowrap; }
+.nodata { padding:20px; }
+.nostock { height:75px !important;width:75px !important;position:absolute;top:0;left:-22px;z-index:10; }
+.nostockprev { height:50px !important;width:50px !important;padding:0;top:-8px;left:16px; }
+.getminpv { height:100px;line-height:100px;text-align:center; }
+a.back { float:right !important;margin:5px 10px;padding:5px 20px !important; }
+
+.s1,.s2,.s3,.s4,.s5,.s6,.s7,.s8 { display:inline-block;margin:0 !important; }
+.s0 { width:20px !important;text-align:right; }
+.s1 { width:50px !important;text-align:center; }
+.s2 { width:80px !important;text-align:center; }
+.s3 { width:100px !important; }
+.s4 { width:150px !important; }
+.s5 { width:200px !important; }
+.s6 { width:300px !important;}
+.s7 { width:500px !important;overflow:auto; }
+/*	classes		*/

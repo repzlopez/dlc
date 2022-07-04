@@ -1,0 +1,89 @@
+/*	rounded corner	*/
+#shop,
+.pbut,
+textarea,
+select,
+input,
+.btn,
+#download,
+.orders .blue,
+.cancelorder,
+.dobatch,
+#newdistri li ul {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.nav2,
+.upload,
+/* admin */
+#first_login form,
+#first_login h3,
+.ui-tabs-panel img,
+.ui-tabs-panel .info,
+#prod_list li,
+#prod_list img,
+#cart,
+.prod_main img,
+.feat_prod li,
+.feat_prod .feat,
+.newsletters li,
+.fullnews img,
+#prev,
+#prev img,
+.prev img,
+.calendar_page,
+.legend,
+.sampleimg,
+#cart ul,
+.orders,
+.vieworders ul,
+#validate,
+#recap ul,
+#getrec ul,
+#getsm ul,
+#getbonussum ul,
+#olreg,
+#package,
+#package li,
+#package_data,
+#responsor,
+#gos_cart,
+#gos_cart div,
+#gos_cart ul,
+.gos_totals,
+#pcm_cart,
+#pcm_cart div,
+#pcm_cart ul,
+.pcm_totals,
+.remit ul div,
+#distrilist,
+#shortnav,
+.home li a,
+.guest a {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.home,
+.rel_prod,
+.rel_prod li,
+.rel_prod img {
+    -moz-border-radius: 4em 1em;
+    -webkit-border-radius: 4em 1em;
+    -khtml-border-radius: 4em 1em;
+    border-radius: 4em 1em;
+}
+
+#tab1 a {
+    -moz-border-radius: 1em 1em 1px 1px;
+    -webkit-border-radius: 1em 1em 1px 1px;
+    -khtml-border-radius: 1em 1em 1px 1px;
+    border-radius: 1em 1em 1px 1px;
+}
+
+/*	rounded corner	*/

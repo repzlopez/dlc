@@ -65,7 +65,7 @@ $x .= '<a href="?get=bbb"' . $tab['bbb'] . '>BB Bonus</a>';
 $x .= '<a href="?get=pool"' . $tab['pool'] . '>BB Pool</a>';
 //$x .= '<a href="?get=slots"'.$tab['slots'].'>Slots</a>';
 $x .= $mgrlist . '</div>';
-$x .= '<ul id="data_list"><span class="lt">' . (GET_PAGE == 'downline' ? $search : '') . '</span>';
+$x .= '<ul id="data_list">' . (GET_PAGE == 'downline' ? '<span class="lt"' . $search . '</span>' : '');
 $x .= '<li class="updated">' . (RTOR ? 'RT' : 'AS Updated as of ' . getLastUpdate()) . '</li>';
 echo $x;
 
@@ -373,7 +373,7 @@ function getManagerList() {
 		ORDER BY IF(B.bddids RLIKE '^[a-z]',1,2),B.bddids
 	";
 
-	$data .= '<li class="hdr rt"><div class="monyr"><a href="../admin/managerlist" id="download">Download List</a><label>Month/Year</label> <select id="mon_year">'.generate_date().'</select></div></li>';
+	$data .= '<li class="hdr rt" id="dl_list"><div class="monyr"><a href="../admin/managerlist" id="download">Download List</a><label>Month/Year</label> <select id="mon_year">'.generate_date(). '</select></div></li>';
 	$data .= '<li class="hdr"><span class="w0"></span><span class="s4 ct">ID#</span><span class="s5">Name</span><span class="s2 rt">PPV</span><span class="s2 rt">GPV</span><span class="s2 rt">TPV</span><span class="s1 ct">Level</span><span class="s2 ct">Mgr Lines</span><span class="s4">Manager IDs</span></li>';
 
 	$con = SQLi('distributor');

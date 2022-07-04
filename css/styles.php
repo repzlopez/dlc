@@ -577,7 +577,7 @@ span.gen1 { color:#c82536 $imp; }
 .fff { $bk:#fff $imp;$bor_0 $imp;$pad_0 $imp; }
 .pad { color:#fff $imp; }
 .print select { font-family:'courier new';$txrt; }
-.updated { $bor_0 $imp;color:#999;$frgt;$fon_sz:11px;$fital;margin:2px 10px;$pad_0 $imp; }
+.updated { $bor_0 $imp;color:#999;$txrt;$fon_sz:11px;$fital;margin:2px 10px;$pad_0 $imp; }
 .updated:hover { $bk:$bg $imp; }
 .btn { $bk:$btn_bg;$bor1 $btnhov;$cur_pt;$pad_5; }
 .btn:hover { $bor1 #ccc; }

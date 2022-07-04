@@ -1,0 +1,120 @@
+/*		print		*/
+body {
+    background: #fff;
+    margin: 0;
+}
+
+#user,
+.btn,
+.transrec {
+    display: none !important
+}
+
+#olreg li {
+    padding: 5px 0;
+}
+
+#olreg input {
+    border: 0;
+}
+
+#olreg label {
+    display: inline-block;
+}
+
+.toplinks {
+    display: none;
+}
+
+.recaphead,
+.recap div,
+.recap span,
+.recap label,
+.recap li,
+.recap p {
+    font: normal 20px 'courier new' !important;
+    overflow: hidden;
+}
+
+.recaphead {
+    margin: -100px 0 50px;
+    padding-left: 200px;
+}
+
+.recap .s2 {
+    width: 70px !important;
+}
+
+.recap .s3 {
+    width: 140px !important;
+}
+
+.recap .s4 {
+    width: 200px !important;
+}
+
+.recap .s5 {
+    width: 250px !important;
+}
+
+.recap .s6 {
+    width: 260px !important;
+}
+
+.recap .s7 {
+    width: 800px !important;
+}
+
+.recap .hdr .s6 {
+    width: 450px !important;
+}
+
+.recaptotals {
+    margin-left: 450px;
+}
+
+.toplinks,
+#head form,
+#foot,
+#tab,
+#dist_level,
+#download,
+.print,
+#totals,
+#notice,
+#backtotop,
+.totop,
+.noprint,
+#search {
+    display: none !important;
+}
+
+#sig,
+.printonly {
+    display: block;
+}
+
+#data_list,
+#data_list li,
+.nav2 {
+    border: 0;
+}
+
+span,
+label {
+    font-size: 12px;
+    color: #333 !important;
+}
+
+.updated {
+    font-size: 10px;
+    font-style: italic;
+    color: #555;
+}
+
+@page {
+    size: auto;
+    margin: 0mm 0mm 0mm 0mm;
+}
+
+/*		print		*/

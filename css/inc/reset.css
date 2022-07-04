@@ -1,0 +1,160 @@
+@charset "utf-8";
+
+:root {
+    --blue      : #00539b;      /* official blue */
+    --gold      : #fdb913;      /* official gold */
+
+    --bg        : #fff;         /* container bg */
+
+    --btn_bg    : #fff;         /* button bg */
+    --btnhov    : #eee;         /* button hover */
+
+    --d_tab     : #fff;         /* tab */
+    --d_tab_curr: #eee;         /* current tab */
+
+    --placeholder: #ccc;        /* placeholder color */
+
+    --ln_hov    : #959595;      /* line hover */
+    --dark_hdr  : #959597;
+
+    --fonts     : "lucida sans unicode", arial, sans-serif;
+    --maxwid    : 960px;
+    --mob_wid   : 300px;
+}
+
+html,
+body,
+div,
+span,
+strong,
+label,
+ul,
+ol,
+li,
+form,
+select,
+input,
+textarea,
+a,
+p,
+img,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+html,
+body,
+div,
+span,
+strong,
+label,
+ul,
+ol,
+li,
+form,
+select,
+input,
+textarea,
+a,
+p {
+    font-size: 12px;
+    font-family: var(--fonts);
+}
+
+html,
+body {
+    height: 100%;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    background: #fff;
+    font-size: 62.5%;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    width: var(--maxwid);
+}
+
+lh {
+    font-weight: bold;
+    text-align: left;
+}
+
+ol,
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+a:active,
+a:focus,
+a:selected {
+    border: 0;
+    outline: none;
+}
+
+img,
+hr {
+    border: 0;
+}
+
+textarea {
+    height: 100px;
+    vertical-align: top;
+    outline: none;
+}
+
+p {
+    text-align: justify;
+}
+
+input {
+    border: 1px solid #ccc;
+}
+
+input[type=radio],
+input[type=checkbox] {
+    padding: 0;
+}
+
+input[type=file],
+input[type=radio] {
+    border: 0;
+}
+
+input[type=file] {
+    width: auto;
+}
+
+input[type=submit],
+input[type=button] {
+    background: #fff;
+    cursor: pointer;
+}
+input[type=submit]:hover,
+input[type=button]:hover {
+    background: #eee;
+}
+
+input[readonly],
+input[disabled],
+select[disabled] {
+    background: #dddee0;
+}

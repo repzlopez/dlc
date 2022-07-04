@@ -1,0 +1,87 @@
+/*	center 	*/
+select { padding:4px !important; }
+#filter li { width:auto !important; }
+#filter label { padding:0 8px;width:auto; }
+#center_orders,
+#center_products { padding:10px; }
+#msg { font-size:14px; }
+#shortnav { background:#eee;border:1px solid #aaa;width:42px;position:fixed;left:-10px;top:20px;padding:10px; }
+#shortnav li { margin:0 0 5px 10px; }
+#shortnav a { background:green;display:block;height:32px;width:32px; }
+#shortnav li:first-child a { background:url(../../src/buttons.png) 0 0 no-repeat; }
+
+.gos_totals,
+.pcm_totals { background:var(--bg);border:1px solid #777;display:inline-block;font-size:20px;height:20px;padding:15px 10px;text-align:right;vertical-align:bottom;width:160px; }
+#gos_cart,
+#pcm_cart { background:#eee;border:1px solid #777;height:0;width:var(--maxwid);margin-left:-20px;padding:0 30px 10px;position:fixed;bottom:-10px; }
+#gos_cart ul,
+#pcm_cart ul { border-bottom:#777 solid 1px;margin:0;padding:15px 0; }
+#gos_cart li,
+#pcm_cart li { float:left;height:52px;margin-bottom:10px; }
+#gos_cart input[type=file],
+#pcm_cart input[type=file] { border:1px solid #777;font-size:12px; }
+#gos_cart .txt,
+#pcm_cart .txt { margin:0;width:284px; }
+#gos_cart label,
+#pcm_cart label { float:left;width:auto; }
+#gos_cart label.rt,
+#pcm_cart label.rt { float:right; }
+
+#ulkart,#ulsubm { height:52px; }
+#uldist { height:176px; }
+#ulpaym { height:238px; }
+#uldist li,#ulpaym li { width:476px; }
+#uldist span,#ulpaym span { float:left;margin:0 5px;width:140px; }
+#ulsubm li,#ulkart li { width:952px; }
+#datePicker { cursor:pointer; }
+#gos_tab,#pcm_tab,
+#ulsubm span { cursor:pointer;float:right !important;margin-left:10px; }
+#gos_tab:hover,#pcm_tab:hover,
+#ulsubm span:hover { background:var(--bg); }
+#tab { padding-bottom:0 !important; }
+#tab a { width:112px; }
+#tab a:hover,.current { background:#eee !important; }
+
+.distri li,.setup li { padding:10px; }
+.distri .dobatch { display:inline-block;float:none !important;padding:5px !important;margin:5px 0 !important; }
+
+.orders input[type=text] { margin:-2px 0 0 !important; }
+.orders li { width:820px; }
+.orders .s6 { height:auto; }
+.orders .hdr span { width:820px;padding:0 5px;margin:0; }
+.list li,.remit .txt,.oqty { padding:3px !important; }
+#upfile { display:inline-block;margin:0 !important;padding:0 !important;width:100px; }
+#ulpaym #upfile { float:left; }
+#batpaym li,#batconf li,#batrepl li,#batclos li { display:inline-block; }
+#distrilist { background:var(--bg);height:476px;width:var(--maxwid);padding:5px 10px;position:fixed;bottom:0;z-index:9999; border:1px solid #777;overflow:auto; }
+#distrilist li { border-bottom:#eee solid 1px;cursor:pointer;display:block;text-align:left;padding:5px; }
+#distrilist span { font-size:20px; }
+#distrilist p { cursor:pointer;position:absolute;top:0;right:0;margin:10px; }
+
+.remit ul,.remit .hdr { border-bottom:#aaa solid 1px;margin:0 auto; }
+.remit ul div { border:1px solid #eee;display:none;margin:10px 0 5px;padding:5px;width:610px; }
+.remit li { padding:5px !important; }
+.remit .lt { text-align:left !important; }
+.chkbox { width:14px !important;margin:0 2px; }
+.smaller:hover { background:none !important;color:darkred; }
+.ital { font-style:italic; }
+.remit #upfile { width:auto; }
+.multi span { background:url(../../src/plusminus.png) no-repeat top right;cursor:pointer;display:inline-block;height:14px;width:14px; }
+.multi select { margin:0 0 0 5px !important; }
+.multi input { margin:0 3px !important; }
+.remit table { border-collapse:collapse; }
+.remit th,.remit td  { border:1px solid #777 !important;padding:2px 5px !important; }
+.remit td { max-width:100px !important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+
+.setup form label { text-align:right;margin:0 5px;width:120px; }
+.setup form .txt { width:480px; }
+
+.remit ul,.remit .hdr,.remit li { width:720px; }
+.remit span,.remit .hdr  { height:auto !important;width:auto; }
+
+.hdr { background:none !important; }
+iframe,input[name=gc_batch],
+#batpaym,#batconf,#batrepl,#batclos,
+.multi form input,.list .chkbox { display:none; }
+#addnew { background:url(../../src/plusminus.png) no-repeat 0 2px;display:inline-block;height:14px;width:14px;margin:0 4px;padding:0; }
+/*	center 	*/

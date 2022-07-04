@@ -1,0 +1,18 @@
+/*	header		*/
+#head { background:var(--bg);height:90px;margin:0;padding:10px;width:var(--maxwid); }
+#head a { margin-left:5px; }
+#head a,#head label { color:#555; }
+#head a img { float:left; }
+#head a:hover { color:var(--blue);text-shadow:1px 1px 3px #777; }
+#head form { float:right;padding:0 !important;width:620px; }
+#head form div { height:20px;float:right; }
+#head label { margin-right:5px;width:auto !important; }
+#head input { font-size:10px;width:100px; }
+#head input[type=submit] { float:none !important;width:60px; }
+#topnav { float:right;padding:5px; }
+
+#user { float:right;color:#999;padding:0 5px; }
+#user .blue { font-family:var(--fonts);font-size:12px; }
+#user a { color:#555;margin:0 5px; }
+#user label { font-style:italic; }
+/*	header		*/
