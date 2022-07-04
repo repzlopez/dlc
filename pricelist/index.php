@@ -56,43 +56,45 @@ function getList() {
     $old = '';
     $ntp = 1.7;
     $con = SQLi('products');
-	$rs  = mysqli_query($con, $qry) or die(mysqli_error($con));
-	$num = mysqli_num_rows($rs);
+	$rs  = $con->query($qry) or die(mysqli_error($con));
+	$num = $rs->num_rows;
 
 	$_SESSION['listcount'] = $num;
 
     if( $num > 0 ) {
-		while( $r = mysqli_fetch_array($rs,MYSQLI_BOTH) ) {
+		while( $r = $rs->fetch_array() ) {
             $new = $r['cat'];
 
             if( $old != $new ) {
                 $x .= '<li class="hdr ct"><h4>' . strtoupper(str_replace('others', 'packages',$new)) . '</h4></li>';
                 $x .= '<li class="hdr">';
                 $x .= '<strong class="s2">Item</strong>';
-                // $x .= '<strong class="s2">Category</strong>';
                 $x .= '<strong class="s7">Description</strong>';
-                $x .= '<strong class="s3 rt">' . ($show_dp ? 'PV' : '') . '</strong>';
-                $x .= '<strong class="s3 rt">' . ($show_dp ? 'WSP ' . ($nt ? '($ NT)' : '(Php)') : '') . '</strong>';
-                $x .= '<strong class="s3 rt">SRP ' . ($nt ? '($ NT)' : '(Php)') . '</strong>';
+                $x .= '<strong class="s2 rt">' . ($show_dp ? 'PV' : '') . '</strong>';
+                $x .= '<strong class="s2 rt">' . ($show_dp ? 'WSP ' . ($nt ? '($ NT)' : '(Php)') : '') . '</strong>';
+                $x .= '<strong class="s2 rt">' . ($show_dp ? 'PMP ' . ($nt ? '($ NT)' : '(Php)') : '') . '</strong>';
+                $x .= '<strong class="s2 rt">SRP ' . ($nt ? '($ NT)' : '(Php)') . '</strong>';
                 $x .= '</li>';
         }
 
             if( $nt ) {
-                $wsp = number_format($r['wsp'] /$ntp, 2);
-                $srp = number_format($r['srp'] /$ntp, 2);
+                $wsp = number_format($r['wsp'] / $ntp, 2);
+                $pmp = number_format($r['pmp'] / $ntp, 2);
+                $srp = number_format($r['srp'] / $ntp, 2);
+
             } else {
                 $wsp = number_format($r['wsp']);
+                $pmp = number_format($r['pmp']);
                 $srp = number_format($r['srp']);
             }
 
 			$x .= '<li>';
             $x .= '<span class="s2">' . $r['id'] . '</span>';
-            // $x .= '<span class="s2">' . ucwords($new) . '</span>';
 			$x .= '<span class="s7">'. utf8_encode($r['name']) .'</span>';
-            $x .= '<span class="s3 rt">'. ( $show_dp ? number_format($r['pv'], 2, '.', '') :'') . '</span>';
-			$x .= '<span class="s3 rt">'. ( $show_dp ? $wsp :'' ) .'</span>';
-			$x .= '<span class="s3 rt">'. $srp .'</span>';
-			// $x .= '<span class="s1">'. $r['status'] .'</span>';
+            $x .= '<span class="s2 rt">'. ( $show_dp ? number_format($r['pv'], 2, '.', '') :'') . '</span>';
+            $x .= '<span class="s2 rt">' . ($show_dp ? $wsp : '') . '</span>';
+            $x .= '<span class="s2 rt">' . ($show_dp ? $pmp : '') . '</span>';
+			$x .= '<span class="s2 rt">'. $srp .'</span>';
 			$x .= '</li>';
 
             $old = $new;
