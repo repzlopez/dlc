@@ -14,25 +14,29 @@ $_SESSION['lastURI'] = 'onreg';
 $title    = ' | Online Registration';
 $item     = isset($_GET['i'])?$_GET['i']:'';
 $do       = isset($_GET['do'])?$_GET['do']:'';
-$reseller = isset($_GET['reseller'])&&$_GET['reseller'];
-$imgpath  = '/images/products/';
-$reselleronly = $reseller ? '' :'NOT';
 
-$p= $msg= '';
+$reseller = isset($_GET['reseller']) && $_GET['reseller'];
+$reselleronly = $reseller ? '' : 'NOT';
+
+$pcmstore = isset($_GET['pcmstore']) && $_GET['pcmstore'];
+$pcmstoreonly = $pcmstore ? '' : 'NOT';
+
+$p = $msg = '';
+$imgpath  = '/images/products/';
+
 $con = SQLi('products');
 $qry = "SELECT l.id,name,srp,img,contains
 	FROM tblpackages k
-	LEFT JOIN tbllist l
-		ON l.id=k.id
-	LEFT JOIN tblproducts p
-		ON p.id=k.id
+	LEFT JOIN tbllist l ON l.id=k.id
+	LEFT JOIN tblproducts p ON p.id=k.id
 	WHERE k.status=1
-	AND l.name $reselleronly LIKE 'Reseller%'
 	AND l.status=1
+	AND l.name $reselleronly LIKE 'Reseller%'
+	AND LOWER(l.name) $pcmstoreonly LIKE '%pcm package%'
 	ORDER BY name";
 
-$rs = mysqli_query($con,$qry) or die(mysqli_error($con));
-while( $rw=mysqli_fetch_assoc($rs) ) {
+$rs = $con->query($qry) or die(mysqli_error($con));
+while( $rw = $rs->fetch_assoc() ) {
 	foreach( $rw as $k=>$v ) $$k = $v;
     if( $reseller ) $_SESSION['reseller_packages'][$id] = $id;
 
@@ -40,7 +44,7 @@ while( $rw=mysqli_fetch_assoc($rs) ) {
 	$p   .= '<li data-code="'.$id.'" data-price="'.$srp.'" '.($contains!=''?'title="Contains:'."\n".str_replace('<br>','',$contains).'"':'').'><p id="overlay" class="'.(OLREG_REF==$id?'blue':'').'">'."$name Php ".number_format($srp,0).'</p><img src="'.$previmg.'" /></li>';
 }
 
-if( !$reseller ) {
+if( !$reseller && !$pcmstore ) {
 	$c100 = 'code_100.jpg';
 	$c500 = 'code_500.jpg';
 	$poc  = 'worth of products of your choice';
@@ -49,7 +53,8 @@ if( !$reseller ) {
 	$p   .= '<li data-code="'.OLREG_Choice500.'" data-price="" title="500PV '.$poc.'"><p id="overlay" class="'.(OLREG_REF==OLREG_Choice500?'blue':'').'">'.OLREG_min500.'PV Products<br>of your choice</p><a href="/read/'.$shortlink.'/lifestyle-shop?olreg_ref='.OLREG_Choice500.'"><img src="'.(file_exists($imgpath.$c500)?$imgpath.$c500:$imgpath.'default_product.jpg').'" /></a></li>';
 
 } else {
-	$_SESSION['reseller'] = 1;
+	if ($reseller) $_SESSION['reseller'] = 1;
+	if ($pcmstore) $_SESSION['pcmstore'] = 1;
 }
 
 $cartpath  = '../distrilog/cart/';

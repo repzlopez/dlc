@@ -42,7 +42,8 @@ define( 'SPECTATOR', isset($_SESSION['spectator']) && $_SESSION['spectator'] );
 define( 'OVERRIDE', isset($_SESSION['override']) && $_SESSION['override'] );
 
 define( 'GUEST', isset($_SESSION['rfr']) ? $_SESSION['rfr'] :NULL );
-define( 'RESELLER', isset($_SESSION['reseller']) ? $_SESSION['reseller'] :NULL );
+define( 'RESELLER', isset($_SESSION['reseller']) ? $_SESSION['reseller'] : NULL );
+define( 'PCMSTORE', isset($_SESSION['pcmstore']) ? $_SESSION['pcmstore'] : NULL );
 define( 'REF_PROD', isset($_SESSION['pid']) ? DLC_ROOT.'/products.php?pid='. $_SESSION['pid'] :NULL );
 define( 'OLREG_REF', isset($_SESSION['olreg_ref']) ? $_SESSION['olreg_ref'] :NULL );
 define( 'OLREG_min100', 100 );

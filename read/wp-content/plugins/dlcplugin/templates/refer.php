@@ -34,7 +34,7 @@ $url_products  = get_permalink( $title->ID );
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link" href="<?php echo get_permalink( $beoneofus->ID );?>">OPEN MY STORE</a></div>
+<div class="wp-block-button"><a class="wp-block-button__link" href="<?php echo get_permalink( $beoneofus->ID) . '?pcmstore=1';?>">OPEN MY STORE</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
 
@@ -43,15 +43,3 @@ $url_products  = get_permalink( $title->ID );
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 
-<!-- wp:column -->
-<div class="wp-block-column"><!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link" href="<?php echo get_permalink( $beoneofus->ID ) . '?reseller=1'; ?>">BE A RESELLER</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons -->
-
-<!-- wp:paragraph -->
-<p>Want to become a <strong>Reseller</strong>, or maybe just looking for discounts?</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns -->
