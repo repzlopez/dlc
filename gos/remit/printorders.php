@@ -47,9 +47,9 @@ function printOrders($ref) {
 	foreach($idata as $v) {
 		$v1 = $v[0];
 		$v2 = utf8_encode($v[1]);
-		$v3 = $v[2];
-		$v4 = $v[3];
-		$v5 = $v[4];
+		$v3 = (float)$v[2];
+		$v4 = (float)$v[3];
+		$v5 = (float)$v[4];
 
 		$shopppv = $v5 * $v3;
 		$shopamt = $v4 * $v3;

@@ -32,7 +32,9 @@ $monyr  = isset($_GET['monyr']) ? test_input($_GET['monyr']) : date('Ym');
 
 ob_start();
 include('../head.php');
+
 loadRemit($monyr);
+
 unset($_GET);
 include('../foot.php');
 ob_end_flush();
@@ -49,7 +51,7 @@ function loadRemit($monyr) {
 	$tbl   = 'tblorders';
 	$con   = SQLi('gos');
 
-	if( $do==0 ) {
+	if( !$do ) {
 		if( $tabid=='remittance' && isset($sum) ) echo '<div><a href="javascript:window.print()" class="back" id="download">Print</a></div>';
 
 		echo '<ul id="tab" class="list">';
@@ -331,7 +333,7 @@ function listRemit($monyr) {
 				$v4 = $v[3];
 				$v5 = $v[4];
 
-				$pov   = getPOV($v1);
+				$pov   = $i < $ctr ? getPOV($v1) :0;
 				$opov  = $pov * $v3;
 				$tpov += $opov;
 				$oppv  = $v5 * $v3;
@@ -436,6 +438,7 @@ function getPOV($id) {
 	$qry = "SELECT pov FROM tbllist WHERE id='$id'";
 	$rs = $con->query($qry) or die(mysqli_error($con));
 	$rw = $rs->fetch_array();
+
 	return $rw['pov'];
 }
 

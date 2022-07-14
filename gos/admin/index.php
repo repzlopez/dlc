@@ -43,7 +43,8 @@ if( !$do ) {
 	$styleis = $bad = '';
 	$_SESSION['gos_last'] = DLC_GORT . '/admin';
 
-	$rs = $con->query( "SELECT * FROM $tbl WHERE un='$item'") or die(mysqli_error($con));
+	$add = $item != '' ? "WHERE un='$item'" :'';
+	$rs = $con->query("SELECT * FROM $tbl $add") or die(mysqli_error($con));
 	$x  = ($rs->num_rows > 0) ? 1 : 0;
 	$rw = $rs->fetch_array();
 
