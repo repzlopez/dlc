@@ -18,7 +18,8 @@ function prepPrefMemberBonus() {
 	$i = 0;
 	$con = SQLi('orders');
 
-	$qry = "SELECT o.omdid, o.ominv, x.refno, x.orders
+	$qry = "SELECT o.omdid, o.ominv, x.refno, x.orders,
+			(SELECT DATEDIFF(CONCAT(SUBSTRING(dssetd,1,4),'-',SUBSTRING(dssetd,5,2),'-',SUBSTRING(dssetd,-2)), '". PM_START ."') FROM diamondl_distributor.distributors WHERE dsdid=o.omdid) age 
 		FROM ormstp o
 		LEFT JOIN (
 				SELECT refno,invoice,orders
@@ -32,6 +33,7 @@ function prepPrefMemberBonus() {
 		AND o.ominv NOT IN (SELECT invoice FROM pm_bonus)
 		AND o.omdid NOT IN (SELECT bhdid FROM " . DB . "distributor.bohstp)
 		AND x.orders <> ''
+		HAVING age >= 0
 		ORDER BY o.ominv DESC
 	";
 // echo $qry . '<br>';

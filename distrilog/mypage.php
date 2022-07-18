@@ -60,7 +60,7 @@ $x .= '<a href="?get=pv"' . $tab['pv'] . '>Group PV</a>';
 $x .= '<a href="?get=downline"' . $tab['downline'] . '>Downlines</a>';
 $x .= '<a href="?get=bonus"' . $tab['bonus'] . '>Bonus History</a>';
 $x .= '<a href="?get=order"' . $tab['order'] . '>Order History</a>';
-if($has_bonus) $x .= '<a href="?get=pmbonus"' . $tab['pmbonus'] . '>PM Bonus</a>';
+// if($has_bonus) $x .= '<a href="?get=pmbonus"' . $tab['pmbonus'] . '>PM Bonus</a>';
 $x .= '<a href="?get=bbb"' . $tab['bbb'] . '>BB Bonus</a>';
 $x .= '<a href="?get=pool"' . $tab['pool'] . '>BB Pool</a>';
 //$x .= '<a href="?get=slots"'.$tab['slots'].'>Slots</a>';
