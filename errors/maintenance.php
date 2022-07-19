@@ -6,9 +6,9 @@ if (!isset($_SESSION)) {
 define('INCLUDE_CHECK', 1);
 require('../admin/setup.php');
 
-$pid  = 16003;
-$msg  = '<h2>YOU\'RE NOT ALLOWED HERE</h2><br>';
-$msg .= '<p>We use<br><span class="product">'. getPName($pid) .'</span><br />to protect our pages</p>';
+$pid  = 20022;
+$msg  = '<h2>SORRY FOR THE INCONVENIENCE</h2><br>';
+$msg .= '<p>We\'re applying<br><span class="product">' . getPName($pid) . '</span><br />to keep our pages from aging</p>';
 ob_start();
 
 ?><html>

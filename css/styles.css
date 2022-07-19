@@ -8,6 +8,7 @@
 @import 'inc/placeholder.css';
 @import 'inc/rounded.css';
 @import 'inc/classes.css';
+@import 'inc/error.css';
 
 #container { background:var(--bg);margin:0 auto;padding:10px;text-align:left;width:var(--maxwid); }
 #container div.orders .bad { float:right;padding:2px 10px; }

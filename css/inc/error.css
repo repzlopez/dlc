@@ -1,0 +1,17 @@
+/*		error			*/
+#head { padding:20px 10px; }
+#container { background:#fff;height:100%;padding:0; }
+.bad_browser { margin:50px 0; }
+.bad_browser p { text-align:center; }
+
+.msg { float:left;margin:0 10px;width:420px; }
+.msg h2 { color:var(--blue);text-align:center; }
+.msg p { font-size:14px;font-weight:bold;text-align:center; }
+.msg span { color:green;font:bold 18px verdana; }
+.msg img { display:block;height:200px;margin:0 auto; }
+.msg img,.contact { -moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;border-radius:10px; }
+
+.contact { border:1px solid var(--blue);border-width:1px 0 1px 0;float:left;padding:0 20px;width:400px; }
+.contact ul { margin:10px 0; }
+.contact h2 { color: var(--blue); }
+/*		error			*/

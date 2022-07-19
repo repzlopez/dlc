@@ -80,7 +80,7 @@ select { padding:4px !important; }
 .remit span,.remit .hdr  { height:auto !important;width:auto; }
 
 .hdr { background:none !important; }
-iframe,input[name=gc_batch],
+input[name=gc_batch],
 #batpaym,#batconf,#batrepl,#batclos,
 .multi form input,.list .chkbox { display:none; }
 #addnew { background:url(../../src/plusminus.png) no-repeat 0 2px;display:inline-block;height:14px;width:14px;margin:0 4px;padding:0; }
