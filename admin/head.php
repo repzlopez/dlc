@@ -16,11 +16,13 @@ $root   = ($ap!='')?$rcnt:'';
 $frm    = '';
 
 if( !ISIN_ADMIN && !ISIN_GOS && !ISIN_PCM && !ISIN_MIG ) {
-	$frm.='<form method="post" action="/admin/login/login.php"><div>';
-	$frm.='<label for="un">User <input type="text" name="un" value="" /></label>';
-	$frm.='<label for="pw">Pass <input type="password" name="pw" value="" /></label>';
-	$frm.='<input type="submit" name="submit" class="btn" value="Login" /></div>';
-	$frm.='<div class="bad">'.$errmsg.'</div></form>';
+	reloadTo('/login');
+
+	// $frm.='<form method="post" action="/admin/login/login.php"><div>';
+	// $frm.='<label for="un">User <input type="text" name="un" value="" /></label>';
+	// $frm.='<label for="pw">Pass <input type="password" name="pw" value="" /></label>';
+	// $frm.='<input type="submit" name="submit" class="btn" value="Login" /></div>';
+	// $frm.='<div class="bad">'.$errmsg.'</div></form>';
 
 }else{
 	$frm.='<div id="user" data-title="DLC '.$title.'" '.(LOGIN_TYPE?'data-login="'.LOGIN_TYPE.'"':'').' data-notif="'.NOTIF_ON.'">'.(UPDATE_ON?'<label>UPDATE IN PROGRESS...</label> ':'').' <span>Week '.WEEK.'</span> | <span class="blue">Admin | '.LOGIN_NAME.' |</span> <a href="/logout" class="lite">Logout</a></div>';
