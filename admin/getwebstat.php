@@ -11,8 +11,9 @@ if(!defined('INCLUDE_CHECK')) {
 
 $isadmin = (strpos($_SERVER['PHP_SELF'], 'admin') !== false);
 if(!$isadmin && !getStatus('999') && !isset($_SESSION['maintenance'])) {
-	reloadTo(DLC_ROOT.'/errors/404.php');exit;
+	reloadTo(DLC_ROOT. '/errors/maintenance.php');exit;
 }
 
 $_SESSION['cart_on'] = ( isset($_SESSION['cart_on'] ) ? $_SESSION['cart_on'] : getStatus('998') );
+
 ?>

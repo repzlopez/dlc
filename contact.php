@@ -26,12 +26,12 @@
 		</li>
 	</ul>
 
-	<ul>
+	<!-- <ul>
 		<lh>E-mail</lh>
 		<li>
 			<span class="s3">Concerns:</span><a href="mailto:distriservice@dlcph.com">distriservice@dlcph.com</a><br />
 		</li>
-	</ul>
+	</ul> -->
 
 	<ul>
 		<lh>Facebook</lh>
