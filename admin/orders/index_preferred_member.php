@@ -110,7 +110,7 @@ function loadPrefMemberBonus($wk) {
 
 		$x .= '<li><span class="s0"></span><span class="s4">'.$dsdid.'</span>
 			<span class="s6" title="'.$nam.'">'.$nam. '</span>
-			<span class="s2 rt">'. $invoice . '</span>
+			<span class="s2 rt"><a href="?p=ormstp&do=2&i=' . $invoice . '">'. $invoice . '</a></span>
 			<span class="s3 rt">'. number_format($bonus, 2, '.', ',') .'</span>
 			<span class="s2 ct">'. $status .'</span></li>';
 	}

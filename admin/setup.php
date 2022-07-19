@@ -71,7 +71,7 @@ define( 'READ_ONLY', 'readonly="readonly"' );
 define( 'DISABLED', 'disabled="disabled"' );
 define( 'SELECTED', 'selected="selected"' );
 define( 'C_K', 'checked="checked"');
-define( 'PM_START', '2022-08-01');
+define( 'PM_START', '2022-07-01');	// 2022-08-01
 define( 'TMDSET', 'Y-m-d H:i:s' );
 define( 'DATSET', 'M d, Y' );
 define( 'TIMSET', 'h:ia' );
