@@ -22,11 +22,12 @@ foreach( $_SESSION as $k=>$v ) {
 
 if( isset($submit) && $submit=='Login' ) {
 	$pw = md5($un.$pw.'@)!)');
-//echo "SELECT * FROM tbladmin WHERE un='$un' AND status=1";
+// echo "SELECT * FROM tbladmin WHERE un='$un' AND status=1";
 	$check = mysqli_query($con,"SELECT * FROM tbladmin WHERE un='$un' AND status=1") or die(mysqli_error($con));
 	$rs = mysqli_num_rows($check);
 
 	if( $rs==0 ) {						/*query if un exist*/
+// echo 1;
 		mysqli_close($con);
 		$_SESSION['bad_admin'] = true;
 		reloadTo('../');
@@ -37,6 +38,7 @@ if( isset($submit) && $submit=='Login' ) {
 		mysqli_close($con);
 
 		if( $pw!=$pwql ) {					/*pwword check*/
+// echo 2;
 			$_SESSION['bad_admin'] = true;
 			reloadTo('../');
 
@@ -54,6 +56,7 @@ if( isset($submit) && $submit=='Login' ) {
 			} elseif( testScope("apc") ) {
 				$_SESSION['apc_id'] = $un;
 			}
+// echo 3;
 
 			reloadTo(DLC_ADMIN);
 		}

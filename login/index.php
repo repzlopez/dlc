@@ -8,11 +8,12 @@ define('INCLUDE_CHECK',1);
 require_once('../func.php');
 
 $firstlogin = (isset($_SESSION['first_login']) && $_SESSION['first_login']);
+$badadmin	  = (isset($_SESSION['bad_admin']) && $_SESSION['bad_admin']) ? true:false;
 $badlogin   = (isset($_SESSION['bad_login']) && $_SESSION['bad_login']);
 $notfound   = (isset($_SESSION['not_found']) && $_SESSION['not_found']);
 $userno     = (isset($_SESSION['u_site'])) ? $_SESSION['u_site'] : '';
 $login      = (isset($_SESSION['catch_login'])) ? $_SESSION['catch_login'] : '';
-$errmsg     = ($badlogin) ? ($notfound ? '** Distributor ID does not exist' : '** Invalid Distributor ID or Password') : '';
+$errmsg     = $badadmin ? '** invalid ID or Password' : ($badlogin ? ($notfound ? '** Distributor ID does not exist' : '** Invalid Distributor ID or Password') : '');
 $path       = ($login != '' ? '/' . $login : '') . '/login/';
 $page       = 'login';
 

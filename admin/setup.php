@@ -110,23 +110,29 @@ function SQLi($dbsrc) {
 }
 
 function getName($id,$fmt,$nomid=false) {
-	$con = SQLi('distributor');
-	$rs  = $con->query("SELECT dsfnam,dsmnam,dslnam FROM distributors WHERE dsdid='$id'") or die(mysqli_error($con));
-	$rw  = $rs->fetch_array();
-	$fn  = $rw['dsfnam'];
-	$mn  = $nomid?'':$rw['dsmnam'];
-	$ln  = $rw['dslnam'];
-	$nam = '';
+		$con = SQLi('distributor');
+		$rs  = $con->query("SELECT dsfnam,dsmnam,dslnam FROM distributors WHERE dsdid='$id'") or die(mysqli_error($con));
 
-	switch($fmt) {
-		case 'full': $nam = $fn .' '. (($mn!='') ? $mn :'' ) .' '. $ln; break;
-		case 'fml' : $nam = $fn .' '. (($mn!='') ? substr($mn,0,1) .'.' :'') .' '. $ln; break;
-		case 'lfm' : $nam = $ln .', '. $fn .' '. ( ($mn!='') ? substr($mn,0,1) .'.' :''); break;
-		case 'lff' : $nam = $ln .', '. $fn .' '. $mn; break;
-		default: break;
+	if( $rs->num_rows > 0 ) {
+		$rw  = $rs->fetch_array();
+		$fn  = $rw['dsfnam'];
+		$mn  = $nomid?'':$rw['dsmnam'];
+		$ln  = $rw['dslnam'];
+		$nam = '';
+
+		switch($fmt) {
+			case 'full': $nam = $fn .' '. (($mn!='') ? $mn :'' ) .' '. $ln; break;
+			case 'fml' : $nam = $fn .' '. (($mn!='') ? substr($mn,0,1) .'.' :'') .' '. $ln; break;
+			case 'lfm' : $nam = $ln .', '. $fn .' '. ( ($mn!='') ? substr($mn,0,1) .'.' :''); break;
+			case 'lff' : $nam = $ln .', '. $fn .' '. $mn; break;
+			default: break;
+		}
+
+		return titleCase($nam);
+
+	} else {
+		return 'INVALID ID';
 	}
-
-	return titleCase($nam);
 }
 
 function getPName($id) {
