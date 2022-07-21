@@ -7,8 +7,6 @@ if(!isset($_SESSION)) {
 $shortlink = strpos($_SERVER['SERVER_NAME'],'local')!==false ? 'index.php/' :'';
 $url = '/read';
 
-unset($_SESSION['catch_login']);
-
 if( !isset($_SESSION['isLogged']) && isset($_GET['rfr']) ) {
 	$_SESSION['rfr'] = $_GET['rfr'];
 	$_SESSION['pid'] = isset($_GET['pid'])?$_GET['pid']:NULL;

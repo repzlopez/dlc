@@ -57,6 +57,8 @@ if ( isset($_POST['submit'])&&$_POST['submit']=='Login' ) {
 		$_SESSION['pcm_bond']   = $bond;
 		$_SESSION['pcm_logged'] = 1;
 		$_SESSION['pcm_bad']    = 0;
+
+		unset($_SESSION['catch_login']);
 	}
 	reloadTo(DLC_PCRT);
 }

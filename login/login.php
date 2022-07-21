@@ -101,6 +101,7 @@ if(isset($_POST['submit'])) {
 				if( preg_match("/". CRIS ."|". REPZ ."/i", $_SESSION['u_site']) ) $_SESSION['super_user'] = true;
 				$_SESSION['isLogged'] = true;
 
+				unset($_SESSION['catch_login']);
 			} else $_SESSION['bad_login'] = true;
 		}
 

@@ -57,6 +57,8 @@ if ( isset($_POST['submit'])&&$_POST['submit']=='Login' ) {
 		$_SESSION['mig_bond']   = 0;
 		$_SESSION['mig_logged'] = 1;
 		$_SESSION['mig_bad']    = 0;
+
+		unset($_SESSION['catch_login']);
 	}
 
 	reloadTo(DLC_MGRT);

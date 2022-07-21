@@ -61,6 +61,8 @@ if ( isset($_POST['submit'])&&$_POST['submit']=='Login' ) {
 		$_SESSION['gos_bond']   = $bond;
 		$_SESSION['gos_logged'] = 1;
 		$_SESSION['gos_bad']    = 0;
+
+		unset($_SESSION['catch_login']);
 	}
 
 	reloadTo(DLC_GORT);
