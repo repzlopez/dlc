@@ -64,13 +64,15 @@ if(isset($id1)) {
      $x .= '</div></li>';
 }
 
+$sponsor_name = ' <span>' . ucwords(strtolower($sname)) . '</span>';
+
 $x .= '<li><hr></li>';
 $x .= '<li><label>Sponsor:</label><br>';
-$x .= '<div><span>'.$dssid.'</span> <span>'.ucwords(strtolower($sname)). '</span></div>';
+$x .= '<div><span>'.$dssid.'</span></div>';
 $x .= '</li>';
 
 $x .= '<li><hr></li>';
-$x .= '<li class="pv">
+$x .= '<li class="pv"><label>PV:</label><br>
      <div><label>Personal:</label> <span>'.number_format($ppv,2).' PV</span></div>
      <div><label>Group:</label> <span>'.number_format($npv,2).' PV</span></div>
      <div><label>Total PV:</label> <span>'.number_format($gpv,2).' PV</span></div>
