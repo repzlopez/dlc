@@ -9,10 +9,12 @@ $id = $name = $msg = $c = $x = '';
 
 if( isset($_POST['submit']) && $_POST['id'] !='' ) {
 	$id  = trim_escape($_POST['id']);
-	$qry = "SELECT bhdid,CONCAT(dsfnam,' ',dsmnam,' ',dslnam) nam
+	$qry = "SELECT bhdid,CONCAT(dsfnam,' ',dsmnam,' ',dslnam) nam,
+				DATEDIFF(CONCAT(SUBSTRING(dssetd,1,4),'-',SUBSTRING(dssetd,5,2),'-',SUBSTRING(dssetd,-2)), '" . PM_START . "') age 
 		FROM " . DB . "distributor.distributors d
 		LEFT JOIN " . DB . "distributor.bohstp b ON b.bhdid=d.dsdid
-		WHERE dsdid='$id'";
+		WHERE dsdid='$id'
+	";
 
 	$con = SQLi('distributor');
 	$rs = $con->query($qry) or die(mysqli_error($con));
@@ -25,6 +27,9 @@ if( isset($_POST['submit']) && $_POST['id'] !='' ) {
 		if( $r['bhdid'] != '' ) {
 			$c = 'good';
 			$msg = 'DISTRIBUTOR';
+
+		} elseif( $r['age'] < 0  ) {
+			$msg = "NON DISTRIBUTOR";
 
 		} else {
 			$msg = "PREFERRED MEMBER";

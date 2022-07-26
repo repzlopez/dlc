@@ -34,6 +34,7 @@ if(!ISIN_ADMIN) {
 	$y .= '<li><a href="?p=distripv">DISTRIBUTOR PV</a></li>';
 	$y .= '<li><a href="?p=lineage">DISTRIBUTOR LINEAGE</a></li>';
 	$y .= '<li><a href="?p=allowsponsor&do=0">ALLOWED TO SPONSOR</a></li>';
+	$y .= '<li><a href="?p=preferredmember&do=0">PREF MEMBER</a></li>';
 	$y .= DIV_CLEAR . '</ul>';
 }
 
