@@ -13,12 +13,22 @@ $lic  = isset( $_SESSION['listcount'] ) ? $_SESSION['listcount'] :0;
 $num  = ( $lic>0 ? $lic :0 );
 
 ob_start();
-$msg   = loadHead($title);
-$msg  .= '<div id="container">' . $data . '</div>';
+
+$ret = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>DLC Pricelist</title>
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="shortcut icon" href="/src/favicon.ico"></link>
+<link rel="stylesheet" type="text/css" href="styles.css"></link>
+</head><body>';
+
+$ret .= '<div id="container">' . $data . '</div></body></html>';
+$ret .= '<style type="text/css">.loading{display:none}</style>';
 
 ob_start();
-echo $msg;
-echo '<style type="text/css">.loading{display:none}</style>';
+echo $ret;
 
 ob_end_flush();
 
@@ -66,7 +76,7 @@ function getList() {
             $new = $r['cat'];
 
             if( $old != $new ) {
-                $x .= '<li class="hdr ct"><h4>' . ($new!='' ? strtoupper(str_replace('others', 'packages',$new))  : 'OTHER PRODUCTS') . '</h4></li>';
+                $x .= '<li class="hdr ct"><br><h4>' . ($new!='' ? strtoupper(str_replace('others', 'packages',$new))  : 'OTHER PRODUCTS') . '</h4></li>';
                 $x .= '<li class="hdr">';
                 $x .= '<strong class="s2">Item</strong>';
                 $x .= '<strong class="s7">Description</strong>';

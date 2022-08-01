@@ -1,0 +1,8 @@
+@import '/css/inc/reset.css';
+@import '/css/inc/dashboard.css';
+@import '/css/inc/pricelist.css';
+@import '/css/inc/center.css';
+@import '/css/inc/classes.css';
+
+#container { background:var(--bg);margin:0 auto;padding:10px;text-align:left;width:var(--maxwid); }
+
