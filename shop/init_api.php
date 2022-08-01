@@ -3,6 +3,7 @@ if(!isset($_SESSION)) {
     session_set_cookie_params(0);
     session_start();
 }
+
 define('API_PATH', 'https://dlcph.com/api');
 define('API_TOKEN', '923660b5-db83-led8-c4ef');
 define('DSDID', $_SESSION['u_site'] );

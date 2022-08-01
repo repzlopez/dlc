@@ -276,7 +276,7 @@ class Auth extends API {
                          break;
                     case 'list':
                          // $wer="AND (l.id='$id' OR LOWER(l.name) LIKE '%".strtolower($id)."%')";
-                         $ret = 'l.id,l.name';
+                         $ret = "l.id,l.name,l.srp,l.wsp,l.pov,CONCAT(LPAD(l.id, 5, '0'),'-',LPAD(l.wsp, 5, '0'),'-',LPAD(l.pov, 5, '0')) pcode";
                          break;
                     default:
                          $id  = $id!='' ? $id : null;

@@ -13,7 +13,7 @@ require('inc/header.php');
 
 $shoplist   = (isset($_SESSION['shoplist'])) ? $_SESSION['shoplist'] : NULL;
 $search_on  = (isset($_POST['find'])) ? $_POST['find'] : '';
-$pcat       = (isset($_POST['p'])) ? $_POST['p'] : '';
+$pcat       = (isset($_GET['p'])) ? $_GET['p'] : '';
 $cid        = (isset($cid)) ? $cid : '';
 $data       = '';
 
@@ -36,7 +36,7 @@ $qry = "SELECT *
   $searchstring
   AND l.status=1
   AND p.status=1
-  ORDER BY cat,sort_order,l.id";
+  ORDER BY CASE WHEN cat='others' THEN 1 ELSE 0 END,sort_order,l.id";
 
 $x = '';
 
@@ -103,27 +103,27 @@ while ($rw = $rs->fetch_assoc()) {
     <ul class="filter-list">
 
       <li>
-        <button class="filter-btn  active">All</button>
+        <a href="products.php"><button class="filter-btn <?php echo ($pcat == '' ? 'active' : ''); ?>">All</button></a>
       </li>
 
       <li>
-        <button class="filter-btn">Health</button>
+        <a href="?p=health"><button class="filter-btn <?php echo ($pcat == 'health' ? 'active' : ''); ?>">Health</button></a>
       </li>
 
       <li>
-        <button class="filter-btn">Personal Care</button>
+        <a href="?p=personal"><button class="filter-btn <?php echo ($pcat == 'personal' ? 'active' : ''); ?>">Personal Care</button></a>
       </li>
 
       <li>
-        <button class="filter-btn">Skin Care</button>
+        <a href="?p=skincare"><button class="filter-btn <?php echo ($pcat == 'skincare' ? 'active' : ''); ?>">Skin Care</button></a>
       </li>
 
       <li>
-        <button class="filter-btn">Household</button>
+        <a href="?p=household"><button class="filter-btn <?php echo ($pcat == 'household' ? 'active' : ''); ?>">Household</button></a>
       </li>
 
       <li>
-        <button class="filter-btn">Packages</button>
+        <a href="?p=packages"><button class="filter-btn <?php echo ($pcat == 'packages' ? 'active' : ''); ?>">Packages</button></a>
       </li>
 
     </ul>

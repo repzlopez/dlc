@@ -46,8 +46,9 @@ echo "\n<br>$qry"."\n\n";
      public function products($ret) {
           $qry = "SELECT $ret
                FROM tbllist l
+               LEFT JOIN tblproducts p ON p.id=l.id
                WHERE l.status=1
-               ORDER BY l.id";
+               ORDER BY p.cat,p.sort_order,l.id";
 
           $rs = $this->conn->prepare($qry);
           $rs->execute();

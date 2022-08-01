@@ -3,25 +3,31 @@ if(!isset($_SESSION)) {
      session_set_cookie_params(0);
      session_start();
 }
-define(INCLUDE_CHECK, 1);
+define('INCLUDE_CHECK', 1);
 
 $un = null;
 
 require_once('../admin/setup.php');
 include_once '../admin/getwebstat.php';
 
-$title = 'DLC API TEST';
+$title = 'API TEST';
 $x = loadHead($title);
 
 // if( isset($_POST['login']) ) {
      $_SESSION['u_site'] = '*';
 // }
 
-if( $_SESSION['u_site'] != '' ) {
-     $endpoint = '/me';
+if(isset($_SESSION['u_site']) && $_SESSION['u_site'] != '') {
+     $endpoint = '/products/list';
      require_once 'init_api.php';
+     $data = $response['data'];
 print_r($data);
-     // foreach($data as $k => $v) $$k = $v;
+
+     foreach($data as $k => $v) {
+          $$k = $v;
+
+     }
+     
 
      // $x .= '<div id="container">';
      // $x .= '<h3 class="lt">' . $dsdid . '</h3>';
