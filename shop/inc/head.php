@@ -10,7 +10,7 @@
   <!-- 
     - favicon
   -->
-  <link rel="shortcut icon" href="/src/favicon.ico">
+  <link rel="shortcut icon" href="<?php echo BAK_ROOT; ?>/src/favicon.ico">
 
   <!-- 
     - custom css link

@@ -7,7 +7,7 @@ if (!isset($_SESSION)) {
 require('inc/setup.php');
 require('inc/head.php');
 require('inc/header.php');
-require('inc/main.php');
+require('inc/home.php');
 require('inc/footer.php');
 require('inc/foot.php');
 ?>

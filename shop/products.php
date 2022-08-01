@@ -45,13 +45,15 @@ $rs  = $con->query($qry) or die($con->mysqli_error);
 while ($rw = $rs->fetch_assoc()) {
   foreach ($rw as $k => $v) $$k = $v;
 
+  $badge = '';// '<div class="card-badge">' . $id . '</div>';
+
   $x .= '<li class="product-item">
         <div class="product-card" tabindex="0">
 
           <figure class="card-banner">
-            <img src="../images/products/' . $id . '.jpg" loading="lazy" alt="' . $name . '" class="image-contain">
+            <img src="'. BAK_ROOT .'/images/products/' . $id . '.jpg" loading="lazy" alt="' . $name . '" class="image-contain">
 
-            <div class="card-badge">' . $id . '</div>
+            '. $badge .'
 
             <ul class="card-action-list">
 

@@ -8,7 +8,7 @@
         <div class="overlay" data-overlay></div>
 
         <a href="<?php echo SHOP_URL; ?>" class="logo">
-            <img src="/src/dlc_lifestyleshop _logo.png" height="50" alt="<?php echo SHOP_FULL; ?>">
+            <img src="<?php echo BAK_ROOT; ?>/src/dlc_lifestyleshop _logo.png" height="50" alt="<?php echo SHOP_FULL; ?>">
         </a>
 
         <button class="nav-open-btn" data-nav-open-btn aria-label="Open Menu">
@@ -22,7 +22,7 @@
             </button>
 
             <a href="<?php echo SHOP_URL; ?>" class="logo">
-                <img src="/src/dlc_lifestyleshop _logo.png" height="50" alt="<?php echo SHOP_FULL; ?>">
+                <img src="<?php echo BAK_ROOT; ?>/src/dlc_lifestyleshop _logo.png" height="50" alt="<?php echo SHOP_FULL; ?>">
             </a>
 
             <ul class="navbar-list">
