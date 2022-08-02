@@ -1,0 +1,9 @@
+# secure .htaccess file
+<Files .htaccess>
+   Order allow,deny
+   Deny from all
+</Files>
+
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://dlclifestyle.shop/ [R,L]

@@ -509,7 +509,13 @@ body {
   pointer-events: all;
 }
 
+.contact iframe {
+  height: 500px;
+}
 
+.contact p {
+  padding: 5px 20px;
+}
 
 
 
@@ -836,9 +842,13 @@ a.footer-link:is(:hover, :focus) { color: var(--blue); }
 
 .footer-list:not(:last-child) { margin-bottom: 30px; }
 
-.footer-list:first-child ion-icon {
+.footer-list ion-icon {
   color: var(--blue);
   font-size: 22px;
+}
+
+.footer-list iframe {
+  height: 100px;
 }
 
 .table-row {
@@ -893,7 +903,7 @@ a.footer-link:is(:hover, :focus) { color: var(--blue); }
 
 .copyright-link {
   display: inline-block;
-  color: var(--blue);
+  color: var(--gold);
 }
 
 

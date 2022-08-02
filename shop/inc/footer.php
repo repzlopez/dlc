@@ -7,82 +7,19 @@
     <div class="footer-top section">
         <div class="container">
 
-            <div class="footer-brand">
-
-                <a href="#" class="logo">
-                </a>
-
-                <ul class="social-list">
-
-                    <li>
-                        <a href="https://www.facebook.com/dlcphilippines" class="social-link" target="_blank">
-                            <ion-icon name="logo-facebook"></ion-icon>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.youtube.com/c/dlcphils" class="social-link" target="_blank">
-                            <ion-icon name="logo-youtube"></ion-icon>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.linkedin.com/company/dlcph/" class="social-link" target="_blank">
-                            <ion-icon name="logo-linkedin"></ion-icon>
-                        </a>
-                    </li>
-
-                </ul>
-
-            </div>
-
             <div class="footer-link-box">
 
                 <ul class="footer-list">
 
                     <li>
-                        <p class="footer-list-title">Contact Us</p>
-                    </li>
-
-                    <li>
-                        <address class="footer-link">
-                            <ion-icon name="location"></ion-icon>
-
-                            <span class="footer-link-text">
-                                Unit 2B, ABD Bulding, 64 Kamuning Rd, Quezon City, Metro Manila 1103
-                            </span>
-                        </address>
-                    </li>
-
-                    <li>
-                        <a href="tel:+63277293929" class="footer-link">
-                            <ion-icon name="call"></ion-icon>
-
-                            <span class="footer-link-text">+63 2 7729 3929</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="mailto:distriserve@dlcph.com" class="footer-link">
-                            <ion-icon name="mail"></ion-icon>
-
-                            <span class="footer-link-text">distriserve@dlcph.com</span>
-                        </a>
-                    </li>
-
-                </ul>
-
-                <!-- <ul class="footer-list">
-
-                    <li>
-                        <p class="footer-list-title">My Account</p>
+                        <p class="footer-list-title">Orders</p>
                     </li>
 
                     <li>
                         <a href="#" class="footer-link">
                             <ion-icon name="chevron-forward-outline"></ion-icon>
 
-                            <span class="footer-link-text">My Account</span>
+                            <span class="footer-link-text">My Orders</span>
                         </a>
                     </li>
 
@@ -94,31 +31,39 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="#" class="footer-link">
-                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                </ul>
 
-                            <span class="footer-link-text">Wishlist</span>
+                <ul class="footer-list">
+
+                    <li>
+                        <p class="footer-list-title">Contact Us</p>
+                    </li>
+
+                    <li>
+                        <a href="tel:<?php echo SHOP_PHONE; ?>" class="footer-link">
+                            <ion-icon name="call"></ion-icon>
+
+                            <span class="footer-link-text"><?php echo SHOP_PHONE; ?></span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="#" class="footer-link">
-                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                        <a href="tel:<?php echo SHOP_GLOBE; ?>" class="footer-link">
+                            <ion-icon name="phone-portrait-sharp"></ion-icon>
 
-                            <span class="footer-link-text">Compare</span>
+                            <span class="footer-link-text"><?php echo SHOP_GLOBE; ?></span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="#" class="footer-link">
-                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                        <a href="tel:<?php echo SHOP_SMART; ?>" class="footer-link">
+                            <ion-icon name="phone-portrait-sharp"></ion-icon>
 
-                            <span class="footer-link-text">New Products</span>
+                            <span class="footer-link-text"><?php echo SHOP_SMART; ?></span>
                         </a>
                     </li>
 
-                </ul> -->
+                </ul>
 
                 <div class="footer-list">
 
@@ -143,6 +88,22 @@
                     </table>
 
                 </div>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <p class="footer-list-title">Map</p>
+                    </li>
+
+                    <li>
+                        <address class="footer-link">
+                            <span class="footer-link-text">
+                                <?php echo SHOP_MAP; ?>
+                            </span>
+                        </address>
+                    </li>
+
+                </ul>
 
                 <!-- <div class="footer-list">
 

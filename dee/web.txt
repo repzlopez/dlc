@@ -10,3 +10,12 @@
 990	webRealTimePV
 989	webSRP
 888	testuser
+
+API
+lm 59f05ba3-d825-l9b1-c9f6 639398564994
+dl 923660b5-db83-led8-c4ef 630000002865
+
+dlccon b9Wz2@pxII46T[
+dlcshp PGOMzNq4cvHe8EMW
+
+talktous shop c0a}zD&#eBqL9qfc

@@ -29,7 +29,7 @@ Wishlist
 5
 
 <ion-icon name="bag-outline" aria-hidden="true"></ion-icon>
-Basket: $318.00
+Cart: $318.00
 4
 
 
