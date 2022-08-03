@@ -27,7 +27,7 @@
   <!-- 
     - preload banner
   -->
-  <link rel="preload" href="./assets/images/hero-banner.png" as="image">
+  <?php echo PRELOAD; ?>
 
 </head>
 

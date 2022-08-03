@@ -238,7 +238,21 @@ body {
   transition: var(--transition-2);
 }
 
+.product-item {
+  border: var(--blue) solid 1px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+
 .product-card:is(:hover, :focus) .image-contain { transform: scale(1.1); }
+
+.product-desc * {
+  margin: 10px 0;
+}
 
 .card-badge {
   position: absolute;

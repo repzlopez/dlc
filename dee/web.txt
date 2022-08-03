@@ -11,6 +11,15 @@
 989	webSRP
 888	testuser
 
+GRANT ALL PRIVILEGES ON  `diamondl\_api`.* TO 'diamondl_dlcph'@'localhost' WITH GRANT OPTION; 
+GRANT ALL PRIVILEGES ON  `diamondl\_beta`.* TO 'diamondl_dlcph'@'localhost' WITH GRANT OPTION; 
+GRANT ALL PRIVILEGES ON  `diamondl\_distributor`.* TO 'diamondl_dlcph'@'localhost' WITH GRANT OPTION; 
+GRANT ALL PRIVILEGES ON  `diamondl\_gos`.* TO 'diamondl_dlcph'@'localhost' WITH GRANT OPTION; 
+GRANT ALL PRIVILEGES ON  `diamondl\_orders`.* TO 'diamondl_dlcph'@'localhost' WITH GRANT OPTION; 
+GRANT ALL PRIVILEGES ON  `diamondl\_pcm`.* TO 'diamondl_dlcph'@'localhost' WITH GRANT OPTION; 
+GRANT ALL PRIVILEGES ON  `diamondl\_products`.* TO 'diamondl_dlcph'@'localhost' WITH GRANT OPTION; 
+
+
 API
 lm 59f05ba3-d825-l9b1-c9f6 639398564994
 dl 923660b5-db83-led8-c4ef 630000002865

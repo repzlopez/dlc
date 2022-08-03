@@ -1,6 +1,18 @@
-<!-- 
-- #FOOTER
--->
+<?php
+
+$logout = '';
+
+if (isset($_SESSION['login'])) {
+    $logout = '
+    <li>
+        <a href="?logout" class="footer-link">
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+
+            <span class="footer-link-text">Logout (' . ucwords(strtolower($_SESSION['login']['name'])) . ')</span>
+        </a>
+    </li>';
+}
+?>
 
 <footer id="footer" class="footer">
 
@@ -12,14 +24,14 @@
                 <ul class="footer-list">
 
                     <li>
-                        <p class="footer-list-title">Orders</p>
+                        <p class="footer-list-title">Account</p>
                     </li>
 
                     <li>
-                        <a href="#" class="footer-link">
+                        <a href="login" class="footer-link">
                             <ion-icon name="chevron-forward-outline"></ion-icon>
 
-                            <span class="footer-link-text">My Orders</span>
+                            <span class="footer-link-text">My Account</span>
                         </a>
                     </li>
 
@@ -31,6 +43,7 @@
                         </a>
                     </li>
 
+                    <?php echo $logout; ?>
                 </ul>
 
                 <ul class="footer-list">
